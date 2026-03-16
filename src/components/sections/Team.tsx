@@ -11,7 +11,7 @@ const team = [
     education: 'LLB (Hons) University of Melbourne',
     admitted: '1998 — Victoria, NSW, Federal',
     initials: 'AB',
-    color: '#c9a84c',
+    color: '#1e3a5f',
   },
   {
     name: 'Sarah Whitmore',
@@ -21,7 +21,7 @@ const team = [
     education: 'LLB (Hons) University of Sydney',
     admitted: '2001 — NSW, Victoria',
     initials: 'SW',
-    color: '#6eb8f0',
+    color: '#2a6496',
   },
   {
     name: 'James Rafferty',
@@ -31,7 +31,7 @@ const team = [
     education: 'LLB/BCom University of Queensland',
     admitted: '2003 — Queensland, NSW, Victoria',
     initials: 'JR',
-    color: '#b78ef0',
+    color: '#6b4f9e',
   },
   {
     name: 'Lisa Chen',
@@ -41,7 +41,7 @@ const team = [
     education: 'LLB (Hons) Monash University',
     admitted: '2005 — Victoria, Federal',
     initials: 'LC',
-    color: '#5fd6a0',
+    color: '#1a6e4a',
   },
   {
     name: 'Thomas Nguyen',
@@ -51,7 +51,7 @@ const team = [
     education: 'LLB/BA University of Melbourne',
     admitted: '2008 — Victoria, NSW',
     initials: 'TN',
-    color: '#f06e8a',
+    color: '#8c2a3e',
   },
   {
     name: 'Rebecca Moore',
@@ -61,31 +61,31 @@ const team = [
     education: 'LLB (Hons) University of NSW',
     admitted: '2012 — NSW, Victoria',
     initials: 'RM',
-    color: '#f0a85f',
+    color: '#7a4a1e',
   },
 ]
 
 export function Team() {
   return (
     <section id="team" className="relative py-24 lg:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050507] via-[#060610] to-[#050507]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#f8f9fa] to-[#ffffff]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <ScrollReveal>
             <span className="section-label mb-4 block">
-              <span className="w-5 h-px bg-[#c9a84c]" />
+              <span className="w-5 h-px bg-[#1e3a5f]" />
               Our Team
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight">
               The Lawyers
               <br />
               <span className="text-gradient-gold italic">Behind the Wins</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="lg:max-w-xs">
-            <p className="text-white/40 text-base leading-relaxed">
+            <p className="text-[#1e3a5f]/40 text-base leading-relaxed">
               A team of Australia's most accomplished litigators, united by a passion for justice and a record of extraordinary outcomes.
             </p>
           </ScrollReveal>
@@ -98,7 +98,7 @@ export function Team() {
               <motion.div
                 whileHover={{ y: -6 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className="group relative bg-white/[0.025] border border-white/[0.06] rounded-2xl p-6 overflow-hidden cursor-default"
+                className="group relative bg-[#1e3a5f]/[0.025] border border-[#1e3a5f]/[0.06] rounded-2xl p-6 overflow-hidden cursor-default"
               >
                 {/* Hover background */}
                 <div
@@ -122,14 +122,14 @@ export function Team() {
                     <motion.a
                       href="#"
                       whileHover={{ scale: 1.1 }}
-                      className="w-8 h-8 border border-white/10 rounded-full flex items-center justify-center text-white/30 hover:text-white/60 hover:border-white/25 transition-colors duration-200"
+                      className="w-8 h-8 border border-[#1e3a5f]/10 rounded-full flex items-center justify-center text-[#1e3a5f]/30 hover:text-[#1e3a5f]/60 hover:border-[#1e3a5f]/25 transition-colors duration-200"
                     >
                       <Linkedin size={13} />
                     </motion.a>
                   </div>
 
                   {/* Name & role */}
-                  <h3 className="text-white font-semibold text-lg leading-tight mb-1">{member.name}</h3>
+                  <h3 className="text-[#1e3a5f] font-semibold text-lg leading-tight mb-1">{member.name}</h3>
                   <div className="text-sm mb-1" style={{ color: member.color }}>{member.role}</div>
 
                   {/* Specialties */}
@@ -146,11 +146,11 @@ export function Team() {
                   </div>
 
                   {/* Bio */}
-                  <p className="text-white/35 text-xs leading-relaxed mb-4">{member.bio}</p>
+                  <p className="text-[#1e3a5f]/50 text-xs leading-relaxed mb-4">{member.bio}</p>
 
                   {/* Divider */}
-                  <div className="border-t border-white/[0.05] pt-4">
-                    <div className="text-white/25 text-xs">{member.admitted}</div>
+                  <div className="border-t border-[#1e3a5f]/[0.05] pt-4">
+                    <div className="text-[#1e3a5f]/40 text-xs">{member.admitted}</div>
                   </div>
                 </div>
               </motion.div>
@@ -160,12 +160,12 @@ export function Team() {
 
         {/* CTA */}
         <ScrollReveal delay={0.3} className="mt-12 text-center">
-          <p className="text-white/30 text-sm mb-4">Interested in joining Australia's premier litigation practice?</p>
+          <p className="text-[#1e3a5f]/30 text-sm mb-4">Interested in joining Australia's premier litigation practice?</p>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 text-[#c9a84c] text-sm font-semibold hover:opacity-80 transition-opacity"
+            className="inline-flex items-center gap-2 text-[#1e3a5f] text-sm font-semibold hover:opacity-80 transition-opacity"
           >
             Explore Opportunities <ArrowUpRight size={15} />
           </motion.a>

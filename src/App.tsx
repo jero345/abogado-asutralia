@@ -13,7 +13,7 @@ import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#050507] text-white">
+    <div className="min-h-screen bg-white text-[#1e3a5f]">
       <CustomCursor />
       <ScrollProgressBar />
       <Header />

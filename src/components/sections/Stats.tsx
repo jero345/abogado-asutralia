@@ -42,33 +42,33 @@ export function Stats() {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050507] via-[#07070e] to-[#050507]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#f8f9fa] to-[#ffffff]" />
       <div className="absolute inset-0 opacity-[0.015] bg-[length:60px_60px]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(201,168,76,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)
+            linear-gradient(rgba(30,58,95,1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(30,58,95,1) 1px, transparent 1px)
           `,
         }}
       />
 
-      {/* Gold accent line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent" />
+      {/* Navy accent line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1e3a5f]/30 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
           <span className="section-label">
-            <span className="w-5 h-px bg-[#c9a84c]" />
+            <span className="w-5 h-px bg-[#1e3a5f]" />
             Track Record
-            <span className="w-5 h-px bg-[#c9a84c]" />
+            <span className="w-5 h-px bg-[#1e3a5f]" />
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] mt-4 mb-6">
             Numbers That
             <br />
             <span className="text-gradient-gold italic">Tell the Story</span>
           </h2>
-          <p className="text-white/40 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-[#1e3a5f]/40 text-lg max-w-xl mx-auto leading-relaxed">
             Two decades of relentless advocacy have produced results that speak for themselves.
           </p>
         </ScrollReveal>
@@ -80,22 +80,22 @@ export function Stats() {
             return (
               <ScrollReveal key={stat.label} delay={i * 0.1}>
                 <motion.div
-                  whileHover={{ y: -4, borderColor: 'rgba(201,168,76,0.25)' }}
+                  whileHover={{ y: -4, borderColor: 'rgba(30,58,95,0.25)' }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 group cursor-default"
+                  className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.06] rounded-2xl p-8 group cursor-default"
                 >
                   {/* Hover glow */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: 'radial-gradient(circle at 50% 0%, rgba(201,168,76,0.05) 0%, transparent 70%)' }}
+                    style={{ background: 'radial-gradient(circle at 50% 0%, rgba(30,58,95,0.05) 0%, transparent 70%)' }}
                   />
 
                   {/* Icon */}
-                  <div className="w-11 h-11 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-6 group-hover:bg-[#c9a84c]/15 transition-colors duration-300">
-                    <Icon size={20} className="text-[#c9a84c]" />
+                  <div className="w-11 h-11 rounded-xl bg-[#1e3a5f]/10 border border-[#1e3a5f]/20 flex items-center justify-center mb-6 group-hover:bg-[#1e3a5f]/15 transition-colors duration-300">
+                    <Icon size={20} className="text-[#1e3a5f]" />
                   </div>
 
                   {/* Counter */}
-                  <div className="text-4xl font-bold text-white mb-2">
+                  <div className="text-4xl font-bold text-[#1e3a5f] mb-2">
                     <AnimatedCounter
                       value={stat.value}
                       prefix={stat.prefix}
@@ -105,10 +105,10 @@ export function Stats() {
                   </div>
 
                   {/* Label */}
-                  <div className="text-[#c9a84c] text-sm font-semibold mb-3">{stat.label}</div>
+                  <div className="text-[#1e3a5f] text-sm font-semibold mb-3">{stat.label}</div>
 
                   {/* Description */}
-                  <p className="text-white/35 text-sm leading-relaxed">{stat.description}</p>
+                  <p className="text-[#1e3a5f]/50 text-sm leading-relaxed">{stat.description}</p>
                 </motion.div>
               </ScrollReveal>
             )
@@ -117,12 +117,12 @@ export function Stats() {
 
         {/* Bottom quote */}
         <ScrollReveal delay={0.3} className="mt-16 text-center">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-white/[0.02] border border-[#c9a84c]/15 rounded-full">
-            <div className="w-1.5 h-1.5 bg-[#c9a84c] rounded-full animate-pulse" />
-            <span className="text-white/50 text-sm font-medium">
+          <div className="inline-flex items-center gap-4 px-8 py-4 bg-[#1e3a5f]/[0.02] border border-[#1e3a5f]/15 rounded-full">
+            <div className="w-1.5 h-1.5 bg-[#1e3a5f] rounded-full animate-pulse" />
+            <span className="text-[#1e3a5f]/50 text-sm font-medium">
               Australia's most successful class action litigation firm by settlements recovered
             </span>
-            <div className="w-1.5 h-1.5 bg-[#c9a84c] rounded-full animate-pulse" />
+            <div className="w-1.5 h-1.5 bg-[#1e3a5f] rounded-full animate-pulse" />
           </div>
         </ScrollReveal>
       </div>

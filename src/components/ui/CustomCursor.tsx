@@ -52,14 +52,14 @@ export function CustomCursor() {
     <>
       {/* Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 bg-[#c9a84c] rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-3 h-3 bg-[#1e3a5f] rounded-full pointer-events-none z-[9999] mix-blend-difference"
         style={{ x: cursorXSpring, y: cursorYSpring }}
         animate={{ scale: clicked ? 0.5 : hovered ? 1.5 : 1 }}
         transition={{ type: 'spring', stiffness: 500, damping: 28 }}
       />
       {/* Trail */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-[#c9a84c]/40 rounded-full pointer-events-none z-[9998]"
+        className="fixed top-0 left-0 w-8 h-8 border border-[#1e3a5f]/40 rounded-full pointer-events-none z-[9998]"
         style={{
           x: trailXSpring,
           y: trailYSpring,

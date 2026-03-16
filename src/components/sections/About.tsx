@@ -33,11 +33,11 @@ export function About() {
 
   return (
     <section id="about" ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-[#050507]" />
+      <div className="absolute inset-0 bg-[#ffffff]" />
 
       {/* Background text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="text-[20vw] font-bold text-white/[0.015] uppercase select-none whitespace-nowrap">
+        <span className="text-[20vw] font-bold text-[#1e3a5f]/[0.015] uppercase select-none whitespace-nowrap">
           BANTON
         </span>
       </div>
@@ -48,15 +48,15 @@ export function About() {
           <div>
             <ScrollReveal>
               <span className="section-label mb-4 block">
-                <span className="w-5 h-px bg-[#c9a84c]" />
+                <span className="w-5 h-px bg-[#1e3a5f]" />
                 About the Firm
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1e3a5f] leading-tight mb-8">
                 Two Decades of
                 <br />
                 <span className="text-gradient-gold italic">Fighting for Justice</span>
               </h2>
-              <div className="space-y-5 text-white/50 leading-relaxed">
+              <div className="space-y-5 text-[#1e3a5f]/50 leading-relaxed">
                 <p>
                   Banton Group was founded with a singular purpose: to give individuals and institutions the firepower to take on powerful adversaries and win. Since our inception, we have grown into one of Australia's most formidable litigation practices.
                 </p>
@@ -76,14 +76,14 @@ export function About() {
                 return (
                   <ScrollReveal key={value.title} delay={i * 0.1}>
                     <motion.div
-                      whileHover={{ borderColor: 'rgba(201,168,76,0.2)', backgroundColor: 'rgba(201,168,76,0.02)' }}
-                      className="p-5 border border-white/[0.06] rounded-xl transition-all duration-300"
+                      whileHover={{ borderColor: 'rgba(30,58,95,0.2)', backgroundColor: 'rgba(30,58,95,0.02)' }}
+                      className="p-5 border border-[#1e3a5f]/[0.06] rounded-xl transition-all duration-300"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-[#c9a84c]/10 flex items-center justify-center mb-3">
-                        <Icon size={15} className="text-[#c9a84c]" />
+                      <div className="w-8 h-8 rounded-lg bg-[#1e3a5f]/10 flex items-center justify-center mb-3">
+                        <Icon size={15} className="text-[#1e3a5f]" />
                       </div>
-                      <h4 className="text-white font-semibold text-sm mb-1.5">{value.title}</h4>
-                      <p className="text-white/35 text-xs leading-relaxed">{value.description}</p>
+                      <h4 className="text-[#1e3a5f] font-semibold text-sm mb-1.5">{value.title}</h4>
+                      <p className="text-[#1e3a5f]/50 text-xs leading-relaxed">{value.description}</p>
                     </motion.div>
                   </ScrollReveal>
                 )
@@ -99,14 +99,14 @@ export function About() {
                 style={{ y: imageY }}
                 className="relative"
               >
-                <div className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl overflow-hidden aspect-[4/5]">
+                <div className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.06] rounded-2xl overflow-hidden aspect-[4/5]">
                   {/* Abstract visual */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     {/* Concentric circles */}
                     {[300, 220, 140, 60].map((size, i) => (
                       <motion.div
                         key={size}
-                        className="absolute border border-[#c9a84c]/10 rounded-full"
+                        className="absolute border border-[#1e3a5f]/10 rounded-full"
                         style={{ width: size, height: size }}
                         animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
                         transition={{ duration: 20 + i * 8, repeat: Infinity, ease: 'linear' }}
@@ -114,9 +114,9 @@ export function About() {
                     ))}
 
                     {/* Center emblem */}
-                    <div className="w-24 h-24 border-2 border-[#c9a84c]/40 rotate-45 flex items-center justify-center bg-[#c9a84c]/5">
-                      <div className="w-10 h-10 bg-[#c9a84c]/20 rotate-0 flex items-center justify-center">
-                        <Scale size={20} className="text-[#c9a84c]" style={{ transform: 'rotate(-45deg)' }} />
+                    <div className="w-24 h-24 border-2 border-[#1e3a5f]/40 rotate-45 flex items-center justify-center bg-[#1e3a5f]/5">
+                      <div className="w-10 h-10 bg-[#1e3a5f]/20 rotate-0 flex items-center justify-center">
+                        <Scale size={20} className="text-[#1e3a5f]" style={{ transform: 'rotate(-45deg)' }} />
                       </div>
                     </div>
 
@@ -129,7 +129,7 @@ export function About() {
                     ].map((item, i) => (
                       <motion.div
                         key={item.label}
-                        className="absolute text-xs text-white/25 font-medium border border-white/[0.06] px-2.5 py-1 rounded-full bg-white/[0.02]"
+                        className="absolute text-xs text-[#1e3a5f]/40 font-medium border border-[#1e3a5f]/[0.06] px-2.5 py-1 rounded-full bg-white/80"
                         style={{ top: item.top, bottom: item.bottom, left: item.left, right: item.right }}
                         animate={{ y: [0, -6, 0], opacity: [0.4, 0.8, 0.4] }}
                         transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.8 }}
@@ -140,11 +140,11 @@ export function About() {
                   </div>
 
                   {/* Bottom overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#050507] via-[#050507]/60 to-transparent p-8 pt-20">
-                    <div className="font-serif text-2xl font-bold text-white mb-2">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#f0f4f8] via-[#f0f4f8]/60 to-transparent p-8 pt-20">
+                    <div className="font-serif text-2xl font-bold text-[#1e3a5f] mb-2">
                       "We don't just argue cases.<br />We change outcomes."
                     </div>
-                    <div className="text-[#c9a84c] text-sm">— Founding Partner, Banton Group</div>
+                    <div className="text-[#2a4f82] text-sm">— Founding Partner, Banton Group</div>
                   </div>
                 </div>
               </motion.div>
@@ -155,10 +155,10 @@ export function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="absolute -bottom-8 -left-8 bg-[#0a0a0f] border border-[#c9a84c]/20 rounded-2xl p-5 shadow-2xl"
+                className="absolute -bottom-8 -left-8 bg-white border border-[#1e3a5f]/20 rounded-2xl p-5 shadow-lg"
               >
-                <div className="text-3xl font-bold text-[#c9a84c] mb-1">98%</div>
-                <div className="text-white/50 text-xs">Client Satisfaction Rate</div>
+                <div className="text-3xl font-bold text-[#1e3a5f] mb-1">98%</div>
+                <div className="text-[#1e3a5f]/50 text-xs">Client Satisfaction Rate</div>
               </motion.div>
             </div>
           </ScrollReveal>

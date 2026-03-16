@@ -11,8 +11,8 @@ const practices = [
     description:
       'We represent thousands of Australians in landmark class actions against corporations, financial institutions, and government entities. Our track record includes some of the largest settlements in Australian legal history.',
     highlights: ['Securities class actions', 'Consumer product claims', 'Financial misconduct', 'Environmental litigation'],
-    color: 'from-[#c9a84c]/20 to-[#c9a84c]/5',
-    accent: '#c9a84c',
+    color: 'from-[#1e3a5f]/20 to-[#1e3a5f]/5',
+    accent: '#1e3a5f',
   },
   {
     icon: Building2,
@@ -23,7 +23,7 @@ const practices = [
       'Complex commercial disputes demand sophisticated strategy. We provide sophisticated advocacy in contract disputes, shareholder conflicts, trade practices, and commercial fraud matters across all Australian courts.',
     highlights: ['Contract disputes', 'Shareholder actions', 'Trade practices', 'Fraud & misrepresentation'],
     color: 'from-blue-500/15 to-blue-500/5',
-    accent: '#6eb8f0',
+    accent: '#2a6496',
   },
   {
     icon: RefreshCw,
@@ -34,7 +34,7 @@ const practices = [
       'When businesses face financial distress, decisive legal action is critical. We advise on voluntary administration, receivership, deed of company arrangement, and complex creditor negotiations.',
     highlights: ['Voluntary administration', 'Liquidations', 'Creditor rights', 'Corporate rescue'],
     color: 'from-purple-500/15 to-purple-500/5',
-    accent: '#b78ef0',
+    accent: '#6b4f9e',
   },
   {
     icon: DollarSign,
@@ -45,31 +45,31 @@ const practices = [
       'Financial disputes require deep technical expertise and aggressive advocacy. We handle securities litigation, banking disputes, investment fraud, ASIC proceedings, and derivative claims.',
     highlights: ['Securities litigation', 'Banking disputes', 'Investment fraud', 'ASIC proceedings'],
     color: 'from-emerald-500/15 to-emerald-500/5',
-    accent: '#5fd6a0',
+    accent: '#1a6e4a',
   },
 ]
 
 export function PracticeAreas() {
   return (
     <section id="practice-areas" className="relative py-24 lg:py-32">
-      <div className="absolute inset-0 bg-[#050507]" />
+      <div className="absolute inset-0 bg-[#ffffff]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <ScrollReveal>
             <span className="section-label mb-4 block">
-              <span className="w-5 h-px bg-[#c9a84c]" />
+              <span className="w-5 h-px bg-[#1e3a5f]" />
               What We Do
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight">
               Practice
               <br />
               <span className="text-gradient-gold italic">Areas</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="lg:max-w-xs">
-            <p className="text-white/40 text-base leading-relaxed">
+            <p className="text-[#1e3a5f]/40 text-base leading-relaxed">
               Four specialised practice areas. One relentless commitment to winning. We operate at the intersection of law, strategy, and technology.
             </p>
           </ScrollReveal>
@@ -84,7 +84,7 @@ export function PracticeAreas() {
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="relative bg-white/[0.025] border border-white/[0.06] rounded-2xl p-8 group cursor-default overflow-hidden"
+                  className="relative bg-[#1e3a5f]/[0.025] border border-[#1e3a5f]/[0.06] rounded-2xl p-8 group cursor-default overflow-hidden"
                 >
                   {/* Background gradient on hover */}
                   <motion.div
@@ -100,7 +100,7 @@ export function PracticeAreas() {
                       >
                         <Icon size={22} style={{ color: practice.accent }} />
                       </div>
-                      <span className="text-white/10 text-4xl font-bold font-mono">{practice.number}</span>
+                      <span className="text-[#1e3a5f]/10 text-4xl font-bold font-mono">{practice.number}</span>
                     </div>
 
                     {/* Title */}
@@ -111,11 +111,11 @@ export function PracticeAreas() {
                       >
                         {practice.tagline}
                       </span>
-                      <h3 className="text-2xl font-semibold text-white">{practice.title}</h3>
+                      <h3 className="text-2xl font-semibold text-[#1e3a5f]">{practice.title}</h3>
                     </div>
 
                     {/* Description */}
-                    <p className="text-white/40 text-sm leading-relaxed mb-6 mt-3">{practice.description}</p>
+                    <p className="text-[#1e3a5f]/40 text-sm leading-relaxed mb-6 mt-3">{practice.description}</p>
 
                     {/* Highlights */}
                     <div className="grid grid-cols-2 gap-2 mb-6">
@@ -125,7 +125,7 @@ export function PracticeAreas() {
                             className="w-1 h-1 rounded-full flex-shrink-0"
                             style={{ backgroundColor: practice.accent }}
                           />
-                          <span className="text-white/40 text-xs">{h}</span>
+                          <span className="text-[#1e3a5f]/40 text-xs">{h}</span>
                         </div>
                       ))}
                     </div>

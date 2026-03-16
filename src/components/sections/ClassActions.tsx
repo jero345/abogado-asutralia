@@ -87,9 +87,9 @@ const cases = [
 ]
 
 const statusColors: Record<string, string> = {
-  Settled: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
-  Active: 'text-[#c9a84c] bg-[#c9a84c]/10 border-[#c9a84c]/20',
-  Pending: 'text-blue-400 bg-blue-400/10 border-blue-400/20',
+  Settled: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+  Active: 'text-[#1e3a5f] bg-[#1e3a5f]/10 border-[#1e3a5f]/20',
+  Pending: 'text-blue-700 bg-blue-50 border-blue-200',
 }
 
 export function ClassActions() {
@@ -97,22 +97,22 @@ export function ClassActions() {
 
   return (
     <section id="class-actions" className="relative py-24 lg:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050507] via-[#06060c] to-[#050507]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#f8f9fa] to-[#ffffff]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="mb-16">
           <span className="section-label mb-4 block">
-            <span className="w-5 h-px bg-[#c9a84c]" />
+            <span className="w-5 h-px bg-[#1e3a5f]" />
             Case Studies
           </span>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight">
               Landmark
               <br />
               <span className="text-gradient-gold italic">Class Actions</span>
             </h2>
-            <p className="text-white/40 text-base leading-relaxed lg:max-w-xs">
+            <p className="text-[#1e3a5f]/40 text-base leading-relaxed lg:max-w-xs">
               A selection of our most significant cases — representing real people against powerful institutions.
             </p>
           </div>
@@ -126,8 +126,8 @@ export function ClassActions() {
                 layout
                 className={`relative border rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 ${
                   expanded === c.id
-                    ? 'border-[#c9a84c]/25 bg-white/[0.04]'
-                    : 'border-white/[0.06] bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.03]'
+                    ? 'border-[#1e3a5f]/25 bg-[#1e3a5f]/[0.04]'
+                    : 'border-[#1e3a5f]/[0.06] bg-[#1e3a5f]/[0.02] hover:border-[#1e3a5f]/10 hover:bg-[#1e3a5f]/[0.03]'
                 }`}
                 onClick={() => setExpanded(expanded === c.id ? null : c.id)}
               >
@@ -140,36 +140,36 @@ export function ClassActions() {
                         <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${statusColors[c.status]}`}>
                           {c.status}
                         </span>
-                        <span className="text-white/25 text-xs font-medium px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] rounded-full">
+                        <span className="text-[#1e3a5f]/40 text-xs font-medium px-2.5 py-1 bg-[#1e3a5f]/[0.04] border border-[#1e3a5f]/[0.06] rounded-full">
                           {c.tag}
                         </span>
-                        <span className="text-white/25 text-xs hidden sm:flex items-center gap-1">
+                        <span className="text-[#1e3a5f]/40 text-xs hidden sm:flex items-center gap-1">
                           <Calendar size={11} />
                           {c.year}
                         </span>
                       </div>
-                      <h3 className="text-white font-semibold text-lg leading-snug pr-4">{c.title}</h3>
-                      <p className="text-white/40 text-sm mt-2 leading-relaxed line-clamp-2">{c.summary}</p>
+                      <h3 className="text-[#1e3a5f] font-semibold text-lg leading-snug pr-4">{c.title}</h3>
+                      <p className="text-[#1e3a5f]/40 text-sm mt-2 leading-relaxed line-clamp-2">{c.summary}</p>
                     </div>
 
                     {/* Stats */}
                     <div className="flex items-center gap-6 lg:gap-8 flex-shrink-0">
                       <div className="text-center">
-                        <div className="flex items-center gap-1 text-[#c9a84c] font-bold text-xl">
+                        <div className="flex items-center gap-1 text-[#1e3a5f] font-bold text-xl">
                           {c.amount}
                         </div>
-                        <div className="text-white/30 text-xs mt-0.5">Claim Value</div>
+                        <div className="text-[#1e3a5f]/30 text-xs mt-0.5">Claim Value</div>
                       </div>
                       <div className="hidden sm:block text-center">
-                        <div className="flex items-center gap-1 text-white font-bold text-xl">
+                        <div className="flex items-center gap-1 text-[#1e3a5f] font-bold text-xl">
                           {c.members}
                         </div>
-                        <div className="text-white/30 text-xs mt-0.5">Members</div>
+                        <div className="text-[#1e3a5f]/30 text-xs mt-0.5">Members</div>
                       </div>
                       <motion.div
                         animate={{ rotate: expanded === c.id ? 180 : 0 }}
                         transition={{ duration: 0.25 }}
-                        className="w-9 h-9 border border-white/10 rounded-full flex items-center justify-center text-white/40 flex-shrink-0"
+                        className="w-9 h-9 border border-[#1e3a5f]/10 rounded-full flex items-center justify-center text-[#1e3a5f]/40 flex-shrink-0"
                       >
                         <ChevronDown size={15} />
                       </motion.div>
@@ -187,18 +187,18 @@ export function ClassActions() {
                       transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 lg:px-8 pb-8 border-t border-white/[0.05]">
+                      <div className="px-6 lg:px-8 pb-8 border-t border-[#1e3a5f]/[0.05]">
                         <div className="pt-6 grid lg:grid-cols-3 gap-8">
                           {/* Details */}
                           <div className="lg:col-span-2">
                             <div className="flex items-center gap-2 mb-2 mt-1">
-                              <div className="w-4 h-px bg-[#c9a84c]/60" />
-                              <span className="text-[#c9a84c] text-xs font-semibold tracking-wider uppercase">Case Overview</span>
+                              <div className="w-4 h-px bg-[#1e3a5f]/60" />
+                              <span className="text-[#1e3a5f] text-xs font-semibold tracking-wider uppercase">Case Overview</span>
                             </div>
-                            <p className="text-white/55 text-sm leading-relaxed">{c.details}</p>
+                            <p className="text-[#1e3a5f]/60 text-sm leading-relaxed">{c.details}</p>
 
-                            <div className="mt-4 flex items-start gap-2 text-white/30 text-xs">
-                              <span className="font-medium text-white/40">Court:</span>
+                            <div className="mt-4 flex items-start gap-2 text-[#1e3a5f]/30 text-xs">
+                              <span className="font-medium text-[#1e3a5f]/40">Court:</span>
                               {c.court}
                             </div>
                           </div>
@@ -206,14 +206,14 @@ export function ClassActions() {
                           {/* Outcomes */}
                           <div>
                             <div className="flex items-center gap-2 mb-4 mt-1">
-                              <div className="w-4 h-px bg-[#c9a84c]/60" />
-                              <span className="text-[#c9a84c] text-xs font-semibold tracking-wider uppercase">Key Outcomes</span>
+                              <div className="w-4 h-px bg-[#1e3a5f]/60" />
+                              <span className="text-[#1e3a5f] text-xs font-semibold tracking-wider uppercase">Key Outcomes</span>
                             </div>
                             <ul className="space-y-3">
                               {c.outcomes.map((outcome) => (
                                 <li key={outcome} className="flex items-start gap-2.5">
-                                  <CheckCircle size={13} className="text-[#c9a84c] mt-0.5 flex-shrink-0" />
-                                  <span className="text-white/55 text-sm">{outcome}</span>
+                                  <CheckCircle size={13} className="text-[#1e3a5f] mt-0.5 flex-shrink-0" />
+                                  <span className="text-[#1e3a5f]/60 text-sm">{outcome}</span>
                                 </li>
                               ))}
                             </ul>
@@ -233,7 +233,7 @@ export function ClassActions() {
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2.5 px-8 py-4 border border-[#c9a84c]/30 text-[#c9a84c] text-sm font-semibold rounded-full hover:bg-[#c9a84c]/10 transition-all duration-200"
+            className="inline-flex items-center gap-2.5 px-8 py-4 border border-[#1e3a5f]/30 text-[#1e3a5f] text-sm font-semibold rounded-full hover:bg-[#1e3a5f]/10 transition-all duration-200"
           >
             Register for a Current Class Action
             <ArrowRight size={15} />

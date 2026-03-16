@@ -47,15 +47,15 @@ const timeline = [
 export function Technology() {
   return (
     <section id="technology" className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-[#050507]" />
+      <div className="absolute inset-0 bg-[#ffffff]" />
 
       {/* Grid background */}
       <div
         className="absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(201,168,76,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px)
+            linear-gradient(rgba(30,58,95,1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(30,58,95,1) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
         }}
@@ -65,16 +65,16 @@ export function Technology() {
         {/* Header */}
         <ScrollReveal className="text-center mb-16">
           <span className="section-label justify-center mb-4 block">
-            <span className="w-5 h-px bg-[#c9a84c]" />
+            <span className="w-5 h-px bg-[#1e3a5f]" />
             Strategy & Technology
-            <span className="w-5 h-px bg-[#c9a84c]" />
+            <span className="w-5 h-px bg-[#1e3a5f]" />
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight mb-6">
             Law Meets
             <br />
             <span className="text-gradient-gold italic">Innovation</span>
           </h2>
-          <p className="text-white/40 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[#1e3a5f]/40 text-lg max-w-2xl mx-auto leading-relaxed">
             We combine deep legal expertise with cutting-edge technology to deliver superior outcomes in an increasingly complex legal landscape.
           </p>
         </ScrollReveal>
@@ -86,14 +86,14 @@ export function Technology() {
             return (
               <ScrollReveal key={feature.title} delay={i * 0.08}>
                 <motion.div
-                  whileHover={{ y: -4, borderColor: 'rgba(201,168,76,0.2)' }}
-                  className="bg-white/[0.025] border border-white/[0.06] rounded-2xl p-7 group cursor-default transition-all duration-300"
+                  whileHover={{ y: -4, borderColor: 'rgba(30,58,95,0.2)' }}
+                  className="bg-[#1e3a5f]/[0.025] border border-[#1e3a5f]/[0.06] rounded-2xl p-7 group cursor-default transition-all duration-300"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center mb-5 group-hover:bg-[#c9a84c]/15 transition-colors duration-300">
-                    <Icon size={20} className="text-[#c9a84c]" />
+                  <div className="w-11 h-11 rounded-xl bg-[#1e3a5f]/10 border border-[#1e3a5f]/20 flex items-center justify-center mb-5 group-hover:bg-[#1e3a5f]/15 transition-colors duration-300">
+                    <Icon size={20} className="text-[#1e3a5f]" />
                   </div>
-                  <h3 className="text-white font-semibold text-base mb-3">{feature.title}</h3>
-                  <p className="text-white/40 text-sm leading-relaxed">{feature.description}</p>
+                  <h3 className="text-[#1e3a5f] font-semibold text-base mb-3">{feature.title}</h3>
+                  <p className="text-[#1e3a5f]/40 text-sm leading-relaxed">{feature.description}</p>
                 </motion.div>
               </ScrollReveal>
             )
@@ -103,14 +103,14 @@ export function Technology() {
         {/* Timeline */}
         <ScrollReveal className="mb-6">
           <div className="flex items-center gap-3 mb-12">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a84c]/60" />
-            <span className="text-[#c9a84c] text-xs font-semibold tracking-[0.2em] uppercase">Our Journey</span>
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#1e3a5f]/60" />
+            <span className="text-[#1e3a5f] text-xs font-semibold tracking-[0.2em] uppercase">Our Journey</span>
           </div>
         </ScrollReveal>
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute top-5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/20 to-transparent hidden lg:block" />
+          <div className="absolute top-5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1e3a5f]/20 to-transparent hidden lg:block" />
 
           <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-4">
             {timeline.map((item, i) => (
@@ -122,14 +122,14 @@ export function Technology() {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, type: 'spring', stiffness: 300 }}
-                    className="w-10 h-10 rounded-full bg-[#c9a84c]/10 border border-[#c9a84c]/30 flex items-center justify-center mb-4 mx-auto lg:mx-0"
+                    className="w-10 h-10 rounded-full bg-[#1e3a5f]/10 border border-[#1e3a5f]/30 flex items-center justify-center mb-4 mx-auto lg:mx-0"
                   >
-                    <div className="w-2 h-2 bg-[#c9a84c] rounded-full" />
+                    <div className="w-2 h-2 bg-[#1e3a5f] rounded-full" />
                   </motion.div>
 
-                  <div className="text-[#c9a84c] font-bold text-lg mb-1">{item.year}</div>
-                  <div className="text-white font-semibold text-sm mb-2">{item.event}</div>
-                  <p className="text-white/35 text-xs leading-relaxed">{item.detail}</p>
+                  <div className="text-[#1e3a5f] font-bold text-lg mb-1">{item.year}</div>
+                  <div className="text-[#1e3a5f] font-semibold text-sm mb-2">{item.event}</div>
+                  <p className="text-[#1e3a5f]/50 text-xs leading-relaxed">{item.detail}</p>
                 </div>
               </ScrollReveal>
             ))}
