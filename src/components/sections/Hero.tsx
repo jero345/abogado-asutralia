@@ -99,7 +99,7 @@ export function Hero() {
       {/* Content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center"
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center mt-24 md:mt-32"
       >
         {/* Eyebrow */}
         <motion.div
