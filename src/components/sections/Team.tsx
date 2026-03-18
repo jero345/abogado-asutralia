@@ -4,10 +4,10 @@ import { Linkedin, ArrowUpRight } from 'lucide-react'
 
 const team = [
   {
-    name: 'Andrew Banton',
+    name: 'Amanda Banton',
     role: 'Founding & Managing Partner',
     specialties: ['Class Actions', 'Securities Litigation'],
-    bio: 'Andrew is one of Australia\'s leading class action lawyers with over 25 years of experience. He has led landmark cases recovering hundreds of millions for Australian consumers and investors.',
+    bio: 'Amanda is one of Australia\'s leading class action lawyers with over 25 years of experience. She has led landmark cases recovering hundreds of millions for Australian consumers and investors.',
     education: 'LLB (Hons) University of Melbourne',
     admitted: '1998 — Victoria, NSW, Federal',
     initials: 'AB',
