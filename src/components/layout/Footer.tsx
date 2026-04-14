@@ -6,15 +6,14 @@ const practiceAreas = [
   'Class Actions',
   'Commercial Litigation',
   'Insolvency & Restructuring',
-  'Corporate Disputes',
-  'Financial Disputes',
-  'Securities Litigation',
+  'Complex Financial Disputes',
 ]
 
 const quickLinks = [
   { label: 'About the Firm', href: '#about' },
   { label: 'Our Team', href: '#team' },
-  { label: 'Case Studies', href: '#class-actions' },
+  { label: 'Class Actions', href: '#class-actions' },
+  { label: 'Awards', href: '#awards' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -34,17 +33,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <ScrollReveal className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 border border-[#1e3a5f]/60 rotate-45 flex items-center justify-center flex-shrink-0">
-                <div className="w-3 h-3 bg-[#1e3a5f]" />
-              </div>
-              <div>
-                <span className="text-[#1e3a5f] font-semibold text-lg">BANTON</span>
-                <span className="text-[#2a4f82] font-light text-lg ml-1.5">GROUP</span>
-              </div>
+            <div className="mb-6">
+              <img src="/img/logo.jpg" alt="Banton Group" className="h-12 w-auto object-contain" />
             </div>
-            <p className="text-[#1e3a5f]/40 text-sm leading-relaxed mb-6">
-              Elite litigation specialists delivering extraordinary outcomes for Australia's most complex legal challenges.
+            <p className="text-[#1e3a5f]/50 text-sm leading-relaxed mb-6">
+              Australia's premier litigation firm — delivering extraordinary outcomes in class actions, commercial disputes, and insolvency since 2020.
             </p>
             <div className="flex gap-3">
               <motion.a
@@ -55,7 +48,7 @@ export function Footer() {
                 <Linkedin size={15} />
               </motion.a>
               <motion.a
-                href="mailto:info@bantongroup.com.au"
+                href="mailto:info@bantongroup.com"
                 whileHover={{ scale: 1.1, backgroundColor: 'rgba(30,58,95,0.15)' }}
                 className="w-9 h-9 border border-[#1e3a5f]/10 rounded-full flex items-center justify-center text-[#1e3a5f]/50 hover:text-[#1e3a5f] transition-colors duration-200"
               >
@@ -106,17 +99,17 @@ export function Footer() {
           <ScrollReveal delay={0.2}>
             <h3 className="text-[#1e3a5f] text-sm font-semibold tracking-[0.1em] uppercase mb-6">Contact</h3>
             <div className="space-y-4">
-              <a href="tel:+61299999999" className="flex items-start gap-3 text-[#1e3a5f]/40 text-sm hover:text-[#1e3a5f]/70 transition-colors group">
+              <a href="tel:+61280768090" className="flex items-start gap-3 text-[#1e3a5f]/40 text-sm hover:text-[#1e3a5f]/70 transition-colors group">
                 <Phone size={14} className="mt-0.5 flex-shrink-0 text-[#1e3a5f]" />
-                <span>+61 2 9999 9999</span>
+                <span>+61 2 8076 8090</span>
               </a>
-              <a href="mailto:info@bantongroup.com.au" className="flex items-start gap-3 text-[#1e3a5f]/40 text-sm hover:text-[#1e3a5f]/70 transition-colors group">
+              <a href="mailto:info@bantongroup.com" className="flex items-start gap-3 text-[#1e3a5f]/40 text-sm hover:text-[#1e3a5f]/70 transition-colors group">
                 <Mail size={14} className="mt-0.5 flex-shrink-0 text-[#1e3a5f]" />
-                <span>info@bantongroup.com.au</span>
+                <span>info@bantongroup.com</span>
               </a>
               <div className="flex items-start gap-3 text-[#1e3a5f]/40 text-sm">
                 <MapPin size={14} className="mt-0.5 flex-shrink-0 text-[#1e3a5f]" />
-                <span>Level 32, 101 Collins Street<br />Melbourne VIC 3000</span>
+                <span>Level 12, 60 Martin Place<br />Sydney NSW 2000 (HQ)</span>
               </div>
             </div>
 
@@ -131,17 +124,23 @@ export function Footer() {
           </ScrollReveal>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-[#1e3a5f]/[0.06] flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#1e3a5f]/40 text-xs">
-            © {new Date().getFullYear()} Banton Group Pty Ltd. All rights reserved.
+        {/* Legal notice */}
+        <div className="pt-8 border-t border-[#1e3a5f]/[0.06] space-y-4">
+          <p className="text-[#1e3a5f]/50 text-[11px] leading-relaxed max-w-4xl">
+            Banton Group is an incorporated legal practice, and not a partnership. References to 'partners' are references to title only.
+            Liability limited by a scheme approved under Professional Standards Legislation.
           </p>
-          <div className="flex gap-6">
-            {['Privacy Policy', 'Terms of Service', 'Disclaimer'].map((item) => (
-              <a key={item} href="#" className="text-[#1e3a5f]/40 text-xs hover:text-[#1e3a5f]/60 transition-colors duration-200">
-                {item}
-              </a>
-            ))}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 pt-4 border-t border-[#1e3a5f]/[0.04]">
+            <p className="text-[#1e3a5f]/40 text-xs">
+              © {new Date().getFullYear()} Banton Group Pty Ltd. All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              {['Privacy Policy', 'Terms of Service', 'Disclaimer'].map((item) => (
+                <a key={item} href="#" className="text-[#1e3a5f]/40 text-xs hover:text-[#1e3a5f]/60 transition-colors duration-200">
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

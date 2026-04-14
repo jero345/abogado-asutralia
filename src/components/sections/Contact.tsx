@@ -13,27 +13,19 @@ const enquiryTypes = [
 
 const offices = [
   {
-    city: 'Melbourne',
-    address: 'Level 32, 101 Collins Street',
-    suburb: 'Melbourne VIC 3000',
-    phone: '+61 3 9999 9999',
-    email: 'melbourne@bantongroup.com.au',
+    city: 'Sydney',
+    address: 'Level 12, 60 Martin Place',
+    suburb: 'Sydney NSW 2000',
+    phone: '+61 2 8076 8090',
+    email: 'info@bantongroup.com',
     primary: true,
   },
   {
-    city: 'Sydney',
-    address: 'Level 28, 1 Market Street',
-    suburb: 'Sydney NSW 2000',
-    phone: '+61 2 9999 9999',
-    email: 'sydney@bantongroup.com.au',
-    primary: false,
-  },
-  {
-    city: 'Brisbane',
-    address: 'Level 18, 240 Queen Street',
-    suburb: 'Brisbane QLD 4000',
-    phone: '+61 7 9999 9999',
-    email: 'brisbane@bantongroup.com.au',
+    city: 'Melbourne',
+    address: 'Level 40, 140 William Street',
+    suburb: 'Melbourne VIC 3000',
+    phone: '+61 03 9229 3948',
+    email: 'info@bantongroup.com',
     primary: false,
   },
 ]

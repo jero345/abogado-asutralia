@@ -10,15 +10,15 @@ const stats = [
     prefix: '$',
     suffix: 'M+',
     label: 'Recovered for Clients',
-    description: 'Total value of settlements and judgments secured across all class actions and litigation matters.',
+    description: 'Total value of settlements and judgments secured across class actions and litigation matters.',
   },
   {
     icon: Users,
-    value: 200000,
+    value: 20,
     prefix: '',
     suffix: '+',
-    label: 'Class Members Represented',
-    description: 'Individuals and institutions whose rights we have fought for and protected.',
+    label: 'Years of Combined Leadership',
+    description: 'Our founding partners bring over two decades of combined experience from top-tier Australian and global firms.',
   },
   {
     icon: Award,
@@ -30,11 +30,11 @@ const stats = [
   },
   {
     icon: Globe,
-    value: 25,
+    value: 6,
     prefix: '',
-    suffix: '+',
-    label: 'Years of Excellence',
-    description: 'Decades of strategic litigation expertise across Australia\'s most complex disputes.',
+    suffix: '',
+    label: 'Courts of Appearance',
+    description: 'Federal Court, Supreme Courts of all states, Full Federal Court, and the High Court of Australia.',
   },
 ]
 
@@ -69,7 +69,7 @@ export function Stats() {
             <span className="text-gradient-gold italic">Tell the Story</span>
           </h2>
           <p className="text-[#1e3a5f]/40 text-lg max-w-xl mx-auto leading-relaxed">
-            Two decades of relentless advocacy have produced results that speak for themselves.
+            A record of relentless advocacy — producing results that speak for themselves.
           </p>
         </ScrollReveal>
 

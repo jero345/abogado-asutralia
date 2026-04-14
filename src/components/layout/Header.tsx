@@ -7,6 +7,7 @@ const navLinks = [
   { label: 'Class Actions', href: '#class-actions' },
   { label: 'About', href: '#about' },
   { label: 'Team', href: '#team' },
+  { label: 'Awards', href: '#awards' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -54,13 +55,11 @@ export function Header() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
-                <div className="w-8 h-8 border border-[#1e3a5f]/60 rotate-45 flex items-center justify-center">
-                  <div className="w-3 h-3 bg-[#1e3a5f] rotate-0" />
-                </div>
-                <div>
-                  <span className="text-[#1e3a5f] font-semibold text-lg tracking-tight">BANTON</span>
-                  <span className="text-[#2a4f82] font-light text-lg tracking-tight ml-1.5">GROUP</span>
-                </div>
+                <img
+                  src="/img/logo.jpg"
+                  alt="Banton Group"
+                  className={`h-10 w-auto object-contain transition-all duration-300 ${scrolled ? '' : 'bg-white/95 rounded-md px-2 py-1 shadow-sm'}`}
+                />
               </motion.a>
 
               {/* Desktop Nav */}
@@ -70,11 +69,11 @@ export function Header() {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                    className="text-[#1e3a5f]/60 text-sm font-medium hover:text-[#1e3a5f] transition-colors duration-200 relative group"
+                    className={`text-sm font-medium transition-colors duration-200 relative group ${scrolled ? 'text-[#1e3a5f]/60 hover:text-[#1e3a5f]' : 'text-white/80 hover:text-white'}`}
                     whileHover={{ y: -1 }}
                   >
                     {link.label}
-                    <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[#1e3a5f] transition-all duration-300 group-hover:w-full" />
+                    <span className={`absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${scrolled ? 'bg-[#1e3a5f]' : 'bg-white'}`} />
                   </motion.a>
                 ))}
               </nav>
@@ -85,7 +84,7 @@ export function Header() {
                   onClick={() => scrollTo('#contact')}
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-5 py-2.5 bg-[#1e3a5f] text-white text-sm font-semibold rounded-full transition-colors duration-200 hover:bg-[#2a4f82]"
+                  className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-colors duration-200 ${scrolled ? 'bg-[#1e3a5f] text-white hover:bg-[#2a4f82]' : 'bg-white text-[#1C3A64] hover:bg-[#EFF4F4]'}`}
                 >
                   Schedule Consultation
                 </motion.button>
@@ -94,7 +93,7 @@ export function Header() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden text-[#1e3a5f]/70 hover:text-[#1e3a5f] transition-colors"
+                className={`lg:hidden transition-colors ${scrolled ? 'text-[#1e3a5f]/70 hover:text-[#1e3a5f]' : 'text-white/80 hover:text-white'}`}
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>

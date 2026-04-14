@@ -7,6 +7,7 @@ import { ClassActions } from '@/components/sections/ClassActions'
 import { About } from '@/components/sections/About'
 import { Team } from '@/components/sections/Team'
 import { Technology } from '@/components/sections/Technology'
+import { Awards } from '@/components/sections/Awards'
 import { Contact } from '@/components/sections/Contact'
 import { CustomCursor } from '@/components/ui/CustomCursor'
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
@@ -25,6 +26,7 @@ function App() {
         <About />
         <Team />
         <Technology />
+        <Awards />
         <Contact />
       </main>
       <Footer />

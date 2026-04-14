@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local asset sources (unoptimized originals — only optimized copies live in public/img)
+recursos/

@@ -1,95 +1,127 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { ArrowRight, ChevronDown, Calendar, CheckCircle } from 'lucide-react'
+import { ArrowRight, ChevronDown, Calendar, Scale } from 'lucide-react'
 
 const cases = [
   {
     id: 1,
-    status: 'Settled',
-    category: 'Financial Services',
-    title: 'Major Bank Responsible Lending Class Action',
-    summary: 'Class action against a Big Four bank for systematic failures in responsible lending obligations across tens of thousands of consumer loans.',
-    amount: '$135M',
-    members: '42,000+',
-    year: '2023',
-    court: 'Federal Court of Australia',
-    details:
-      'Banton Group led this landmark class action alleging the respondent bank systematically failed to comply with its responsible lending obligations under the National Consumer Credit Protection Act. The action covered unsecured personal loans and credit cards issued between 2012-2019, with class members receiving compensation for losses flowing from loans they could not afford to repay.',
-    outcomes: [
-      'Record settlement of $135 million',
-      '42,000+ class members compensated',
-      'Precedent-setting responsible lending obligations',
-      'Compelled systemic industry-wide reforms',
-    ],
-    tag: 'Banking',
+    status: 'Active',
+    category: 'Securities',
+    year: '2020',
+    title: 'Arrium Class Action',
+    summary: 'Action against former directors of Arrium Limited (ASX:ARI) and auditors KPMG for share price inflation.',
+    court: 'Victorian Supreme Court',
+    defendant: 'ASX:ARI Directors & KPMG',
   },
   {
     id: 2,
     status: 'Active',
-    category: 'Securities',
-    title: 'ASX-Listed Energy Corporation Securities Class Action',
-    summary: 'Shareholders allege a major ASX-listed energy company made misleading and deceptive statements regarding project reserves, causing significant share price decline.',
-    amount: '$280M+',
-    members: '28,000+',
-    year: '2024',
-    court: 'Federal Court of Australia (VIC)',
-    details:
-      'This ongoing securities class action targets alleged contraventions of continuous disclosure obligations and misleading conduct under the Corporations Act and ASIC Act. Banton Group acts as lead firm, representing institutional and retail shareholders who acquired shares during the relevant period and suffered losses following the share price collapse.',
-    outcomes: [
-      'Class of 28,000+ shareholders',
-      'Estimated losses exceeding $280 million',
-      'Challenging continuous disclosure failures',
-      'Litigation funding secured',
-    ],
-    tag: 'Securities',
+    category: 'Financial Products',
+    year: '2022',
+    title: 'Fitch SCDO Class Action',
+    summary: "Investors in synthetic CDOs rated 'AAA'–'AA-' by Fitch between 2005–2007 seeking damages for negligent ratings.",
+    court: 'Federal Court',
+    defendant: 'International Ratings Agency',
   },
   {
     id: 3,
-    status: 'Settled',
-    category: 'Consumer',
-    title: 'Telecommunications Data Breach Class Action',
-    summary: 'A class action on behalf of millions of Australians whose personal data was exposed in a major telecommunications data breach, resulting in identity theft and financial harm.',
-    amount: '$58M',
-    members: '1.2M+',
+    status: 'Active',
+    category: 'Financial Products',
     year: '2022',
-    court: 'Supreme Court of NSW',
-    details:
-      'Following a massive data breach affecting over 1.2 million Australians, Banton Group filed this class action alleging the respondent failed to take reasonable steps to protect customer data in contravention of the Privacy Act. The matter settled for $58 million and required the respondent to implement comprehensive cybersecurity improvements.',
-    outcomes: [
-      '$58 million settlement',
-      '1.2 million class members',
-      'Mandatory cybersecurity uplift orders',
-      'Privacy law reform contribution',
-    ],
-    tag: 'Privacy',
+    title: 'S&P CDO & CPDO Class Action',
+    summary: 'Action against S&P Global for misleading credit ratings on CDOs and CPDOs issued between 2005–2007.',
+    court: 'Federal Court',
+    defendant: 'Global Institution',
   },
   {
     id: 4,
     status: 'Active',
-    category: 'Superannuation',
-    title: 'Superannuation Fee Gouging Class Action',
-    summary: 'Class action targeting a major superannuation fund for charging excessive fees and failing to act in the best financial interests of members over a decade.',
-    amount: '$400M+',
-    members: '95,000+',
+    category: 'Environmental',
+    year: '2019',
+    title: 'Murray Darling Basin Class Action',
+    summary: 'NSW and Victorian water entitlement holders seeking compensation for low water allocations in 2017–2020.',
+    court: 'NSW Supreme Court',
+    defendant: 'Regional Farmers',
+  },
+  {
+    id: 5,
+    status: 'Active',
+    category: 'Securities',
+    year: '2021',
+    title: 'Blue Sky Class Action',
+    summary: 'Shareholders allege materially misstated financial reports by Blue Sky and auditor Ernst & Young in FY2016–FY2018.',
+    court: 'Federal Court',
+    defendant: 'ASX Investors',
+  },
+  {
+    id: 6,
+    status: 'Active',
+    category: 'Securities',
+    year: '2022',
+    title: 'Phoslock Class Action',
+    summary: 'Action against Phoslock (ASX:PET) directors and KPMG following disclosure of fraudulent activity in China operations.',
+    court: 'Federal Court',
+    defendant: 'ASX Shareholders',
+  },
+  {
+    id: 7,
+    status: 'Active',
+    category: 'Consumer',
     year: '2024',
-    court: 'Federal Court of Australia',
-    details:
-      'Banton Group is prosecuting this high-value superannuation class action alleging the trustee failed in its fiduciary duties and statutory obligations to members. The action covers a decade of excessive fee deductions and underperformance attributed to related-party arrangements that were not in members\' best financial interests.',
-    outcomes: [
-      'Potential recovery of $400M+',
-      '95,000+ fund members represented',
-      'Targeting systemic fee extraction',
-      'Industry-wide implications',
-    ],
-    tag: 'Superannuation',
+    title: 'Hyundai ABS Defect Class Action',
+    summary: 'Owners of affected Hyundai vehicles with a defective ABS module creating risk of engine fire.',
+    court: 'Victorian Supreme Court',
+    defendant: 'Vehicle Owners',
+  },
+  {
+    id: 8,
+    status: 'Active',
+    category: 'Consumer',
+    year: '2024',
+    title: 'Kia ABS Defect Class Action',
+    summary: 'Owners of affected Kia vehicles with the same ABS manufacturing defect — risk of fire even when parked.',
+    court: 'Victorian Supreme Court',
+    defendant: 'Vehicle Owners',
+  },
+  {
+    id: 9,
+    status: 'Active',
+    category: 'Securities',
+    year: '2021',
+    title: 'CuDeco Class Action',
+    summary: 'Shareholders of ASX-listed CuDeco Limited (In Liq) allege continuous disclosure contraventions by directors and auditor KPMG.',
+    court: 'Federal Court',
+    defendant: 'ASX Shareholders',
+  },
+  {
+    id: 10,
+    status: 'On Appeal',
+    category: 'Nuisance',
+    year: '2020',
+    title: 'Light Rail Class Action',
+    summary: 'Businesses, landlords and residents affected by the CBD & South-East Light Rail project — now before the High Court.',
+    court: 'High Court of Australia',
+    defendant: 'Sydney CBD',
   },
 ]
 
+const pastMatters = [
+  'Arasor Class Action',
+  'Octaviar Notes Class Action',
+  "Financial Products Class Actions vs. Standard & Poor's",
+  'Fitch Ratings',
+  'Commonwealth Bank',
+  'ANZ',
+  'ABN Amro',
+  'Lehman Brothers',
+]
+
 const statusColors: Record<string, string> = {
-  Settled: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-  Active: 'text-[#1e3a5f] bg-[#1e3a5f]/10 border-[#1e3a5f]/20',
-  Pending: 'text-blue-700 bg-blue-50 border-blue-200',
+  Active: 'text-[#1e3a5f] bg-[#E8F0FA] border-[#1e3a5f]/20',
+  Settled: 'text-[#1A6B41] bg-[#E6F4EE] border-[#1A6B41]/20',
+  'On Appeal': 'text-[#8A6D1E] bg-[#C9A84C]/10 border-[#C9A84C]/30',
+  Investigating: 'text-blue-700 bg-blue-50 border-blue-200',
 }
 
 export function ClassActions() {
@@ -112,8 +144,8 @@ export function ClassActions() {
               <br />
               <span className="text-gradient-gold italic">Class Actions</span>
             </h2>
-            <p className="text-[#1e3a5f]/40 text-base leading-relaxed lg:max-w-xs">
-              A selection of our most significant cases — representing real people against powerful institutions.
+            <p className="text-[#1e3a5f]/40 text-base leading-relaxed lg:max-w-sm">
+              Representing real people against powerful institutions — a selection of our most significant current matters.
             </p>
           </div>
         </ScrollReveal>
@@ -121,7 +153,7 @@ export function ClassActions() {
         {/* Case list */}
         <div className="space-y-3">
           {cases.map((c, i) => (
-            <ScrollReveal key={c.id} delay={i * 0.08}>
+            <ScrollReveal key={c.id} delay={i * 0.04}>
               <motion.div
                 layout
                 className={`relative border rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 ${
@@ -131,40 +163,31 @@ export function ClassActions() {
                 }`}
                 onClick={() => setExpanded(expanded === c.id ? null : c.id)}
               >
-                {/* Header row */}
-                <div className="p-6 lg:p-8">
+                <div className="p-5 lg:p-6">
                   <div className="flex flex-col lg:flex-row lg:items-center gap-4">
                     {/* Left */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${statusColors[c.status]}`}>
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border tracking-wide ${statusColors[c.status]}`}>
                           {c.status}
                         </span>
-                        <span className="text-[#1e3a5f]/40 text-xs font-medium px-2.5 py-1 bg-[#1e3a5f]/[0.04] border border-[#1e3a5f]/[0.06] rounded-full">
-                          {c.tag}
+                        <span className="text-[#1e3a5f]/60 text-[11px] font-medium px-2.5 py-1 bg-[#1e3a5f]/[0.05] border border-[#1e3a5f]/[0.1] rounded-full tracking-wide">
+                          {c.category}
                         </span>
                         <span className="text-[#1e3a5f]/40 text-xs hidden sm:flex items-center gap-1">
                           <Calendar size={11} />
                           {c.year}
                         </span>
                       </div>
-                      <h3 className="text-[#1e3a5f] font-semibold text-lg leading-snug pr-4">{c.title}</h3>
-                      <p className="text-[#1e3a5f]/40 text-sm mt-2 leading-relaxed line-clamp-2">{c.summary}</p>
+                      <h3 className="text-[#1e3a5f] font-semibold text-base leading-snug pr-4">{c.title}</h3>
+                      <p className="text-[#1e3a5f]/50 text-sm mt-1 leading-relaxed line-clamp-2">{c.summary}</p>
                     </div>
 
-                    {/* Stats */}
-                    <div className="flex items-center gap-6 lg:gap-8 flex-shrink-0">
-                      <div className="text-center">
-                        <div className="flex items-center gap-1 text-[#1e3a5f] font-bold text-xl">
-                          {c.amount}
-                        </div>
-                        <div className="text-[#1e3a5f]/30 text-xs mt-0.5">Claim Value</div>
-                      </div>
-                      <div className="hidden sm:block text-center">
-                        <div className="flex items-center gap-1 text-[#1e3a5f] font-bold text-xl">
-                          {c.members}
-                        </div>
-                        <div className="text-[#1e3a5f]/30 text-xs mt-0.5">Members</div>
+                    {/* Right: Court info */}
+                    <div className="flex items-center gap-4 lg:gap-6 flex-shrink-0">
+                      <div className="text-right">
+                        <div className="text-[#1e3a5f] font-semibold text-sm">{c.court}</div>
+                        <div className="text-[#1e3a5f]/40 text-xs mt-0.5">{c.defendant}</div>
                       </div>
                       <motion.div
                         animate={{ rotate: expanded === c.id ? 180 : 0 }}
@@ -177,7 +200,7 @@ export function ClassActions() {
                   </div>
                 </div>
 
-                {/* Expanded details */}
+                {/* Expanded */}
                 <AnimatePresence>
                   {expanded === c.id && (
                     <motion.div
@@ -187,36 +210,24 @@ export function ClassActions() {
                       transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 lg:px-8 pb-8 border-t border-[#1e3a5f]/[0.05]">
-                        <div className="pt-6 grid lg:grid-cols-3 gap-8">
-                          {/* Details */}
-                          <div className="lg:col-span-2">
-                            <div className="flex items-center gap-2 mb-2 mt-1">
+                      <div className="px-5 lg:px-6 pb-6 border-t border-[#1e3a5f]/[0.05]">
+                        <div className="pt-5 grid sm:grid-cols-3 gap-6">
+                          <div className="sm:col-span-2">
+                            <div className="flex items-center gap-2 mb-2">
                               <div className="w-4 h-px bg-[#1e3a5f]/60" />
                               <span className="text-[#1e3a5f] text-xs font-semibold tracking-wider uppercase">Case Overview</span>
                             </div>
-                            <p className="text-[#1e3a5f]/60 text-sm leading-relaxed">{c.details}</p>
-
-                            <div className="mt-4 flex items-start gap-2 text-[#1e3a5f]/30 text-xs">
-                              <span className="font-medium text-[#1e3a5f]/40">Court:</span>
-                              {c.court}
-                            </div>
+                            <p className="text-[#1e3a5f]/60 text-sm leading-relaxed">{c.summary}</p>
                           </div>
-
-                          {/* Outcomes */}
                           <div>
-                            <div className="flex items-center gap-2 mb-4 mt-1">
+                            <div className="flex items-center gap-2 mb-2">
                               <div className="w-4 h-px bg-[#1e3a5f]/60" />
-                              <span className="text-[#1e3a5f] text-xs font-semibold tracking-wider uppercase">Key Outcomes</span>
+                              <span className="text-[#1e3a5f] text-xs font-semibold tracking-wider uppercase">Jurisdiction</span>
                             </div>
-                            <ul className="space-y-3">
-                              {c.outcomes.map((outcome) => (
-                                <li key={outcome} className="flex items-start gap-2.5">
-                                  <CheckCircle size={13} className="text-[#1e3a5f] mt-0.5 flex-shrink-0" />
-                                  <span className="text-[#1e3a5f]/60 text-sm">{outcome}</span>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="flex items-start gap-2 text-[#1e3a5f]/70 text-sm">
+                              <Scale size={13} className="mt-0.5 text-[#1e3a5f]" />
+                              <span>{c.court}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -227,6 +238,24 @@ export function ClassActions() {
             </ScrollReveal>
           ))}
         </div>
+
+        {/* Past matters */}
+        <ScrollReveal delay={0.2} className="mt-16">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px w-8 bg-[#1e3a5f]/40" />
+            <span className="text-[#1e3a5f] text-[11px] font-semibold tracking-[0.2em] uppercase">Our Track Record Also Includes</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {pastMatters.map((m) => (
+              <span
+                key={m}
+                className="text-[#1e3a5f]/60 text-xs font-medium px-3 py-1.5 bg-[#1e3a5f]/[0.04] border border-[#1e3a5f]/[0.08] rounded-full"
+              >
+                {m}
+              </span>
+            ))}
+          </div>
+        </ScrollReveal>
 
         {/* CTA */}
         <ScrollReveal delay={0.3} className="mt-12 text-center">

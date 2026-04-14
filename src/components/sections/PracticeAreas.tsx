@@ -9,8 +9,8 @@ const practices = [
     title: 'Class Actions',
     tagline: 'Justice at Scale',
     description:
-      'We represent thousands of Australians in landmark class actions against corporations, financial institutions, and government entities. Our track record includes some of the largest settlements in Australian legal history.',
-    highlights: ['Securities class actions', 'Consumer product claims', 'Financial misconduct', 'Environmental litigation'],
+      'We represent Australians in landmark class actions against corporations, financial institutions, and government entities. Our track record includes some of the largest and most complex class action matters in Australian legal history — including actions against global ratings agencies, major banks, and ASX-listed companies.',
+    highlights: ['Securities class actions', 'Financial misconduct', 'Consumer product claims', 'Environmental litigation'],
     color: 'from-[#1e3a5f]/20 to-[#1e3a5f]/5',
     accent: '#1e3a5f',
   },
@@ -20,7 +20,7 @@ const practices = [
     title: 'Commercial Litigation',
     tagline: 'High-Stakes Disputes',
     description:
-      'Complex commercial disputes demand sophisticated strategy. We provide sophisticated advocacy in contract disputes, shareholder conflicts, trade practices, and commercial fraud matters across all Australian courts.',
+      'Complex commercial disputes demand sophisticated strategy. We provide expert advocacy in contract disputes, shareholder conflicts, trade practices, and commercial fraud matters across all Australian courts — with a particular focus on complex financial products.',
     highlights: ['Contract disputes', 'Shareholder actions', 'Trade practices', 'Fraud & misrepresentation'],
     color: 'from-blue-500/15 to-blue-500/5',
     accent: '#2a6496',
@@ -31,8 +31,8 @@ const practices = [
     title: 'Insolvency & Restructuring',
     tagline: 'Navigating Complexity',
     description:
-      'When businesses face financial distress, decisive legal action is critical. We advise on voluntary administration, receivership, deed of company arrangement, and complex creditor negotiations.',
-    highlights: ['Voluntary administration', 'Liquidations', 'Creditor rights', 'Corporate rescue'],
+      'When businesses face financial distress, decisive legal action is critical. We advise on voluntary administration, receivership, deed of company arrangement, and complex creditor negotiations. Our key clients include KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick and Grant Thornton.',
+    highlights: ['Voluntary administration', 'Creditor rights', 'Liquidations', 'Corporate rescue'],
     color: 'from-purple-500/15 to-purple-500/5',
     accent: '#6b4f9e',
   },
@@ -42,8 +42,8 @@ const practices = [
     title: 'Complex Financial Disputes',
     tagline: 'Precision Advocacy',
     description:
-      'Financial disputes require deep technical expertise and aggressive advocacy. We handle securities litigation, banking disputes, investment fraud, ASIC proceedings, and derivative claims.',
-    highlights: ['Securities litigation', 'Banking disputes', 'Investment fraud', 'ASIC proceedings'],
+      'Financial disputes require deep technical expertise and aggressive advocacy. We have pioneered successful claims in relation to complex financial products — including collateralised debt obligations and synthetic CDOs — against global ratings agencies and major Australian and global financial institutions.',
+    highlights: ['Securities litigation', 'CDO & CPDO claims', 'Banking disputes', 'ASIC proceedings'],
     color: 'from-emerald-500/15 to-emerald-500/5',
     accent: '#1a6e4a',
   },
