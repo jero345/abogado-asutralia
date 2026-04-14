@@ -34,7 +34,7 @@ export function Footer() {
           {/* Brand */}
           <ScrollReveal className="lg:col-span-1">
             <div className="mb-6">
-              <img src="/img/logo.jpg" alt="Banton Group" className="h-12 w-auto object-contain" />
+              <img src="/img/logobg.png" alt="Banton Group" className="h-12 w-auto object-contain" />
             </div>
             <p className="text-[#1e3a5f]/50 text-sm leading-relaxed mb-6">
               Australia's premier litigation firm — delivering extraordinary outcomes in class actions, commercial disputes, and insolvency since 2020.

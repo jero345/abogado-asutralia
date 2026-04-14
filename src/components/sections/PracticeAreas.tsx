@@ -11,8 +11,8 @@ const practices = [
     description:
       'We represent Australians in landmark class actions against corporations, financial institutions, and government entities. Our track record includes some of the largest and most complex class action matters in Australian legal history — including actions against global ratings agencies, major banks, and ASX-listed companies.',
     highlights: ['Securities class actions', 'Financial misconduct', 'Consumer product claims', 'Environmental litigation'],
-    color: 'from-[#1e3a5f]/20 to-[#1e3a5f]/5',
-    accent: '#1e3a5f',
+    color: 'from-[#1C3A64]/15 to-[#1C3A64]/[0.03]',
+    accent: '#1C3A64',
   },
   {
     icon: Building2,
@@ -22,8 +22,8 @@ const practices = [
     description:
       'Complex commercial disputes demand sophisticated strategy. We provide expert advocacy in contract disputes, shareholder conflicts, trade practices, and commercial fraud matters across all Australian courts — with a particular focus on complex financial products.',
     highlights: ['Contract disputes', 'Shareholder actions', 'Trade practices', 'Fraud & misrepresentation'],
-    color: 'from-blue-500/15 to-blue-500/5',
-    accent: '#2a6496',
+    color: 'from-[#2A4E72]/15 to-[#2A4E72]/[0.03]',
+    accent: '#2A4E72',
   },
   {
     icon: RefreshCw,
@@ -33,8 +33,8 @@ const practices = [
     description:
       'When businesses face financial distress, decisive legal action is critical. We advise on voluntary administration, receivership, deed of company arrangement, and complex creditor negotiations. Our key clients include KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick and Grant Thornton.',
     highlights: ['Voluntary administration', 'Creditor rights', 'Liquidations', 'Corporate rescue'],
-    color: 'from-purple-500/15 to-purple-500/5',
-    accent: '#6b4f9e',
+    color: 'from-[#385078]/15 to-[#385078]/[0.03]',
+    accent: '#385078',
   },
   {
     icon: DollarSign,
@@ -44,8 +44,8 @@ const practices = [
     description:
       'Financial disputes require deep technical expertise and aggressive advocacy. We have pioneered successful claims in relation to complex financial products — including collateralised debt obligations and synthetic CDOs — against global ratings agencies and major Australian and global financial institutions.',
     highlights: ['Securities litigation', 'CDO & CPDO claims', 'Banking disputes', 'ASIC proceedings'],
-    color: 'from-emerald-500/15 to-emerald-500/5',
-    accent: '#1a6e4a',
+    color: 'from-[#6D8FB5]/15 to-[#6D8FB5]/[0.03]',
+    accent: '#1C3A64',
   },
 ]
 

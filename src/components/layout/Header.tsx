@@ -56,9 +56,9 @@ export function Header() {
                 transition={{ type: 'spring', stiffness: 400 }}
               >
                 <img
-                  src="/img/logo.jpg"
+                  src="/img/logobg.png"
                   alt="Banton Group"
-                  className={`h-10 w-auto object-contain transition-all duration-300 ${scrolled ? '' : 'bg-white/95 rounded-md px-2 py-1 shadow-sm'}`}
+                  className={`h-10 md:h-11 w-auto object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`}
                 />
               </motion.a>
 

@@ -13,6 +13,9 @@ type Member = {
   awards?: string[]
 }
 
+// Unified navy palette — brand guide #1C3A64 primary
+const NAVY = '#1C3A64'
+
 const team: Member[] = [
   {
     name: 'Amanda Banton',
@@ -22,7 +25,7 @@ const team: Member[] = [
       'Amanda is the Managing Partner of Banton Group, established in February 2020. She brings close to 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — with consulting experience from KPMG and federal government expertise.',
     photo: '/img/team/amanda-banton.jpg',
     initials: 'AB',
-    color: '#1e3a5f',
+    color: NAVY,
     awards: ['Chambers Asia-Pacific 2022/23/25/26', 'Legal 500 Recommended', 'Law Firm Leader of the Year 2022'],
   },
   {
@@ -33,7 +36,7 @@ const team: Member[] = [
       'Melissa is a Partner specialising in dispute resolution and class actions. Full biography available on request.',
     photo: '/img/team/melissa-morgan.jpg',
     initials: 'MM',
-    color: '#6b4f9e',
+    color: NAVY,
   },
   {
     name: 'Paul Smith',
@@ -43,7 +46,7 @@ const team: Member[] = [
       'Paul is a Partner specialising in dispute resolution and class actions. Full biography available on request.',
     photo: '/img/team/paul-smith.jpg',
     initials: 'PS',
-    color: '#1a6e4a',
+    color: NAVY,
   },
   {
     name: 'Jack Johnstone',
@@ -53,7 +56,7 @@ const team: Member[] = [
       'Jack is a Senior Associate working across class actions and commercial litigation matters. Full biography available on request.',
     photo: '/img/team/jack-johnstone.jpg',
     initials: 'JJ',
-    color: '#8c2a3e',
+    color: NAVY,
   },
   {
     name: 'Matt',
@@ -62,7 +65,7 @@ const team: Member[] = [
     bio: 'Full name, role, and biography pending client confirmation.',
     photo: '/img/team/matt.jpg',
     initials: 'M',
-    color: '#7a4a1e',
+    color: NAVY,
   },
   {
     name: 'Craig',
@@ -71,7 +74,7 @@ const team: Member[] = [
     bio: 'Full name, role, and biography pending client confirmation.',
     photo: '/img/team/craig.jpg',
     initials: 'C',
-    color: '#1f5f7a',
+    color: NAVY,
   },
   {
     name: 'Brody',
@@ -80,7 +83,7 @@ const team: Member[] = [
     bio: 'Full name, role, and biography pending client confirmation.',
     photo: '/img/team/brody.jpg',
     initials: 'B',
-    color: '#3c5a8a',
+    color: NAVY,
   },
   {
     name: 'Lisa',
@@ -89,7 +92,7 @@ const team: Member[] = [
     bio: 'Full name, role, and biography pending client confirmation.',
     photo: '/img/team/lisa.jpg',
     initials: 'L',
-    color: '#5a4e8c',
+    color: NAVY,
   },
 ]
 

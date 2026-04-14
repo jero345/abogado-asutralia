@@ -96,42 +96,49 @@ export function About() {
 
           {/* Right: Amanda portrait */}
           <ScrollReveal direction="left">
-            <div className="relative">
+            <div className="relative pb-24 md:pb-0">
               <motion.div
                 style={{ y: imageY }}
                 className="relative"
               >
-                <div className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.1] rounded-2xl overflow-hidden aspect-[4/5] max-w-[480px] mx-auto">
+                <div className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.1] rounded-2xl overflow-hidden aspect-[4/5] max-w-[460px] mx-auto">
                   <img
                     src="/img/about/amanda-portrait.jpg"
                     alt="Amanda Banton, Founding Partner of Banton Group"
                     className="w-full h-full object-cover"
                   />
-                  {/* Bottom gradient overlay with quote */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1C3A64] via-[#1C3A64]/80 to-transparent p-8 pt-24">
-                    <div className="font-serif text-xl font-bold text-white mb-2 leading-snug">
-                      "We don't just argue cases.<br />We change outcomes."
-                    </div>
-                    <div className="text-white/80 text-sm">— Amanda Banton, Founding Partner</div>
-                  </div>
                 </div>
               </motion.div>
 
-              {/* Floating accreditation card (real award, not 98%) */}
+              {/* Quote card below photo — fully readable */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="relative md:absolute md:-bottom-6 md:right-0 md:max-w-[320px] mt-6 md:mt-0 bg-[#1C3A64] rounded-2xl p-6 shadow-xl border-l-4 border-l-[#6D8FB5]"
+              >
+                <div className="font-serif text-lg md:text-xl font-semibold text-white leading-snug mb-3">
+                  "We don't just argue cases.<br />We change outcomes."
+                </div>
+                <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Founding Partner</div>
+              </motion.div>
+
+              {/* Chambers accreditation — moved to top-left, stays visible */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="absolute -bottom-8 -left-4 sm:-left-8 bg-white border border-[#C9A84C]/40 rounded-2xl p-5 shadow-lg max-w-[240px]"
+                transition={{ delay: 0.5 }}
+                className="absolute top-4 left-2 sm:-left-6 bg-white border border-[#1C3A64]/20 rounded-xl p-4 shadow-lg max-w-[220px]"
               >
-                <div className="text-[#8A6D1E] text-[11px] font-semibold tracking-[0.1em] uppercase mb-1">
+                <div className="text-[#1C3A64] text-[10px] font-semibold tracking-[0.12em] uppercase mb-1">
                   Chambers Asia-Pacific
                 </div>
                 <div className="text-[#1e3a5f] text-sm font-semibold leading-snug">
                   Leading Individual — Amanda Banton
                 </div>
-                <div className="text-[#1e3a5f]/50 text-xs mt-1">2022, 2023, 2025, 2026</div>
+                <div className="text-[#1e3a5f]/60 text-[11px] mt-1">2022, 2023, 2025, 2026</div>
               </motion.div>
             </div>
           </ScrollReveal>

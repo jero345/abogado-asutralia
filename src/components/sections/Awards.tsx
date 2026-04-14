@@ -94,14 +94,14 @@ export function Awards() {
           {testimonials.map((t, i) => (
             <ScrollReveal key={t.quote.slice(0, 20)} delay={i * 0.08}>
               <motion.div
-                whileHover={{ borderColor: 'rgba(201,168,76,0.6)' }}
-                className="relative bg-[#F4F6FB] border-l-[3px] border-l-[#C9A84C] border-y border-r border-[#1e3a5f]/[0.08] rounded-r-2xl p-6 h-full"
+                whileHover={{ borderColor: 'rgba(28,58,100,0.4)' }}
+                className="relative bg-[#F4F6FB] border-l-[3px] border-l-[#1C3A64] border-y border-r border-[#1e3a5f]/[0.08] rounded-r-2xl p-6 h-full"
               >
-                <Quote size={18} className="text-[#C9A84C] mb-3" />
-                <p className="text-[#1e3a5f]/80 text-[15px] italic leading-relaxed mb-4">
+                <Quote size={18} className="text-[#1C3A64] mb-3" />
+                <p className="text-[#1e3a5f]/85 text-[15px] italic leading-relaxed mb-4">
                   "{t.quote}"
                 </p>
-                <div className="text-[#8A6D1E] text-xs font-semibold tracking-wide">{t.source}</div>
+                <div className="text-[#1C3A64] text-xs font-semibold tracking-wide">{t.source}</div>
               </motion.div>
             </ScrollReveal>
           ))}
