@@ -71,11 +71,11 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex items-center justify-center gap-3 mb-8"
         >
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C9A84C]/70" />
-          <span className="text-[#C9A84C] text-xs font-semibold tracking-[0.25em] uppercase">
+          <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#8AAECE]/80" />
+          <span className="text-[#8AAECE] text-[10px] md:text-xs font-medium tracking-[0.2em] md:tracking-[0.25em] uppercase">
             Australia's Premier Litigation Firm
           </span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C9A84C]/70" />
+          <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#8AAECE]/80" />
         </motion.div>
 
         {/* Main headline */}
@@ -83,7 +83,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-[42px] sm:text-5xl md:text-6xl lg:text-[72px] font-light leading-[1.0] tracking-tight mb-6"
+          className="text-[32px] sm:text-4xl md:text-5xl lg:text-[64px] xl:text-[72px] font-light leading-[1.05] tracking-tight mb-5 md:mb-6"
         >
           <span className="text-white">Strategic</span>
           <br />
@@ -99,7 +99,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55 }}
-          className="text-white/80 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed mb-12"
+          className="text-white/80 text-sm md:text-lg lg:text-xl font-light max-w-xl md:max-w-2xl mx-auto leading-relaxed mb-10 md:mb-12 px-2"
         >
           We pursue justice for individuals and institutions in Australia's most complex and high-stakes legal disputes — from landmark class actions to corporate restructuring.
         </motion.p>
@@ -109,16 +109,16 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-14 md:mb-20"
         >
           <Link to="/class-actions">
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors duration-200 tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white text-[#1C3A64] text-[12px] md:text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors duration-200 tracking-[0.02em]"
             >
               View Class Actions
-              <ArrowRight size={16} />
+              <ArrowRight size={14} />
             </motion.span>
           </Link>
 
@@ -126,7 +126,7 @@ export function Hero() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/40 text-white text-[13px] font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 border border-white/40 text-white text-[12px] md:text-[13px] font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
             >
               Contact Us
             </motion.span>
@@ -146,9 +146,9 @@ export function Hero() {
             { value: '50+', label: 'Class Actions' },
             { value: '6', label: 'Courts We Appear In' },
           ].map((stat) => (
-            <div key={stat.label} className="bg-[#1C3A64]/60 backdrop-blur-sm px-6 py-5 text-center">
-              <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-              <div className="text-[#8AAECE] text-[10px] tracking-wider uppercase leading-tight">{stat.label}</div>
+            <div key={stat.label} className="bg-[#1C3A64]/60 backdrop-blur-sm px-3 py-3 md:px-6 md:py-5 text-center">
+              <div className="text-lg md:text-2xl font-bold text-white mb-0.5 md:mb-1">{stat.value}</div>
+              <div className="text-[#8AAECE] text-[9px] md:text-[10px] tracking-wider uppercase leading-tight">{stat.label}</div>
             </div>
           ))}
         </motion.div>

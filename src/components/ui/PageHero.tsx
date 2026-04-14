@@ -14,7 +14,7 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }: PageHeroProps) {
   return (
-    <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-[#1C3A64]">
+    <section className="relative pt-28 pb-12 md:pt-40 md:pb-20 overflow-hidden bg-[#1C3A64]">
       {/* Decorative grid */}
       <div
         className="absolute inset-0 opacity-[0.06]"
@@ -64,8 +64,8 @@ export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }:
           transition={{ duration: 0.6, delay: 0.1 }}
           className="flex items-center gap-3 mb-5"
         >
-          <div className="h-px w-8 bg-[#C9A84C]" />
-          <span className="text-[#C9A84C] text-[11px] font-semibold tracking-[0.2em] uppercase">
+          <div className="h-px w-8 bg-[#8AAECE]" />
+          <span className="text-[#8AAECE] text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase">
             {eyebrow}
           </span>
         </motion.div>
@@ -75,7 +75,7 @@ export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }:
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-4xl md:text-5xl lg:text-[56px] font-medium text-white leading-[1.05] tracking-tight max-w-4xl"
+          className="text-[28px] sm:text-4xl md:text-5xl lg:text-[56px] font-medium text-white leading-[1.1] md:leading-[1.05] tracking-tight max-w-4xl"
         >
           {title}
           {italicTitle && (
@@ -92,7 +92,7 @@ export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }:
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="text-white/70 text-base md:text-lg leading-relaxed mt-6 max-w-2xl"
+            className="text-white/70 text-sm md:text-lg leading-relaxed mt-5 md:mt-6 max-w-2xl"
           >
             {subtitle}
           </motion.p>
