@@ -127,9 +127,9 @@ export function Header() {
         initial={false}
         animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={{ duration: 0.25 }}
-        className={`fixed top-20 left-0 right-0 z-40 bg-white/98 backdrop-blur-xl border-b border-[#1e3a5f]/[0.06] ${mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        className={`fixed top-20 left-0 right-0 z-40 bg-[#1C3A64] border-b border-white/10 shadow-xl ${mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
+        <div className="max-w-7xl mx-auto px-6 py-7 flex flex-col gap-5">
           {navLinks.map((link, i) => (
             <motion.div
               key={link.label}
@@ -140,7 +140,7 @@ export function Header() {
               <NavLink
                 to={link.to}
                 className={({ isActive }) =>
-                  `text-base font-medium transition-colors block ${isActive ? 'text-[#1C3A64]' : 'text-[#555555] hover:text-[#1C3A64]'}`
+                  `text-base font-medium transition-colors block ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`
                 }
               >
                 {link.label}
@@ -149,7 +149,7 @@ export function Header() {
           ))}
           <Link
             to="/contact"
-            className="mt-2 w-full py-3 bg-[#1C3A64] text-white text-sm font-medium rounded-full text-center tracking-[0.02em]"
+            className="mt-3 w-full py-3 bg-white text-[#1C3A64] text-sm font-medium rounded-full text-center tracking-[0.02em] hover:bg-[#EFF4F4] transition-colors"
           >
             Schedule Consultation
           </Link>
