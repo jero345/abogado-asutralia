@@ -51,10 +51,10 @@ export function About() {
                 <span className="w-5 h-px bg-[#1e3a5f]" />
                 About the Firm
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#1e3a5f] leading-tight mb-8">
-                Founded With
+              <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-8">
+                Founded with
                 <br />
-                <span className="text-gradient-gold italic">a Singular Purpose</span>
+                <span className="italic-display text-[#6D8FB5]">a singular purpose.</span>
               </h2>
               <div className="space-y-5 text-[#1e3a5f]/70 leading-relaxed">
                 <p>

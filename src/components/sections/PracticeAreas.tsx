@@ -62,10 +62,10 @@ export function PracticeAreas() {
               <span className="w-5 h-px bg-[#1e3a5f]" />
               What We Do
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
               Practice
               <br />
-              <span className="text-gradient-gold italic">Areas</span>
+              <span className="italic-display text-[#6D8FB5]">areas.</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="lg:max-w-xs">

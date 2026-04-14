@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, ArrowRight } from 'lucide-react'
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 const floatingWords = [
   'Class Actions', 'Commercial Litigation', 'Insolvency', 'Restructuring',
@@ -14,11 +15,6 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
-
-  const scrollTo = (href: string) => {
-    const el = document.getElementById(href)
-    el?.scrollIntoView({ behavior: 'smooth' })
-  }
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -87,15 +83,15 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[72px] font-bold leading-[1] tracking-tight mb-6"
+          className="text-[42px] sm:text-5xl md:text-6xl lg:text-[72px] font-light leading-[1.0] tracking-tight mb-6"
         >
           <span className="text-white">Strategic</span>
           <br />
-          <span className="text-[#6D8FB5] italic font-light">Litigation.</span>
+          <span className="italic-display text-[#6D8FB5]">litigation.</span>
           <br />
           <span className="text-white">Extraordinary</span>
           <br />
-          <span className="text-[#6D8FB5] italic font-light">Outcomes.</span>
+          <span className="italic-display text-[#6D8FB5]">outcomes.</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -115,24 +111,26 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
-          <motion.button
-            onClick={() => scrollTo('class-actions')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#1C3A64] text-sm font-semibold rounded-full hover:bg-[#EFF4F4] transition-colors duration-200"
-          >
-            View Class Actions
-            <ArrowRight size={16} />
-          </motion.button>
+          <Link to="/class-actions">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors duration-200 tracking-[0.02em]"
+            >
+              View Class Actions
+              <ArrowRight size={16} />
+            </motion.span>
+          </Link>
 
-          <motion.button
-            onClick={() => scrollTo('contact')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/40 text-white text-sm font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200"
-          >
-            Contact Us
-          </motion.button>
+          <Link to="/contact">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/40 text-white text-[13px] font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
+            >
+              Contact Us
+            </motion.span>
+          </Link>
         </motion.div>
 
         {/* Stats strip */}

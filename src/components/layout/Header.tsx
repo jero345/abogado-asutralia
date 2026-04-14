@@ -1,20 +1,26 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Practice Areas', href: '#practice-areas' },
-  { label: 'Class Actions', href: '#class-actions' },
-  { label: 'About', href: '#about' },
-  { label: 'Team', href: '#team' },
-  { label: 'Awards', href: '#awards' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Practice Areas', to: '/practice-areas' },
+  { label: 'Class Actions', to: '/class-actions' },
+  { label: 'About', to: '/about' },
+  { label: 'Team', to: '/team' },
+  { label: 'Awards', to: '/awards' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { scrollY } = useScroll()
+  const { pathname } = useLocation()
+
+  // On sub-pages (not home), the header sits over navy PageHero — treat as "dark bg"
+  const isHomePage = pathname === '/'
+  const darkBackground = isHomePage ? !scrolled : !scrolled
 
   const headerBg = useTransform(
     scrollY,
@@ -28,12 +34,9 @@ export function Header() {
     return unsub
   }, [scrollY])
 
-  const scrollTo = (href: string) => {
+  useEffect(() => {
     setMobileOpen(false)
-    const id = href.replace('#', '')
-    const el = document.getElementById(id)
-    el?.scrollIntoView({ behavior: 'smooth' })
-  }
+  }, [pathname])
 
   return (
     <>
@@ -48,52 +51,69 @@ export function Header() {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="flex items-center justify-between h-20">
               {/* Logo */}
-              <motion.a
-                href="#"
-                onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              <Link
+                to="/"
                 className="flex items-center gap-3"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 400 }}
               >
-                <img
+                <motion.img
                   src="/img/logobg.png"
                   alt="Banton Group"
-                  className={`h-10 md:h-11 w-auto object-contain transition-all duration-300 ${scrolled ? '' : 'brightness-0 invert'}`}
+                  className={`h-10 md:h-11 w-auto object-contain transition-all duration-300 ${darkBackground ? 'brightness-0 invert' : ''}`}
+                  whileHover={{ scale: 1.03 }}
                 />
-              </motion.a>
+              </Link>
 
               {/* Desktop Nav */}
-              <nav className="hidden lg:flex items-center gap-8">
+              <nav className="hidden lg:flex items-center gap-7">
                 {navLinks.map((link) => (
-                  <motion.a
+                  <NavLink
                     key={link.label}
-                    href={link.href}
-                    onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                    className={`text-sm font-medium transition-colors duration-200 relative group ${scrolled ? 'text-[#1e3a5f]/60 hover:text-[#1e3a5f]' : 'text-white/80 hover:text-white'}`}
-                    whileHover={{ y: -1 }}
+                    to={link.to}
+                    className={({ isActive }) =>
+                      `text-[13px] font-medium tracking-[0.01em] transition-colors duration-200 relative group ${
+                        darkBackground
+                          ? isActive
+                            ? 'text-white'
+                            : 'text-white/75 hover:text-white'
+                          : isActive
+                            ? 'text-[#1C3A64]'
+                            : 'text-[#555555] hover:text-[#1C3A64]'
+                      }`
+                    }
                   >
-                    {link.label}
-                    <span className={`absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full ${scrolled ? 'bg-[#1e3a5f]' : 'bg-white'}`} />
-                  </motion.a>
+                    {({ isActive }) => (
+                      <>
+                        {link.label}
+                        <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
+                          darkBackground ? 'bg-white' : 'bg-[#1C3A64]'
+                        } ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                      </>
+                    )}
+                  </NavLink>
                 ))}
               </nav>
 
               {/* CTA */}
               <div className="hidden lg:flex items-center gap-4">
-                <motion.button
-                  onClick={() => scrollTo('#contact')}
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-colors duration-200 ${scrolled ? 'bg-[#1e3a5f] text-white hover:bg-[#2a4f82]' : 'bg-white text-[#1C3A64] hover:bg-[#EFF4F4]'}`}
-                >
-                  Schedule Consultation
-                </motion.button>
+                <Link to="/contact">
+                  <motion.span
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    className={`inline-block px-5 py-2.5 text-[13px] font-medium rounded-full transition-colors duration-200 tracking-[0.02em] ${
+                      darkBackground
+                        ? 'bg-white text-[#1C3A64] hover:bg-[#EFF4F4]'
+                        : 'bg-[#1C3A64] text-white hover:bg-[#2A4E72]'
+                    }`}
+                  >
+                    Schedule Consultation
+                  </motion.span>
+                </Link>
               </div>
 
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className={`lg:hidden transition-colors ${scrolled ? 'text-[#1e3a5f]/70 hover:text-[#1e3a5f]' : 'text-white/80 hover:text-white'}`}
+                className={`lg:hidden transition-colors ${darkBackground ? 'text-white/80 hover:text-white' : 'text-[#1e3a5f]/70 hover:text-[#1e3a5f]'}`}
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
@@ -111,25 +131,28 @@ export function Header() {
       >
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
           {navLinks.map((link, i) => (
-            <motion.a
+            <motion.div
               key={link.label}
-              href={link.href}
-              onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
               initial={{ opacity: 0, x: -20 }}
               animate={mobileOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ delay: i * 0.05 }}
-              className="text-[#1e3a5f]/70 text-base font-medium hover:text-[#1e3a5f] transition-colors"
             >
-              {link.label}
-            </motion.a>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) =>
+                  `text-base font-medium transition-colors block ${isActive ? 'text-[#1C3A64]' : 'text-[#555555] hover:text-[#1C3A64]'}`
+                }
+              >
+                {link.label}
+              </NavLink>
+            </motion.div>
           ))}
-          <motion.button
-            onClick={() => scrollTo('#contact')}
-            whileTap={{ scale: 0.97 }}
-            className="mt-2 w-full py-3 bg-[#1e3a5f] text-white text-sm font-semibold rounded-full"
+          <Link
+            to="/contact"
+            className="mt-2 w-full py-3 bg-[#1C3A64] text-white text-sm font-medium rounded-full text-center tracking-[0.02em]"
           >
             Schedule Consultation
-          </motion.button>
+          </Link>
         </div>
       </motion.div>
     </>

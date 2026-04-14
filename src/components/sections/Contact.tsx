@@ -77,10 +77,10 @@ export function Contact() {
             Get in Touch
             <span className="w-5 h-px bg-[#1e3a5f]" />
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight mb-6">
-            Your Case Starts
+          <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-6">
+            Your case starts
             <br />
-            <span className="text-gradient-gold italic">With a Conversation</span>
+            <span className="italic-display text-[#6D8FB5]">with a conversation.</span>
           </h2>
           <p className="text-[#1e3a5f]/40 text-lg max-w-xl mx-auto leading-relaxed">
             Initial consultations are confidential and obligation-free. Tell us about your matter and we'll assess whether we can help.

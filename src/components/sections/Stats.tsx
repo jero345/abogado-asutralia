@@ -63,10 +63,10 @@ export function Stats() {
             Track Record
             <span className="w-5 h-px bg-[#1e3a5f]" />
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] mt-4 mb-6">
-            Numbers That
+          <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] mt-4 mb-6 leading-[1.1] tracking-tight">
+            Numbers that
             <br />
-            <span className="text-gradient-gold italic">Tell the Story</span>
+            <span className="italic-display text-[#6D8FB5]">tell the story.</span>
           </h2>
           <p className="text-[#1e3a5f]/40 text-lg max-w-xl mx-auto leading-relaxed">
             A record of relentless advocacy — producing results that speak for themselves.

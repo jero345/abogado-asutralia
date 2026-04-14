@@ -109,10 +109,10 @@ export function Team() {
               <span className="w-5 h-px bg-[#1e3a5f]" />
               Our Team
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] leading-tight">
-              The Lawyers
+            <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
+              The lawyers
               <br />
-              <span className="text-gradient-gold italic">Behind the Wins</span>
+              <span className="italic-display text-[#6D8FB5]">behind the wins.</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="lg:max-w-sm">

@@ -1,0 +1,19 @@
+import { PageHero } from '@/components/ui/PageHero'
+import { About } from '@/components/sections/About'
+import { Technology } from '@/components/sections/Technology'
+
+export function AboutPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="About the Firm"
+        title="Specialist boutique."
+        italicTitle="Big-firm firepower."
+        subtitle="Established February 2020 by Amanda Banton — today one of Australia's largest private litigation and insolvency practices."
+        breadcrumbs={[{ label: 'About' }]}
+      />
+      <About />
+      <Technology />
+    </>
+  )
+}

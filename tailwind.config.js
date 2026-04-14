@@ -19,8 +19,25 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        // PP Neue Machina is the licensed brand font. Space Grotesk is the
+        // closest open-source proxy (geometric sans, same x-height family).
+        sans: ['"PP Neue Machina"', '"Space Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['"PP Neue Machina"', '"Space Grotesk"', 'system-ui', 'sans-serif'],
+        serif: ['Fraunces', '"Playfair Display"', 'Georgia', 'serif'],
+      },
+      fontSize: {
+        // Brand typography scale — desktop values
+        'eyebrow': ['11px', { lineHeight: '1.4', letterSpacing: '0.12em' }],
+        'body': ['15px', { lineHeight: '1.7' }],
+        'body-lg': ['16px', { lineHeight: '1.7' }],
+        'h2-card': ['22px', { lineHeight: '1.2' }],
+        'h1-section': ['44px', { lineHeight: '1.1' }],
+        'display': ['72px', { lineHeight: '1.0' }],
+        'stat': ['44px', { lineHeight: '1.0' }],
+      },
+      letterSpacing: {
+        'brand-eyebrow': '0.12em',
+        'brand-button': '0.02em',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
