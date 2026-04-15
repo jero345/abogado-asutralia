@@ -17,7 +17,7 @@ export function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pb-[210px] md:pb-[180px]">
       {/* Team photo background */}
       <motion.div
         style={{ scale }}
@@ -62,7 +62,7 @@ export function Hero() {
       {/* Content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center mt-24 md:mt-32"
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center mt-20 md:mt-24"
       >
         {/* Eyebrow */}
         <motion.div
@@ -109,7 +109,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-14 md:mb-20"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4"
         >
           <Link to="/class-actions">
             <motion.span
@@ -132,26 +132,28 @@ export function Hero() {
             </motion.span>
           </Link>
         </motion.div>
+      </motion.div>
 
-        {/* Stats strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/15 max-w-3xl mx-auto"
-        >
+      {/* Stats strip — pinned to bottom of hero, NOT in the fade-on-scroll group */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.9 }}
+        className="absolute bottom-6 md:bottom-10 inset-x-0 z-20 flex justify-center px-4 md:px-8"
+      >
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-[#0F2540]/40 backdrop-blur-md w-full max-w-3xl">
           {[
             { value: '$500M+', label: 'Recovered for Clients' },
             { value: '20+', label: 'Years Combined Leadership' },
             { value: '50+', label: 'Class Actions' },
             { value: '6', label: 'National Jurisdictions' },
           ].map((stat) => (
-            <div key={stat.label} className="bg-[#1C3A64]/60 backdrop-blur-sm px-3 py-4 md:px-6 md:py-5 text-center">
+            <div key={stat.label} className="bg-[#1C3A64]/75 backdrop-blur-sm px-3 py-4 md:px-6 md:py-5 text-center">
               <div className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-white mb-1 leading-none">{stat.value}</div>
               <div className="text-[#8AAECE] text-[10px] md:text-[11px] tracking-[0.1em] md:tracking-[0.12em] uppercase leading-tight mt-2">{stat.label}</div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* Scroll indicator — desktop only so it doesn't collide with the stats strip on mobile */}

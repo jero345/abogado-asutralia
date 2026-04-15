@@ -1,5 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { Stats } from '@/components/sections/Stats'
+import { AwardsStrip } from '@/components/sections/AwardsStrip'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Scale, Building2, Briefcase, Users, Award, UserPlus, FileText } from 'lucide-react'
@@ -18,6 +19,7 @@ export function Home() {
   return (
     <>
       <Hero />
+      <AwardsStrip />
       <Stats />
 
       {/* Section index — direct entry to each sub-page */}

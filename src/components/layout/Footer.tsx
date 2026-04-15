@@ -117,6 +117,25 @@ export function Footer() {
           </ScrollReveal>
         </div>
 
+        {/* Awards strip — always visible */}
+        <div className="pt-8 pb-6 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+            <div className="text-[10px] tracking-[0.2em] uppercase text-[#8AAECE] md:flex-shrink-0 md:max-w-[140px] leading-snug">
+              Ranked &amp; Recognised
+              <div className="text-white/60 text-[10px] tracking-normal normal-case mt-1 font-normal">
+                Legal 500 · Chambers · Doyle's · Australasian Law Awards
+              </div>
+            </div>
+            <div className="flex-1 bg-white rounded-xl p-3 md:p-4">
+              <img
+                src="/img/marcas.jpg"
+                alt="Banton Group awards — Legal 500 Asia-Pacific, Chambers Asia-Pacific, Doyle's Guide, Australasian Law Awards (2022–2026)"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Legal notice */}
         <div className="pt-8 border-t border-white/10 space-y-4">
           <p className="text-[#6D8FB5] text-[11px] leading-relaxed max-w-4xl">
