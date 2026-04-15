@@ -4,11 +4,11 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'Practice Areas', to: '/practice-areas' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Our Team', to: '/team' },
+  { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
-  { label: 'About', to: '/about' },
-  { label: 'Team', to: '/team' },
-  { label: 'Awards', to: '/awards' },
+  { label: 'Work With Us', to: '/work-with-us' },
   { label: 'Contact', to: '/contact' },
 ]
 

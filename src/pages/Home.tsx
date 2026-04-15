@@ -2,16 +2,16 @@ import { Hero } from '@/components/sections/Hero'
 import { Stats } from '@/components/sections/Stats'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Scale, Building2, RefreshCw, Users, Award, FileText, Phone } from 'lucide-react'
+import { ArrowUpRight, Scale, Building2, Briefcase, Users, Award, UserPlus, FileText } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const sections = [
-  { to: '/practice-areas', icon: Scale, title: 'Practice Areas', desc: 'Four specialised areas: class actions, commercial, insolvency, complex financial.' },
-  { to: '/class-actions', icon: Building2, title: 'Class Actions', desc: '10 landmark matters currently active across Federal, Supreme and High Courts.' },
-  { to: '/about', icon: RefreshCw, title: 'About the Firm', desc: 'Founded February 2020 by Amanda Banton — one of Australia\'s largest private litigation practices.' },
+  { to: '/about', icon: Briefcase, title: 'About Us', desc: "Founded February 2020 by Amanda Banton — one of Australia's largest private litigation practices." },
   { to: '/team', icon: Users, title: 'Our Team', desc: 'Accomplished litigators recognised by Chambers Asia-Pacific and Legal 500.' },
+  { to: '/litigation', icon: Scale, title: 'Litigation', desc: 'Four specialised areas: class actions, commercial, insolvency, complex financial.' },
+  { to: '/class-actions', icon: Building2, title: 'Class Actions', desc: '10 landmark matters currently active across Federal, Supreme and High Courts.' },
+  { to: '/work-with-us', icon: UserPlus, title: 'Work With Us', desc: 'Summer clerkships, graduate roles and careers for ambitious legal professionals.' },
   { to: '/awards', icon: Award, title: 'Awards & Recognition', desc: 'Ranked in Chambers 2022–2026 and Legal 500 — Recommended Firm.' },
-  { to: '/contact', icon: Phone, title: 'Contact', desc: 'Sydney HQ at 60 Martin Place and Melbourne office at 140 William Street.' },
 ]
 
 export function Home() {

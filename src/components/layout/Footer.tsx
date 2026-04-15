@@ -11,9 +11,11 @@ const practiceAreas = [
 ]
 
 const quickLinks = [
-  { label: 'About the Firm', to: '/about' },
+  { label: 'About Us', to: '/about' },
   { label: 'Our Team', to: '/team' },
+  { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
+  { label: 'Work With Us', to: '/work-with-us' },
   { label: 'Awards', to: '/awards' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -59,7 +61,7 @@ export function Footer() {
               {practiceAreas.map((area) => (
                 <li key={area}>
                   <Link
-                    to="/practice-areas"
+                    to="/litigation"
                     className="text-[#B8C8E0] text-[13px] hover:text-white transition-colors duration-200 flex items-center gap-1 group"
                   >
                     <span className="w-3 h-px bg-transparent group-hover:bg-white/60 transition-all duration-200" />
