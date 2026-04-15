@@ -51,6 +51,7 @@ export function WorkWithUsPage() {
         italicTitle="Progress on merit."
         subtitle="Dynamic legal practice focused on Australia's largest complex litigation and insolvency matters. Guided by technical experts and committed legal professionals."
         breadcrumbs={[{ label: 'Work With Us' }]}
+        backgroundImage="/img/hero-bg/work-with-us.jpg"
       />
 
       {/* Intro / culture */}

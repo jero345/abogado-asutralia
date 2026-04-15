@@ -131,9 +131,9 @@ export function Footer() {
               <Link to="/terms-of-use" className="text-[#8AAECE] text-[11px] hover:text-white transition-colors duration-200">
                 Terms of Use
               </Link>
-              <a href="mailto:info@bantongroup.com" className="text-[#8AAECE] text-[11px] hover:text-white transition-colors duration-200">
+              <Link to="/privacy-policy" className="text-[#8AAECE] text-[11px] hover:text-white transition-colors duration-200">
                 Privacy Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>

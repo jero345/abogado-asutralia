@@ -8,8 +8,9 @@ export function TeamPage() {
         eyebrow="Our Team"
         title="Accomplished litigators,"
         italicTitle="united by one mission."
-        subtitle="Eight specialists across partners, senior associates and associates — recognised by Chambers Asia-Pacific and Legal 500."
+        subtitle="Specialists across partners, senior associates and associates — recognised by Chambers Asia-Pacific and Legal 500."
         breadcrumbs={[{ label: 'Team' }]}
+        backgroundImage="/img/hero-bg/team.jpg"
       />
       <Team />
     </>

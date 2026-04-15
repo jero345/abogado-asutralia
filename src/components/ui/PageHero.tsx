@@ -10,25 +10,54 @@ interface PageHeroProps {
   italicTitle?: string
   subtitle?: string
   breadcrumbs?: Crumb[]
+  /** Optional blurred background image — path under /public */
+  backgroundImage?: string
 }
 
-export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }: PageHeroProps) {
+export function PageHero({
+  eyebrow,
+  title,
+  italicTitle,
+  subtitle,
+  breadcrumbs,
+  backgroundImage,
+}: PageHeroProps) {
   return (
     <section className="relative pt-28 pb-12 md:pt-40 md:pb-20 overflow-hidden bg-[#1C3A64]">
-      {/* Decorative grid */}
-      <div
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-        }}
-      />
+      {/* Blurred photo background (optional) */}
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={backgroundImage}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover scale-110"
+            style={{ filter: 'blur(10px)' }}
+          />
+          {/* Navy overlay for text legibility — rgba(28,58,100,0.70) */}
+          <div className="absolute inset-0 bg-[#1C3A64]/70" />
+          {/* Extra depth — darker near the top */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F2540]/60 via-transparent to-[#1C3A64]/30" />
+        </div>
+      )}
+
+      {/* Decorative grid (only when no photo — otherwise too busy) */}
+      {!backgroundImage && (
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
+      )}
+
       {/* Radial glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at center top, rgba(109,143,181,0.35) 0%, transparent 70%)' }}
       />
 
@@ -75,7 +104,7 @@ export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }:
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-[28px] sm:text-4xl md:text-5xl lg:text-[56px] font-medium text-white leading-[1.1] md:leading-[1.05] tracking-tight max-w-4xl"
+          className="text-[28px] sm:text-4xl md:text-5xl lg:text-[56px] font-medium text-white leading-[1.1] md:leading-[1.05] tracking-tight max-w-4xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]"
         >
           {title}
           {italicTitle && (
@@ -92,7 +121,7 @@ export function PageHero({ eyebrow, title, italicTitle, subtitle, breadcrumbs }:
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="text-white/70 text-sm md:text-lg leading-relaxed mt-5 md:mt-6 max-w-2xl"
+            className="text-white/80 text-sm md:text-lg leading-relaxed mt-5 md:mt-6 max-w-2xl drop-shadow-[0_1px_6px_rgba(0,0,0,0.25)]"
           >
             {subtitle}
           </motion.p>

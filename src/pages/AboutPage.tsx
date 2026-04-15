@@ -11,6 +11,7 @@ export function AboutPage() {
         italicTitle="Big-firm firepower."
         subtitle="Established February 2020 by Amanda Banton — today one of Australia's largest private litigation and insolvency practices."
         breadcrumbs={[{ label: 'About' }]}
+        backgroundImage="/img/hero-bg/about.jpg"
       />
       <About />
       <Technology />

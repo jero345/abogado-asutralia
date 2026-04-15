@@ -10,6 +10,7 @@ export function ClassActionsPage() {
         italicTitle="Six courts. One goal."
         subtitle="Representing real people against powerful institutions — securities, financial products, consumer, environmental and nuisance claims."
         breadcrumbs={[{ label: 'Class Actions' }]}
+        backgroundImage="/img/hero-bg/class-actions.jpg"
       />
       <ClassActions />
     </>

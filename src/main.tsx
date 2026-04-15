@@ -12,6 +12,7 @@ import { AwardsPage } from '@/pages/AwardsPage'
 import { WorkWithUsPage } from '@/pages/WorkWithUsPage'
 import { ContactPage } from '@/pages/ContactPage'
 import { TermsOfUsePage } from '@/pages/TermsOfUsePage'
+import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 
 createRoot(document.getElementById('root')!).render(
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/awards" element={<AwardsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
