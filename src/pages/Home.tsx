@@ -66,7 +66,7 @@ export function Home() {
         {/* Lobby background (no blur, minimal overlay so it stays visible) */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/img/Banton-Group-Culture.jpg"
+            src="/img/lobby-60-martin.jpg"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover"

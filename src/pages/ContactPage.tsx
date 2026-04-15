@@ -10,6 +10,7 @@ export function ContactPage() {
         italicTitle="One conversation away."
         subtitle="Initial consultations are confidential and obligation-free. Sydney HQ at 60 Martin Place — Melbourne at 140 William Street."
         breadcrumbs={[{ label: 'Contact' }]}
+        backgroundImage="/img/hero-bg/contact.jpg"
       />
       <Contact />
     </>
