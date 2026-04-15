@@ -26,8 +26,8 @@ export function Hero() {
         <img
           src="/img/hero/team-group.jpg"
           alt="Banton Group team"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ objectPosition: '50% 35%' }}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '60% 45%' }}
         />
         {/* Navy overlay — per brand guidelines rgba(28,58,100,0.70) */}
         <div className="absolute inset-0 bg-[#1C3A64]/[0.82]" />
