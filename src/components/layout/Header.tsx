@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
+  { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
   { label: 'Our Team', to: '/team' },
   { label: 'Litigation', to: '/litigation' },
@@ -69,6 +70,7 @@ export function Header() {
                   <NavLink
                     key={link.label}
                     to={link.to}
+                    end={link.to === '/'}
                     className={({ isActive }) =>
                       `text-[13px] font-medium tracking-[0.01em] transition-colors duration-200 relative group ${
                         darkBackground
@@ -139,6 +141,7 @@ export function Header() {
             >
               <NavLink
                 to={link.to}
+                end={link.to === '/'}
                 className={({ isActive }) =>
                   `text-base font-medium transition-colors block ${isActive ? 'text-white' : 'text-white/80 hover:text-white'}`
                 }
