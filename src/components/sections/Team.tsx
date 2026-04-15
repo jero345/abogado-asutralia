@@ -108,13 +108,13 @@ export function Team() {
                 transition={{ type: 'spring', stiffness: 300 }}
                 className="group relative bg-white border border-[#1C3A64]/10 rounded-2xl overflow-hidden cursor-default h-full flex flex-col"
               >
-                {/* Photo or placeholder */}
-                <div className="relative aspect-[4/5] bg-[#EFF4F4] overflow-hidden">
+                {/* Photo or placeholder — aspect-[2/3] matches the source photos so faces and full body fit without cropping */}
+                <div className="relative aspect-[2/3] bg-[#EFF4F4] overflow-hidden">
                   {member.photo ? (
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center gap-3">
@@ -126,8 +126,6 @@ export function Team() {
                       </span>
                     </div>
                   )}
-                  {/* Bottom fade */}
-                  <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white via-white/60 to-transparent" />
                 </div>
 
                 {/* Body */}
