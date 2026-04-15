@@ -61,24 +61,36 @@ export function Home() {
         </div>
       </section>
 
-      {/* Closing call */}
-      <section className="relative py-16 md:py-20 bg-[#1C3A64]">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      {/* Closing call — lobby photo as visible background */}
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        {/* Lobby background (no blur, minimal overlay so it stays visible) */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/img/Banton-Group-Culture.jpg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Dark gradient for text legibility — heavier on left, lighter on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F2540]/85 via-[#1C3A64]/55 to-[#1C3A64]/25" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-left md:text-center">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 mb-5">
               <div className="h-px w-6 bg-[#8AAECE]" />
               <FileText size={18} className="text-[#8AAECE]" />
               <div className="h-px w-6 bg-[#8AAECE]" />
             </div>
-            <h2 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] font-medium text-white leading-[1.15] mb-5 tracking-tight">
-              Have a matter that demands <span className="italic-display text-[#6D8FB5]">extraordinary advocacy?</span>
+            <h2 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] font-medium text-white leading-[1.15] mb-5 tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+              Have a matter that demands <span className="italic-display text-[#8AAECE]">extraordinary advocacy?</span>
             </h2>
-            <p className="text-white/70 text-sm md:text-base lg:text-lg leading-[1.7] mb-8 max-w-xl mx-auto">
+            <p className="text-white/90 text-sm md:text-base lg:text-lg leading-[1.7] mb-8 max-w-xl md:mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.3)]">
               Initial consultations are confidential and obligation-free. Tell us about your matter and we'll assess whether we can help.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em] shadow-lg"
             >
               Schedule a Consultation
               <ArrowUpRight size={14} />
