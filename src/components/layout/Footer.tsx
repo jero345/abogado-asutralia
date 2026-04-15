@@ -15,6 +15,7 @@ const quickLinks = [
   { label: 'Our Team', to: '/team' },
   { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
+  { label: 'News', to: '/news' },
   { label: 'Work With Us', to: '/work-with-us' },
   { label: 'Awards', to: '/awards' },
   { label: 'Contact', to: '/contact' },

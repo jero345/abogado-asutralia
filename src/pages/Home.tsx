@@ -2,7 +2,7 @@ import { Hero } from '@/components/sections/Hero'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Scale, Building2, Briefcase, Users, Award, UserPlus, FileText } from 'lucide-react'
+import { ArrowUpRight, Scale, Building2, Briefcase, Users, Award, UserPlus, FileText, Newspaper } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const sections = [
@@ -10,6 +10,7 @@ const sections = [
   { to: '/team', icon: Users, title: 'Our Team', desc: 'Accomplished litigators recognised by Chambers Asia-Pacific and Legal 500.' },
   { to: '/litigation', icon: Scale, title: 'Litigation', desc: 'Four specialised areas: class actions, commercial, insolvency, complex financial.' },
   { to: '/class-actions', icon: Building2, title: 'Class Actions', desc: '10 landmark matters currently active across Federal, Supreme and High Courts.' },
+  { to: '/news', icon: Newspaper, title: 'News & Articles', desc: 'Press coverage and commentary from Banton Group lawyers on Australian litigation.' },
   { to: '/work-with-us', icon: UserPlus, title: 'Work With Us', desc: 'Summer clerkships, graduate roles and careers for ambitious legal professionals.' },
   { to: '/awards', icon: Award, title: 'Awards & Recognition', desc: 'Ranked in Chambers 2022–2026 and Legal 500 — Recommended Firm.' },
 ]

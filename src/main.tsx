@@ -11,6 +11,8 @@ import { TeamPage } from '@/pages/TeamPage'
 import { AwardsPage } from '@/pages/AwardsPage'
 import { WorkWithUsPage } from '@/pages/WorkWithUsPage'
 import { ContactPage } from '@/pages/ContactPage'
+import { NewsPage } from '@/pages/NewsPage'
+import { NewsArticlePage } from '@/pages/NewsArticlePage'
 import { TermsOfUsePage } from '@/pages/TermsOfUsePage'
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
@@ -27,6 +29,8 @@ createRoot(document.getElementById('root')!).render(
           {/* Keep legacy /practice-areas URL working */}
           <Route path="/practice-areas" element={<LitigationPage />} />
           <Route path="/class-actions" element={<ClassActionsPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:slug" element={<NewsArticlePage />} />
           <Route path="/work-with-us" element={<WorkWithUsPage />} />
           <Route path="/awards" element={<AwardsPage />} />
           <Route path="/contact" element={<ContactPage />} />
