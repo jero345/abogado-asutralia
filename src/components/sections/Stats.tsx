@@ -63,7 +63,7 @@ export function Stats() {
             Track Record
             <span className="w-5 h-px bg-[#1e3a5f]" />
           </span>
-          <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] mt-4 mb-6 leading-[1.1] tracking-tight">
+          <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] mt-4 mb-6 leading-[1.1] tracking-tight">
             Numbers that
             <br />
             <span className="italic-display text-[#6D8FB5]">tell the story.</span>
@@ -95,7 +95,7 @@ export function Stats() {
                   </div>
 
                   {/* Counter */}
-                  <div className="text-4xl font-bold text-[#1e3a5f] mb-2">
+                  <div className="text-[32px] md:text-[40px] lg:text-[44px] font-semibold text-[#1C3A64] mb-2 leading-none">
                     <AnimatedCounter
                       value={stat.value}
                       prefix={stat.prefix}
@@ -105,10 +105,10 @@ export function Stats() {
                   </div>
 
                   {/* Label */}
-                  <div className="text-[#1e3a5f] text-sm font-semibold mb-3">{stat.label}</div>
+                  <div className="text-[#1C3A64] text-[13px] md:text-sm font-medium mb-3">{stat.label}</div>
 
                   {/* Description */}
-                  <p className="text-[#1e3a5f]/50 text-sm leading-relaxed">{stat.description}</p>
+                  <p className="text-[#555555] text-[13px] md:text-sm leading-[1.6]">{stat.description}</p>
                 </motion.div>
               </ScrollReveal>
             )

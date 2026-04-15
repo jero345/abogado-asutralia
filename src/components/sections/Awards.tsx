@@ -47,7 +47,7 @@ export function Awards() {
             Awards & Recognition
             <span className="w-5 h-px bg-[#1e3a5f]" />
           </span>
-          <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-6">
+          <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-6">
             Ranked and recognised
             <br />
             <span className="italic-display text-[#6D8FB5]">by those who know.</span>

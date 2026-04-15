@@ -51,7 +51,7 @@ export function About() {
                 <span className="w-5 h-px bg-[#1e3a5f]" />
                 About the Firm
               </span>
-              <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-8">
+              <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-8">
                 Founded with
                 <br />
                 <span className="italic-display text-[#6D8FB5]">a singular purpose.</span>

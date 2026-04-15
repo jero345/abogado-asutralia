@@ -62,22 +62,26 @@ export function Home() {
       </section>
 
       {/* Closing call */}
-      <section className="relative py-20 bg-[#1C3A64]">
+      <section className="relative py-16 md:py-20 bg-[#1C3A64]">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <FileText size={28} className="text-[#C9A84C] mx-auto mb-5" />
-            <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-5">
+            <div className="inline-flex items-center gap-2 mb-5">
+              <div className="h-px w-6 bg-[#8AAECE]" />
+              <FileText size={18} className="text-[#8AAECE]" />
+              <div className="h-px w-6 bg-[#8AAECE]" />
+            </div>
+            <h2 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] font-medium text-white leading-[1.15] mb-5 tracking-tight">
               Have a matter that demands <span className="italic-display text-[#6D8FB5]">extraordinary advocacy?</span>
             </h2>
-            <p className="text-white/70 text-base md:text-lg mb-8 max-w-xl mx-auto">
+            <p className="text-white/70 text-sm md:text-base lg:text-lg leading-[1.7] mb-8 max-w-xl mx-auto">
               Initial consultations are confidential and obligation-free. Tell us about your matter and we'll assess whether we can help.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#1C3A64] text-sm font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
             >
               Schedule a Consultation
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={14} />
             </Link>
           </ScrollReveal>
         </div>

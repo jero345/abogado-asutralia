@@ -139,7 +139,7 @@ export function ClassActions() {
             Case Studies
           </span>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
+            <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
               Landmark
               <br />
               <span className="italic-display text-[#6D8FB5]">class actions.</span>

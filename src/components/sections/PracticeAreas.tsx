@@ -62,7 +62,7 @@ export function PracticeAreas() {
               <span className="w-5 h-px bg-[#1e3a5f]" />
               What We Do
             </span>
-            <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
+            <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
               Practice
               <br />
               <span className="italic-display text-[#6D8FB5]">areas.</span>
@@ -111,7 +111,7 @@ export function PracticeAreas() {
                       >
                         {practice.tagline}
                       </span>
-                      <h3 className="text-2xl font-semibold text-[#1e3a5f]">{practice.title}</h3>
+                      <h3 className="text-[20px] md:text-[22px] lg:text-[24px] font-medium text-[#1C3A64] leading-[1.2]">{practice.title}</h3>
                     </div>
 
                     {/* Description */}

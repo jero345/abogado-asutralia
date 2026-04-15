@@ -83,7 +83,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-[32px] sm:text-4xl md:text-5xl lg:text-[64px] xl:text-[72px] font-light leading-[1.05] tracking-tight mb-5 md:mb-6"
+          className="text-[42px] sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[72px] font-light leading-[1.05] tracking-tight mb-5 md:mb-6"
         >
           <span className="text-white">Strategic</span>
           <br />
@@ -146,9 +146,9 @@ export function Hero() {
             { value: '50+', label: 'Class Actions' },
             { value: '6', label: 'Courts We Appear In' },
           ].map((stat) => (
-            <div key={stat.label} className="bg-[#1C3A64]/60 backdrop-blur-sm px-3 py-3 md:px-6 md:py-5 text-center">
-              <div className="text-lg md:text-2xl font-bold text-white mb-0.5 md:mb-1">{stat.value}</div>
-              <div className="text-[#8AAECE] text-[9px] md:text-[10px] tracking-wider uppercase leading-tight">{stat.label}</div>
+            <div key={stat.label} className="bg-[#1C3A64]/60 backdrop-blur-sm px-3 py-4 md:px-6 md:py-5 text-center">
+              <div className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-white mb-1 leading-none">{stat.value}</div>
+              <div className="text-[#8AAECE] text-[10px] md:text-[11px] tracking-[0.1em] md:tracking-[0.12em] uppercase leading-tight mt-2">{stat.label}</div>
             </div>
           ))}
         </motion.div>

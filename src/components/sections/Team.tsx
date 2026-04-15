@@ -109,7 +109,7 @@ export function Team() {
               <span className="w-5 h-px bg-[#1e3a5f]" />
               Our Team
             </span>
-            <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
+            <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
               The lawyers
               <br />
               <span className="italic-display text-[#6D8FB5]">behind the wins.</span>
@@ -160,7 +160,7 @@ export function Team() {
                 {/* Body */}
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-start justify-between mb-1">
-                    <h3 className="text-[#1e3a5f] font-semibold text-lg leading-tight">{member.name}</h3>
+                    <h3 className="text-[#1C3A64] font-medium text-[18px] md:text-[20px] leading-[1.2]">{member.name}</h3>
                     <motion.a
                       href="#"
                       whileHover={{ scale: 1.1 }}
