@@ -1,121 +1,109 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-
-const floatingWords = [
-  'Class Actions', 'Commercial Litigation', 'Insolvency', 'Restructuring',
-  'Corporate Disputes', 'Financial Claims', 'Securities', 'Arbitration',
-]
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  // Parallax + subtle zoom for the background — "movement in the hero"
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.15])
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '25%'])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pb-[210px] md:pb-[180px]">
-      {/* Team photo background */}
-      <motion.div
-        style={{ scale }}
-        className="absolute inset-0 z-0"
-      >
+    <section
+      ref={ref}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pb-[190px] md:pb-[170px] pt-24 md:pt-32"
+    >
+      {/* Background — building photo with parallax zoom */}
+      <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 z-0">
         <img
-          src="/img/hero/team-group.jpg"
-          alt="Banton Group team"
+          src="/img/hero/building.jpg"
+          alt=""
+          aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '60% 45%' }}
+          style={{ objectPosition: '50% 40%' }}
         />
-        {/* Navy overlay — per brand guidelines rgba(28,58,100,0.70) */}
-        <div className="absolute inset-0 bg-[#1C3A64]/[0.82]" />
-        {/* Vignette for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1C3A64]/40 via-transparent to-[#1C3A64]/60" />
+        {/* Navy overlay — per brand spec rgba(28,58,100,0.70) */}
+        <div className="absolute inset-0 bg-[#1C3A64]/70" />
+        {/* Deeper gradient at bottom so stats strip reads clearly */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F2540]/40 via-transparent to-[#1C3A64]/70" />
+      </motion.div>
 
-        {/* Floating label chips */}
-        {floatingWords.map((word, i) => (
+      {/* Ambient moving chips — subtle motion layer */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none hidden md:block">
+        {['Class Actions', 'Commercial Litigation', 'Insolvency', 'Complex Financial'].map((word, i) => (
           <motion.div
             key={word}
-            className="absolute text-xs text-white/15 font-medium tracking-widest uppercase pointer-events-none hidden lg:block"
+            className="absolute text-[10px] text-white/15 font-medium tracking-[0.25em] uppercase"
             style={{
-              top: `${10 + (i * 11) % 80}%`,
-              left: `${5 + (i * 13) % 88}%`,
+              top: `${18 + (i * 19) % 65}%`,
+              left: `${8 + (i * 23) % 80}%`,
             }}
-            animate={{
-              y: [0, -12, 0],
-              opacity: [0.08, 0.2, 0.08],
-            }}
-            transition={{
-              duration: 4 + i * 0.7,
-              repeat: Infinity,
-              delay: i * 0.4,
-              ease: 'easeInOut',
-            }}
+            animate={{ y: [0, -14, 0], opacity: [0.12, 0.22, 0.12] }}
+            transition={{ duration: 5 + i * 0.8, repeat: Infinity, delay: i * 0.6, ease: 'easeInOut' }}
           >
             {word}
           </motion.div>
         ))}
-      </motion.div>
+      </div>
 
-      {/* Content */}
+      {/* Content — cleaner, more air */}
       <motion.div
-        style={{ y, opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center mt-20 md:mt-24"
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center"
       >
         {/* Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex items-center justify-center gap-3 mb-8"
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="flex items-center justify-center gap-3 mb-10 md:mb-14"
         >
-          <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#8AAECE]/80" />
-          <span className="text-[#8AAECE] text-[10px] md:text-xs font-medium tracking-[0.2em] md:tracking-[0.25em] uppercase">
+          <div className="h-px w-10 md:w-14 bg-gradient-to-r from-transparent to-[#8AAECE]/90" />
+          <span className="text-[#8AAECE] text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase">
             Australia's Premier Litigation Firm
           </span>
-          <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#8AAECE]/80" />
+          <div className="h-px w-10 md:w-14 bg-gradient-to-l from-transparent to-[#8AAECE]/90" />
         </motion.div>
 
-        {/* Main headline */}
+        {/* Main headline — capped at 64px desktop / 42px mobile per brief */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-[42px] sm:text-5xl md:text-6xl lg:text-[64px] xl:text-[72px] font-light leading-[1.05] tracking-tight mb-5 md:mb-6"
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="text-[38px] sm:text-[44px] md:text-[52px] lg:text-[60px] xl:text-[64px] font-light leading-[1.05] tracking-tight mb-10 md:mb-14 max-w-5xl mx-auto"
         >
-          <span className="text-white">Strategic</span>
+          <span className="text-white">Strategic litigation.</span>
           <br />
-          <span className="italic-display text-[#6D8FB5]">litigation.</span>
-          <br />
-          <span className="text-white">Extraordinary</span>
-          <br />
-          <span className="italic-display text-[#6D8FB5]">outcomes.</span>
+          <span className="italic-display text-[#6D8FB5]">Extraordinary outcomes.</span>
         </motion.h1>
 
-        {/* Subheadline */}
+        {/* Short, single-line subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="text-white/80 text-sm md:text-lg lg:text-xl font-light max-w-xl md:max-w-2xl mx-auto leading-relaxed mb-10 md:mb-12 px-2"
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="text-white/80 text-[15px] md:text-[17px] font-light leading-[1.7] max-w-xl mx-auto mb-12 md:mb-14"
         >
-          We pursue justice for individuals and institutions in Australia's most complex and high-stakes legal disputes — from landmark class actions to corporate restructuring.
+          Specialist litigation for Australia's most complex legal disputes.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4"
         >
           <Link to="/class-actions">
             <motion.span
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-white text-[#1C3A64] text-[12px] md:text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors duration-200 tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-7 md:px-8 py-3 md:py-4 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors duration-200 tracking-[0.02em]"
             >
               View Class Actions
               <ArrowRight size={14} />
@@ -124,9 +112,9 @@ export function Hero() {
 
           <Link to="/contact">
             <motion.span
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 border border-white/40 text-white text-[12px] md:text-[13px] font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-7 md:px-8 py-3 md:py-4 border border-white/40 text-white text-[13px] font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
             >
               Contact Us
             </motion.span>
@@ -134,11 +122,11 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Stats strip — pinned to bottom of hero, NOT in the fade-on-scroll group */}
+      {/* Stats strip — pinned to bottom, always visible */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.9 }}
+        transition={{ duration: 0.8, delay: 0.85 }}
         className="absolute bottom-6 md:bottom-10 inset-x-0 z-20 flex justify-center px-4 md:px-8"
       >
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-[#0F2540]/40 backdrop-blur-md w-full max-w-3xl">
@@ -149,27 +137,11 @@ export function Hero() {
             { value: '6', label: 'National Jurisdictions' },
           ].map((stat) => (
             <div key={stat.label} className="bg-[#1C3A64]/75 backdrop-blur-sm px-3 py-4 md:px-6 md:py-5 text-center">
-              <div className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-white mb-1 leading-none">{stat.value}</div>
-              <div className="text-[#8AAECE] text-[10px] md:text-[11px] tracking-[0.1em] md:tracking-[0.12em] uppercase leading-tight mt-2">{stat.label}</div>
+              <div className="text-[26px] md:text-[34px] lg:text-[40px] font-semibold text-white mb-1 leading-none">{stat.value}</div>
+              <div className="text-[#8AAECE] text-[10px] md:text-[11px] tracking-[0.12em] uppercase leading-tight mt-2">{stat.label}</div>
             </div>
           ))}
         </div>
-      </motion.div>
-
-      {/* Scroll indicator — desktop only so it doesn't collide with the stats strip on mobile */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
-      >
-        <span className="text-white/50 text-xs tracking-widest uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ArrowDown size={14} className="text-white/50" />
-        </motion.div>
       </motion.div>
     </section>
   )

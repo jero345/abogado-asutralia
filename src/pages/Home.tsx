@@ -1,5 +1,4 @@
 import { Hero } from '@/components/sections/Hero'
-import { Stats } from '@/components/sections/Stats'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -20,7 +19,6 @@ export function Home() {
     <>
       <Hero />
       <AwardsStrip />
-      <Stats />
 
       {/* Section index — direct entry to each sub-page */}
       <section className="relative py-24 lg:py-28 bg-[#EFF4F4]">
@@ -30,8 +28,8 @@ export function Home() {
               <div className="h-px w-8 bg-[#1C3A64]" />
               <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#1C3A64]">Explore</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-medium text-[#1C3A64] leading-tight">
-              Everything you need to <span className="italic-display text-[#6D8FB5]">work with us</span>
+            <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
+              How we can <span className="italic-display text-[#6D8FB5]">help you.</span>
             </h2>
           </ScrollReveal>
 
@@ -52,8 +50,8 @@ export function Home() {
                         </div>
                         <ArrowUpRight size={16} className="text-[#1C3A64]/30 group-hover:text-[#1C3A64] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
                       </div>
-                      <h3 className="text-[#1C3A64] font-medium text-lg mb-2 leading-snug">{s.title}</h3>
-                      <p className="text-[#555555] text-sm leading-relaxed">{s.desc}</p>
+                      <h3 className="text-[#1C3A64] font-medium text-[19px] md:text-[20px] mb-2 leading-[1.25]">{s.title}</h3>
+                      <p className="text-[#555555] text-[15px] leading-[1.65]">{s.desc}</p>
                     </motion.div>
                   </Link>
                 </ScrollReveal>

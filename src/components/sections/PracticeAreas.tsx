@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { Scale, Building2, RefreshCw, DollarSign, ArrowUpRight } from 'lucide-react'
+import { Scale, Building2, RefreshCw, DollarSign } from 'lucide-react'
 
 const practices = [
   {
@@ -115,29 +115,21 @@ export function PracticeAreas() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-[#1e3a5f]/40 text-sm leading-relaxed mb-6 mt-3">{practice.description}</p>
+                    <p className="text-[#555555] text-[15px] leading-[1.7] mb-6 mt-3">{practice.description}</p>
 
                     {/* Highlights */}
                     <div className="grid grid-cols-2 gap-2 mb-6">
                       {practice.highlights.map((h) => (
                         <div key={h} className="flex items-center gap-2">
                           <div
-                            className="w-1 h-1 rounded-full flex-shrink-0"
+                            className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                             style={{ backgroundColor: practice.accent }}
                           />
-                          <span className="text-[#1e3a5f]/40 text-xs">{h}</span>
+                          <span className="text-[#555555] text-[13px]">{h}</span>
                         </div>
                       ))}
                     </div>
 
-                    {/* CTA */}
-                    <motion.div
-                      className="flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ color: practice.accent }}
-                    >
-                      Learn more
-                      <ArrowUpRight size={14} />
-                    </motion.div>
                   </div>
                 </motion.div>
               </ScrollReveal>

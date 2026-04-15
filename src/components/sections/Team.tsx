@@ -14,7 +14,7 @@ type Member = {
 const team: Member[] = [
   {
     name: 'Amanda Banton',
-    role: 'Founding & Managing Partner',
+    role: 'Principal & Managing Partner',
     specialties: ['Class Actions', 'Securities Litigation', 'Insolvency & Commercial Litigation'],
     bio:
       'Amanda is the Managing Partner of Banton Group, established in February 2020. She brings close to 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — with consulting experience from KPMG and federal government expertise.',
@@ -45,6 +45,7 @@ const team: Member[] = [
     bio:
       "Melissa brings extensive experience in complex commercial, corporate and insolvency litigation, representing both plaintiffs and defendants across Australia. Her practice encompasses class action proceedings, liquidator claims against former directors and auditors, breaches of the Corporations Act, and trust and fiduciary disputes.",
     photo: '/img/team/melissa-morgan.jpg',
+    awards: ['Legal 500 Asia-Pacific 2026'],
   },
   {
     name: 'Paul Smith',
@@ -62,6 +63,7 @@ const team: Member[] = [
     bio:
       'Jack has extensive experience in large-scale class actions and commercial litigation, including disputes in various superior and appellate courts across Australia. His practice focuses principally on plaintiff litigation, representing group members, liquidators and commercial entities in disputes with major financial institutions, ASX-listed companies and government bodies.',
     photo: '/img/team/jack-johnstone.jpg',
+    awards: ['Chambers Asia-Pacific 2026'],
   },
   {
     name: 'Sabin Thomas',
@@ -157,7 +159,7 @@ export function Team() {
                   </div>
 
                   {/* Bio */}
-                  <p className="text-[#555555] text-[13px] leading-[1.6] mb-4 flex-1">{member.bio}</p>
+                  <p className="text-[#555555] text-[15px] leading-[1.7] mb-4 flex-1">{member.bio}</p>
 
                   {/* Awards */}
                   {member.awards && (

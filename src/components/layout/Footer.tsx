@@ -92,20 +92,34 @@ export function Footer() {
 
           {/* Contact */}
           <ScrollReveal delay={0.2}>
-            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6">Contact</h3>
-            <div className="space-y-4">
-              <a href="tel:+61280768090" className="flex items-start gap-3 text-[#B8C8E0] text-[13px] hover:text-white transition-colors group">
-                <Phone size={14} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
-                <span>+61 2 8076 8090</span>
-              </a>
-              <a href="mailto:info@bantongroup.com" className="flex items-start gap-3 text-[#B8C8E0] text-[13px] hover:text-white transition-colors group">
-                <Mail size={14} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
-                <span>info@bantongroup.com</span>
-              </a>
-              <div className="flex items-start gap-3 text-[#B8C8E0] text-[13px]">
-                <MapPin size={14} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
-                <span>Level 12, 60 Martin Place<br />Sydney NSW 2000 (HQ)</span>
+            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6">Offices</h3>
+            <div className="space-y-5">
+              <div>
+                <div className="text-white text-[13px] font-medium mb-1.5">Sydney <span className="text-[#8AAECE] text-[10px] tracking-[0.15em] uppercase ml-1">HQ</span></div>
+                <div className="flex items-start gap-2.5 text-[#B8C8E0] text-[13px] leading-[1.55] mb-1">
+                  <MapPin size={13} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
+                  <span>Level 12, 60 Martin Place<br />Sydney NSW 2000</span>
+                </div>
+                <a href="tel:+61280768090" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors">
+                  <Phone size={13} className="flex-shrink-0 text-[#6D8FB5]" />
+                  +61 2 8076 8090
+                </a>
               </div>
+              <div>
+                <div className="text-white text-[13px] font-medium mb-1.5">Melbourne</div>
+                <div className="flex items-start gap-2.5 text-[#B8C8E0] text-[13px] leading-[1.55] mb-1">
+                  <MapPin size={13} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
+                  <span>Level 40, 140 William Street<br />Melbourne VIC 3000</span>
+                </div>
+                <a href="tel:+61392293948" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors">
+                  <Phone size={13} className="flex-shrink-0 text-[#6D8FB5]" />
+                  +61 03 9229 3948
+                </a>
+              </div>
+              <a href="mailto:info@bantongroup.com" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors pt-1 border-t border-white/10 mt-4">
+                <Mail size={13} className="flex-shrink-0 text-[#6D8FB5]" />
+                info@bantongroup.com
+              </a>
             </div>
 
             <Link

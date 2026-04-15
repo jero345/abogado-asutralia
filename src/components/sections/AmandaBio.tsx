@@ -35,7 +35,7 @@ export function AmandaBio() {
               </h2>
               <div className="space-y-5 text-[#555555] leading-[1.75] text-[15px] md:text-[16px]">
                 <p>
-                  Amanda Banton is the Founding and Managing Partner of Banton Group, established in February 2020. She brings close to 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — and draws on consulting experience from KPMG and federal government expertise.
+                  Amanda Banton is the Principal and Managing Partner of Banton Group, established in February 2020. She brings close to 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — and draws on consulting experience from KPMG and federal government expertise.
                 </p>
                 <p>
                   Under Amanda's leadership, Banton Group has grown into one of Australia's largest private litigation and insolvency practices, acting in some of Australia's biggest insolvencies and class actions alongside corporate and commercial litigation and advisory work. Her practice encompasses complex insolvency, regulatory, corporate and commercial disputes — including securities litigation, competition and consumer law, and breaches of trust and fiduciary duties.
@@ -58,7 +58,7 @@ export function AmandaBio() {
                   Amanda Banton
                 </div>
                 <div className="text-white font-medium text-[15px] mb-5">
-                  Founding & Managing Partner
+                  Principal & Managing Partner
                 </div>
                 <div className="space-y-3 text-[13px]">
                   <motion.a
@@ -99,7 +99,7 @@ export function AmandaBio() {
                   {recognitions.map((r) => (
                     <li key={r} className="flex items-start gap-2.5">
                       <span className="w-1 h-1 rounded-full bg-[#C9A84C] mt-2 flex-shrink-0" />
-                      <span className="text-[#8A6D1E] text-[12px] leading-[1.55]">{r}</span>
+                      <span className="text-[#8A6D1E] text-[13px] leading-[1.6]">{r}</span>
                     </li>
                   ))}
                 </ul>

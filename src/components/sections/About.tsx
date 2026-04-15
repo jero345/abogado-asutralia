@@ -35,13 +35,6 @@ export function About() {
     <section id="about" ref={ref} className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-[#EFF4F4]" />
 
-      {/* Background text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="text-[20vw] font-bold text-[#1e3a5f]/[0.015] uppercase select-none whitespace-nowrap">
-          BANTON
-        </span>
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           {/* Left: Text */}
@@ -56,7 +49,7 @@ export function About() {
                 <br />
                 <span className="italic-display text-[#6D8FB5]">a singular purpose.</span>
               </h2>
-              <div className="space-y-5 text-[#1e3a5f]/70 leading-relaxed">
+              <div className="space-y-5 text-[#555555] text-[16px] leading-[1.75]">
                 <p>
                   Banton Group was established in February 2020 by Amanda Banton with a singular purpose: to give individuals and institutions the firepower to take on powerful adversaries and win. Today, Banton Group is one of Australia's largest private litigation and insolvency practices.
                 </p>
@@ -85,8 +78,8 @@ export function About() {
                       <div className="w-8 h-8 rounded-lg bg-[#1e3a5f]/10 flex items-center justify-center mb-3">
                         <Icon size={15} className="text-[#1e3a5f]" />
                       </div>
-                      <h4 className="text-[#1e3a5f] font-semibold text-sm mb-1.5">{value.title}</h4>
-                      <p className="text-[#1e3a5f]/60 text-xs leading-relaxed">{value.description}</p>
+                      <h4 className="text-[#1C3A64] font-medium text-[15px] mb-2">{value.title}</h4>
+                      <p className="text-[#555555] text-[13px] leading-[1.65]">{value.description}</p>
                     </motion.div>
                   </ScrollReveal>
                 )
@@ -104,7 +97,7 @@ export function About() {
                 <div className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.1] rounded-2xl overflow-hidden aspect-[4/5] max-w-[460px] mx-auto">
                   <img
                     src="/img/about/amanda-portrait.jpg"
-                    alt="Amanda Banton, Founding Partner of Banton Group"
+                    alt="Amanda Banton, Principal Partner of Banton Group"
                     className="w-full h-full object-cover"
                     style={{ objectPosition: '50% 20%' }}
                   />
@@ -122,7 +115,7 @@ export function About() {
                 <div className="font-serif text-lg md:text-xl font-semibold text-white leading-snug mb-3">
                   "We don't just argue cases.<br />We change outcomes."
                 </div>
-                <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Founding Partner</div>
+                <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Principal Partner</div>
               </motion.div>
 
               {/* Chambers accreditation — moved to top-left, stays visible */}
