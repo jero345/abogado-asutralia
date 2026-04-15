@@ -127,12 +127,13 @@ export function Footer() {
             <p className="text-[#8AAECE] text-[11px]">
               © {new Date().getFullYear()} Banton Group Pty Ltd. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              {['Privacy Policy', 'Terms of Service', 'Disclaimer'].map((item) => (
-                <a key={item} href="#" className="text-[#8AAECE] text-[11px] hover:text-white transition-colors duration-200">
-                  {item}
-                </a>
-              ))}
+            <div className="flex flex-wrap gap-4 md:gap-6">
+              <Link to="/terms-of-use" className="text-[#8AAECE] text-[11px] hover:text-white transition-colors duration-200">
+                Terms of Use
+              </Link>
+              <a href="mailto:info@bantongroup.com" className="text-[#8AAECE] text-[11px] hover:text-white transition-colors duration-200">
+                Privacy Policy
+              </a>
             </div>
           </div>
         </div>

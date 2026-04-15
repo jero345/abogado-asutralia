@@ -1,5 +1,6 @@
 import { PageHero } from '@/components/ui/PageHero'
 import { PracticeAreas } from '@/components/sections/PracticeAreas'
+import { KeyLitigation } from '@/components/sections/KeyLitigation'
 
 export function LitigationPage() {
   return (
@@ -12,6 +13,7 @@ export function LitigationPage() {
         breadcrumbs={[{ label: 'Litigation' }]}
       />
       <PracticeAreas />
+      <KeyLitigation />
     </>
   )
 }

@@ -106,6 +106,7 @@ export function About() {
                     src="/img/about/amanda-portrait.jpg"
                     alt="Amanda Banton, Founding Partner of Banton Group"
                     className="w-full h-full object-cover"
+                    style={{ objectPosition: '50% 20%' }}
                   />
                 </div>
               </motion.div>

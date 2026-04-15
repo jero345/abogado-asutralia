@@ -31,6 +31,7 @@ const team: Member[] = [
     specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring'],
     bio:
       'Elliott joined Banton Group as a founding partner in February 2020, having previously worked at top-tier and global law firms in Australia and abroad. For more than 17 years, he has gained significant experience running complex class actions and large-scale commercial, restructuring, and insolvency disputes across Australia, the Asia Pacific, the Middle East, and Europe.',
+    photo: '/img/team/elliott-smith.jpg',
     awards: [
       'Chambers & Partners Recommended 2022',
       'Legal 500 Recommended',
@@ -63,7 +64,7 @@ const team: Member[] = [
     photo: '/img/team/jack-johnstone.jpg',
   },
   {
-    name: 'Sabin Thomas',
+    name: 'Robin',
     role: 'Senior Associate',
     specialties: ['Class Actions', 'Litigation'],
     bio: 'Biography and photograph pending from the firm.',
