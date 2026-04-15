@@ -144,7 +144,7 @@ export function Hero() {
             { value: '$500M+', label: 'Recovered for Clients' },
             { value: '20+', label: 'Years Combined Leadership' },
             { value: '50+', label: 'Class Actions' },
-            { value: '6', label: 'Courts We Appear In' },
+            { value: '6', label: 'National Jurisdictions' },
           ].map((stat) => (
             <div key={stat.label} className="bg-[#1C3A64]/60 backdrop-blur-sm px-3 py-4 md:px-6 md:py-5 text-center">
               <div className="text-[28px] md:text-[36px] lg:text-[44px] font-semibold text-white mb-1 leading-none">{stat.value}</div>

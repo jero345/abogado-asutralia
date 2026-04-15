@@ -27,6 +27,10 @@ export interface ClassAction {
   court?: string
   summary: string
   content: Block[]
+  /** Short status line shown on the card — e.g. "Active — Federal Court NSD 924/2024" */
+  keyDate?: string
+  /** Canonical WordPress page for this matter on bantongroup.com */
+  wordpressLink?: string
 }
 
 export const classActions: ClassAction[] = [
@@ -53,6 +57,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the Arrium Class Action', href: '#arrium-info' },
     ],
+    keyDate: 'Active — Victorian Supreme Court S ECI 2020 03281',
+    wordpressLink: 'https://bantongroup.com/arrium-class-action/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -77,6 +83,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the CuDeco Class Action', href: '#cudeco-info' },
     ],
+    keyDate: 'KPMG settled 2025 · Directors trial pending',
+    wordpressLink: 'https://bantongroup.com/cudeco-class-action/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -96,6 +104,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the Fitch SCDO Class Action', href: '#fitch-info' },
     ],
+    keyDate: 'Active — Federal Court NSD 924/2024',
+    wordpressLink: 'https://bantongroup.com/fitch-ratings-class-action/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -139,6 +149,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'email', label: 'Enquiries', address: 'mdbaclassaction@bantongroup.com' },
     ],
+    keyDate: 'Opt-out closed · Mediation July 2024',
+    wordpressLink: 'https://bantongroup.com/mdba-class-action/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -172,6 +184,8 @@ export const classActions: ClassAction[] = [
           'The case is premised that it is the failure to report accurately, and the failure by Blue Sky\u2019s auditors to detect the misstatements, that caused investors to suffer loss and damage. The contraventions alleged include contraventions by Blue Sky and the director respondents of ss 674, 1041H and 1041E of the Corporations Act, alternatively 12DA(1) of the Australian Securities and Investments Commissions Act 2001 (Cth) (ASIC Act), alternatively s 18 of the Australian Consumer Law set out in Schedule 2 of the Competition and Consumer Act 2010 (Cth) (ACL) and contraventions by Ernst & Young of ss 1041H and/or 1041E of the Corporations Act and/or s 12DA(1) of the ASIC Act and/or s 18 of the ACL.',
       },
     ],
+    keyDate: 'Active — Federal Court',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -220,6 +234,8 @@ export const classActions: ClassAction[] = [
       { kind: 'h', text: 'Next Steps' },
       { kind: 'link', label: 'Register your claim / request further information', href: '#sp-register' },
     ],
+    keyDate: 'Active — Federal Court of Australia',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -310,6 +326,8 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'Proposed Amended Funding Information Summary', href: '#hy-amended-funding' },
       { kind: 'email', label: 'All Hyundai ABS Class Action enquiries', address: 'Hyundaikia@bantongroup.com' },
     ],
+    keyDate: 'Active — Carriage hearing 30 June 2025',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -398,6 +416,8 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'Proposed Amended Funding Information Summary', href: '#kia-amended-funding' },
       { kind: 'email', label: 'All Kia ABS Class Action enquiries', address: 'Hyundaikia@bantongroup.com' },
     ],
+    keyDate: 'Active — Carriage hearing 30 June 2025',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -438,6 +458,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'Register as a group member / enquire', href: '#salt-lake-register' },
     ],
+    keyDate: 'Investigation advanced',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -479,6 +501,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'Register as a group member / enquire', href: '#zip-register' },
     ],
+    keyDate: 'Investigation advanced',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -489,6 +513,8 @@ export const classActions: ClassAction[] = [
     year: '2025',
     summary: 'Settlement approval orders dated 28 May 2025.',
     content: [{ kind: 'link', label: 'Settlement approval orders (28 May 2025)', href: '#qoin-settlement' }],
+    keyDate: 'Settlement approved 28 May 2025',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -539,6 +565,8 @@ export const classActions: ClassAction[] = [
       { kind: 'h', text: 'Registration' },
       { kind: 'email', label: 'Enquiries and registrations', address: 'lightrailclassaction@bantongroup.com' },
     ],
+    keyDate: 'High Court hearing 15-16 May 2025',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -586,6 +614,8 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'email', label: 'Phoslock Class Action enquiries', address: 'phoslockclassaction@bantongroup.com' },
     ],
+    keyDate: 'Discovery in progress · CMC 7 August 2026',
+    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
 ]
 

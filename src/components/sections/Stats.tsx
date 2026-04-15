@@ -33,8 +33,8 @@ const stats = [
     value: 6,
     prefix: '',
     suffix: '',
-    label: 'Courts of Appearance',
-    description: 'Federal Court, Supreme Courts of all states, Full Federal Court, and the High Court of Australia.',
+    label: 'National Jurisdictions',
+    description: 'We appear across Australia — Federal Court, Supreme Courts of every state and territory, the Full Federal Court, and the High Court of Australia.',
   },
 ]
 

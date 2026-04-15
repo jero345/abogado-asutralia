@@ -64,7 +64,7 @@ const team: Member[] = [
     photo: '/img/team/jack-johnstone.jpg',
   },
   {
-    name: 'Robin',
+    name: 'Sabin Thomas',
     role: 'Senior Associate',
     specialties: ['Class Actions', 'Litigation'],
     bio: 'Biography and photograph pending from the firm.',
