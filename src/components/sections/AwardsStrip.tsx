@@ -21,6 +21,12 @@ export function AwardsStrip() {
               Consistently ranked by the world's{' '}
               <span className="italic-display text-[#6D8FB5]">leading legal directories.</span>
             </h2>
+            <p className="text-[#555555] text-[14px] md:text-[15px] leading-[1.75] max-w-2xl mx-auto mt-5">
+              Banton Group — founded in February 2020 by Amanda Banton — is recognised as a{' '}
+              <span className="text-[#1C3A64] font-medium">Leading Individual</span> by{' '}
+              <span className="text-[#1C3A64] font-medium">Chambers Asia-Pacific 2022, 2023, 2025 and 2026</span>.
+              Today, Banton Group is one of Australia's largest private litigation practices, acting in some of the country's most significant class actions and insolvencies.
+            </p>
           </div>
         </ScrollReveal>
 
