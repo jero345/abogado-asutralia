@@ -5,10 +5,11 @@ import { ChevronDown, Calendar, Scale, FileText, Mail, ArrowUpRight, ExternalLin
 import { classActions, investigations, pastActions, type Block, type CaseStatus } from '@/data/classActions'
 
 const statusColors: Record<CaseStatus, string> = {
-  Active: 'text-[#1C3A64] bg-[#E8F0FA] border-[#1C3A64]/20',
-  Settled: 'text-[#1A6B41] bg-[#E6F4EE] border-[#1A6B41]/20',
-  'On Appeal': 'text-[#8A6D1E] bg-[#C9A84C]/10 border-[#C9A84C]/30',
-  Investigating: 'text-[#1C3A64] bg-white border-[#1C3A64]/30',
+  // All statuses in the navy family — no green, no gold, no purple
+  Active: 'text-white bg-[#1C3A64] border-[#1C3A64]',
+  Settled: 'text-[#1C3A64] bg-[#E8F0FA] border-[#1C3A64]/25',
+  'On Appeal': 'text-white bg-[#385078] border-[#385078]',
+  Investigating: 'text-[#1C3A64] bg-white border-[#1C3A64]/40',
 }
 
 function BlockRenderer({ block }: { block: Block }) {

@@ -22,6 +22,7 @@ export function NewsPage() {
         italicTitle="On the record."
         subtitle="Updates from the firm, media coverage and commentary from Banton Group's lawyers on developments in Australian litigation."
         breadcrumbs={[{ label: 'News' }]}
+        backgroundImage="/img/hero-bg/about.jpg"
       />
 
       <section className="relative py-16 md:py-24 bg-white">

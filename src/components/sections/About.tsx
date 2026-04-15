@@ -118,22 +118,6 @@ export function About() {
                 <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Principal Partner</div>
               </motion.div>
 
-              {/* Chambers accreditation — moved to top-left, stays visible */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="absolute top-4 left-2 sm:-left-6 bg-white border border-[#1C3A64]/20 rounded-xl p-4 shadow-lg max-w-[220px]"
-              >
-                <div className="text-[#1C3A64] text-[10px] font-semibold tracking-[0.12em] uppercase mb-1">
-                  Chambers Asia-Pacific
-                </div>
-                <div className="text-[#1e3a5f] text-sm font-semibold leading-snug">
-                  Leading Individual — Amanda Banton
-                </div>
-                <div className="text-[#1e3a5f]/60 text-[11px] mt-1">2022, 2023, 2025, 2026</div>
-              </motion.div>
             </div>
           </ScrollReveal>
         </div>
