@@ -24,20 +24,20 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className="relative pt-28 pb-12 md:pt-40 md:pb-20 overflow-hidden bg-[#1C3A64]">
-      {/* Blurred photo background (optional) */}
+      {/* Sharp photo background (optional) — text sits over a gradient, not a blur */}
       {backgroundImage && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src={backgroundImage}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover scale-110"
-            style={{ filter: 'blur(10px)' }}
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Navy overlay for text legibility — rgba(28,58,100,0.70) */}
-          <div className="absolute inset-0 bg-[#1C3A64]/70" />
-          {/* Extra depth — darker near the top */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F2540]/60 via-transparent to-[#1C3A64]/30" />
+          {/* Left-to-right dark-to-light gradient so the heading side stays legible
+              while the right side of the photo shows through clearly */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F2540]/85 via-[#1C3A64]/55 to-[#1C3A64]/20" />
+          {/* Subtle bottom fade to ease the transition into the next section */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1C3A64]/40" />
         </div>
       )}
 
