@@ -14,34 +14,34 @@ export function Home() {
       <AwardsStrip />
 
       {/* Amanda feature — green-skirt portrait with name */}
-      <section className="relative py-16 md:py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-[340px_1fr] gap-8 md:gap-10 lg:gap-12 items-center">
+      <section className="relative py-16 md:py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center md:items-stretch gap-8 md:gap-10">
             <ScrollReveal>
-              <div className="rounded-2xl overflow-hidden border border-[#1C3A64]/10 shadow-lg max-w-[340px] mx-auto md:mx-0">
+              <div className="rounded-2xl overflow-hidden border border-[#1C3A64]/10 shadow-lg w-[260px] md:w-[280px] flex-shrink-0">
                 <img
                   src="/img/home/amanda-feature.jpg"
                   alt="Amanda Banton"
-                  className="w-full h-auto"
+                  className="w-full h-auto block"
                 />
               </div>
             </ScrollReveal>
-            <ScrollReveal delay={0.15}>
-              <div className="flex items-center gap-3 mb-4">
+            <ScrollReveal delay={0.15} className="flex-1 flex flex-col justify-center text-center md:text-left">
+              <div className="flex items-center gap-3 mb-4 justify-center md:justify-start">
                 <div className="h-px w-8 bg-[#1C3A64]" />
                 <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-[#1C3A64]">
                   Managing Partner
                 </span>
               </div>
-              <h2 className="text-[28px] sm:text-3xl md:text-[36px] lg:text-[40px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-5">
+              <h2 className="text-[28px] sm:text-3xl md:text-[34px] lg:text-[38px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-5">
                 Amanda <span className="italic-display text-[#6D8FB5]">Banton.</span>
               </h2>
-              <p className="text-[#555555] text-[15px] md:text-[16px] leading-[1.75] mb-5 max-w-xl">
+              <p className="text-[#555555] text-[15px] md:text-[16px] leading-[1.75] mb-5">
                 Under Amanda's leadership, Banton Group has grown into one of Australia's most formidable private litigation and insolvency practices, acting in some of Australia's biggest class action litigation, commercial disputes and insolvency since 2020.
               </p>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 text-[#1C3A64] text-[14px] font-medium hover:underline"
+                className="inline-flex items-center gap-2 text-[#1C3A64] text-[14px] font-medium hover:underline self-center md:self-start"
               >
                 Read more about the firm
                 <ArrowUpRight size={14} />
