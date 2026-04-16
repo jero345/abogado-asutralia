@@ -68,8 +68,9 @@ const team: Member[] = [
   {
     name: 'Sabin Thomas',
     role: 'Senior Associate',
-    specialties: ['Class Actions', 'Litigation'],
-    bio: 'Biography and photograph pending from the firm.',
+    specialties: ['Commercial Disputes', 'International Arbitration', 'Insolvency'],
+    bio:
+      'Sabin is a commercial disputes lawyer with extensive experience in high-value litigation and international arbitration. She has represented corporate and international clients in complex, multi-jurisdictional matters, including construction, insolvency and enforcement proceedings. Having practised at leading Malaysian firms, Sabin has worked on significant cross-border disputes involving novel legal issues and coordinated with counsel across multiple jurisdictions.',
   },
 ]
 
