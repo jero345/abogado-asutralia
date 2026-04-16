@@ -59,7 +59,7 @@ export function Contact() {
   }
 
   const inputClass =
-    'w-full bg-[#1e3a5f]/[0.04] border border-[#1e3a5f]/[0.08] rounded-xl px-5 py-3.5 text-[#1e3a5f] text-sm placeholder:text-[#1e3a5f]/25 focus:outline-none focus:border-[#1e3a5f]/40 focus:bg-[#1e3a5f]/[0.06] transition-all duration-200'
+    'w-full bg-white border border-[#1C3A64]/25 rounded-xl px-5 py-3.5 text-[#1C3A64] text-[15px] placeholder:text-[#888888] focus:outline-none focus:border-[#1C3A64] focus:bg-white focus:ring-2 focus:ring-[#1C3A64]/10 transition-all duration-200'
 
   return (
     <section id="contact" className="relative py-24 lg:py-32 overflow-hidden">
@@ -102,7 +102,7 @@ export function Contact() {
                   >
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-[#1e3a5f]/50 text-xs font-medium mb-2 tracking-wide">Full Name *</label>
+                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Full Name *</label>
                         <input
                           type="text"
                           required
@@ -113,7 +113,7 @@ export function Contact() {
                         />
                       </div>
                       <div>
-                        <label className="block text-[#1e3a5f]/50 text-xs font-medium mb-2 tracking-wide">Email Address *</label>
+                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Email Address *</label>
                         <input
                           type="email"
                           required
@@ -127,7 +127,7 @@ export function Contact() {
 
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-[#1e3a5f]/50 text-xs font-medium mb-2 tracking-wide">Phone Number</label>
+                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Phone Number</label>
                         <input
                           type="tel"
                           value={form.phone}
@@ -137,7 +137,7 @@ export function Contact() {
                         />
                       </div>
                       <div className="relative">
-                        <label className="block text-[#1e3a5f]/50 text-xs font-medium mb-2 tracking-wide">Enquiry Type</label>
+                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Enquiry Type</label>
                         <button
                           type="button"
                           onClick={() => setTypeOpen(!typeOpen)}
@@ -175,7 +175,7 @@ export function Contact() {
                     </div>
 
                     <div>
-                      <label className="block text-[#1e3a5f]/50 text-xs font-medium mb-2 tracking-wide">Your Message *</label>
+                      <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Your Message *</label>
                       <textarea
                         required
                         rows={5}

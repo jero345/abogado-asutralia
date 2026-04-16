@@ -39,7 +39,10 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <motion.a
-                href="#"
+                href="https://www.linkedin.com/company/banton-group-legal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Banton Group on LinkedIn"
                 whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.15)' }}
                 className="w-9 h-9 border border-white/20 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-colors duration-200"
               >
