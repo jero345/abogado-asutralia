@@ -10,7 +10,7 @@ export function TeamPage() {
         italicTitle="united by one mission."
         subtitle="Specialists across partners, senior associates and associates — recognised by Chambers Asia-Pacific and Legal 500."
         breadcrumbs={[{ label: 'Team' }]}
-        backgroundImage="/img/hero-bg/team.jpg"
+        backgroundImage="/img/hero-bg/our-team.jpg"
       />
       <Team />
     </>

@@ -114,7 +114,7 @@ export function Hero() {
             <motion.span
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-7 md:px-8 py-3 md:py-4 border border-white/40 text-white text-[13px] font-medium rounded-full hover:border-white hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
+              className="inline-flex items-center gap-2 px-7 md:px-8 py-3 md:py-4 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-all duration-200 tracking-[0.02em]"
             >
               Contact Us
             </motion.span>

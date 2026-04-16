@@ -96,10 +96,10 @@ export function About() {
               >
                 <div className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.1] rounded-2xl overflow-hidden aspect-[4/5] max-w-[460px] mx-auto">
                   <img
-                    src="/img/about/amanda-portrait.jpg"
+                    src="/img/about/about-us-amanda.jpg"
                     alt="Amanda Banton, Principal Partner of Banton Group"
                     className="w-full h-full object-cover"
-                    style={{ objectPosition: '50% 20%' }}
+                    style={{ objectPosition: '50% 25%' }}
                   />
                 </div>
               </motion.div>

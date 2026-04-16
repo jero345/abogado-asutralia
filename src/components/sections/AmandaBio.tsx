@@ -98,8 +98,8 @@ export function AmandaBio() {
                 <ul className="space-y-3">
                   {recognitions.map((r) => (
                     <li key={r} className="flex items-start gap-2.5">
-                      <span className="w-1 h-1 rounded-full bg-[#C9A84C] mt-2 flex-shrink-0" />
-                      <span className="text-[#8A6D1E] text-[13px] leading-[1.6]">{r}</span>
+                      <span className="w-1 h-1 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
+                      <span className="text-[#1C3A64] text-[13px] leading-[1.6]">{r}</span>
                     </li>
                   ))}
                 </ul>

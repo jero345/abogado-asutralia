@@ -21,6 +21,44 @@ export function Home() {
       <Hero />
       <AwardsStrip />
 
+      {/* Amanda feature — green-skirt portrait with name */}
+      <section className="relative py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid md:grid-cols-[360px_1fr] lg:grid-cols-[420px_1fr] gap-10 lg:gap-16 items-center">
+            <ScrollReveal>
+              <div className="rounded-2xl overflow-hidden border border-[#1C3A64]/10 shadow-lg max-w-[420px] mx-auto md:mx-0">
+                <img
+                  src="/img/home/amanda-feature.jpg"
+                  alt="Amanda Banton"
+                  className="w-full h-auto"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.15}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-px w-8 bg-[#1C3A64]" />
+                <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-[#1C3A64]">
+                  Principal Partner
+                </span>
+              </div>
+              <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-6">
+                Amanda <span className="italic-display text-[#6D8FB5]">Banton.</span>
+              </h2>
+              <p className="text-[#555555] text-[15px] md:text-[16px] leading-[1.75] mb-6 max-w-xl">
+                Under Amanda's leadership, Banton Group has grown into one of Australia's largest private litigation and insolvency practices, acting in some of Australia's biggest insolvencies and class actions alongside corporate and commercial litigation and advisory work.
+              </p>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 text-[#1C3A64] text-[14px] font-medium hover:underline"
+              >
+                Read more about the firm
+                <ArrowUpRight size={14} />
+              </Link>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
       {/* Section index — direct entry to each sub-page */}
       <section className="relative py-24 lg:py-28 bg-[#EFF4F4]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -85,7 +123,7 @@ export function Home() {
               <div className="h-px w-6 bg-[#8AAECE]" />
             </div>
             <h2 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] font-medium text-white leading-[1.15] mb-5 tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-              Have a matter that demands <span className="italic-display text-[#8AAECE]">extraordinary advocacy?</span>
+              Have a matter that demands <span className="italic-display text-white font-semibold">extraordinary advocacy?</span>
             </h2>
             <p className="text-white/90 text-sm md:text-base lg:text-lg leading-[1.7] mb-8 max-w-xl md:mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.3)]">
               Initial consultations are confidential and obligation-free. Tell us about your matter and we'll assess whether we can help.
