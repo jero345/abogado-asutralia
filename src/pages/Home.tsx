@@ -1,7 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
 import { AmandaQuote } from '@/components/sections/AmandaQuote'
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, FileText } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'

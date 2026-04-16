@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Linkedin, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { Linkedin, Mail, Phone, MapPin } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 
