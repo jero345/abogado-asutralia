@@ -70,10 +70,11 @@ export function Home() {
             src="/img/lobby-60-martin.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-[65%_50%] md:object-center"
           />
-          {/* Dark gradient for text legibility — heavier on left, lighter on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0F2540]/85 via-[#1C3A64]/55 to-[#1C3A64]/25" />
+          {/* Overlay — gradient on desktop so the right side photo shows through,
+              darker flat navy on mobile so the text stays legible over the cropped image */}
+          <div className="absolute inset-0 bg-[#1C3A64]/75 md:bg-gradient-to-r md:from-[#0F2540]/85 md:via-[#1C3A64]/55 md:to-[#1C3A64]/25" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-left md:text-center">
