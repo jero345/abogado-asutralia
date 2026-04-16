@@ -115,7 +115,7 @@ export function About() {
                 <div className="font-serif text-lg md:text-xl font-semibold text-white leading-snug mb-3">
                   "We don't just argue cases.<br />We change outcomes."
                 </div>
-                <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Principal Partner</div>
+                <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Managing Partner</div>
               </motion.div>
 
             </div>

@@ -1,5 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
+import { AmandaQuote } from '@/components/sections/AmandaQuote'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Scale, Building2, Briefcase, Users, Award, UserPlus, FileText, Newspaper } from 'lucide-react'
@@ -58,6 +59,9 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* Amanda quote — feature moment between Amanda bio and the section index */}
+      <AmandaQuote />
 
       {/* Section index — direct entry to each sub-page */}
       <section className="relative py-24 lg:py-28 bg-[#EFF4F4]">

@@ -1,6 +1,5 @@
 import { PageHero } from '@/components/ui/PageHero'
 import { About } from '@/components/sections/About'
-import { AmandaQuote } from '@/components/sections/AmandaQuote'
 import { AmandaBio } from '@/components/sections/AmandaBio'
 import { Innovation } from '@/components/sections/Innovation'
 
@@ -15,7 +14,6 @@ export function AboutPage() {
         breadcrumbs={[{ label: 'About' }]}
         backgroundImage="/img/hero-bg/about.jpg"
       />
-      <AmandaQuote />
       <About />
       <AmandaBio />
       <Innovation />
