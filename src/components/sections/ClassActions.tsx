@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { ChevronDown, Calendar, Scale, FileText, Mail, ArrowUpRight, ExternalLink, Clock } from 'lucide-react'
+import { ChevronDown, Calendar, Scale, FileText, Mail, ArrowUpRight, Clock } from 'lucide-react'
 import { classActions, investigations, pastActions, type Block, type CaseStatus } from '@/data/classActions'
 
 const statusColors: Record<CaseStatus, string> = {
@@ -212,18 +212,6 @@ export function ClassActions() {
                               <BlockRenderer key={k} block={b} />
                             ))}
                           </div>
-                          {c.wordpressLink && (
-                            <a
-                              href={c.wordpressLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="mt-6 inline-flex items-center gap-2 text-[13px] font-medium text-[#1C3A64] border border-[#1C3A64] rounded-full px-4 py-2 hover:bg-[#1C3A64] hover:text-white transition-colors"
-                            >
-                              <ExternalLink size={13} />
-                              Full case page on bantongroup.com
-                              <ArrowUpRight size={12} />
-                            </a>
-                          )}
                         </div>
                       </motion.div>
                     )}

@@ -31,11 +31,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <ScrollReveal className="lg:col-span-1">
-            <div className="mb-6">
+            <div className="mb-5">
               <img src="/img/logobg.png" alt="Banton Group" className="h-12 w-auto object-contain brightness-0 invert" />
             </div>
-            <p className="text-[#B8C8E0] text-[13px] leading-relaxed mb-6">
-              Australia's premier litigation firm — delivering extraordinary outcomes in class actions, commercial disputes, and insolvency since 2020.
+            <div className="text-white/80 text-[11px] tracking-[0.08em] uppercase mb-5 leading-[1.4]">
+              The Banton Group Pty Ltd<br />
+              <span className="text-[#8AAECE] normal-case tracking-normal">ACN: 632 702 919</span>
+            </div>
+            <p className="text-[#B8C8E0] text-[13px] leading-[1.65] mb-6">
+              A premier Litigation Firm — delivering extraordinary outcomes in class actions, commercial disputes and insolvency since 2020.
             </p>
             <div className="flex gap-3">
               <motion.a
@@ -102,7 +106,7 @@ export function Footer() {
                 <div className="text-white text-[13px] font-medium mb-1.5">Sydney <span className="text-[#8AAECE] text-[10px] tracking-[0.15em] uppercase ml-1">HQ</span></div>
                 <div className="flex items-start gap-2.5 text-[#B8C8E0] text-[13px] leading-[1.55] mb-1">
                   <MapPin size={13} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
-                  <span>Level 12, 60 Martin Place<br />Sydney NSW 2000</span>
+                  <span>Level 12/60 Martin Place<br />Sydney NSW 2000</span>
                 </div>
                 <a href="tel:+61280768090" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors">
                   <Phone size={13} className="flex-shrink-0 text-[#6D8FB5]" />
@@ -113,11 +117,11 @@ export function Footer() {
                 <div className="text-white text-[13px] font-medium mb-1.5">Melbourne</div>
                 <div className="flex items-start gap-2.5 text-[#B8C8E0] text-[13px] leading-[1.55] mb-1">
                   <MapPin size={13} className="mt-0.5 flex-shrink-0 text-[#6D8FB5]" />
-                  <span>Level 40, 140 William Street<br />Melbourne VIC 3000</span>
+                  <span>Level 4/40 William Street<br />Melbourne VIC 3000</span>
                 </div>
-                <a href="tel:+61392293948" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors">
+                <a href="tel:+61280768090" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors">
                   <Phone size={13} className="flex-shrink-0 text-[#6D8FB5]" />
-                  +61 03 9229 3948
+                  +61 2 8076 8090
                 </a>
               </div>
               <a href="mailto:info@bantongroup.com" className="flex items-center gap-2.5 text-[#B8C8E0] text-[13px] hover:text-white transition-colors pt-1 border-t border-white/10 mt-4">

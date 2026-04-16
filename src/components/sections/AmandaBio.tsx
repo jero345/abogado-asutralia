@@ -29,19 +29,19 @@ export function AmandaBio() {
                 About Amanda
               </span>
               <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-8">
-                Twenty years at the
+                Twenty years + at the
                 <br />
-                <span className="italic-display text-[#6D8FB5]">top end of town.</span>
+                <span className="italic-display text-[#6D8FB5]">top end of the game.</span>
               </h2>
               <div className="space-y-5 text-[#555555] leading-[1.75] text-[15px] md:text-[16px]">
                 <p>
-                  Amanda Banton is the Principal and Managing Partner of Banton Group, established in February 2020. She brings close to 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — and draws on consulting experience from KPMG and federal government expertise.
+                  Amanda Banton is the Managing Partner of Banton Group, which she established in 2020. She brings over 20 years of experience in the legal profession. Formerly practising at Squire Patton Boggs and Piper Alderman — she ran substantial litigation practices — and draws on consulting experience from KPMG and federal government expertise.
                 </p>
                 <p>
-                  Under Amanda's leadership, Banton Group has grown into one of Australia's largest private litigation and insolvency practices, acting in some of Australia's biggest insolvencies and class actions alongside corporate and commercial litigation and advisory work. Her practice encompasses complex insolvency, regulatory, corporate and commercial disputes — including securities litigation, competition and consumer law, and breaches of trust and fiduciary duties.
+                  Under Amanda's leadership, Banton Group has grown into one of Australia's most formidable litigation and insolvency practices, acting in some of Australia's biggest commercial litigation, class actions, securities litigation, competition and consumer law, and breaches of trust and fiduciary duties and insolvencies.
                 </p>
                 <p>
-                  Amanda is known for her capacity to establish cases from the ground up, her surgical strategic thinking, and her ability to execute groundbreaking matters in which new law has been created. She is highly regarded by clients, litigation funders, insolvency practitioners, and the Court alike — managing all stakeholders including clients, funders, defendants' solicitors and the judiciary with equal care and precision.
+                  Amanda is known for her capacity to establish cases from the ground up, her surgical strategic thinking, and her ability to execute ground-breaking matters in which new law has been created and triggered global precedent. She is highly regarded by clients, litigation funders, insolvency practitioners, and the Court alike.
                 </p>
                 <p>
                   Banton Group has been at the forefront of the evolving class action funding landscape, establishing a significant capital base to bankroll its own litigation and maintaining strong relationships with Australia's leading litigation funders. The firm acts on a contingency fee basis where appropriate in the Supreme Court of Victoria.
@@ -58,7 +58,7 @@ export function AmandaBio() {
                   Amanda Banton
                 </div>
                 <div className="text-white font-medium text-[15px] mb-5">
-                  Principal & Managing Partner
+                  Managing Partner
                 </div>
                 <div className="space-y-3 text-[13px]">
                   <motion.a
@@ -80,11 +80,18 @@ export function AmandaBio() {
                     amanda.banton@bantongroup.com
                   </a>
                   <a
+                    href="tel:+61280768090"
+                    className="flex items-center gap-3 text-white/80 hover:text-white transition-colors"
+                  >
+                    <Phone size={14} className="text-[#8AAECE]" />
+                    +61 2 8076 8090 <span className="text-[#8AAECE] text-[11px] ml-1">· direct</span>
+                  </a>
+                  <a
                     href="tel:+61424156859"
                     className="flex items-center gap-3 text-white/80 hover:text-white transition-colors"
                   >
                     <Phone size={14} className="text-[#8AAECE]" />
-                    +61 424 156 859
+                    +61 424 156 859 <span className="text-[#8AAECE] text-[11px] ml-1">· mobile</span>
                   </a>
                 </div>
               </div>

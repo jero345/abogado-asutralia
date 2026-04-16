@@ -65,7 +65,7 @@ export function Hero() {
         >
           <div className="h-px w-10 md:w-14 bg-gradient-to-r from-transparent to-[#8AAECE]/90" />
           <span className="text-[#8AAECE] text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase">
-            Australia's Premier Litigation Firm
+            A Premier Litigation Firm
           </span>
           <div className="h-px w-10 md:w-14 bg-gradient-to-l from-transparent to-[#8AAECE]/90" />
         </motion.div>
@@ -132,9 +132,9 @@ export function Hero() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-[#0F2540]/40 backdrop-blur-md w-full max-w-3xl">
           {[
             { value: '$500M+', label: 'Recovered for Clients' },
-            { value: '20+', label: 'Years Combined Leadership' },
-            { value: '50+', label: 'Class Actions' },
-            { value: '6', label: 'National Jurisdictions' },
+            { value: '50+', label: 'Years Combined Leadership' },
+            { value: '60+', label: 'Major Litigation Cases' },
+            { value: '30+', label: 'Significant Judgments' },
           ].map((stat) => (
             <div key={stat.label} className="bg-[#1C3A64]/75 backdrop-blur-sm px-3 py-4 md:px-6 md:py-5 text-center">
               <div className="text-[26px] md:text-[34px] lg:text-[40px] font-semibold text-white mb-1 leading-none">{stat.value}</div>

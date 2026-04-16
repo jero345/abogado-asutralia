@@ -63,14 +63,14 @@ export function PracticeAreas() {
               What We Do
             </span>
             <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
-              Practice
+              Four
               <br />
-              <span className="italic-display text-[#6D8FB5]">areas.</span>
+              <span className="italic-display text-[#6D8FB5]">Specialisms.</span>
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={0.15} className="lg:max-w-xs">
-            <p className="text-[#1e3a5f]/40 text-base leading-relaxed">
-              Four specialised practice areas. One relentless commitment to winning. We operate at the intersection of law, strategy, and technology.
+          <ScrollReveal delay={0.15} className="lg:max-w-sm">
+            <p className="text-[#555555] text-[15px] md:text-base leading-[1.7]">
+              Four specialised practice areas, brought together by a relentless commitment to winning, at the intersection of law, strategy and technology.
             </p>
           </ScrollReveal>
         </div>

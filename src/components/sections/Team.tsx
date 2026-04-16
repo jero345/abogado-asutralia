@@ -8,13 +8,15 @@ type Member = {
   specialties: string[]
   bio: string
   photo?: string
+  /** Optional CSS filter to harmonise the photo with the rest of the grid. */
+  photoFilter?: string
   awards?: string[]
 }
 
 const team: Member[] = [
   {
     name: 'Amanda Banton',
-    role: 'Principal & Managing Partner',
+    role: 'Managing Partner',
     specialties: ['Class Actions', 'Securities Litigation', 'Insolvency & Commercial Litigation'],
     bio:
       'Amanda is the Managing Partner of Banton Group, established in February 2020. She brings close to 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — with consulting experience from KPMG and federal government expertise.',
@@ -72,6 +74,7 @@ const team: Member[] = [
     bio:
       'Sabin is a commercial disputes lawyer with extensive experience in high-value litigation and international arbitration. She has represented corporate and international clients in complex, multi-jurisdictional matters, including construction, insolvency and enforcement proceedings. Having practised at leading Malaysian firms, Sabin has worked on significant cross-border disputes involving novel legal issues and coordinated with counsel across multiple jurisdictions.',
     photo: '/img/team/sabin-thomas.jpg',
+    photoFilter: 'contrast(1.2) brightness(0.80) saturate(0.85)',
   },
 ]
 
@@ -89,14 +92,14 @@ export function Team() {
               Our Team
             </span>
             <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
-              The lawyers
+              Expert Litigators,
               <br />
-              <span className="italic-display text-[#6D8FB5]">behind the wins.</span>
+              <span className="italic-display text-[#6D8FB5]">relentless in pursuit of results.</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="lg:max-w-sm">
             <p className="text-[#555555] text-base leading-[1.6]">
-              A team of accomplished litigators, united by a passion for justice and a record of extraordinary outcomes.
+              Leading litigators, aligned in purpose — delivering results where it matters most.
             </p>
           </ScrollReveal>
         </div>
@@ -117,6 +120,7 @@ export function Team() {
                       src={member.photo}
                       alt={member.name}
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                      style={member.photoFilter ? { filter: member.photoFilter } : undefined}
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center gap-3">

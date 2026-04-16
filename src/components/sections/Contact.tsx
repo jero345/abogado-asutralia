@@ -14,7 +14,7 @@ const enquiryTypes = [
 const offices = [
   {
     city: 'Sydney',
-    address: 'Level 12, 60 Martin Place',
+    address: 'Level 12/60 Martin Place',
     suburb: 'Sydney NSW 2000',
     phone: '+61 2 8076 8090',
     email: 'info@bantongroup.com',
@@ -22,9 +22,9 @@ const offices = [
   },
   {
     city: 'Melbourne',
-    address: 'Level 40, 140 William Street',
+    address: 'Level 4/40 William Street',
     suburb: 'Melbourne VIC 3000',
-    phone: '+61 03 9229 3948',
+    phone: '+61 2 8076 8090',
     email: 'info@bantongroup.com',
     primary: false,
   },
