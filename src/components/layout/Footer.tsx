@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom'
 import { Linkedin, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
-const practiceAreas = [
-  'Class Actions',
-  'Commercial Litigation',
-  'Insolvency & Restructuring',
-  'Complex Financial Disputes',
-]
+
 
 const quickLinks = [
   { label: 'About Us', to: '/about' },
@@ -28,7 +23,7 @@ export function Footer() {
       <div className="h-px w-full bg-gradient-to-r from-transparent via-[#6D8FB5]/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <ScrollReveal className="lg:col-span-1">
             <div className="mb-5">
@@ -62,23 +57,7 @@ export function Footer() {
             </div>
           </ScrollReveal>
 
-          {/* Practice Areas */}
-          <ScrollReveal delay={0.1}>
-            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6">Practice Areas</h3>
-            <ul className="space-y-3">
-              {practiceAreas.map((area) => (
-                <li key={area}>
-                  <Link
-                    to="/litigation"
-                    className="text-[#B8C8E0] text-[13px] hover:text-white transition-colors duration-200 flex items-center gap-1 group"
-                  >
-                    <span className="w-3 h-px bg-transparent group-hover:bg-white/60 transition-all duration-200" />
-                    {area}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
+
 
           {/* Quick Links */}
           <ScrollReveal delay={0.15}>
@@ -130,12 +109,7 @@ export function Footer() {
               </a>
             </div>
 
-            <Link
-              to="/contact"
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 border border-white/40 text-white text-[13px] font-medium rounded-full hover:bg-white/10 transition-all duration-200 tracking-[0.02em]"
-            >
-              Get in Touch <ArrowUpRight size={14} />
-            </Link>
+
           </ScrollReveal>
         </div>
 
