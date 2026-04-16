@@ -71,6 +71,7 @@ const team: Member[] = [
     specialties: ['Commercial Disputes', 'International Arbitration', 'Insolvency'],
     bio:
       'Sabin is a commercial disputes lawyer with extensive experience in high-value litigation and international arbitration. She has represented corporate and international clients in complex, multi-jurisdictional matters, including construction, insolvency and enforcement proceedings. Having practised at leading Malaysian firms, Sabin has worked on significant cross-border disputes involving novel legal issues and coordinated with counsel across multiple jurisdictions.',
+    photo: '/img/team/sabin-thomas.jpg',
   },
 ]
 
