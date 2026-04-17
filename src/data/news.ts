@@ -91,19 +91,6 @@ export const articles: NewsArticle[] = [
       url: 'https://www.lawyerly.com.au/top-squire-patton-boggs-litigator-defects-to-launch-boutique-firm/',
     },
   },
-  {
-    slug: 'amanda-banton-wikipedia',
-    title: 'Amanda Banton \u2014 first lawyer to win judgment against a global ratings agency',
-    date: '2020-01-01',
-    category: 'Profile',
-    author: 'Wikipedia',
-    excerpt:
-      'Amanda Banton is the first and only lawyer in the world to successfully obtain a judgment against a global credit ratings agency. Standard & Poor\u2019s settled for $215 million \u2014 one of the largest pre-trial settlements in Australian legal history.',
-    source: {
-      name: 'Wikipedia',
-      url: 'https://en.wikipedia.org/wiki/Amanda_Banton',
-    },
-  },
 ]
 
 export function getArticleBySlug(slug: string): NewsArticle | undefined {
