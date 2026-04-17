@@ -1,33 +1,119 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { Quote } from 'lucide-react'
 
 /**
- * Feature quote from Amanda Banton — displayed between the About hero
- * and the main body copy.
+ * Rotating testimonials — Legal 500 Asia Pacific 2026.
+ * Auto-advances every 6s with fade/slide transition; pauses on hover.
  */
+
+type Testimonial = {
+  quote: string
+  source: string
+}
+
+const SOURCE = 'Legal 500 Asia Pacific Guide 2026'
+
+const testimonials: Testimonial[] = [
+  {
+    quote:
+      'I rate Banton Group highly due to their success rate and \u201Ccut through\u201D in litigation.',
+    source: SOURCE,
+  },
+  {
+    quote:
+      'I highly recommend the firm for its exceptional legal expertise, strategic acumen, and professional integrity.',
+    source: SOURCE,
+  },
+  {
+    quote:
+      'Best of breed as a boutique law firm in plaintiff class actions and complex litigation which requires extraordinary strategic analysis.',
+    source: SOURCE,
+  },
+  {
+    quote:
+      'Amanda is an outstanding legal practitioner whose deep knowledge and strategic thinking consistently delivers strong results. She is a rock star in Australian class actions.',
+    source: SOURCE,
+  },
+  {
+    quote:
+      'Their collaborative approach and commitment to excellence have made them invaluable parties in challenging legal matters.',
+    source: SOURCE,
+  },
+]
+
+const AUTO_ADVANCE_MS = 6000
+
 export function AmandaQuote() {
+  const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  // Auto-advance
+  useEffect(() => {
+    if (paused) return
+    const t = setInterval(() => {
+      setIndex((i) => (i + 1) % testimonials.length)
+    }, AUTO_ADVANCE_MS)
+    return () => clearInterval(t)
+  }, [paused])
+
+  const current = testimonials[index]
+
   return (
-    <section className="relative py-16 md:py-20 bg-white">
+    <section className="relative py-16 md:py-24 bg-white">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <ScrollReveal>
-          <motion.figure
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+          <div
             className="text-center"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
           >
             <Quote size={32} className="text-[#6D8FB5] mx-auto mb-6" strokeWidth={1.2} />
-            <blockquote className="font-medium text-[#1C3A64] text-[28px] sm:text-[32px] md:text-[40px] lg:text-[44px] leading-[1.2] tracking-tight mb-6">
-              <span>Complexity doesn't deter us.</span>
-              <br />
-              <span className="italic-display text-[#6D8FB5]">It defines us.</span>
-            </blockquote>
-            <figcaption className="text-[#555555] text-[13px] tracking-[0.1em] uppercase">
-              — Amanda Banton, Managing Partner
-            </figcaption>
-          </motion.figure>
+
+            {/* Rotating quote — fixed min-height so the layout doesn't jump between slides */}
+            <div className="relative min-h-[180px] md:min-h-[200px] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.figure
+                  key={index}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  className="max-w-3xl mx-auto"
+                >
+                  <blockquote className="font-medium text-[#1C3A64] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] leading-[1.3] tracking-tight mb-6 italic-display">
+                    <span className="text-[#1C3A64]/50">&lsquo;</span>
+                    {current.quote}
+                    <span className="text-[#1C3A64]/50">&rsquo;</span>
+                  </blockquote>
+                  <figcaption className="text-[#555555] text-[12px] md:text-[13px] tracking-[0.15em] uppercase">
+                    — {current.source}
+                  </figcaption>
+                </motion.figure>
+              </AnimatePresence>
+            </div>
+
+            {/* Controls — dots */}
+            <div className="flex items-center justify-center gap-3 mt-10">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show testimonial ${i + 1}`}
+                  className="group relative p-2"
+                >
+                  <span
+                    className={`block h-1.5 rounded-full transition-all duration-300 ${
+                      i === index
+                        ? 'w-8 bg-[#1C3A64]'
+                        : 'w-1.5 bg-[#1C3A64]/25 group-hover:bg-[#1C3A64]/50'
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>
