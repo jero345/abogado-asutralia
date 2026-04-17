@@ -256,7 +256,15 @@ export function CaseDetailPage() {
                   <p className="text-white/85 text-[14px] leading-[1.6] mb-5">
                     Register your interest as a group member. All enquiries are private and confidential.
                   </p>
-                  {caseData.registrationUrl ? (
+                  {caseData.hasInternalForm ? (
+                    <Link
+                      to={`/class-actions/${caseData.slug}/register`}
+                      className="inline-flex items-center gap-2 w-full justify-center px-5 py-3 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
+                    >
+                      Register Now
+                      <ArrowUpRight size={14} />
+                    </Link>
+                  ) : caseData.registrationUrl ? (
                     <a
                       href={caseData.registrationUrl}
                       target="_blank"
