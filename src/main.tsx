@@ -17,12 +17,17 @@ import { NewsPage } from '@/pages/NewsPage'
 import { NewsArticlePage } from '@/pages/NewsArticlePage'
 import { TermsOfUsePage } from '@/pages/TermsOfUsePage'
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
+import { StudioPage } from '@/pages/StudioPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
+        {/* Sanity Studio — mounted outside the site Layout so it has the
+            full viewport with no header/footer */}
+        <Route path="/studio/*" element={<StudioPage />} />
+
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />

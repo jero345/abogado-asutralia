@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { PageHero } from '@/components/ui/PageHero'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ArrowUpRight, Calendar, ExternalLink, Newspaper } from 'lucide-react'
-import { getSortedArticles } from '@/data/news'
+import { fetchArticles, type NewsArticle } from '@/lib/news'
 
 function formatDate(iso: string) {
   const d = new Date(iso)
@@ -11,8 +12,20 @@ function formatDate(iso: string) {
 }
 
 export function NewsPage() {
-  const articles = getSortedArticles()
-  const hasArticles = articles.length > 0
+  const [articles, setArticles] = useState<NewsArticle[] | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetchArticles().then((list) => {
+      if (!cancelled) setArticles(list)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const hasArticles = !!articles && articles.length > 0
+  const loading = articles === null
 
   return (
     <>
@@ -27,9 +40,13 @@ export function NewsPage() {
 
       <section className="relative py-16 md:py-24 bg-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          {hasArticles ? (
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="w-8 h-8 mx-auto border-4 border-[#1C3A64]/20 border-t-[#1C3A64] rounded-full animate-spin" />
+            </div>
+          ) : hasArticles ? (
             <div className="space-y-8">
-              {articles.map((a, i) => (
+              {articles!.map((a, i) => (
                 <ScrollReveal key={a.slug} delay={i * 0.06}>
                   <motion.article
                     whileHover={{ y: -3 }}
@@ -98,7 +115,6 @@ export function NewsPage() {
               ))}
             </div>
           ) : (
-            /* Empty state — the firm hasn't published yet */
             <ScrollReveal>
               <div className="text-center max-w-xl mx-auto py-10">
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#EFF4F4] border border-[#1C3A64]/15 flex items-center justify-center">

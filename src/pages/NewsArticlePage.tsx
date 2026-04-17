@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { PageHero } from '@/components/ui/PageHero'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react'
-import { getArticleBySlug, type ArticleBlock } from '@/data/news'
+import { fetchArticle, type NewsArticle } from '@/lib/news'
+import { type ArticleBlock } from '@/data/news'
 
 function formatDate(iso: string) {
   const d = new Date(iso)
@@ -74,9 +76,28 @@ function BlockRenderer({ block }: { block: ArticleBlock }) {
 
 export function NewsArticlePage() {
   const { slug } = useParams<{ slug: string }>()
-  const article = slug ? getArticleBySlug(slug) : undefined
+  const [article, setArticle] = useState<NewsArticle | null | undefined>(undefined)
 
-  if (!article) return <Navigate to="/news" replace />
+  useEffect(() => {
+    let cancelled = false
+    if (!slug) return
+    fetchArticle(slug).then((a) => {
+      if (!cancelled) setArticle(a)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [slug])
+
+  if (article === undefined) {
+    return (
+      <section className="min-h-[60vh] flex items-center justify-center bg-white">
+        <div className="w-8 h-8 border-4 border-[#1C3A64]/20 border-t-[#1C3A64] rounded-full animate-spin" />
+      </section>
+    )
+  }
+
+  if (article === null) return <Navigate to="/news" replace />
 
   return (
     <>
