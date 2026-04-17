@@ -2,9 +2,9 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { motion } from 'framer-motion'
 
 const cdoDefendants = [
-  'Lehmans',
+  'Lehman Brothers',
   'Standard & Poors',
-  'Fitch Rating agencies',
+  'Fitch Ratings',
   'ABN Amro',
   'Commonwealth Bank',
   'ANZ Bank',
@@ -19,7 +19,7 @@ const insolvencies = [
   'Ceramic Fuel Cells Limited',
 ]
 
-const clients = ['KordaMentha', 'Deloitte', 'McGrath Nicol', 'KPMG', 'Hall Chadwick', 'Grant Thornton']
+const clients = ['FTI', 'KordaMentha', 'Deloitte', 'McGrath Nicol', 'KPMG', 'Hall Chadwick', 'Grant Thornton']
 
 export function KeyLitigation() {
   return (
@@ -98,7 +98,7 @@ export function KeyLitigation() {
                 <p className="text-[#555555] text-[14px] md:text-[15px] leading-[1.7] mb-4">
                   Our key clients in respect of insolvency and commercial litigation matters include{' '}
                   <span className="text-[#1C3A64] font-medium">
-                    KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick and Grant Thornton
+                    FTI, KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick and Grant Thornton
                   </span>
                   , as well as a range of Trustees and Responsible Entities of Managed Investment Schemes.
                 </p>
