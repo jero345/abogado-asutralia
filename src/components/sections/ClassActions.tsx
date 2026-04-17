@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ChevronDown, Calendar, Scale, FileText, Mail, ArrowUpRight, Clock } from 'lucide-react'
 import { classActions, investigations, pastActions, type Block, type CaseStatus } from '@/data/classActions'
@@ -212,6 +213,15 @@ export function ClassActions() {
                               <BlockRenderer key={k} block={b} />
                             ))}
                           </div>
+                          {c.detailSlug && (
+                            <Link
+                              to={`/class-actions/${c.detailSlug}`}
+                              className="mt-6 inline-flex items-center gap-2 text-[13px] font-medium text-white bg-[#1C3A64] hover:bg-[#2A4E72] rounded-full px-5 py-2.5 transition-colors tracking-[0.02em]"
+                            >
+                              View full case details
+                              <ArrowUpRight size={13} />
+                            </Link>
+                          )}
                         </div>
                       </motion.div>
                     )}

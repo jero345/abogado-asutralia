@@ -31,6 +31,8 @@ export interface ClassAction {
   keyDate?: string
   /** Canonical WordPress page for this matter on bantongroup.com */
   wordpressLink?: string
+  /** Slug of the internal React detail page at /class-actions/:slug (if one exists) */
+  detailSlug?: string
 }
 
 export const classActions: ClassAction[] = [
@@ -57,8 +59,9 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the Arrium Class Action', href: '#arrium-info' },
     ],
-    keyDate: 'Active — Victorian Supreme Court S ECI 2020 03281',
+    keyDate: 'Registration closes 15 Dec 2025 · Trial 3 Aug 2026',
     wordpressLink: 'https://bantongroup.com/arrium-class-action/',
+    detailSlug: 'arrium',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -83,8 +86,9 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the CuDeco Class Action', href: '#cudeco-info' },
     ],
-    keyDate: 'KPMG settled 2025 · Directors trial pending',
+    keyDate: 'KPMG settled 2025 · Directors trial 29 Jun 2026',
     wordpressLink: 'https://bantongroup.com/cudeco-class-action/',
+    detailSlug: 'cudeco',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -104,8 +108,9 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the Fitch SCDO Class Action', href: '#fitch-info' },
     ],
-    keyDate: 'Active — Federal Court NSD 924/2024',
+    keyDate: 'Opt-out 4 Apr 2026 · Trial 3 May 2027',
     wordpressLink: 'https://bantongroup.com/fitch-ratings-class-action/',
+    detailSlug: 'fitch-scdo',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -116,7 +121,7 @@ export const classActions: ClassAction[] = [
     year: '2019',
     court: 'NSW Supreme Court',
     summary:
-      'NSW and Victorian water entitlement holders seeking compensation for low water allocations in 2017\u20132020.',
+      'The matter was heard by Faulkner J over 40 days with closing submissions on 14 November 2025. Judgment is reserved.',
     content: [
       {
         kind: 'p',
@@ -149,8 +154,9 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'email', label: 'Enquiries', address: 'mdbaclassaction@bantongroup.com' },
     ],
-    keyDate: 'Opt-out closed · Mediation July 2024',
+    keyDate: 'Heard by Faulkner J · Judgment reserved 14 Nov 2025',
     wordpressLink: 'https://bantongroup.com/mdba-class-action/',
+    detailSlug: 'murray-darling',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -186,6 +192,7 @@ export const classActions: ClassAction[] = [
     ],
     keyDate: 'Active — Federal Court',
     wordpressLink: 'https://bantongroup.com/class-actions/',
+    detailSlug: 'blue-sky',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -616,6 +623,7 @@ export const classActions: ClassAction[] = [
     ],
     keyDate: 'Discovery in progress · CMC 7 August 2026',
     wordpressLink: 'https://bantongroup.com/class-actions/',
+    detailSlug: 'phoslock',
   },
 ]
 

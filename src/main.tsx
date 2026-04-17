@@ -6,6 +6,7 @@ import { Layout } from '@/components/layout/Layout'
 import { Home } from '@/pages/Home'
 import { LitigationPage } from '@/pages/LitigationPage'
 import { ClassActionsPage } from '@/pages/ClassActionsPage'
+import { CaseDetailPage } from '@/pages/CaseDetailPage'
 import { AboutPage } from '@/pages/AboutPage'
 import { TeamPage } from '@/pages/TeamPage'
 import { AwardsPage } from '@/pages/AwardsPage'
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')!).render(
           {/* Keep legacy /practice-areas URL working */}
           <Route path="/practice-areas" element={<LitigationPage />} />
           <Route path="/class-actions" element={<ClassActionsPage />} />
+          <Route path="/class-actions/:slug" element={<CaseDetailPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:slug" element={<NewsArticlePage />} />
           <Route path="/work-with-us" element={<WorkWithUsPage />} />
