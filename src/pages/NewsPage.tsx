@@ -80,7 +80,7 @@ export function NewsPage() {
                           <Calendar size={11} />
                           {formatDate(a.date)}
                         </span>
-                        {a.source && (
+                        {a.source && !a.source.url.startsWith('/') && (
                           <span className="flex items-center gap-1 text-[#888888] text-[12px]">
                             · {a.source.name}
                           </span>
@@ -91,15 +91,25 @@ export function NewsPage() {
                       </h2>
                       <p className="text-[#555555] text-[15px] leading-[1.65] mb-5">{a.excerpt}</p>
                       {a.source ? (
-                        <a
-                          href={a.source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline w-fit"
-                        >
-                          Read on {a.source.name}
-                          <ExternalLink size={13} />
-                        </a>
+                        a.source.url.startsWith('/') ? (
+                          <Link
+                            to={a.source.url}
+                            className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline w-fit"
+                          >
+                            Read article
+                            <ArrowUpRight size={13} />
+                          </Link>
+                        ) : (
+                          <a
+                            href={a.source.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline w-fit"
+                          >
+                            Read on {a.source.name}
+                            <ExternalLink size={13} />
+                          </a>
+                        )
                       ) : (
                         <Link
                           to={`/news/${a.slug}`}

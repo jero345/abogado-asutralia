@@ -50,6 +50,7 @@ export const articleSchema = defineType({
       options: {
         list: [
           { title: 'Press Release', value: 'Press Release' },
+          { title: 'Case Update', value: 'Case Update' },
           { title: 'Class Actions', value: 'Class Actions' },
           { title: 'Commentary', value: 'Commentary' },
           { title: 'Firm Update', value: 'Firm Update' },
