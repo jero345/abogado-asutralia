@@ -33,75 +33,75 @@ export interface NewsArticle {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Initial content approved by the firm — April 2026.
-// These are the 5 launch articles. Once Sanity is wired, Amanda
-// adds / edits entries from the /studio admin and these samples
-// become the fallback used only when the CMS is unreachable.
+// Content approved by the firm — April 2026.
+// Once Sanity is wired, Amanda adds / edits entries from the
+// /studio admin and these entries become the fallback used only
+// when the CMS is unreachable.
 // ─────────────────────────────────────────────────────────────
 export const articles: NewsArticle[] = [
   {
     slug: 'chambers-asia-pacific-2026-ranking',
     title: 'Banton Group ranked in Chambers Asia-Pacific 2026',
-    date: '2026-01-22',
+    date: '2026-01-01',
     category: 'Press Release',
     author: 'Banton Group',
     excerpt:
-      'Chambers and Partners has recognised Banton Group in its 2026 Asia-Pacific guide for Dispute Resolution: Class Actions, with Amanda Banton ranked a Leading Individual for the fourth year.',
+      'Chambers and Partners has recognised Banton Group in its 2026 Asia-Pacific guide for Dispute Resolution: Class Actions, with Amanda Banton ranked a Leading Individual for the fourth consecutive year.',
     source: {
       name: 'chambers.com',
       url: 'https://chambers.com/law-firm/banton-group-asia-pacific-8:23231690',
     },
   },
   {
-    slug: 'cudeco-kpmg-settlement',
-    title: 'CuDeco Class Action \u2014 KPMG Settlement reached',
-    date: '2025-09-15',
-    category: 'Case Update',
+    slug: 'lawyers-weekly-partner-of-year-2025',
+    title: 'Banton Group \u2014 Partner of the Year Awards 2025 finalists',
+    date: '2025-01-01',
+    category: 'Award',
     author: 'Banton Group',
     excerpt:
-      'Banton Group announces that KPMG has reached a settlement agreement in the CuDeco Class Action. The settlement was approved by the Federal Court of Australia in December 2025. Directors trial is continuing.',
+      'Elliott Smith and Melissa Morgan of Banton Group were named finalists in the Lawyers Weekly Partner of the Year Awards 2025 in the Class Actions category.',
     source: {
-      name: 'Full case details',
-      url: '/class-actions/cudeco',
+      name: 'Lawyers Weekly',
+      url: 'https://www.lawyersweekly.com.au/partner-of-the-year-awards/winners/2025-winners-and-finalists',
     },
   },
   {
-    slug: 'qoin-settlement-approved',
-    title: 'Qoin Class Action \u2014 Settlement approved',
-    date: '2025-05-28',
-    category: 'Case Update',
+    slug: 'lawyers-weekly-partner-of-year-2023',
+    title: 'Amanda Banton \u2014 Class Actions Partner of the Year finalist',
+    date: '2023-01-01',
+    category: 'Award',
     author: 'Banton Group',
     excerpt:
-      'The Federal Court of Australia has approved the settlement of the Qoin Class Action. Settlement approval orders were made on 28 May 2025.',
+      'Amanda Banton of Banton Group was named a finalist in the Lawyers Weekly Partner of the Year Awards 2023 in the Class Actions category.',
     source: {
-      name: 'Class Actions',
-      url: '/class-actions',
+      name: 'Lawyers Weekly',
+      url: 'https://www.lawyersweekly.com.au/partner-of-the-year-awards/winners/2023-winners-and-finalists',
     },
   },
   {
-    slug: 'hyundai-kia-scope-expanded',
-    title: 'Hyundai & Kia ABS Class Actions \u2014 Scope expanded',
-    date: '2025-03-28',
-    category: 'Case Update',
+    slug: 'lawyerly-boutique-launch-2020',
+    title: 'Top Squire Patton Boggs litigator launches boutique firm',
+    date: '2020-02-07',
+    category: 'Press Release',
     author: 'Banton Group',
     excerpt:
-      'On 28 March 2025, the lead plaintiffs signalled their intention to seek leave of the Court to amend the scope of the claims against Hyundai and Kia to include additional vehicle models recalled in August and October 2024.',
+      'Amanda Banton, one of Australia\u2019s leading class action litigators, left Squire Patton Boggs to establish Banton Group \u2014 a specialist litigation boutique with plans to bring class actions on a contingency fee basis.',
     source: {
-      name: 'Class Actions',
-      url: '/class-actions',
+      name: 'Lawyerly',
+      url: 'https://www.lawyerly.com.au/top-squire-patton-boggs-litigator-defects-to-launch-boutique-firm/',
     },
   },
   {
-    slug: 'arrium-registration-open',
-    title: 'Arrium Class Action \u2014 Registration open',
-    date: '2025-08-07',
-    category: 'Case Update',
-    author: 'Banton Group',
+    slug: 'amanda-banton-wikipedia',
+    title: 'Amanda Banton \u2014 first lawyer to win judgment against a global ratings agency',
+    date: '2020-01-01',
+    category: 'Profile',
+    author: 'Wikipedia',
     excerpt:
-      'Investors who acquired Arrium Limited (ASX:ARI) ordinary shares between 14 August 2014 and 4 April 2016 may be eligible to participate in the Arrium Class Action. Register your claim with Banton Group.',
+      'Amanda Banton is the first and only lawyer in the world to successfully obtain a judgment against a global credit ratings agency. Standard & Poor\u2019s settled for $215 million \u2014 one of the largest pre-trial settlements in Australian legal history.',
     source: {
-      name: 'Register for Arrium',
-      url: '/class-actions/arrium',
+      name: 'Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Amanda_Banton',
     },
   },
 ]
