@@ -4,7 +4,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { Quote } from 'lucide-react'
 
 /**
- * Rotating testimonials — Legal 500 Asia Pacific 2026.
+ * Rotating testimonials — Legal 500 Asia Pacific Guide 2026.
  * Auto-advances every 6s with fade/slide transition; pauses on hover.
  */
 
@@ -61,18 +61,33 @@ export function AmandaQuote() {
   const current = testimonials[index]
 
   return (
-    <section className="relative py-16 md:py-24 bg-white">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+    <section className="relative py-20 md:py-28 bg-[#1C3A64] overflow-hidden">
+      {/* Subtle radial accent behind the quote */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] pointer-events-none opacity-40"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(109,143,181,0.25) 0%, transparent 65%)' }}
+      />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8">
         <ScrollReveal>
           <div
             className="text-center"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <Quote size={32} className="text-[#6D8FB5] mx-auto mb-6" strokeWidth={1.2} />
+            {/* Eyebrow */}
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="h-px w-10 bg-[#8AAECE]" />
+              <span className="text-[#8AAECE] text-[11px] font-medium tracking-[0.2em] uppercase">
+                Recognised by those who matter
+              </span>
+              <div className="h-px w-10 bg-[#8AAECE]" />
+            </div>
+
+            <Quote size={32} className="text-[#8AAECE] mx-auto mb-6" strokeWidth={1.2} />
 
             {/* Rotating quote — fixed min-height so the layout doesn't jump between slides */}
-            <div className="relative min-h-[180px] md:min-h-[200px] flex items-center justify-center">
+            <div className="relative min-h-[200px] md:min-h-[220px] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.figure
                   key={index}
@@ -82,12 +97,12 @@ export function AmandaQuote() {
                   transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
                   className="max-w-3xl mx-auto"
                 >
-                  <blockquote className="font-medium text-[#1C3A64] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] leading-[1.3] tracking-tight mb-6 italic-display">
-                    <span className="text-[#1C3A64]/50">&lsquo;</span>
+                  <blockquote className="font-medium text-white text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] leading-[1.3] tracking-tight mb-6 italic-display">
+                    <span className="text-[#8AAECE]">&lsquo;</span>
                     {current.quote}
-                    <span className="text-[#1C3A64]/50">&rsquo;</span>
+                    <span className="text-[#8AAECE]">&rsquo;</span>
                   </blockquote>
-                  <figcaption className="text-[#555555] text-[12px] md:text-[13px] tracking-[0.15em] uppercase">
+                  <figcaption className="text-[#8AAECE] text-[12px] md:text-[13px] tracking-[0.15em] uppercase">
                     — {current.source}
                   </figcaption>
                 </motion.figure>
@@ -106,8 +121,8 @@ export function AmandaQuote() {
                   <span
                     className={`block h-1.5 rounded-full transition-all duration-300 ${
                       i === index
-                        ? 'w-8 bg-[#1C3A64]'
-                        : 'w-1.5 bg-[#1C3A64]/25 group-hover:bg-[#1C3A64]/50'
+                        ? 'w-8 bg-white'
+                        : 'w-1.5 bg-white/25 group-hover:bg-white/50'
                     }`}
                   />
                 </button>
