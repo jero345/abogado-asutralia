@@ -232,33 +232,35 @@ export function ClassActions() {
           })}
         </div>
 
-        {/* Investigations */}
-        <ScrollReveal delay={0.1} className="mt-16">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-[#1C3A64]/40" />
-            <span className="text-[#1C3A64] text-[11px] font-medium tracking-[0.2em] uppercase">
-              Current Investigations
-            </span>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {investigations.map((inv, i) => (
-              <ScrollReveal key={inv.id} delay={i * 0.06}>
-                <div className="h-full bg-[#F4F6FB] border border-[#1C3A64]/10 rounded-2xl p-6">
-                  <h3 className="text-[#1C3A64] font-medium text-[16px] mb-2">{inv.title}</h3>
-                  <p className="text-[#555555] text-[13px] md:text-[14px] leading-[1.6] mb-3">{inv.summary}</p>
-                  <p className="text-[#555555] text-[13px] leading-[1.7] mb-4">{inv.body}</p>
-                  <a
-                    href={inv.link.href}
-                    className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline"
-                  >
-                    {inv.link.label}
-                    <ArrowUpRight size={13} />
-                  </a>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </ScrollReveal>
+        {/* Investigations — only shown when there are active investigations */}
+        {investigations.length > 0 && (
+          <ScrollReveal delay={0.1} className="mt-16">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-8 bg-[#1C3A64]/40" />
+              <span className="text-[#1C3A64] text-[11px] font-medium tracking-[0.2em] uppercase">
+                Current Investigations
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {investigations.map((inv, i) => (
+                <ScrollReveal key={inv.id} delay={i * 0.06}>
+                  <div className="h-full bg-[#F4F6FB] border border-[#1C3A64]/10 rounded-2xl p-6">
+                    <h3 className="text-[#1C3A64] font-medium text-[16px] mb-2">{inv.title}</h3>
+                    <p className="text-[#555555] text-[13px] md:text-[14px] leading-[1.6] mb-3">{inv.summary}</p>
+                    <p className="text-[#555555] text-[13px] leading-[1.7] mb-4">{inv.body}</p>
+                    <a
+                      href={inv.link.href}
+                      className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline"
+                    >
+                      {inv.link.label}
+                      <ArrowUpRight size={13} />
+                    </a>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </ScrollReveal>
+        )}
 
         {/* Past Actions */}
         <ScrollReveal delay={0.2} className="mt-16">

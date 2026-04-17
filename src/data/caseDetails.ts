@@ -16,6 +16,7 @@ export type CaseBlock =
   | { kind: 'documents'; heading?: string; items: { label: string; href: string }[] }
   | { kind: 'timeline'; heading?: string; items: { label: string; date: string }[] }
   | { kind: 'externalLink'; label: string; href: string; description?: string }
+  | { kind: 'table'; heading?: string; columns: string[]; rows: (string | { link: string; label: string })[][] }
 
 // ─── Registration form schema ───────────────────────────────────────
 export type FormField =
@@ -1014,6 +1015,347 @@ export const cases: CaseDetail[] = [
         label: 'Share sale details (11 October 2018 - 17 September 2020)',
         rows: 3,
         helper: 'For each sale: date, quantity and price',
+      },
+    ],
+  },
+  // ─── HYUNDAI ABS ────────────────────────────────────────────────────
+  {
+    slug: 'hyundai-abs',
+    title: 'Hyundai ABS Class Action',
+    status: 'Active',
+    category: 'Consumer',
+    year: '2024',
+    court: 'Supreme Court of Victoria',
+    leadPlaintiff: 'Samantha Jane Edwards & Josephine Dolores Hoppner',
+    email: 'HyundaiABS@bantongroup.com',
+    hasInternalForm: true,
+    summary:
+      'Class action against Hyundai Motor Company Australia for a defective ABS module that creates a risk of engine compartment fire, even when the vehicle is turned off.',
+    content: [
+      { kind: 'h2', text: 'Background' },
+      {
+        kind: 'p',
+        text:
+          'Banton Group acts on behalf of Samantha Jane Edwards and Josephine Dolores Hoppner, who are the lead Plaintiffs in a class action against Hyundai Motor Company Australia Pty Ltd and Hyundai Motor Company (together, Hyundai) in relation to multiple safety recall notices which identify a defect in the Anti-Lock Braking System (ABS) in several Hyundai vehicle models.',
+      },
+      {
+        kind: 'p',
+        text:
+          'Due to a manufacturing error, an electronic control circuit board in the ABS module will short circuit when the components are exposed to moisture. This moisture creates the risk of an engine compartment fire, even when the vehicle is turned off, as the circuit is constantly powered. This could increase the risk of an accident, serious injury or death to vehicle occupants, other road users and bystanders, and/or damage to property.',
+      },
+      {
+        kind: 'p',
+        text:
+          'While the short circuit does not affect the functioning of the brake system, Hyundai have advised vehicle owners to park their vehicles in an open space and away from flammable materials and structures, i.e. not in a garage. However, parking vehicles outside presents a further set of risks and costs, including theft, higher insurance premiums and/or parking fees.',
+      },
+      {
+        kind: 'p',
+        text:
+          'The Hyundai ABS Class Action seeks compensation for vehicle owners who have suffered loss due to alleged breaches of the Australian Consumer Law by Hyundai. The proceeding is in the Supreme Court of Victoria.',
+      },
+      {
+        kind: 'callout',
+        title: 'Carriage hearing',
+        tone: 'info',
+        text:
+          'A competing class action has been filed by another law firm. A hearing is scheduled on 30 June 2025 to determine which law firm will be given carriage of the class action against Hyundai.',
+      },
+
+      { kind: 'h2', text: 'Am I eligible to register?' },
+      {
+        kind: 'p',
+        text:
+          'You may be eligible to register to participate in the Hyundai ABS Class Action if you acquired one or more of the following affected vehicles:',
+      },
+      {
+        kind: 'table',
+        heading: 'Affected Hyundai vehicles',
+        columns: ['Model', 'Series', 'Model Years', 'Acquired prior to', 'Recall Notice'],
+        rows: [
+          ['Sonata', 'NF', '2004–2013', '28 February 2018', { link: '#recall-hy-1', label: 'View Recall' }],
+          ['Grandeur', 'TG', '2004–2013', '28 February 2018', { link: '#recall-hy-2', label: 'View Recall' }],
+          ['Santa Fe', '—', '2006–2009', '8 May 2020', { link: '#recall-hy-3', label: 'View Recall' }],
+          ['i30', '—', '2005–2010', '8 May 2020', { link: '#recall-hy-4', label: 'View Recall' }],
+          ['Elantra', '—', '2005–2010', '8 May 2020', { link: '#recall-hy-5', label: 'View Recall' }],
+          ['Tucson', '—', '2014–2020', '4 February 2021', { link: '#recall-hy-6', label: 'View Recall' }],
+          ['Genesis', '—', '2014–2017', '30 May 2021', { link: '#recall-hy-7', label: 'View Recall' }],
+          ['Genesis', 'G80', '2018', '30 May 2021', { link: '#recall-hy-8', label: 'View Recall' }],
+          ['Santa Fe', 'DM', '2014–2017', '26 September 2022', { link: '#recall-hy-9', label: 'View Recall' }],
+          ['ix35', '—', '2014–2017', '26 September 2022', { link: '#recall-hy-10', label: 'View Recall' }],
+          ['ix35 (EL)', 'EL', '2014–2015', '7 December 2022', { link: '#recall-hy-11', label: 'View Recall' }],
+          ['Veloster', 'FS', '2007–2014', '1 August 2024', { link: '#recall-hy-12', label: 'View Recall' }],
+          ['ix35', 'LM', '2007–2014', '1 August 2024', { link: '#recall-hy-13', label: 'View Recall' }],
+          ['Accent', 'RM', '2007–2014', '1 August 2024', { link: '#recall-hy-14', label: 'View Recall' }],
+          ['i40', 'VF', '2007–2014', '1 August 2024', { link: '#recall-hy-15', label: 'View Recall' }],
+          ['Santa Fe', 'DM', '2007–2014', '1 August 2024', { link: '#recall-hy-16', label: 'View Recall' }],
+          ['iMax', '—', '2007–2014', '1 August 2024', { link: '#recall-hy-17', label: 'View Recall' }],
+          ['iLoad', '—', '—', '—', '—'],
+        ],
+      },
+      {
+        kind: 'p',
+        text:
+          'If you are unsure whether you are eligible, click the relevant Recall Notice link and check whether your Vehicle Identification Number (VIN) appears on the list. A VIN is a unique identification number found on your vehicle\u2019s registration certificate or owner\u2019s manual.',
+      },
+      {
+        kind: 'p',
+        text:
+          'You are still able to participate in the Hyundai ABS Class Action even if you have sold your vehicle, your vehicle was written off, or rectification work relating to the recall notice has been completed.',
+      },
+
+      { kind: 'h2', text: 'Key documents' },
+      {
+        kind: 'documents',
+        items: [
+          { label: 'Hyundai ABS Class Action \u2014 Group Proceeding Summary Statement', href: '#hy-group-statement' },
+          { label: 'Hyundai ABS Class Action \u2014 Funding Information Summary', href: '#hy-funding-statement' },
+        ],
+      },
+
+      { kind: 'h2', text: 'Update \u2014 28 March 2025' },
+      {
+        kind: 'callout',
+        title: 'Scope expansion',
+        tone: 'warning',
+        text:
+          'On 28 March 2025, the lead Plaintiffs signalled their intention to seek leave of the Court to amend the scope of the claim against Hyundai to include group members with vehicle models recalled on 1 August 2024. Should the Court grant leave to amend, the documents below will reflect the new scope of the Hyundai ABS Class Action.',
+      },
+      {
+        kind: 'documents',
+        heading: 'Proposed amended documents',
+        items: [
+          { label: 'Proposed Amended Group Proceeding Summary Statement', href: '#hy-amended-group' },
+          { label: 'Proposed Amended Funding Information Summary', href: '#hy-amended-funding' },
+        ],
+      },
+    ],
+
+    caseSpecificFields: [
+      { kind: 'divider', label: 'Vehicle details' },
+      {
+        kind: 'text',
+        name: 'vehicleModel',
+        label: 'Vehicle model',
+        required: true,
+        placeholder: 'e.g. Hyundai Tucson',
+      },
+      {
+        kind: 'text',
+        name: 'vehicleYear',
+        label: 'Vehicle year',
+        required: true,
+        placeholder: 'e.g. 2017',
+      },
+      {
+        kind: 'text',
+        name: 'vin',
+        label: 'Vehicle Identification Number (VIN)',
+        helper: 'Found on your registration certificate or owner\u2019s manual',
+      },
+      {
+        kind: 'text',
+        name: 'acquisitionDate',
+        label: 'Date vehicle was acquired',
+        required: true,
+        placeholder: 'DD/MM/YYYY',
+      },
+      {
+        kind: 'radio',
+        name: 'vehicleSold',
+        label: 'Have you sold or no longer own this vehicle?',
+        required: true,
+        options: [
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' },
+        ],
+      },
+      {
+        kind: 'radio',
+        name: 'recallRepairDone',
+        label: 'Has recall rectification work been carried out on your vehicle?',
+        required: true,
+        options: [
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' },
+          { value: 'unsure', label: 'Unsure' },
+        ],
+      },
+      {
+        kind: 'textarea',
+        name: 'lossDetails',
+        label: 'Brief description of any loss or damage suffered',
+        rows: 3,
+        helper: 'e.g. higher insurance costs, parking fees, vehicle damage',
+      },
+    ],
+  },
+
+  // ─── KIA ABS ─────────────────────────────────────────────────────────
+  {
+    slug: 'kia-abs',
+    title: 'Kia ABS Defect Class Action',
+    status: 'Active',
+    category: 'Consumer',
+    year: '2024',
+    court: 'Supreme Court of Victoria',
+    leadPlaintiff: 'David John Sims',
+    email: 'KiaABS@bantongroup.com',
+    hasInternalForm: true,
+    summary:
+      'Class action against Kia Australia for the same ABS manufacturing defect — a risk of engine compartment fire even when the vehicle is parked and turned off.',
+    content: [
+      { kind: 'h2', text: 'Background' },
+      {
+        kind: 'p',
+        text:
+          'Banton Group acts on behalf of David John Sims, who is the lead Plaintiff in a class action against Kia Australia Pty Ltd and Kia Corporation (together, Kia) in relation to multiple safety recall notices which identify a defect in the Anti-Lock Braking System (ABS) in several Kia vehicle models.',
+      },
+      {
+        kind: 'p',
+        text:
+          'Due to a manufacturing error, an electronic control circuit board in the ABS module will short circuit when the components are exposed to moisture. This moisture creates the risk of an engine compartment fire, even when the vehicle is turned off, as the circuit is constantly powered. This could increase the risk of an accident, serious injury or death to vehicle occupants, other road users and bystanders, and/or damage to property.',
+      },
+      {
+        kind: 'p',
+        text:
+          'While the short circuit does not affect the functioning of the brake system, Kia have advised vehicle owners to park their vehicles in an open space and away from flammable materials and structures, i.e. not in a garage. However, parking vehicles outside presents a further set of risks and costs, including higher insurance premiums and/or parking fees.',
+      },
+      {
+        kind: 'p',
+        text:
+          'The Kia ABS Class Action seeks compensation for vehicle owners who have suffered loss due to alleged breaches of the Australian Consumer Law by Kia. The proceeding is in the Supreme Court of Victoria.',
+      },
+      {
+        kind: 'callout',
+        title: 'Carriage hearing',
+        tone: 'info',
+        text:
+          'A competing class action has been filed by another law firm. A hearing is scheduled on 30 June 2025 to determine which law firm will be given carriage of the class action against Kia.',
+      },
+
+      { kind: 'h2', text: 'Am I eligible to register?' },
+      {
+        kind: 'p',
+        text:
+          'You may be eligible to register to participate in the Kia ABS Class Action if you acquired one or more of the following affected vehicles:',
+      },
+      {
+        kind: 'table',
+        heading: 'Affected Kia vehicles',
+        columns: ['Model', 'Series', 'Model Years', 'Acquired prior to', 'Recall Notice'],
+        rows: [
+          ['Sportage', '—', '2007–2009', '5 January 2017', { link: '#recall-kia-1', label: 'View Recall' }],
+          ['Sorento', '—', '2005–2010', '17 March 2020', { link: '#recall-kia-2', label: 'View Recall' }],
+          ['Carnival', '—', '2005–2010', '17 March 2020', { link: '#recall-kia-3', label: 'View Recall' }],
+          ['Sportage', '—', '2016–2019', '16 May 2021', { link: '#recall-kia-4', label: 'View Recall' }],
+          ['Stinger', '—', '2016–2019', '16 May 2021', { link: '#recall-kia-5', label: 'View Recall' }],
+          ['Sportage', 'SLe', '2014–2015', '19 January 2023', { link: '#recall-kia-6', label: 'View Recall' }],
+          ['Sportage', 'KM', '2007–2009', '19 January 2023', { link: '#recall-kia-7', label: 'View Recall' }],
+          ['Soul', 'AM', '2010–2013', '9 October 2024', { link: '#recall-kia-8', label: 'View Recall' }],
+          ['Sorento', 'XM', '2010–2014', '9 October 2024', { link: '#recall-kia-9', label: 'View Recall' }],
+          ['Cerato', 'TD', '2009–2013', '9 October 2024', { link: '#recall-kia-10', label: 'View Recall' }],
+          ['Sportage', 'SL', '2009–2013', '9 October 2024', { link: '#recall-kia-11', label: 'View Recall' }],
+          ['Optima', 'TF', '2010–2015', '9 October 2024', { link: '#recall-kia-12', label: 'View Recall' }],
+          ['Rio', 'UB', '2011–2016', '9 October 2024', { link: '#recall-kia-13', label: 'View Recall' }],
+          ['Sportage', 'SLe', '2013–2014', '9 October 2024', { link: '#recall-kia-14', label: 'View Recall' }],
+          ['Rondo', 'UN', '2009–2012', '9 October 2024', { link: '#recall-kia-15', label: 'View Recall' }],
+          ['Rondo', 'RP', '2012–2018', '9 October 2024', { link: '#recall-kia-16', label: 'View Recall' }],
+        ],
+      },
+      {
+        kind: 'p',
+        text:
+          'If you are unsure whether you are eligible, click the relevant Recall Notice link and check whether your Vehicle Identification Number (VIN) appears on the list. A VIN is a unique identification number found on your vehicle\u2019s registration certificate or owner\u2019s manual.',
+      },
+      {
+        kind: 'p',
+        text:
+          'You are still able to participate in the Kia ABS Class Action even if you have sold your vehicle, your vehicle was written off, or rectification work relating to the recall notice has been completed.',
+      },
+
+      { kind: 'h2', text: 'Key documents' },
+      {
+        kind: 'documents',
+        items: [
+          { label: 'Kia ABS Class Action \u2014 Group Proceeding Summary Statement', href: '#kia-group-statement' },
+          { label: 'Kia ABS Class Action \u2014 Funding Information Summary', href: '#kia-funding-statement' },
+        ],
+      },
+
+      { kind: 'h2', text: 'Update \u2014 28 March 2025' },
+      {
+        kind: 'callout',
+        title: 'Scope expansion',
+        tone: 'warning',
+        text:
+          'On 28 March 2025, the lead Plaintiff signalled his intention to seek leave of the Court to amend the scope of the claim against Kia to include group members with vehicle models recalled on 9 October 2024. Should the Court grant leave to amend, the documents below will reflect the new scope.',
+      },
+      {
+        kind: 'documents',
+        heading: 'Proposed amended documents',
+        items: [
+          { label: 'Proposed Amended Group Proceeding Summary Statement', href: '#kia-amended-group' },
+          { label: 'Proposed Amended Funding Information Summary', href: '#kia-amended-funding' },
+        ],
+      },
+    ],
+
+    caseSpecificFields: [
+      { kind: 'divider', label: 'Vehicle details' },
+      {
+        kind: 'text',
+        name: 'vehicleModel',
+        label: 'Vehicle model',
+        required: true,
+        placeholder: 'e.g. Kia Sportage',
+      },
+      {
+        kind: 'text',
+        name: 'vehicleYear',
+        label: 'Vehicle year',
+        required: true,
+        placeholder: 'e.g. 2014',
+      },
+      {
+        kind: 'text',
+        name: 'vin',
+        label: 'Vehicle Identification Number (VIN)',
+        helper: 'Found on your registration certificate or owner\u2019s manual',
+      },
+      {
+        kind: 'text',
+        name: 'acquisitionDate',
+        label: 'Date vehicle was acquired',
+        required: true,
+        placeholder: 'DD/MM/YYYY',
+      },
+      {
+        kind: 'radio',
+        name: 'vehicleSold',
+        label: 'Have you sold or no longer own this vehicle?',
+        required: true,
+        options: [
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' },
+        ],
+      },
+      {
+        kind: 'radio',
+        name: 'recallRepairDone',
+        label: 'Has recall rectification work been carried out on your vehicle?',
+        required: true,
+        options: [
+          { value: 'yes', label: 'Yes' },
+          { value: 'no', label: 'No' },
+          { value: 'unsure', label: 'Unsure' },
+        ],
+      },
+      {
+        kind: 'textarea',
+        name: 'lossDetails',
+        label: 'Brief description of any loss or damage suffered',
+        rows: 3,
+        helper: 'e.g. higher insurance costs, parking fees, vehicle damage',
       },
     ],
   },

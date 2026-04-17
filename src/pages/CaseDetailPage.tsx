@@ -182,6 +182,56 @@ function BlockRenderer({ block }: { block: CaseBlock }) {
           </div>
         </a>
       )
+    case 'table':
+      return (
+        <div className="my-7 overflow-x-auto">
+          {block.heading && (
+            <h3 className="text-[#1C3A64] text-[15px] font-medium tracking-wide uppercase mb-3">
+              {block.heading}
+            </h3>
+          )}
+          <table className="w-full text-[13px] md:text-[14px] border-collapse min-w-[560px]">
+            <thead>
+              <tr className="bg-[#1C3A64] text-white">
+                {block.columns.map((col, k) => (
+                  <th
+                    key={k}
+                    className="text-left px-3 py-2.5 font-medium first:rounded-tl-lg last:rounded-tr-lg whitespace-nowrap"
+                  >
+                    {col}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, ri) => (
+                <tr
+                  key={ri}
+                  className={`border-b border-[#1C3A64]/08 ${ri % 2 === 0 ? 'bg-white' : 'bg-[#F4F6FB]'}`}
+                >
+                  {row.map((cell, ci) => (
+                    <td key={ci} className="px-3 py-2.5 text-[#444444] align-top">
+                      {typeof cell === 'string' ? (
+                        cell === '—' ? <span className="text-[#AAAAAA]">—</span> : cell
+                      ) : (
+                        <a
+                          href={cell.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#1C3A64] font-medium hover:underline inline-flex items-center gap-1"
+                        >
+                          {cell.label}
+                          <ExternalLink size={11} />
+                        </a>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
     default:
       return null
   }

@@ -331,10 +331,11 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'Proposed Amended Group Proceeding Summary Statement', href: '#hy-amended-group' },
       { kind: 'link', label: 'Proposed Amended Funding Information Summary', href: '#hy-amended-funding' },
-      { kind: 'email', label: 'All Hyundai ABS Class Action enquiries', address: 'Hyundaikia@bantongroup.com' },
+      { kind: 'email', label: 'All Hyundai ABS Class Action enquiries', address: 'HyundaiABS@bantongroup.com' },
     ],
     keyDate: 'Active — Carriage hearing 30 June 2025',
     wordpressLink: 'https://bantongroup.com/class-actions/',
+    detailSlug: 'hyundai-abs',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -421,10 +422,11 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'Proposed Amended Group Proceeding Summary Statement', href: '#kia-amended-group' },
       { kind: 'link', label: 'Proposed Amended Funding Information Summary', href: '#kia-amended-funding' },
-      { kind: 'email', label: 'All Kia ABS Class Action enquiries', address: 'Hyundaikia@bantongroup.com' },
+      { kind: 'email', label: 'All Kia ABS Class Action enquiries', address: 'KiaABS@bantongroup.com' },
     ],
     keyDate: 'Active — Carriage hearing 30 June 2025',
     wordpressLink: 'https://bantongroup.com/class-actions/',
+    detailSlug: 'kia-abs',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -627,26 +629,13 @@ export const classActions: ClassAction[] = [
   },
 ]
 
-export const investigations = [
-  {
-    id: 'highlow',
-    title: 'HighLow Markets Pty Ltd Investigation',
-    summary:
-      'Potential class action on behalf of people who have purchased binary options from HighLow Markets Pty Ltd.',
-    body:
-      'HighLow is a company registered in Australia whose primary line of business is the issuing and trading of binary options to retail investors. If you purchased HighLow options since 1 February 2015 and would like to register your interest in participating in any prospective class action or would like further information, contact us.',
-    link: { label: 'Register interest', href: '#highlow-register' },
-  },
-  {
-    id: 'tyro',
-    title: 'Tyro Payments Ltd Investigation',
-    summary:
-      'Possible class action on behalf of customers of Tyro Payments Ltd (ASX:TYR) affected by the January 2021 terminal outage.',
-    body:
-      'Tyro says the outage was caused by a connectivity issue, and affected many of Tyro\u2019s electronic payment terminals used in businesses across Australia over a 19 day period. If your business was affected, register your interest.',
-    link: { label: 'Register interest', href: '#tyro-register' },
-  },
-]
+export const investigations: {
+  id: string
+  title: string
+  summary: string
+  body: string
+  link: { label: string; href: string }
+}[] = []
 
 export const pastActions = [
   'Arasor Class Action',
