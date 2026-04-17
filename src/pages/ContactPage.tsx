@@ -6,9 +6,9 @@ export function ContactPage() {
     <>
       <PageHero
         eyebrow="Get in Touch"
-        title="Two offices."
-        italicTitle="One conversation away."
-        subtitle="Initial consultations are confidential and obligation-free. Sydney HQ at 60 Martin Place — Melbourne at 140 William Street."
+        title="Your case starts"
+        italicTitle="with a conversation."
+        subtitle="All consultations are private and confidential. Tell us about your matter and we will assess whether we can help. Initial conversations are at no charge unless we are retained by you."
         breadcrumbs={[{ label: 'Contact' }]}
         backgroundImage="/img/hero-bg/contact.jpg"
       />

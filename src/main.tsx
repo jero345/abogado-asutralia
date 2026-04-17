@@ -14,7 +14,6 @@ import { AwardsPage } from '@/pages/AwardsPage'
 import { WorkWithUsPage } from '@/pages/WorkWithUsPage'
 import { ContactPage } from '@/pages/ContactPage'
 import { NewsPage } from '@/pages/NewsPage'
-import { NewsArticlePage } from '@/pages/NewsArticlePage'
 import { TermsOfUsePage } from '@/pages/TermsOfUsePage'
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
 import { StudioPage } from '@/pages/StudioPage'
@@ -38,8 +37,11 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/class-actions" element={<ClassActionsPage />} />
           <Route path="/class-actions/:slug" element={<CaseDetailPage />} />
           <Route path="/class-actions/:slug/register" element={<CaseRegisterPage />} />
+          {/* Blog — currently a "Coming Soon" placeholder. /news kept as a
+              legacy redirect so old links still resolve. */}
+          <Route path="/blog" element={<NewsPage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/:slug" element={<NewsArticlePage />} />
+          <Route path="/news/:slug" element={<NewsPage />} />
           <Route path="/work-with-us" element={<WorkWithUsPage />} />
           <Route path="/awards" element={<AwardsPage />} />
           <Route path="/contact" element={<ContactPage />} />

@@ -37,7 +37,7 @@ export function Home() {
                 Amanda <span className="italic-display text-[#6D8FB5]">Banton.</span>
               </h2>
               <p className="text-[#555555] text-[15px] md:text-[16px] leading-[1.75] mb-5">
-                Under Amanda's leadership, Banton Group has grown into one of Australia's most formidable private litigation and insolvency practices, acting in some of Australia's biggest class action litigation, commercial disputes and insolvency since 2020.
+                Amanda is the Managing Partner of Banton Group, which she established in February 2020. With over 20 years of legal experience — formerly at Squire Patton Boggs and Piper Alderman, where she ran substantial litigation practices — and drawing on consulting experience at KPMG and within the Federal Government, she has built Banton Group into one of Australia's most formidable litigation and insolvency practices.
               </p>
               <Link
                 to="/about"
@@ -61,7 +61,7 @@ export function Home() {
         {/* Lobby background (no blur, minimal overlay so it stays visible) */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/img/building-exterior.jpg"
+            src="/img/hero-bg/work-with-us.jpg"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover object-center"

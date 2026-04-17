@@ -108,10 +108,6 @@ export function ClassActions() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <ScrollReveal className="mb-12">
-          <span className="section-label mb-4 block">
-            <span className="w-5 h-px bg-[#1C3A64]" />
-            Current Matters
-          </span>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
               Landmark

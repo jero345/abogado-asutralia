@@ -10,7 +10,7 @@ const quickLinks = [
   { label: 'Our Team', to: '/team' },
   { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
-  { label: 'News', to: '/news' },
+  { label: 'Blog', to: '/blog' },
   { label: 'Work With Us', to: '/work-with-us' },
   { label: 'Awards', to: '/awards' },
   { label: 'Contact', to: '/contact' },
@@ -23,15 +23,15 @@ export function Footer() {
       <div className="h-px w-full bg-gradient-to-r from-transparent via-[#6D8FB5]/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
-          <ScrollReveal className="lg:col-span-1">
+          <ScrollReveal>
             <div className="mb-5">
               <img src="/img/logobg.png" alt="Banton Group" className="h-12 w-auto object-contain brightness-0 invert" />
             </div>
-            <div className="text-white/80 text-[11px] tracking-[0.08em] uppercase mb-5 leading-[1.4]">
-              The Banton Group Pty Ltd<br />
-              <span className="text-[#8AAECE] normal-case tracking-normal">ACN: 632 702 919</span>
+            <div className="text-white text-[11px] tracking-[0.08em] uppercase mb-5 leading-[1.4]">
+              Banton Group Pty Ltd<br />
+              <span className="text-white normal-case tracking-normal">ABN 85 632 702 919</span>
             </div>
             <p className="text-[#B8C8E0] text-[13px] leading-[1.65] mb-6">
               A premier Litigation Firm — delivering extraordinary outcomes in class actions, commercial disputes and insolvency since 2020.

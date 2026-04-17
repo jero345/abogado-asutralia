@@ -9,7 +9,7 @@ const navLinks = [
   { label: 'Our Team', to: '/team' },
   { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
-  { label: 'News', to: '/news' },
+  { label: 'Blog', to: '/blog' },
   { label: 'Work With Us', to: '/work-with-us' },
   { label: 'Contact', to: '/contact' },
 ]

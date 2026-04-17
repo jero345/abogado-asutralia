@@ -19,7 +19,7 @@ export function WorkWithUsPage() {
         italicTitle="Progress on merit."
         subtitle="Work on some of Australia's most significant and complex disputes, alongside lawyers recognised for their strategic insight and technical excellence."
         breadcrumbs={[{ label: 'Work With Us' }]}
-        backgroundImage="/img/hero-bg/work-with-us.jpg"
+        backgroundImage="/img/building-exterior.jpg"
       />
 
       {/* Intro block */}
@@ -37,13 +37,19 @@ export function WorkWithUsPage() {
             </h2>
             <div className="space-y-5 text-[#555555] leading-[1.75] text-[15px] md:text-[16px]">
               <p>
-                At Banton Group, you will work on some of Australia's most significant and complex disputes, alongside lawyers recognised for their strategic insight and technical excellence. From the outset, you will be entrusted with meaningful responsibility and exposed to the full lifecycle of high-stakes litigation and insolvency matters.
+                At Banton Group, you will work on some of Australia's most significant and complex disputes, alongside lawyers recognised for their strategic insight and technical excellence.
               </p>
               <p>
-                Our structure is deliberately non-hierarchical. You will work closely with Partners and senior lawyers, gaining direct insight into strategy, advocacy and client decision-making.
+                From the outset, you will be entrusted with meaningful responsibility and exposed to the full lifecycle of high-stakes litigation and insolvency matters — from strategy and pleadings through to evidence, advocacy and resolution.
               </p>
               <p>
-                We are deeply committed to excellence — both in the work we deliver and in the way we develop our people. Banton Group is a place for lawyers who are ambitious, commercially astute and motivated to operate at the highest level. Progression is merit-based and reflective of contribution.
+                Our structure is deliberately flat. You will work closely with Partners and senior lawyers, gaining direct insight into strategy, advocacy and client decision-making without the filters of a conventional hierarchy.
+              </p>
+              <p>
+                We are deeply committed to excellence — both in the work we deliver and in the way we develop our people. Banton Group is a place for lawyers who are ambitious, commercially astute and motivated to operate at the highest level.
+              </p>
+              <p>
+                Progression is merit-based and reflective of contribution. Those who demonstrate capability and commitment will find opportunity without artificial constraint.
               </p>
             </div>
           </ScrollReveal>
@@ -72,10 +78,16 @@ export function WorkWithUsPage() {
                   Our Summer Clerkship Program lets ambitious law students experience working in one of Sydney's leading disputes teams on some of Australia's largest and most complex litigations.
                 </p>
                 <p>
-                  Banton Group offers two intakes per year: December and February. Each intake runs for four weeks.
+                  Banton Group offers two intakes per year — December and February — each running for four weeks.
                 </p>
                 <p>
-                  To apply: send your cover letter, CV and academic transcript to{' '}
+                  Clerks are genuinely integrated into teams. You will sit in on strategy meetings, draft submissions, attend Court and work side-by-side with the lawyers running the matter, rather than from the sidelines.
+                </p>
+                <p>
+                  Many of our Summer Clerks go on to join us as graduates.
+                </p>
+                <p>
+                  To apply, send your cover letter, CV and academic transcript to{' '}
                   <a href="mailto:careers@bantongroup.com" className="text-[#1C3A64] underline hover:opacity-75">
                     careers@bantongroup.com
                   </a>
@@ -129,7 +141,16 @@ export function WorkWithUsPage() {
                 We offer graduate lawyers the opportunity to work on high-profile and complex litigation and insolvency matters from the outset of their careers.
               </p>
               <p>
-                Our flat structure means direct exposure to senior lawyers early on, with meaningful responsibility from day one. Many of our Summer Clerks go on to join us as graduates.
+                Our flat, non-hierarchical structure means direct exposure to Partners and senior lawyers early on, with meaningful responsibility from day one.
+              </p>
+              <p>
+                We invest in our graduates — pairing technical training with genuine integration into the matters driving the firm. You will quickly find yourself on the record, in Court and in client meetings on work that matters.
+              </p>
+              <p>
+                Progression is determined on merit alone. Those who demonstrate capability will advance without artificial limits.
+              </p>
+              <p>
+                Many of our Summer Clerks go on to join us as graduates.
               </p>
             </div>
           </ScrollReveal>
