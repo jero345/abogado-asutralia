@@ -70,23 +70,6 @@ export function Contact() {
         style={{ background: 'radial-gradient(circle, rgba(30,58,95,0.08) 0%, transparent 70%)' }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <ScrollReveal className="text-center mb-16">
-          <span className="section-label justify-center mb-4 block">
-            <span className="w-5 h-px bg-[#1e3a5f]" />
-            Get in Touch
-            <span className="w-5 h-px bg-[#1e3a5f]" />
-          </span>
-          <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-6">
-            Your case starts
-            <br />
-            <span className="italic-display text-[#6D8FB5]">with a conversation.</span>
-          </h2>
-          <p className="text-[#1e3a5f]/40 text-lg max-w-xl mx-auto leading-relaxed">
-            Initial consultations are confidential and obligation-free. Tell us about your matter and we'll assess whether we can help.
-          </p>
-        </ScrollReveal>
-
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Form */}
           <ScrollReveal className="lg:col-span-3">

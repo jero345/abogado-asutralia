@@ -9,7 +9,10 @@
       "Bash(curl -s http://localhost:5175)",
       "Bash(curl -s http://localhost:5176)",
       "Bash(python -c \"import PyPDF2\")",
-      "Bash(python -c \"import pypdf\")"
+      "Bash(python -c \"import pypdf\")",
+      "Bash(where pdftoppm *)",
+      "Bash(where pdftotext *)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

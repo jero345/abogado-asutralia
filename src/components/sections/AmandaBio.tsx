@@ -157,7 +157,7 @@ export function AmandaBio() {
                     className="flex items-center gap-3 text-white/80 hover:text-white transition-colors"
                   >
                     <Phone size={14} className="text-[#8AAECE]" />
-                    +61 424 156 859 <span className="text-[#8AAECE] text-[11px] ml-1">· mobile</span>
+                    +61 424 156 859 <span className="text-[#8AAECE] text-[11px] ml-1">· Mobile</span>
                   </a>
                 </div>
               </div>

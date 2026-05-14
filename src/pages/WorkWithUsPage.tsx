@@ -75,19 +75,27 @@ export function WorkWithUsPage() {
             <div className="bg-white border border-[#1C3A64]/10 rounded-2xl p-7 md:p-9">
               <div className="space-y-5 text-[#555555] text-[15px] md:text-[16px] leading-[1.75] max-w-3xl">
                 <p>
-                  Our Summer Clerkship Program lets ambitious law students experience working in one of Sydney's leading disputes teams on some of Australia's largest and most complex litigations.
+                  Our Summer Clerkship Program lets ambitious law students experience working in one of Sydney's leading disputes teams on some of Australia's largest and most complex litigations. The flat structure of our Firm means that you will get direct, real, exposure to senior lawyers from the first day of your clerkship.
+                </p>
+
+                <h3 className="text-[#1C3A64] text-[18px] md:text-[20px] font-medium pt-3">
+                  The Clerkship
+                </h3>
+                <p>
+                  Banton Group offers two intakes of clerks each year, one in December and one in February. Each clerkship intake runs for four weeks.
                 </p>
                 <p>
-                  Banton Group offers two intakes per year — December and February — each running for four weeks.
+                  Because our team works together as one large practice, there are no rotations. Instead, you will generally receive work from all Partners (and their teams) in the Firm over the course of the clerkship. You will have a lawyer buddy, and a senior lawyer mentor, to guide you through your clerkship and ensure that you are fully supported.
                 </p>
                 <p>
-                  Clerks are genuinely integrated into teams. You will sit in on strategy meetings, draft submissions, attend Court and work side-by-side with the lawyers running the matter, rather than from the sidelines.
+                  Our clerkship offers a genuine insight into what it's like to work at Banton Group as a Graduate and Associate, and many of our clerks have gone on to successfully obtain those roles in the Firm. The focus is on real learning on real work for our varied and complex matters, but there are also chances for socialising with the team outside of the office context at Firm events.
                 </p>
+
+                <h3 className="text-[#1C3A64] text-[18px] md:text-[20px] font-medium pt-3">
+                  Process for applying
+                </h3>
                 <p>
-                  Many of our Summer Clerks go on to join us as graduates.
-                </p>
-                <p>
-                  To apply, send your cover letter, CV and academic transcript to{' '}
+                  To apply for our Summer Clerkship Program, please send your cover letter, CV and academic transcript to{' '}
                   <a href="mailto:careers@bantongroup.com" className="text-[#1C3A64] underline hover:opacity-75">
                     careers@bantongroup.com
                   </a>
@@ -138,19 +146,19 @@ export function WorkWithUsPage() {
             </h2>
             <div className="space-y-5 text-[#555555] leading-[1.75] text-[15px] md:text-[16px]">
               <p>
-                We offer graduate lawyers the opportunity to work on high-profile and complex litigation and insolvency matters from the outset of their careers.
+                We offer graduate lawyers the opportunity to be involved in a dynamic legal practice working on high-profile and complex litigation and insolvency matters from the outset of their careers. Working with us, you will be guided by technical experts and committed legal professionals, gaining hands-on experience across a broad range of matters.
               </p>
               <p>
-                Our flat, non-hierarchical structure means direct exposure to Partners and senior lawyers early on, with meaningful responsibility from day one.
+                Our flat structure means you will have direct exposure to senior lawyers early on, with meaningful responsibility and involvement in real work from day one. We have removed the hierarchical and traditional constraints that can restrict development in larger firms and instead foster a fluid, flexible, and merit-based environment.
               </p>
               <p>
-                We invest in our graduates — pairing technical training with genuine integration into the matters driving the firm. You will quickly find yourself on the record, in Court and in client meetings on work that matters.
+                Outstanding lawyers are recognised and progress quickly based on performance and initiative. Rather than a fixed-term “program”, our approach is to integrate graduates into the Firm as valued members of the team. You will work across all Partners and practice areas, supported by a lawyer buddy and senior mentor to help guide your development and ensure you are fully supported.
               </p>
               <p>
-                Progression is determined on merit alone. Those who demonstrate capability will advance without artificial limits.
+                This is an exciting opportunity for motivated, ambitious and responsible graduates to develop their professional knowledge and skills while contributing to a market-leading firm offering a multidisciplinary approach to complex legal problems.
               </p>
               <p>
-                Many of our Summer Clerks go on to join us as graduates.
+                Many of our Summer Clerks go on to join us as graduates, reflecting our focus on long-term development and investment in our people.
               </p>
             </div>
           </ScrollReveal>
@@ -179,12 +187,6 @@ export function WorkWithUsPage() {
               careers@bantongroup.com
               <ArrowUpRight size={14} />
             </a>
-            <div className="mt-12 pt-8 border-t border-white/10 max-w-2xl mx-auto">
-              <p className="text-white/60 text-[13px] leading-[1.7]">
-                Sydney (HQ) · Level 12/60 Martin Place · +61 2 8076 8090<br />
-                Melbourne · Level 4/40 William Street · +61 2 8076 8090
-              </p>
-            </div>
           </ScrollReveal>
         </div>
       </section>

@@ -8,7 +8,7 @@ export function ContactPage() {
         eyebrow="Get in Touch"
         title="Your case starts"
         italicTitle="with a conversation."
-        subtitle="All consultations are private and confidential. Tell us about your matter and we will assess whether we can help. Initial conversations are at no charge unless we are retained by you."
+        subtitle="All consultations are private and confidential. Tell us about your matter and we will assess whether we can assist. Initial conversations are at no charge. If you choose to retain us, our fees will be discussed and agreed with you."
         breadcrumbs={[{ label: 'Contact' }]}
         backgroundImage="/img/hero-bg/contact.jpg"
       />

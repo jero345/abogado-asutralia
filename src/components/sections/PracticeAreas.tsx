@@ -63,9 +63,9 @@ export function PracticeAreas() {
               What We Do
             </span>
             <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
-              Four
+              Four Specialised
               <br />
-              <span className="italic-display text-[#6D8FB5]">Specialisms.</span>
+              <span className="italic-display text-[#6D8FB5]">Practice Areas.</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.15} className="lg:max-w-sm">

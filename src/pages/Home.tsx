@@ -2,7 +2,7 @@ import { Hero } from '@/components/sections/Hero'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
 import { AmandaQuote } from '@/components/sections/AmandaQuote'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, FileText } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 
@@ -64,19 +64,17 @@ export function Home() {
             src="/img/hero-bg/work-with-us.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
           />
-          {/* Navy overlay — wide gradient so the building skyline reads clearly
-              while the left-side text stays legible */}
-          <div className="absolute inset-0 bg-[#1C3A64]/70 md:bg-gradient-to-r md:from-[#0F2540]/85 md:via-[#1C3A64]/55 md:to-[#1C3A64]/35" />
+          {/* Navy overlay — softer/centered so the building name on Martin Place
+              remains legible while the heading still reads */}
+          <div className="absolute inset-0 bg-[#1C3A64]/55 md:bg-gradient-to-b md:from-[#0F2540]/70 md:via-[#1C3A64]/40 md:to-[#1C3A64]/55" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-left md:text-center">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 mb-5">
-              <div className="h-px w-6 bg-[#8AAECE]" />
-              <FileText size={18} className="text-[#8AAECE]" />
-              <div className="h-px w-6 bg-[#8AAECE]" />
+              <div className="h-px w-10 bg-[#8AAECE]" />
             </div>
             <h2 className="text-[28px] sm:text-3xl md:text-4xl lg:text-[44px] font-medium text-white leading-[1.15] mb-5 tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
               Have a matter that demands <span className="italic-display text-white font-semibold">extraordinary advocacy?</span>

@@ -8,8 +8,8 @@ export function AboutPage() {
     <>
       <PageHero
         eyebrow="About the Firm"
-        title="Specialist boutique."
-        italicTitle="Big-firm firepower."
+        title="A private litigation and insolvency practice"
+        italicTitle="built for high-stakes matters."
         subtitle="Today, Banton Group is one of Australia's most formidable private litigation and insolvency practices."
         breadcrumbs={[{ label: 'About Us' }]}
         backgroundImage="/img/hero-bg/about.jpg"

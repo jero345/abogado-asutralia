@@ -33,7 +33,7 @@ export function Innovation() {
           </h2>
 
           <p className="text-[#555555] text-[15px] md:text-[17px] leading-[1.75] max-w-2xl mx-auto">
-            We are able to leverage AI resources and the latest technology approaches to ensure efficiency and cost savings where appropriate.
+            We harness AI and advanced technology to drive efficiency, sharpen strategy, and reduce costs where appropriate.
           </p>
         </ScrollReveal>
       </div>
