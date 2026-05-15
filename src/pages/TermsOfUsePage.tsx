@@ -8,8 +8,8 @@ const sections: Section[] = [
     paragraphs: [
       'Visitors to this website are bound by the following Terms so please read these carefully before proceeding.',
       'This website is only a general guide to legal issues and it is not a substitute for legal advice.',
-      'Welcome to our website. This website with URL address www.bantongroup.com is owned and operated by The Banton Group Pty Ltd ACN 632 702 919 and/or its subsidiaries/related parties ("Banton Group").',
-      "The term 'The Banton Group Pty Ltd', 'Banton Group', 'BG', 'the Company' or 'us' or 'our' or 'we' refers to The Banton Group Pty Ltd ACN 632 702 919 and/or its subsidiaries and related parties, the owner of the website, whose registered office is Level 12, 60 Martin Place, Sydney NSW 2000. The term 'you' or 'your' refers to the website user.",
+      'Welcome to our website. This website with URL address www.bantongroup.com is owned and operated by Banton Group Pty Ltd ABN 85 632 702 919 and/or its subsidiaries/related parties ("Banton Group").',
+      "The term 'Banton Group Pty Ltd', 'Banton Group', 'BG', 'the Company' or 'us' or 'our' or 'we' refers to Banton Group Pty Ltd ABN 85 632 702 919 and/or its subsidiaries and related parties, the owner of the website, whose registered office is Level 12, 60 Martin Place, Sydney NSW 2000. The term 'you' or 'your' refers to the website user.",
       'This "website" means the whole or any part of the web pages located at or directed to www.bantongroup.com, and includes the website layout; individual elements of the design of the website; underlying code elements of the website; or text, sounds, graphics, animated items or any other content of this website.',
       'By using the Banton Group website, you agree to be bound by these terms of use. We may amend these terms of use at any time. Your continued use of the website is deemed to be acceptance of the amended terms of use.',
     ],

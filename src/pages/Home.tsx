@@ -80,7 +80,7 @@ export function Home() {
               Have a matter that demands <span className="italic-display text-white font-semibold">extraordinary advocacy?</span>
             </h2>
             <p className="text-white/90 text-sm md:text-base lg:text-lg leading-[1.7] mb-8 max-w-2xl md:mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.3)]">
-              All consultations are private and confidential. Tell us about your matter and we will assess whether we can help. Initial conversations are at no charge unless we are retained by you.
+              All consultations are private and confidential. Tell us about your matter and we will assess whether we can assist. Initial conversations are at no charge. If you choose to retain us, our fees will be discussed and agreed with you.
             </p>
             <Link
               to="/contact"
