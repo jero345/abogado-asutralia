@@ -169,7 +169,6 @@ export function PrivacyPolicyPage() {
   return (
     <>
       <PageHero
-        eyebrow="Legal"
         title="Privacy"
         italicTitle="Policy."
         subtitle="How Banton Group collects, uses and protects your personal information — and the rights you have over it."

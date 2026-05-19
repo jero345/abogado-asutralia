@@ -81,7 +81,6 @@ export function TermsOfUsePage() {
   return (
     <>
       <PageHero
-        eyebrow="Legal"
         title="Website"
         italicTitle="Terms of Use."
         subtitle="The rules that govern your use of bantongroup.com. Please read carefully before proceeding."

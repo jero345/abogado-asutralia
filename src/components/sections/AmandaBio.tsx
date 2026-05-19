@@ -61,16 +61,16 @@ export function AmandaBio() {
               </h2>
               <div className="space-y-5 text-[#555555] leading-[1.75] text-[15px] md:text-[16px]">
                 <p>
-                  Amanda Banton is the Managing Partner of Banton Group, which she established in February 2020. She brings over 20 years of experience in the legal profession, formerly at Squire Patton Boggs and Piper Alderman — where she ran substantial litigation practices — and draws on consulting experience from KPMG and federal government expertise.
+                  As Managing Partner of Banton Group, established in February 2020, Amanda Banton brings more than 20 years of experience in the legal profession. Prior to founding the firm, she led substantial litigation practices at Squire Patton Boggs and Piper Alderman, and also gained consulting experience at KPMG alongside expertise developed within the federal government.
                 </p>
                 <p>
-                  Under Amanda's leadership, Banton Group has grown into one of Australia's most formidable litigation and insolvency practices, acting in some of Australia's biggest commercial litigation, class actions, securities litigation, competition and consumer law, and breaches of trust and fiduciary duties and insolvencies.
+                  Under her leadership, Banton Group has developed into one of Australia's leading litigation and insolvency practices, acting in some of the nation's most significant disputes and regulatory matters. Her experience spans complex class actions, competition and consumer law proceedings, breaches of trust and fiduciary duty claims and equity disputes, various negligence and nuisance claims as well as various matters arising under the Corporations Act 2001 (Cth), Australian Securities and Investments Commission Act 2001 (Cth), Civil Liability Act 2002 (NSW) and the Competition and Consumer Act 2010 (Cth), including the Australian Consumer Law.
                 </p>
                 <p>
-                  Amanda is known for her capacity to establish cases from the ground up, her surgical strategic thinking, and her ability to execute ground-breaking matters in which new law has been created and global precedent triggered. She is highly regarded by clients, litigation funders, insolvency practitioners, and the Court alike.
+                  Recognised for her ability to build cases from the ground up, Amanda is known for her strategic thinking and capacity to execute ground-breaking matters in which new law has been created and global precedents triggered. She is highly regarded by clients, litigation funders, insolvency practitioners, and the Court alike.
                 </p>
                 <p>
-                  Banton Group has been at the forefront of the evolving class action funding landscape, establishing a significant capital base to bankroll its own litigation and maintaining strong relationships with Australia's leading litigation funders. The firm acts on a contingency fee basis where appropriate in the Supreme Court of Victoria.
+                  She has also been at the forefront of the evolving class action funding landscape, establishing a significant capital base to bankroll litigation internally while maintaining strong relationships with Australia's leading litigation funders. The firm acts on a contingency fee basis where appropriate in the Supreme Court of Victoria.
                 </p>
               </div>
 

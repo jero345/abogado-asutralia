@@ -61,8 +61,8 @@ export function Footer() {
 
           {/* Quick Links */}
           <ScrollReveal delay={0.15}>
-            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6">Quick Links</h3>
-            <ul className="space-y-3">
+            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6 text-center">Quick Links</h3>
+            <ul className="grid grid-cols-2 grid-rows-4 grid-flow-col gap-x-6 gap-y-3 justify-center">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <Link

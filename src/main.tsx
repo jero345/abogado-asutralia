@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
+import { AuthProvider } from '@/lib/auth'
 import { Layout } from '@/components/layout/Layout'
 import { Home } from '@/pages/Home'
 import { LitigationPage } from '@/pages/LitigationPage'
@@ -14,42 +15,52 @@ import { AwardsPage } from '@/pages/AwardsPage'
 import { WorkWithUsPage } from '@/pages/WorkWithUsPage'
 import { ContactPage } from '@/pages/ContactPage'
 import { NewsPage } from '@/pages/NewsPage'
+import { NewsArticlePage } from '@/pages/NewsArticlePage'
 import { TermsOfUsePage } from '@/pages/TermsOfUsePage'
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
-import { StudioPage } from '@/pages/StudioPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { AdminLogin } from '@/pages/admin/AdminLogin'
+import { AdminLayout } from '@/pages/admin/AdminLayout'
+import { AdminDashboard } from '@/pages/admin/AdminDashboard'
+import { ArticleEditor } from '@/pages/admin/ArticleEditor'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {/* Sanity Studio — mounted outside the site Layout so it has the
-            full viewport with no header/footer */}
-        <Route path="/studio/*" element={<StudioPage />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Admin — sits outside the public Layout so it gets the full viewport. */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="new" element={<ArticleEditor />} />
+            <Route path="edit/:id" element={<ArticleEditor />} />
+          </Route>
 
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/team" element={<TeamPage />} />
-          <Route path="/litigation" element={<LitigationPage />} />
-          {/* Keep legacy /practice-areas URL working */}
-          <Route path="/practice-areas" element={<LitigationPage />} />
-          <Route path="/class-actions" element={<ClassActionsPage />} />
-          <Route path="/class-actions/:slug" element={<CaseDetailPage />} />
-          <Route path="/class-actions/:slug/register" element={<CaseRegisterPage />} />
-          {/* Blog — currently a "Coming Soon" placeholder. /news kept as a
-              legacy redirect so old links still resolve. */}
-          <Route path="/blog" element={<NewsPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/:slug" element={<NewsPage />} />
-          <Route path="/work-with-us" element={<WorkWithUsPage />} />
-          <Route path="/awards" element={<AwardsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/terms-of-use" element={<TermsOfUsePage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/team" element={<TeamPage />} />
+            <Route path="/litigation" element={<LitigationPage />} />
+            {/* Keep legacy /practice-areas URL working */}
+            <Route path="/practice-areas" element={<LitigationPage />} />
+            <Route path="/class-actions" element={<ClassActionsPage />} />
+            <Route path="/class-actions/:slug" element={<CaseDetailPage />} />
+            <Route path="/class-actions/:slug/register" element={<CaseRegisterPage />} />
+            {/* Blog — list + article. /news routes kept as legacy aliases. */}
+            <Route path="/blog" element={<NewsPage />} />
+            <Route path="/blog/:slug" element={<NewsArticlePage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/news/:slug" element={<NewsArticlePage />} />
+            <Route path="/work-with-us" element={<WorkWithUsPage />} />
+            <Route path="/awards" element={<AwardsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/terms-of-use" element={<TermsOfUsePage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 )

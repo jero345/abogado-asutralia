@@ -23,7 +23,7 @@ const team: Member[] = [
   {
     name: 'Amanda Banton',
     role: 'Managing Partner',
-    specialties: ['Class Actions', 'Securities Litigation', 'Insolvency & Commercial Litigation'],
+    specialties: ['Class Actions', 'Securities Litigation', 'Insolvency', 'Commercial Litigation'],
     bio:
       'Amanda is the Managing Partner of Banton Group, which she established in February 2020.',
     extendedBio: [
@@ -50,9 +50,9 @@ const team: Member[] = [
     role: 'Deputy Managing Partner',
     specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring'],
     bio:
-      'Elliott joined Banton Group as a founding partner in February 2020, bringing 18 years of experience from top-tier and global firms in Australia and abroad.',
+      'Elliott joined Banton Group as a founding partner in February 2020, bringing over 19 years of experience from top-tier and global firms in Australia and abroad.',
     extendedBio: [
-      'Elliott has run complex class actions and large-scale commercial, restructuring and insolvency disputes across Australia, the Asia Pacific, the Middle East and Europe. Recent matters include advising a Big Four Australian bank on a significant class action and acting for KPMG as liquidators of CuDeco Limited.',
+      'Elliott has run complex class actions and large-scale commercial, restructuring and insolvency disputes across Australia, the Asia Pacific, the Middle East and Europe. Recent matters include the CuDeco class action, Kupang v Cth and the Phoslock class action. Elliott also has in-house experience having previously worked at a Big Four Bank and a Big Four accounting firm.',
     ],
     photo: '/img/team/elliott-smith.jpg',
     awards: [
@@ -73,7 +73,7 @@ const team: Member[] = [
     bio:
       'Melissa brings extensive experience in complex commercial, corporate and insolvency litigation, representing both plaintiffs and defendants across Australia.',
     extendedBio: [
-      'Her practice encompasses class action proceedings, liquidator claims against former directors and auditors, breaches of the Corporations Act, and trust and fiduciary disputes. Recent matters include the Blue Sky Alternative Investments class action and the MDBA Developments litigation.',
+      'Her practice encompasses class action proceedings, liquidator claims against former directors and auditors, breaches of the Corporations Act, and trust and fiduciary disputes. Recent matters include the Blue Sky Alternative Investments class action, the Arrium class action and the Murray Darling Basin Authority class action.',
     ],
     photo: '/img/team/melissa-morgan.jpg',
     awards: [

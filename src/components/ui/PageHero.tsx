@@ -5,7 +5,6 @@ import { ChevronRight, Home } from 'lucide-react'
 type Crumb = { label: string; to?: string }
 
 interface PageHeroProps {
-  eyebrow: string
   title: string
   italicTitle?: string
   subtitle?: string
@@ -15,7 +14,6 @@ interface PageHeroProps {
 }
 
 export function PageHero({
-  eyebrow,
   title,
   italicTitle,
   subtitle,
@@ -85,19 +83,6 @@ export function PageHero({
             ))}
           </motion.nav>
         )}
-
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex items-center gap-3 mb-5"
-        >
-          <div className="h-px w-8 bg-[#8AAECE]" />
-          <span className="text-[#8AAECE] text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase">
-            {eyebrow}
-          </span>
-        </motion.div>
 
         {/* Title */}
         <motion.h1

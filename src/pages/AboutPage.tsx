@@ -7,7 +7,6 @@ export function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About the Firm"
         title="A private litigation and insolvency practice"
         italicTitle="built for high-stakes matters."
         subtitle="Today, Banton Group is one of Australia's most formidable private litigation and insolvency practices."

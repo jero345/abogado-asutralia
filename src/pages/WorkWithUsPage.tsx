@@ -14,7 +14,6 @@ export function WorkWithUsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Careers"
         title="Working with us."
         italicTitle="Progress on merit."
         subtitle="Work on some of Australia's most significant and complex disputes, alongside lawyers recognised for their strategic insight and technical excellence."

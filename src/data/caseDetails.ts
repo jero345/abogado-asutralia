@@ -160,12 +160,15 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          'The Plaintiffs and group members originally entered into litigation funding agreements with Equite Capital No 1 Pte Ltd. The Court subsequently made a Group Costs Order under section 33ZDA(1) of the Supreme Court Act 1986 (VIC), and those funding agreements were terminated.',
+          'Under the Group Costs Order, Banton Group is liable for the legal costs. If the Arrium Class Action is successful, subject to any variation of the existing GCO, Banton Group will be paid 40% (inclusive of GST) of any damages awarded or any settlement sum approved by the Court in accordance with that GCO, and 60% of those damages or that settlement sum will be distributed to Group Members. If the class action is unsuccessful, group members pay no costs.',
       },
+
       {
-        kind: 'p',
+        kind: 'callout',
+        title: 'Registration deadline extended',
+        tone: 'info',
         text:
-          'Under the Group Costs Order, Banton Group finances the legal costs and disburses payments: 40% of any damages or settlement to Banton Group and 60% to group members. If the class action is unsuccessful, group members pay no costs.',
+          'On 7 May 2026 the Court made orders that the Class Deadline of 15 December 2025 be extended to 11 May 2026.',
       },
 
       {
@@ -173,11 +176,11 @@ export const cases: CaseDetail[] = [
         heading: 'Current status',
         items: [
           { label: "Defendants' evidence due", date: '19 December 2025' },
-          { label: 'Registration / opt-out deadline (4pm AEDT)', date: '15 December 2025' },
+          { label: 'Registration / opt-out deadline (4pm AEDT)', date: '11 May 2026' },
           { label: 'Expert reply evidence due', date: '24 February 2026' },
-          { label: 'Court-ordered mediation', date: '31 March 2026' },
+          { label: 'Court-ordered mediation', date: '9 June 2026' },
           { label: 'Settlement participation window', date: 'Up to 20 July 2026' },
-          { label: 'Trial commencement (6-week estimate)', date: '3 August 2026' },
+          { label: 'Trial commencement (8-week estimate)', date: '3 August 2026' },
         ],
       },
 
@@ -185,7 +188,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          'This case is being run as an open class action, but is currently the subject of a class closure order. The effect of that order is that group members must register their claim by 4pm AEDT on 15 December 2025 in order to benefit from any settlement of the class action that may be reached at any time up to 20 July 2026.',
+          'This case is being run as an open class action, but is currently the subject of a class closure order. The effect of that order is that group members must register their claim by 4pm AEDT on 11 May 2026 in order to benefit from any settlement of the class action that may be reached at any time up to 20 July 2026.',
       },
       {
         kind: 'p',
@@ -315,7 +318,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          "The CuDeco Class Action was commenced in April 2022. It arose from allegations that CuDeco Limited made misleading statements about its Rocklands copper mine in north-west Queensland, including representations about ore reserves, feasibility and the mine\u2019s net present value which caused the price of CuDeco shares to be artificially inflated.",
+          "The CuDeco Class Action was commenced in April 2022. It arose from allegations that CuDeco Limited made misleading statements about its Rocklands copper mine in north-west Queensland, including representations about ore reserves, feasibility and the mine\u2019s net present value, which caused the market price of CuDeco shares to be substantially greater than their true value.",
       },
       {
         kind: 'p',
@@ -325,7 +328,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          'After a number of mediations, a settlement with KPMG was reached in September 2025 and approved by the Federal Court in December 2025. The claims against the directors who are alleged to have been responsible for the misleading statements about the mine remain on foot and are proceeding to trial.',
+          'After a number of mediations, a settlement with KPMG was reached in September 2025 and approved by the Federal Court on 22 December 2025, with distribution orders made on 16 March 2026. The claims against the directors who are alleged to have been responsible for the misleading statements about the mine remain on foot and are proceeding to trial.',
       },
 
       {
@@ -650,7 +653,7 @@ export const cases: CaseDetail[] = [
   // ─── MURRAY DARLING BASIN ───────────────────────────────────────────
   {
     slug: 'murray-darling',
-    title: 'Murray Darling Basin Class Action',
+    title: 'Murray Darling Basin Authority Class Action',
     status: 'Active',
     category: 'Environmental',
     year: '2019',
@@ -892,10 +895,11 @@ export const cases: CaseDetail[] = [
     category: 'Securities',
     year: '2022',
     court: 'Federal Court of Australia',
+    funder: 'Equite Capital No 6 Pte Ltd',
     email: 'phoslockclassaction@bantongroup.com',
     hasInternalForm: true,
     summary:
-      'Action against Phoslock Environmental Technologies Ltd (ASX:PET), former directors and auditor KPMG, following the disclosure of fraudulent activity in China operations.',
+      "Action against Phoslock Environmental Technologies Ltd (ASX:PET), former directors and auditor KPMG, concerning Phoslock's failure to disclose material information about its China operations during the Relevant Period.",
     content: [
       { kind: 'h2', text: 'Overview' },
       {
@@ -906,7 +910,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          "The allegations centre on fraudulent activity in Phoslock's China operations disclosed in late 2021. On 8 October 2020, the company announced the discovery of fraudulent activity relating to areas including false accounting, falsification of invoices and services contracts, improper tax reporting, potential misappropriation of funds, and undisclosed related party transactions.",
+          "The allegations centre on Phoslock's failure to disclose material information about its China operations during the Relevant Period, including undisclosed related party transactions, payments to Chinese government officials, and the non-recoverability of receivables owed by Phoslock's key Chinese counterparty, BHZQ. On 8 October 2020, Phoslock announced the discovery of fraudulent activity in its China operations, including false accounting, falsification of invoices and services contracts, improper tax reporting, potential misappropriation of funds, and undisclosed related party transactions.",
       },
 
       { kind: 'h2', text: 'Case status' },
@@ -917,10 +921,10 @@ export const cases: CaseDetail[] = [
       },
       {
         kind: 'callout',
-        title: 'Mediation scheduled',
+        title: 'Opt out and registration process underway',
         tone: 'info',
         text:
-          'Discussions with the Respondents are in place regarding any potential court ordered registration, opt out process and class closure before the mediation ordered to occur on or before 20 May 2026.',
+          'Pursuant to orders made by Justice Stewart on 15 April 2026, an opt out and registration process is underway. The deadline to register or opt out is 4:00pm on 27 May 2026. The mediation is scheduled for 11 June 2026.',
       },
 
       {
@@ -932,6 +936,13 @@ export const cases: CaseDetail[] = [
         ],
       },
 
+      { kind: 'h2', text: 'How to register or opt out' },
+      {
+        kind: 'p',
+        text:
+          'The deadline to register or opt out is 4:00pm on 27 May 2026. To register, visit https://bantongroup.com/class-actions, or email phoslockclassaction@bantongroup.com, or post to Banton Group, Level 12, 60 Martin Place, Sydney NSW 2000.',
+      },
+
       { kind: 'h2', text: 'Group Member eligibility' },
       { kind: 'p', text: 'You are a group member if you:' },
       {
@@ -939,7 +950,7 @@ export const cases: CaseDetail[] = [
         items: [
           'Acquired an interest in fully paid ordinary shares (Phoslock Shares) in Phoslock Environmental Technologies Ltd during the period between 11 October 2018 and 17 September 2020 (inclusive) (Relevant Period); or prior to the Relevant Period, and retained them throughout the Relevant Period; or',
           'Acquired long exposure to Phoslock Shares by entering equity swap confirmations in respect of Phoslock Shares during the Relevant Period; and',
-          "Have suffered loss or damage by reason of the conduct of the Respondents pleaded in the Statement of Claim.",
+          "Have suffered loss or damage — that is, acquired or held Phoslock shares at a price inflated by the Respondents' conduct — by reason of the conduct of the Respondents pleaded in the Statement of Claim.",
         ],
       },
       {
@@ -962,7 +973,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          'No. Group Members are not liable to pay the upfront legal costs of the class action because it is funded. If the class action is successful you may be required to contribute towards the legal costs and the litigation funder\u2019s commission from your share of any net proceeds you receive.',
+          'No. Group Members are not liable to pay the upfront legal costs of the class action because the proceeding is funded by Equite Capital No 6 Pte Ltd under a Funding Agreement. Further details about the funding arrangement, including the possibility of a Common Fund Order or Funding Equalisation Order, are set out in the Opt Out and Registration Notice. If the class action is successful you may be required to contribute towards the legal costs and the litigation funder\u2019s commission from your share of any net proceeds you receive.',
       },
       { kind: 'h3', text: 'How long will the class action take?' },
       {
@@ -982,9 +993,9 @@ export const cases: CaseDetail[] = [
         heading: 'Key dates',
         items: [
           { label: 'Relevant Period (share acquisition)', date: '11 Oct 2018 - 17 Sep 2020' },
-          { label: 'Fraudulent activity announcement', date: '8 October 2020' },
           { label: 'Latest court orders issued', date: '20 February 2026' },
-          { label: 'Mediation (no later than)', date: '20 May 2026' },
+          { label: 'Opt out / registration deadline (4pm)', date: '27 May 2026' },
+          { label: 'Mediation', date: '11 June 2026' },
           { label: 'Next case management hearing', date: '7 August 2026' },
         ],
       },

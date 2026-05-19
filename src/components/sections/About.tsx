@@ -41,19 +41,19 @@ export function About() {
           <div>
             <ScrollReveal>
               <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight mb-8">
-                Founded with
+                Established with
                 <br />
-                <span className="italic-display text-[#6D8FB5]">a singular purpose.</span>
+                <span className="italic-display text-[#6D8FB5]">purpose.</span>
               </h2>
               <div className="space-y-5 text-[#555555] text-[16px] leading-[1.75]">
                 <p>
-                  Banton Group was established in February 2020 by Amanda Banton with a singular purpose: to give individuals and institutions the firepower to take on powerful adversaries and win. Today, Banton Group is one of Australia's most formidable private litigation and insolvency practices.
+                  Banton Group was established in February 2020 by Amanda Banton to give individuals and institutions the firepower to take on powerful adversaries and win. Today, Banton Group is one of Australia's most formidable litigation and insolvency practices.
                 </p>
                 <p>
                   We occupy a unique position in the legal landscape — a specialist litigation boutique with the capability and resources of a major firm, but the agility, focus, and commitment of a dedicated team that truly cares about outcomes.
                 </p>
                 <p>
-                  Our lawyers are recognised as leaders in class action litigation, commercial disputes, and insolvency law. We have significant experience in the Federal Court & Supreme Courts of all states, the Full Federal Court of NSW, The Court of Appeal in NSW and the High Court of Australia. Our specialist team includes lawyers with experience in Australia, the United States, United Kingdom, New Zealand, South East Asia and Cayman Islands.
+                  Our lawyers are recognised as leaders in class action litigation, commercial disputes, and insolvency law. We have significant experience in the Federal Court & Supreme Courts of all states, the Full Federal Court of NSW, The Court of Appeal in NSW and the High Court of Australia. Our specialist team includes lawyers with experience in Australia, the United States, United Kingdom, New Zealand, South East Asia, Malaysia and Cayman Islands.
                 </p>
                 <p>
                   Banton Group maintains strong relationships with Australia's leading litigation funders and may act on a contingency basis in the Supreme Court of Victoria.

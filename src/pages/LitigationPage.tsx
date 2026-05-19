@@ -6,7 +6,6 @@ export function LitigationPage() {
   return (
     <>
       <PageHero
-        eyebrow="Litigation"
         title="Key Practice Areas."
         italicTitle="Where intent meets strategy to shape outcomes."
         subtitle="Class actions, commercial litigation, insolvency and complex financial disputes — across every Australian court, up to and including the High Court."

@@ -246,7 +246,6 @@ export function CaseDetailPage() {
   return (
     <>
       <PageHero
-        eyebrow={`${caseData.category} Class Action`}
         title={caseData.title}
         subtitle={caseData.summary}
         breadcrumbs={[{ label: 'Class Actions', to: '/class-actions' }, { label: caseData.title }]}

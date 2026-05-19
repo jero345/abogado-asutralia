@@ -97,15 +97,14 @@ export function NewsArticlePage() {
     )
   }
 
-  if (article === null) return <Navigate to="/news" replace />
+  if (article === null) return <Navigate to="/blog" replace />
 
   return (
     <>
       <PageHero
-        eyebrow={article.category ?? 'News'}
         title={article.title}
         subtitle={article.excerpt}
-        breadcrumbs={[{ label: 'News', to: '/news' }, { label: article.title }]}
+        breadcrumbs={[{ label: 'Blog', to: '/blog' }, { label: article.title }]}
       />
 
       <article className="relative py-12 md:py-20 bg-white">
@@ -151,11 +150,11 @@ export function NewsArticlePage() {
             {/* Back */}
             <div className="pt-10 mt-10 border-t border-[#1C3A64]/10">
               <Link
-                to="/news"
+                to="/blog"
                 className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline"
               >
                 <ArrowLeft size={14} />
-                All news & articles
+                All blog articles
               </Link>
             </div>
           </ScrollReveal>

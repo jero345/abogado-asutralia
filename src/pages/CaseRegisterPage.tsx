@@ -14,7 +14,6 @@ export function CaseRegisterPage() {
   return (
     <>
       <PageHero
-        eyebrow="Register your interest"
         title={caseData.title}
         italicTitle="Registration form"
         subtitle="Complete the form below to register as a group member. All information is private and confidential. Initial conversations are at no charge unless we are retained by you."

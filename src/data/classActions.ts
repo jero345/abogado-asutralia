@@ -59,7 +59,7 @@ export const classActions: ClassAction[] = [
       },
       { kind: 'link', label: 'More about the Arrium Class Action', href: '#arrium-info' },
     ],
-    keyDate: 'Registration closes 15 Dec 2025 · Trial 3 Aug 2026',
+    keyDate: 'Trial 3 Aug 2026',
     wordpressLink: 'https://bantongroup.com/arrium-class-action/',
     detailSlug: 'arrium',
   },
@@ -96,7 +96,7 @@ export const classActions: ClassAction[] = [
     title: 'Fitch SCDO Class Action',
     status: 'Active',
     category: 'Financial Products',
-    year: '2022',
+    year: '2024',
     court: 'Federal Court',
     summary:
       'Investors in synthetic CDOs rated \u2018AAA\u2019\u2013\u2018AA-\u2019 by Fitch between 2005\u20132007 seeking damages for negligent ratings.',
@@ -114,8 +114,50 @@ export const classActions: ClassAction[] = [
   },
   // ─────────────────────────────────────────────────────────────
   {
+    id: 'fitch-uk',
+    title: 'Fitch UK Representative Action',
+    status: 'Active',
+    category: 'Financial Products',
+    year: '2024',
+    court: 'High Court of Justice (England & Wales)',
+    summary:
+      'UK representative action against Fitch on behalf of investors in synthetic CDOs rated by Fitch between 2005 and 2007.',
+    content: [
+      {
+        kind: 'p',
+        text:
+          'Banton Group acts on behalf of investors in a UK representative action against Fitch Ratings, Ltd in respect of synthetic collateralised debt obligations (SCDOs) assigned credit ratings of ‘AAA’, ‘AA+’, ‘AA’ or ‘AA-’ by Fitch in and around the period 2005 to 2007.',
+      },
+      { kind: 'link', label: 'More about the Fitch UK Representative Action', href: 'https://bantongroup.com/fitch-ratings-uk-representative-action/' },
+    ],
+    keyDate: 'Active — High Court of Justice',
+    wordpressLink: 'https://bantongroup.com/fitch-ratings-uk-representative-action/',
+  },
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: 'sp-uk',
+    title: 'S&P UK Representative Action',
+    status: 'Active',
+    category: 'Financial Products',
+    year: '2024',
+    court: 'High Court of Justice (England & Wales)',
+    summary:
+      'UK representative action against S&P Global on behalf of investors in CDOs and CPDOs rated by S&P between 2005 and 2007.',
+    content: [
+      {
+        kind: 'p',
+        text:
+          'Banton Group acts on behalf of investors in a UK representative action against S&P Global, Inc and Standard & Poor’s International, LLC in respect of collateralised debt obligations (CDOs) and constant proportion debt obligations (CPDOs) assigned credit ratings of ‘AAA’, ‘AA+’, ‘AA’ or ‘AA-’ by S&P in and around the period 2005 to 2007.',
+      },
+      { kind: 'link', label: 'More about the S&P UK Representative Action', href: 'https://bantongroup.com/sp-global-uk-representative-action/' },
+    ],
+    keyDate: 'Active — High Court of Justice',
+    wordpressLink: 'https://bantongroup.com/sp-global-uk-representative-action/',
+  },
+  // ─────────────────────────────────────────────────────────────
+  {
     id: 'mdba',
-    title: 'Murray Darling Basin Class Action',
+    title: 'Murray Darling Basin Authority Class Action',
     status: 'Active',
     category: 'Environmental',
     year: '2019',
@@ -441,29 +483,29 @@ export const classActions: ClassAction[] = [
       {
         kind: 'p',
         text:
-          'Banton Group is well advanced in its investigation of class action proceedings against Salt Lake Potash Limited (in admin) (receivers and managers appt) (SO4), its former directors and officers, and its auditors (Ernst & Young) (EY) (the Proceeding).',
+          'Banton Group is well advanced in its investigation of class action proceedings against Salt Lake Potash Limited (In Liquidation) (Receivers and Managers Appointed) (SO4), its former directors, and its auditors (Ernst & Young) (EY) (the Proceeding).',
       },
       {
         kind: 'p',
         text:
-          'SO4 is a formerly dual listed ASX and AIM mining and exploration company (ASX:SO4; AIM:SO4) that was developing salt lakes in Western Australia to produce sulphate of potash or potassium sulphate.',
+          'SO4 is a formerly dual listed ASX and AIM mining and exploration company (ASX:SO4; AIM:SO4) that was developing salt lakes in Western Australia to produce sulphate of potash (SOP).',
       },
       { kind: 'h', text: 'The Proceeding' },
       {
         kind: 'p',
         text:
-          'The Proceeding will allege that SO4 and its former directors and officers contravened various provisions of the ASX Listing Rules, the Corporations Act 2001 (Cth) (Corporations Act), the Australian Securities and Investments Commission Act 2001 (Cth) (ASIC Act) and the Australian Consumer Law.',
+          'The Proceeding will allege that SO4 and its former directors contravened various provisions of the ASX Listing Rules, the Corporations Act 2001 (Cth) (Corporations Act), the Australian Securities and Investments Commission Act 2001 (Cth) (ASIC Act) and the Australian Consumer Law.',
       },
       {
         kind: 'p',
         text:
-          'In addition, the Proceeding will allege that EY contravened various provisions of the Corporations Act, the ASIC Act and the Australian Consumer Law to the extent that they contributed to or caused any damages by their representations in SO4\u2019s audited annual and half-year financial reports.',
+          'In addition, the Proceeding will allege that EY made misleading or deceptive representations to the market by issuing unqualified audit opinions and unqualified review opinions on SO4\u2019s audited annual and reviewed half-year financial reports, in which EY approved the carrying value of the Lake Way Mine Development asset at values that were materially overstated, in contravention of the Corporations Act, the ASIC Act and the Australian Consumer Law.',
       },
       { kind: 'h', text: 'Funding' },
       {
         kind: 'p',
         text:
-          'The Proceeding will either be funded subject to a Group Costs Order or other appropriate contingency fee order sought. In either scenario, group members who join the class action will have no financial obligations or financial risk in connection with the Proceeding.',
+          'The Proceeding will be filed in the Supreme Court of Victoria and funded subject to a Group Costs Order under s 33ZDA of the Supreme Court Act 1986 (Vic). Group members who join the class action will have no financial obligations or financial risk in connection with the Proceeding.',
       },
       { kind: 'link', label: 'Register as a group member / enquire', href: '#salt-lake-register' },
     ],
@@ -586,7 +628,7 @@ export const classActions: ClassAction[] = [
     year: '2022',
     court: 'Federal Court of Australia',
     summary:
-      'Action against Phoslock (ASX:PET) directors and KPMG following disclosure of fraudulent activity in China operations.',
+      "Action against Phoslock (ASX:PET) directors and KPMG concerning Phoslock's failure to disclose material information about its China operations.",
     content: [
       { kind: 'h', text: 'Overview' },
       {
@@ -597,7 +639,7 @@ export const classActions: ClassAction[] = [
       {
         kind: 'p',
         text:
-          'The claims arise out of allegations concerning Phoslock\u2019s China operations, which were first disclosed to the market in late 2021. On 8 October 2020, Phoslock announced to the market that it had identified fraudulent activity relating to areas including false accounting, falsification of invoices and services contracts, improper tax reporting, potential misappropriation of funds, and undisclosed related party transactions.',
+          "The claims concern Phoslock\u2019s failure to disclose material information about its China operations during the Relevant Period, including undisclosed related party transactions, payments to Chinese government officials, and the non-recoverability of receivables owed by Phoslock\u2019s key Chinese counterparty, BHZQ. On 8 October 2020, Phoslock announced the discovery of fraudulent activity in its China operations, including false accounting, falsification of invoices and services contracts, improper tax reporting, potential misappropriation of funds, and undisclosed related party transactions.",
       },
       { kind: 'h', text: 'Case Status' },
       { kind: 'link', label: 'Applicant\u2019s Further Amended Statement of Claim', href: '#phoslock-soc' },
