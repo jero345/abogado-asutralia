@@ -74,6 +74,30 @@ function BlockRenderer({ block }: { block: ArticleBlock }) {
   }
 }
 
+function setOrUpdateMeta(attr: 'name' | 'property', key: string, content: string) {
+  let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
+  if (!el) {
+    el = document.createElement('meta')
+    el.setAttribute(attr, key)
+    document.head.appendChild(el)
+  }
+  el.setAttribute('content', content)
+}
+
+function applySeo(article: NewsArticle) {
+  const title = article.seo?.title || article.title
+  const description = article.seo?.description || article.excerpt
+  const ogImage = article.seo?.ogImage || article.coverImage
+  document.title = `${title} — Banton Group`
+  if (description) {
+    setOrUpdateMeta('name', 'description', description)
+    setOrUpdateMeta('property', 'og:description', description)
+  }
+  setOrUpdateMeta('property', 'og:title', title)
+  setOrUpdateMeta('property', 'og:type', 'article')
+  if (ogImage) setOrUpdateMeta('property', 'og:image', ogImage)
+}
+
 export function NewsArticlePage() {
   const { slug } = useParams<{ slug: string }>()
   const [article, setArticle] = useState<NewsArticle | null | undefined>(undefined)
@@ -88,6 +112,10 @@ export function NewsArticlePage() {
       cancelled = true
     }
   }, [slug])
+
+  useEffect(() => {
+    if (article) applySeo(article)
+  }, [article])
 
   if (article === undefined) {
     return (
@@ -142,10 +170,29 @@ export function NewsArticlePage() {
               </figure>
             )}
 
-            {/* Body */}
-            {article.content?.map((block, i) => (
-              <BlockRenderer key={i} block={block} />
-            ))}
+            {/* Body — TipTap HTML takes precedence, fall back to legacy block array */}
+            {article.bodyHtml ? (
+              <div
+                className="prose prose-slate max-w-none prose-headings:text-[#1C3A64] prose-headings:font-medium prose-headings:tracking-tight prose-p:text-[#555555] prose-p:leading-[1.8] prose-a:text-[#1C3A64] prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB] prose-blockquote:not-italic prose-img:rounded-xl"
+                dangerouslySetInnerHTML={{ __html: article.bodyHtml }}
+              />
+            ) : (
+              article.content?.map((block, i) => <BlockRenderer key={i} block={block} />)
+            )}
+
+            {/* Tags */}
+            {article.tags && article.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-10 pt-6 border-t border-[#1C3A64]/10">
+                {article.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[11px] bg-[#1C3A64]/[0.06] text-[#1C3A64] px-2 py-0.5 rounded"
+                  >
+                    #{t}
+                  </span>
+                ))}
+              </div>
+            )}
 
             {/* Back */}
             <div className="pt-10 mt-10 border-t border-[#1C3A64]/10">

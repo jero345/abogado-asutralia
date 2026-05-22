@@ -73,7 +73,7 @@ export function NewsPage() {
                       <h2 className="text-[#1C3A64] text-[20px] md:text-[22px] font-medium leading-[1.3] tracking-tight mb-4">
                         {a.title}
                       </h2>
-                      <p className="text-[#555555] text-[14px] leading-[1.7] mb-6">
+                      <p className="text-[#555555] text-[14px] leading-[1.7] mb-6 line-clamp-3">
                         {a.excerpt}
                       </p>
                       <div className="mt-auto flex items-center justify-between text-[12px] text-[#888888]">

@@ -10,7 +10,16 @@ interface ArticleRow {
   date: string
   category: string | null
   published: boolean
+  publish_at: string | null
   updated_at: string
+}
+
+type Status = 'draft' | 'scheduled' | 'published'
+
+function statusOf(r: ArticleRow): Status {
+  if (!r.published) return 'draft'
+  if (r.publish_at && new Date(r.publish_at) > new Date()) return 'scheduled'
+  return 'published'
 }
 
 function formatDate(iso: string) {
@@ -18,6 +27,16 @@ function formatDate(iso: string) {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
+  })
+}
+
+function formatDateTime(iso: string) {
+  return new Date(iso).toLocaleString('en-AU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   })
 }
 
@@ -30,7 +49,7 @@ export function AdminDashboard() {
     if (!supabase) return
     const { data, error: err } = await supabase
       .from('articles')
-      .select('id, slug, title, date, category, published, updated_at')
+      .select('id, slug, title, date, category, published, publish_at, updated_at')
       .order('date', { ascending: false })
     if (err) {
       setError(err.message)
@@ -112,7 +131,9 @@ export function AdminDashboard() {
       ) : (
         <div className="bg-white border border-[#1C3A64]/10 rounded-2xl overflow-hidden">
           <ul className="divide-y divide-[#1C3A64]/10">
-            {rows.map((r) => (
+            {rows.map((r) => {
+              const status = statusOf(r)
+              return (
               <li key={r.id} className="px-5 py-4 flex items-center gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -122,11 +143,7 @@ export function AdminDashboard() {
                         {r.category}
                       </span>
                     )}
-                    {!r.published && (
-                      <span className="text-[10px] tracking-[0.12em] uppercase text-amber-700 bg-amber-50 px-2 py-0.5 rounded">
-                        Draft
-                      </span>
-                    )}
+                    <StatusChip status={status} />
                   </div>
                   <div className="flex items-center gap-3 mt-1 text-[12px] text-[#888888]">
                     <span className="inline-flex items-center gap-1">
@@ -134,6 +151,11 @@ export function AdminDashboard() {
                       {formatDate(r.date)}
                     </span>
                     <span>/{r.slug}</span>
+                    {status === 'scheduled' && r.publish_at && (
+                      <span className="text-violet-700">
+                        · goes live {formatDateTime(r.publish_at)}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -174,10 +196,29 @@ export function AdminDashboard() {
                   </button>
                 </div>
               </li>
-            ))}
+              )
+            })}
           </ul>
         </div>
       )}
     </div>
+  )
+}
+
+function StatusChip({ status }: { status: Status }) {
+  const styles: Record<Status, string> = {
+    draft: 'text-amber-700 bg-amber-50',
+    scheduled: 'text-violet-700 bg-violet-50',
+    published: 'text-emerald-700 bg-emerald-50',
+  }
+  const labels: Record<Status, string> = {
+    draft: 'Draft',
+    scheduled: 'Scheduled',
+    published: 'Published',
+  }
+  return (
+    <span className={`text-[10px] tracking-[0.12em] uppercase px-2 py-0.5 rounded ${styles[status]}`}>
+      {labels[status]}
+    </span>
   )
 }

@@ -24,12 +24,22 @@ export interface NewsArticle {
   category?: string
   /** Optional author byline. Example: "Amanda Banton". */
   author?: string
+  /** Optional free-form tags (rendered as small chips at the bottom). */
+  tags?: string[]
   /** Source + external link for press pieces. */
   source?: { name: string; url: string }
   /** Cover image shown on the list card and at the top of the article. */
   coverImage?: string
-  /** Article body — leave empty if this entry only links out to an external source. */
+  /** Legacy block-based body (used by static / pre-v2 articles). */
   content?: ArticleBlock[]
+  /** Rich-text HTML body (TipTap output) — new articles use this. */
+  bodyHtml?: string
+  /** SEO overrides for <title>, meta description and Open Graph image. */
+  seo?: {
+    title?: string
+    description?: string
+    ogImage?: string
+  }
 }
 
 // ─────────────────────────────────────────────────────────────

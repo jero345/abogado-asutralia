@@ -1,16 +1,22 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   Loader2,
-  Save,
   ArrowLeft,
-  Plus,
-  Trash2,
-  ChevronUp,
-  ChevronDown,
+  X,
+  Calendar,
+  Send,
+  FileText,
+  Clock,
+  Pencil,
+  Eye,
+  Image as ImageIcon,
+  Upload,
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import type { ArticleBlock } from '@/data/news'
+import { RichTextEditor } from '@/components/admin/RichTextEditor'
+
+type PublishMode = 'draft' | 'scheduled' | 'published'
 
 interface ArticleForm {
   slug: string
@@ -19,11 +25,16 @@ interface ArticleForm {
   excerpt: string
   category: string
   author: string
+  tags: string[]
   source_name: string
   source_url: string
   cover_image: string
-  content: ArticleBlock[]
+  body_html: string
+  seo_title: string
+  seo_description: string
+  seo_og_image: string
   published: boolean
+  publish_at: string | null
 }
 
 const EMPTY: ArticleForm = {
@@ -33,11 +44,16 @@ const EMPTY: ArticleForm = {
   excerpt: '',
   category: '',
   author: '',
+  tags: [],
   source_name: '',
   source_url: '',
   cover_image: '',
-  content: [],
+  body_html: '',
+  seo_title: '',
+  seo_description: '',
+  seo_og_image: '',
   published: false,
+  publish_at: null,
 }
 
 const CATEGORIES = [
@@ -61,6 +77,27 @@ function slugify(s: string) {
     .slice(0, 96)
 }
 
+// Convert ISO timestamptz to the value expected by <input type="datetime-local">
+function isoToLocalInput(iso: string | null): string {
+  if (!iso) return ''
+  const d = new Date(iso)
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return (
+    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
+    `T${pad(d.getHours())}:${pad(d.getMinutes())}`
+  )
+}
+
+function localInputToIso(local: string): string {
+  return new Date(local).toISOString()
+}
+
+function computeMode(form: ArticleForm): PublishMode {
+  if (!form.published) return 'draft'
+  if (form.publish_at && new Date(form.publish_at) > new Date()) return 'scheduled'
+  return 'published'
+}
+
 export function ArticleEditor() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -71,6 +108,10 @@ export function ArticleEditor() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [slugTouched, setSlugTouched] = useState(isEdit)
+  const [view, setView] = useState<'edit' | 'preview'>('edit')
+  const [coverUploading, setCoverUploading] = useState(false)
+
+  const mode = useMemo(() => computeMode(form), [form])
 
   useEffect(() => {
     if (!isEdit || !supabase) return
@@ -99,11 +140,16 @@ export function ArticleEditor() {
           excerpt: data.excerpt,
           category: data.category ?? '',
           author: data.author ?? '',
+          tags: (data.tags as string[] | null) ?? [],
           source_name: data.source_name ?? '',
           source_url: data.source_url ?? '',
           cover_image: data.cover_image ?? '',
-          content: (data.content as ArticleBlock[]) ?? [],
+          body_html: data.body_html ?? '',
+          seo_title: data.seo_title ?? '',
+          seo_description: data.seo_description ?? '',
+          seo_og_image: data.seo_og_image ?? '',
           published: data.published,
+          publish_at: data.publish_at,
         })
         setLoading(false)
       })
@@ -121,54 +167,53 @@ export function ArticleEditor() {
     if (!slugTouched) update('slug', slugify(v))
   }
 
-  const addBlock = (kind: ArticleBlock['kind']) => {
-    let block: ArticleBlock
-    switch (kind) {
-      case 'ul':
-        block = { kind: 'ul', items: [''] }
-        break
-      case 'quote':
-        block = { kind: 'quote', text: '', attribution: '' }
-        break
-      case 'link':
-        block = { kind: 'link', label: '', href: '' }
-        break
-      case 'image':
-        block = { kind: 'image', src: '', caption: '' }
-        break
-      default:
-        block = { kind, text: '' }
+  const uploadCover = async (file: File) => {
+    if (!supabase) return
+    if (!file.type.startsWith('image/')) {
+      setError('Cover must be an image file.')
+      return
     }
-    update('content', [...form.content, block])
+    if (file.size > 5 * 1024 * 1024) {
+      setError('Cover image is too large (max 5 MB).')
+      return
+    }
+    setCoverUploading(true)
+    setError(null)
+    const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+    const path = `covers/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+    const { error: upErr } = await supabase.storage
+      .from('article-images')
+      .upload(path, file, { cacheControl: '3600', upsert: false })
+    if (upErr) {
+      setCoverUploading(false)
+      setError(upErr.message)
+      return
+    }
+    const { data } = supabase.storage.from('article-images').getPublicUrl(path)
+    update('cover_image', data.publicUrl)
+    setCoverUploading(false)
   }
 
-  const updateBlock = (idx: number, patch: Partial<ArticleBlock>) => {
-    const next = form.content.map((b, i) =>
-      i === idx ? ({ ...b, ...patch } as ArticleBlock) : b,
-    )
-    update('content', next)
-  }
-
-  const removeBlock = (idx: number) => {
-    update(
-      'content',
-      form.content.filter((_, i) => i !== idx),
-    )
-  }
-
-  const moveBlock = (idx: number, dir: -1 | 1) => {
-    const target = idx + dir
-    if (target < 0 || target >= form.content.length) return
-    const next = [...form.content]
-    ;[next[idx], next[target]] = [next[target], next[idx]]
-    update('content', next)
-  }
-
-  const submit = async (e: FormEvent) => {
-    e.preventDefault()
+  const save = async (target: PublishMode) => {
     if (!supabase) return
     setSaving(true)
     setError(null)
+
+    let published = false
+    let publish_at: string | null = null
+    if (target === 'published') {
+      published = true
+      publish_at = null
+    } else if (target === 'scheduled') {
+      if (!form.publish_at) {
+        setSaving(false)
+        setError('Pick a publish date and time to schedule.')
+        return
+      }
+      published = true
+      publish_at = form.publish_at
+    }
+
     const payload = {
       slug: form.slug.trim(),
       title: form.title.trim(),
@@ -176,11 +221,19 @@ export function ArticleEditor() {
       excerpt: form.excerpt.trim(),
       category: form.category || null,
       author: form.author || null,
+      tags: form.tags,
       source_name: form.source_name || null,
       source_url: form.source_url || null,
       cover_image: form.cover_image || null,
-      content: form.content,
-      published: form.published,
+      body_html: form.body_html || null,
+      seo_title: form.seo_title || null,
+      seo_description: form.seo_description || null,
+      seo_og_image: form.seo_og_image || null,
+      published,
+      publish_at,
+      // Clear legacy block content when saving from the new editor so the
+      // public renderer doesn't show both at once.
+      content: [],
     }
     const res = isEdit
       ? await supabase.from('articles').update(payload).eq('id', id!)
@@ -193,6 +246,12 @@ export function ArticleEditor() {
     navigate('/admin')
   }
 
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    // Default submit = save draft. The dedicated buttons handle publish/schedule.
+    save('draft')
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -202,18 +261,24 @@ export function ArticleEditor() {
   }
 
   return (
-    <div className="p-6 md:p-10 max-w-4xl mx-auto">
-      <button
-        onClick={() => navigate('/admin')}
-        className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] mb-6 hover:underline"
-      >
-        <ArrowLeft size={13} />
-        Back to articles
-      </button>
+    <div className="p-6 md:p-10 max-w-5xl mx-auto">
+      <div className="flex items-center justify-between mb-6">
+        <button
+          onClick={() => navigate('/admin')}
+          className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] hover:underline"
+        >
+          <ArrowLeft size={13} />
+          Back to articles
+        </button>
+        <StatusBadge mode={mode} />
+      </div>
 
-      <h1 className="text-[#1C3A64] text-[26px] font-medium tracking-tight mb-8">
+      <h1 className="text-[#1C3A64] text-[26px] font-medium tracking-tight mb-2">
         {isEdit ? 'Edit article' : 'New article'}
       </h1>
+      <p className="text-[#888888] text-[13px] mb-8">
+        {isEdit ? 'Update the article. Changes go live as soon as you save.' : 'Compose the article, then save as draft, schedule or publish.'}
+      </p>
 
       {error && (
         <div className="mb-6 text-[13px] text-red-600 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
@@ -229,7 +294,7 @@ export function ArticleEditor() {
               required
               value={form.title}
               onChange={(e) => onTitleChange(e.target.value)}
-              className={input}
+              className={inputCls}
             />
           </Field>
           <Field label="URL slug" hint="Shows in the article URL (/blog/<slug>)">
@@ -241,7 +306,7 @@ export function ArticleEditor() {
                 setSlugTouched(true)
                 update('slug', slugify(e.target.value))
               }}
-              className={input}
+              className={inputCls}
             />
           </Field>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -251,14 +316,14 @@ export function ArticleEditor() {
                 required
                 value={form.date}
                 onChange={(e) => update('date', e.target.value)}
-                className={input}
+                className={inputCls}
               />
             </Field>
             <Field label="Category">
               <select
                 value={form.category}
                 onChange={(e) => update('category', e.target.value)}
-                className={input}
+                className={inputCls}
               >
                 <option value="">— None —</option>
                 {CATEGORIES.map((c) => (
@@ -274,33 +339,75 @@ export function ArticleEditor() {
               type="text"
               value={form.author}
               onChange={(e) => update('author', e.target.value)}
-              className={input}
+              className={inputCls}
               placeholder="Amanda Banton & Melissa Morgan"
             />
           </Field>
+          <Field label="Tags" hint="Press Enter or comma to add. Click × to remove.">
+            <TagsInput value={form.tags} onChange={(v) => update('tags', v)} />
+          </Field>
           <Field
             label="Summary"
-            hint="One short sentence shown on the list and at the top of the article."
+            hint="ONE short sentence shown on the list and at the top of the article. Keep it brief — the full body goes below."
             required
           >
             <textarea
               required
               rows={3}
+              maxLength={280}
               value={form.excerpt}
               onChange={(e) => update('excerpt', e.target.value)}
-              className={input}
+              className={inputCls}
             />
+            <div className="text-[11px] text-[#888888] mt-1 text-right">
+              {form.excerpt.length}/280
+            </div>
           </Field>
         </Section>
 
-        <Section title="External source (optional)" hint="Only for press pieces that link out to another publication.">
+        <Section title="Cover image" hint="Shown on the list card and at the top of the article.">
+          <CoverImageInput
+            value={form.cover_image}
+            onChange={(v) => update('cover_image', v)}
+            onFile={uploadCover}
+            uploading={coverUploading}
+          />
+        </Section>
+
+        <Section
+          title="Article body"
+          hint="Visual editor with a toolbar — use the buttons for bold, italic, headings, lists and images."
+        >
+          <div className="flex items-center gap-1 mb-3">
+            <Tab active={view === 'edit'} onClick={() => setView('edit')}>
+              <Pencil size={12} /> Write
+            </Tab>
+            <Tab active={view === 'preview'} onClick={() => setView('preview')}>
+              <Eye size={12} /> Preview
+            </Tab>
+          </div>
+          {view === 'edit' ? (
+            <RichTextEditor
+              value={form.body_html}
+              onChange={(html) => update('body_html', html)}
+              placeholder="Start writing the article…"
+            />
+          ) : (
+            <PreviewPane form={form} />
+          )}
+        </Section>
+
+        <Section
+          title="External source (optional)"
+          hint="Only for press pieces that link out to another publication."
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Source name">
               <input
                 type="text"
                 value={form.source_name}
                 onChange={(e) => update('source_name', e.target.value)}
-                className={input}
+                className={inputCls}
                 placeholder="Lawyers Weekly"
               />
             </Field>
@@ -309,94 +416,120 @@ export function ArticleEditor() {
                 type="url"
                 value={form.source_url}
                 onChange={(e) => update('source_url', e.target.value)}
-                className={input}
+                className={inputCls}
                 placeholder="https://…"
               />
             </Field>
           </div>
         </Section>
 
-        <Section title="Cover image (optional)" hint="Paste an image URL — must be publicly accessible.">
-          <Field label="Image URL">
+        <Section
+          title="SEO"
+          hint="What people see in Google results and when sharing on LinkedIn / WhatsApp. Optional — defaults to the article title and summary."
+        >
+          <Field
+            label="SEO title"
+            hint="Shown as the page tab title and the headline on Google. Up to ~60 characters."
+          >
+            <input
+              type="text"
+              maxLength={70}
+              value={form.seo_title}
+              onChange={(e) => update('seo_title', e.target.value)}
+              className={inputCls}
+              placeholder={form.title || 'Article title'}
+            />
+            <div className="text-[11px] text-[#888888] mt-1 text-right">
+              {form.seo_title.length}/70
+            </div>
+          </Field>
+          <Field
+            label="SEO description"
+            hint="The grey paragraph under the Google headline. ~155 characters works best."
+          >
+            <textarea
+              rows={3}
+              maxLength={170}
+              value={form.seo_description}
+              onChange={(e) => update('seo_description', e.target.value)}
+              className={inputCls}
+              placeholder={form.excerpt || 'Short summary…'}
+            />
+            <div className="text-[11px] text-[#888888] mt-1 text-right">
+              {form.seo_description.length}/170
+            </div>
+          </Field>
+          <Field
+            label="Social share image (OG image)"
+            hint="The image that appears when the article is shared on LinkedIn / WhatsApp / X. Defaults to the cover."
+          >
             <input
               type="url"
-              value={form.cover_image}
-              onChange={(e) => update('cover_image', e.target.value)}
-              className={input}
-              placeholder="https://…"
+              value={form.seo_og_image}
+              onChange={(e) => update('seo_og_image', e.target.value)}
+              className={inputCls}
+              placeholder={form.cover_image || 'https://…'}
             />
           </Field>
         </Section>
 
-        <Section title="Article body" hint="Add blocks of text. Reorder with the arrows.">
-          <div className="space-y-3">
-            {form.content.length === 0 && (
-              <p className="text-[#888888] text-[13px] italic">No blocks yet. Add one below.</p>
-            )}
-            {form.content.map((block, idx) => (
-              <BlockEditor
-                key={idx}
-                block={block}
-                onChange={(patch) => updateBlock(idx, patch)}
-                onRemove={() => removeBlock(idx)}
-                onMoveUp={() => moveBlock(idx, -1)}
-                onMoveDown={() => moveBlock(idx, 1)}
-                isFirst={idx === 0}
-                isLast={idx === form.content.length - 1}
+        <Section title="Publishing" hint="Pick what happens when you save.">
+          <div className="flex items-end gap-3 flex-wrap">
+            <Field label="Schedule for (optional)" hint="Leave empty to publish immediately when you click Publish.">
+              <input
+                type="datetime-local"
+                value={isoToLocalInput(form.publish_at)}
+                onChange={(e) =>
+                  update('publish_at', e.target.value ? localInputToIso(e.target.value) : null)
+                }
+                className={inputCls + ' max-w-[260px]'}
               />
-            ))}
+            </Field>
+          </div>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              <AddBlockBtn onClick={() => addBlock('p')}>+ Paragraph</AddBlockBtn>
-              <AddBlockBtn onClick={() => addBlock('h2')}>+ Heading</AddBlockBtn>
-              <AddBlockBtn onClick={() => addBlock('h3')}>+ Subheading</AddBlockBtn>
-              <AddBlockBtn onClick={() => addBlock('ul')}>+ List</AddBlockBtn>
-              <AddBlockBtn onClick={() => addBlock('quote')}>+ Quote</AddBlockBtn>
-              <AddBlockBtn onClick={() => addBlock('link')}>+ Link</AddBlockBtn>
-              <AddBlockBtn onClick={() => addBlock('image')}>+ Image</AddBlockBtn>
-            </div>
+          <div className="flex flex-wrap items-center justify-end gap-2 pt-4 border-t border-[#1C3A64]/10 mt-2">
+            <button
+              type="button"
+              onClick={() => navigate('/admin')}
+              className="px-4 py-2.5 text-[#1C3A64] text-[13px] font-medium hover:bg-[#1C3A64]/[0.06] rounded-lg transition-colors"
+            >
+              Cancel
+            </button>
+            <PublishBtn
+              onClick={() => save('draft')}
+              disabled={saving}
+              icon={<FileText size={14} />}
+              variant="outline"
+            >
+              Save draft
+            </PublishBtn>
+            <PublishBtn
+              onClick={() => save('scheduled')}
+              disabled={saving || !form.publish_at}
+              icon={<Clock size={14} />}
+              variant="outline"
+              title={!form.publish_at ? 'Pick a date and time first' : 'Schedule for later'}
+            >
+              Schedule
+            </PublishBtn>
+            <PublishBtn
+              onClick={() => save('published')}
+              disabled={saving}
+              icon={saving ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
+              variant="primary"
+            >
+              Publish now
+            </PublishBtn>
           </div>
         </Section>
-
-        <Section title="Publish">
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={form.published}
-              onChange={(e) => update('published', e.target.checked)}
-              className="w-4 h-4 accent-[#1C3A64]"
-            />
-            <span className="text-[14px] text-[#1C3A64]">
-              Published <span className="text-[#888888]">— visible on the public blog</span>
-            </span>
-          </label>
-        </Section>
-
-        <div className="flex items-center justify-end gap-3 pt-2">
-          <button
-            type="button"
-            onClick={() => navigate('/admin')}
-            className="px-5 py-2.5 text-[#1C3A64] text-[13px] font-medium hover:bg-[#1C3A64]/[0.06] rounded-lg transition-colors"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] disabled:opacity-60 text-white text-[13px] font-medium px-5 py-2.5 rounded-lg transition-colors"
-          >
-            {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
-            {isEdit ? 'Save changes' : 'Create article'}
-          </button>
-        </div>
       </form>
     </div>
   )
 }
 
-// ─── Small UI helpers ─────────────────────────────────────────────────
+// ─── Helper UI ──────────────────────────────────────────────────────
 
-const input =
+const inputCls =
   'w-full px-3.5 py-2.5 border border-[#1C3A64]/15 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-[#1C3A64]/30 focus:border-[#1C3A64]/40 bg-white'
 
 function Section({
@@ -441,10 +574,12 @@ function Field({
   )
 }
 
-function AddBlockBtn({
+function Tab({
+  active,
   onClick,
   children,
 }: {
+  active: boolean
   onClick: () => void
   children: React.ReactNode
 }) {
@@ -452,202 +587,256 @@ function AddBlockBtn({
     <button
       type="button"
       onClick={onClick}
-      className="text-[12px] font-medium text-[#1C3A64] border border-[#1C3A64]/15 hover:bg-[#1C3A64]/[0.06] px-3 py-1.5 rounded-lg transition-colors"
+      className={[
+        'inline-flex items-center gap-1.5 text-[12px] font-medium px-3 py-1.5 rounded-lg transition-colors',
+        active
+          ? 'bg-[#1C3A64] text-white'
+          : 'text-[#1C3A64] hover:bg-[#1C3A64]/[0.06]',
+      ].join(' ')}
     >
       {children}
     </button>
   )
 }
 
-function BlockEditor({
-  block,
-  onChange,
-  onRemove,
-  onMoveUp,
-  onMoveDown,
-  isFirst,
-  isLast,
-}: {
-  block: ArticleBlock
-  onChange: (patch: Partial<ArticleBlock>) => void
-  onRemove: () => void
-  onMoveUp: () => void
-  onMoveDown: () => void
-  isFirst: boolean
-  isLast: boolean
-}) {
+function StatusBadge({ mode }: { mode: PublishMode }) {
+  const styles: Record<PublishMode, string> = {
+    draft: 'bg-amber-50 text-amber-700 border-amber-200',
+    scheduled: 'bg-violet-50 text-violet-700 border-violet-200',
+    published: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  }
+  const labels: Record<PublishMode, string> = {
+    draft: 'Draft',
+    scheduled: 'Scheduled',
+    published: 'Published',
+  }
   return (
-    <div className="border border-[#1C3A64]/12 rounded-xl p-4 bg-[#FAFBFD]">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-[10px] tracking-[0.15em] uppercase font-medium text-[#6D8FB5]">
-          {blockLabel(block.kind)}
+    <span
+      className={`text-[10px] tracking-[0.15em] uppercase font-medium border px-2.5 py-1 rounded-full ${styles[mode]}`}
+    >
+      {labels[mode]}
+    </span>
+  )
+}
+
+function PublishBtn({
+  onClick,
+  disabled,
+  icon,
+  children,
+  variant,
+  title,
+}: {
+  onClick: () => void
+  disabled?: boolean
+  icon: React.ReactNode
+  children: React.ReactNode
+  variant: 'primary' | 'outline'
+  title?: string
+}) {
+  const base =
+    'inline-flex items-center gap-2 text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed'
+  const cls =
+    variant === 'primary'
+      ? 'bg-[#1C3A64] hover:bg-[#2A4E72] text-white'
+      : 'border border-[#1C3A64]/20 text-[#1C3A64] hover:bg-[#1C3A64]/[0.06]'
+  return (
+    <button type="button" onClick={onClick} disabled={disabled} title={title} className={`${base} ${cls}`}>
+      {icon}
+      {children}
+    </button>
+  )
+}
+
+function TagsInput({
+  value,
+  onChange,
+}: {
+  value: string[]
+  onChange: (next: string[]) => void
+}) {
+  const [draft, setDraft] = useState('')
+
+  const commit = (raw: string) => {
+    const tag = raw.trim().replace(/^#/, '')
+    if (!tag) return
+    if (value.includes(tag)) return
+    onChange([...value, tag])
+  }
+
+  const onKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault()
+      commit(draft)
+      setDraft('')
+    } else if (e.key === 'Backspace' && draft === '' && value.length) {
+      onChange(value.slice(0, -1))
+    }
+  }
+
+  return (
+    <div
+      className={
+        inputCls + ' flex flex-wrap items-center gap-1.5 cursor-text min-h-[42px] py-2'
+      }
+      onClick={(e) => {
+        const input = (e.currentTarget as HTMLDivElement).querySelector('input')
+        input?.focus()
+      }}
+    >
+      {value.map((t) => (
+        <span
+          key={t}
+          className="inline-flex items-center gap-1 bg-[#1C3A64]/[0.08] text-[#1C3A64] text-[12px] px-2 py-0.5 rounded-md"
+        >
+          {t}
+          <button
+            type="button"
+            onClick={() => onChange(value.filter((x) => x !== t))}
+            className="hover:text-red-600"
+            aria-label={`Remove ${t}`}
+          >
+            <X size={12} />
+          </button>
         </span>
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={onMoveUp}
-            disabled={isFirst}
-            className="p-1 text-[#1C3A64] hover:bg-[#1C3A64]/[0.06] rounded disabled:opacity-30"
-            title="Move up"
-          >
-            <ChevronUp size={14} />
-          </button>
-          <button
-            type="button"
-            onClick={onMoveDown}
-            disabled={isLast}
-            className="p-1 text-[#1C3A64] hover:bg-[#1C3A64]/[0.06] rounded disabled:opacity-30"
-            title="Move down"
-          >
-            <ChevronDown size={14} />
-          </button>
-          <button
-            type="button"
-            onClick={onRemove}
-            className="p-1 text-red-600 hover:bg-red-50 rounded"
-            title="Remove block"
-          >
-            <Trash2 size={13} />
-          </button>
-        </div>
-      </div>
-      <BlockBody block={block} onChange={onChange} />
+      ))}
+      <input
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onKeyDown={onKey}
+        onBlur={() => {
+          if (draft) {
+            commit(draft)
+            setDraft('')
+          }
+        }}
+        placeholder={value.length ? '' : 'class-actions, hague-convention…'}
+        className="flex-1 min-w-[120px] outline-none bg-transparent text-[14px]"
+      />
     </div>
   )
 }
 
-function BlockBody({
-  block,
+function CoverImageInput({
+  value,
   onChange,
+  onFile,
+  uploading,
 }: {
-  block: ArticleBlock
-  onChange: (patch: Partial<ArticleBlock>) => void
+  value: string
+  onChange: (v: string) => void
+  onFile: (f: File) => void
+  uploading: boolean
 }) {
-  switch (block.kind) {
-    case 'p':
-    case 'h2':
-    case 'h3':
-      return (
-        <textarea
-          rows={block.kind === 'p' ? 5 : 2}
-          value={block.text}
-          onChange={(e) => onChange({ text: e.target.value })}
-          className={input}
-          placeholder={
-            block.kind === 'p' ? 'Write the paragraph…' : 'Heading text'
+  return (
+    <div className="space-y-3">
+      <input
+        type="url"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={inputCls}
+        placeholder="https://…  (or upload below)"
+      />
+      <div className="flex items-center gap-3">
+        <label
+          className={
+            'inline-flex items-center gap-2 cursor-pointer text-[13px] font-medium px-4 py-2.5 rounded-lg border border-[#1C3A64]/20 text-[#1C3A64] hover:bg-[#1C3A64]/[0.06] transition-colors ' +
+            (uploading ? 'opacity-60 cursor-wait' : '')
           }
-        />
-      )
-    case 'quote':
-      return (
-        <div className="space-y-2">
-          <textarea
-            rows={3}
-            value={block.text}
-            onChange={(e) => onChange({ text: e.target.value })}
-            className={input}
-            placeholder="Quote text"
-          />
+        >
+          {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
+          {uploading ? 'Uploading…' : 'Upload image'}
           <input
-            type="text"
-            value={block.attribution ?? ''}
-            onChange={(e) => onChange({ attribution: e.target.value })}
-            className={input}
-            placeholder="Attribution (optional)"
+            type="file"
+            accept="image/*"
+            className="hidden"
+            disabled={uploading}
+            onChange={(e) => {
+              const f = e.target.files?.[0]
+              e.target.value = ''
+              if (f) onFile(f)
+            }}
           />
-        </div>
-      )
-    case 'ul':
-      return (
-        <div className="space-y-2">
-          {block.items.map((item, i) => (
-            <div key={i} className="flex gap-2">
-              <input
-                type="text"
-                value={item}
-                onChange={(e) => {
-                  const items = [...block.items]
-                  items[i] = e.target.value
-                  onChange({ items })
-                }}
-                className={input}
-                placeholder={`Item ${i + 1}`}
-              />
-              <button
-                type="button"
-                onClick={() => onChange({ items: block.items.filter((_, k) => k !== i) })}
-                className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
-                title="Remove item"
-              >
-                <Trash2 size={13} />
-              </button>
-            </div>
-          ))}
+        </label>
+        {value && (
           <button
             type="button"
-            onClick={() => onChange({ items: [...block.items, ''] })}
-            className="text-[12px] font-medium text-[#1C3A64] hover:underline inline-flex items-center gap-1"
+            onClick={() => onChange('')}
+            className="text-[12px] text-red-600 hover:underline"
           >
-            <Plus size={12} /> Add item
+            Remove
           </button>
+        )}
+      </div>
+      {value && (
+        <div className="rounded-xl overflow-hidden border border-[#1C3A64]/10 bg-[#F4F6FB] max-w-md">
+          <img src={value} alt="Cover preview" className="w-full h-auto" />
         </div>
-      )
-    case 'link':
-      return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <input
-            type="text"
-            value={block.label}
-            onChange={(e) => onChange({ label: e.target.value })}
-            className={input}
-            placeholder="Label"
-          />
-          <input
-            type="url"
-            value={block.href}
-            onChange={(e) => onChange({ href: e.target.value })}
-            className={input}
-            placeholder="https://…"
-          />
+      )}
+      {!value && (
+        <div className="flex items-center gap-2 text-[#888888] text-[12px]">
+          <ImageIcon size={14} /> No cover image set
         </div>
-      )
-    case 'image':
-      return (
-        <div className="space-y-2">
-          <input
-            type="url"
-            value={block.src}
-            onChange={(e) => onChange({ src: e.target.value })}
-            className={input}
-            placeholder="Image URL"
-          />
-          <input
-            type="text"
-            value={block.caption ?? ''}
-            onChange={(e) => onChange({ caption: e.target.value })}
-            className={input}
-            placeholder="Caption (optional)"
-          />
-        </div>
-      )
-  }
+      )}
+    </div>
+  )
 }
 
-function blockLabel(kind: ArticleBlock['kind']) {
-  switch (kind) {
-    case 'p':
-      return 'Paragraph'
-    case 'h2':
-      return 'Heading'
-    case 'h3':
-      return 'Subheading'
-    case 'ul':
-      return 'List'
-    case 'quote':
-      return 'Quote'
-    case 'link':
-      return 'Link'
-    case 'image':
-      return 'Image'
-  }
+function PreviewPane({ form }: { form: ArticleForm }) {
+  return (
+    <div className="border border-[#1C3A64]/15 rounded-lg overflow-hidden bg-white">
+      <div className="bg-[#F4F6FB] px-4 py-2 border-b border-[#1C3A64]/10 text-[11px] tracking-[0.15em] uppercase text-[#6D8FB5] font-medium">
+        Preview — exactly how it will look on the public blog
+      </div>
+      <div className="p-6 md:p-8">
+        {form.category && (
+          <div className="text-[10px] tracking-[0.18em] uppercase font-medium text-[#6D8FB5] mb-3">
+            {form.category}
+          </div>
+        )}
+        <h1 className="text-[#1C3A64] text-[28px] md:text-[34px] font-medium leading-tight tracking-tight mb-3">
+          {form.title || 'Untitled article'}
+        </h1>
+        {form.excerpt && (
+          <p className="text-[#555555] text-[15px] leading-[1.7] mb-6">
+            {form.excerpt}
+          </p>
+        )}
+        <div className="flex items-center gap-3 text-[12px] text-[#888888] mb-6 pb-4 border-b border-[#1C3A64]/10">
+          <span className="inline-flex items-center gap-1.5">
+            <Calendar size={11} />
+            {form.date}
+          </span>
+          {form.author && <span>· {form.author}</span>}
+        </div>
+        {form.cover_image && (
+          <img
+            src={form.cover_image}
+            alt=""
+            className="w-full h-auto rounded-xl mb-6"
+          />
+        )}
+        {form.body_html ? (
+          <div
+            className="prose prose-slate max-w-none"
+            dangerouslySetInnerHTML={{ __html: form.body_html }}
+          />
+        ) : (
+          <p className="text-[#aaa] italic text-[14px]">No body yet — start writing in the Write tab.</p>
+        )}
+        {form.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-8 pt-6 border-t border-[#1C3A64]/10">
+            {form.tags.map((t) => (
+              <span
+                key={t}
+                className="text-[11px] bg-[#1C3A64]/[0.06] text-[#1C3A64] px-2 py-0.5 rounded"
+              >
+                #{t}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
