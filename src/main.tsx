@@ -23,6 +23,10 @@ import { AdminLogin } from '@/pages/admin/AdminLogin'
 import { AdminLayout } from '@/pages/admin/AdminLayout'
 import { AdminDashboard } from '@/pages/admin/AdminDashboard'
 import { ArticleEditor } from '@/pages/admin/ArticleEditor'
+import { CasesAdminDashboard } from '@/pages/admin/CasesAdminDashboard'
+import { CaseEditor } from '@/pages/admin/CaseEditor'
+import { InvestigationsAdmin } from '@/pages/admin/InvestigationsAdmin'
+import { PastActionsAdmin } from '@/pages/admin/PastActionsAdmin'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -35,6 +39,11 @@ createRoot(document.getElementById('root')!).render(
             <Route index element={<AdminDashboard />} />
             <Route path="new" element={<ArticleEditor />} />
             <Route path="edit/:id" element={<ArticleEditor />} />
+            <Route path="cases" element={<CasesAdminDashboard />} />
+            <Route path="cases/new" element={<CaseEditor />} />
+            <Route path="cases/edit/:id" element={<CaseEditor />} />
+            <Route path="investigations" element={<InvestigationsAdmin />} />
+            <Route path="past-actions" element={<PastActionsAdmin />} />
           </Route>
 
           <Route element={<Layout />}>

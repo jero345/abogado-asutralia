@@ -1,5 +1,5 @@
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
-import { Loader2, LogOut, FileText, Plus, ArrowLeft } from 'lucide-react'
+import { Loader2, LogOut, FileText, Plus, ArrowLeft, Scale, Search, ListChecks } from 'lucide-react'
 import { useAuth } from '@/lib/auth'
 
 export function AdminLayout() {
@@ -25,34 +25,18 @@ export function AdminLayout() {
           <img src="/img/logobg.png" alt="Banton Group" className="h-9 w-auto object-contain" />
           <p className="text-[#888888] text-[11px] mt-2 tracking-[0.15em] uppercase">Admin</p>
         </div>
-        <nav className="flex-1 px-3 py-4 space-y-1">
-          <NavLink
-            to="/admin"
-            end
-            className={({ isActive }) =>
-              `flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-colors ${
-                isActive
-                  ? 'bg-[#1C3A64] text-white'
-                  : 'text-[#1C3A64] hover:bg-[#1C3A64]/[0.06]'
-              }`
-            }
-          >
-            <FileText size={14} />
-            Articles
-          </NavLink>
-          <NavLink
-            to="/admin/new"
-            className={({ isActive }) =>
-              `flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-colors ${
-                isActive
-                  ? 'bg-[#1C3A64] text-white'
-                  : 'text-[#1C3A64] hover:bg-[#1C3A64]/[0.06]'
-              }`
-            }
-          >
-            <Plus size={14} />
-            New article
-          </NavLink>
+        <nav className="flex-1 px-3 py-4 space-y-5 overflow-y-auto">
+          <SidebarGroup label="Blog">
+            <SidebarLink to="/admin" end icon={<FileText size={14} />}>Articles</SidebarLink>
+            <SidebarLink to="/admin/new" icon={<Plus size={14} />}>New article</SidebarLink>
+          </SidebarGroup>
+
+          <SidebarGroup label="Class Actions">
+            <SidebarLink to="/admin/cases" end icon={<Scale size={14} />}>Cases</SidebarLink>
+            <SidebarLink to="/admin/cases/new" icon={<Plus size={14} />}>New case</SidebarLink>
+            <SidebarLink to="/admin/investigations" icon={<Search size={14} />}>Investigations</SidebarLink>
+            <SidebarLink to="/admin/past-actions" icon={<ListChecks size={14} />}>Past actions</SidebarLink>
+          </SidebarGroup>
         </nav>
         <div className="px-3 py-4 border-t border-[#1C3A64]/10 space-y-1">
           <div className="px-3 pb-2 text-[11px] text-[#888888] truncate" title={session.user.email ?? ''}>
@@ -78,5 +62,45 @@ export function AdminLayout() {
         <Outlet />
       </main>
     </div>
+  )
+}
+
+function SidebarGroup({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <div className="px-3 mb-1.5 text-[10px] tracking-[0.15em] uppercase text-[#888888] font-medium">
+        {label}
+      </div>
+      <div className="space-y-1">{children}</div>
+    </div>
+  )
+}
+
+function SidebarLink({
+  to,
+  end,
+  icon,
+  children,
+}: {
+  to: string
+  end?: boolean
+  icon: React.ReactNode
+  children: React.ReactNode
+}) {
+  return (
+    <NavLink
+      to={to}
+      end={end}
+      className={({ isActive }) =>
+        `flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-colors ${
+          isActive
+            ? 'bg-[#1C3A64] text-white'
+            : 'text-[#1C3A64] hover:bg-[#1C3A64]/[0.06]'
+        }`
+      }
+    >
+      {icon}
+      {children}
+    </NavLink>
   )
 }

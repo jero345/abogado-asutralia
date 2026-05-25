@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ChevronDown, Calendar, Scale, FileText, Mail, ArrowUpRight, Clock } from 'lucide-react'
-import { classActions, investigations, pastActions, type Block, type CaseStatus } from '@/data/classActions'
+import { type Block, type CaseStatus, type ClassAction } from '@/data/classActions'
+import { fetchCases, fetchInvestigations, fetchPastActions, type Investigation } from '@/lib/classActions'
 
 const statusColors: Record<CaseStatus, string> = {
   // All statuses in the navy family — no green, no gold, no purple
@@ -15,6 +16,13 @@ const statusColors: Record<CaseStatus, string> = {
 
 function BlockRenderer({ block }: { block: Block }) {
   switch (block.kind) {
+    case 'html':
+      return (
+        <div
+          className="prose prose-slate prose-sm md:prose-base max-w-none prose-headings:text-[#1C3A64] prose-p:text-[#555555] prose-a:text-[#1C3A64] prose-blockquote:border-l-[#1C3A64]"
+          dangerouslySetInnerHTML={{ __html: block.html }}
+        />
+      )
     case 'p':
       return <p className="text-[#555555] text-[14px] md:text-[15px] leading-[1.75]">{block.text}</p>
     case 'h':
@@ -102,6 +110,24 @@ function BlockRenderer({ block }: { block: Block }) {
 
 export function ClassActions() {
   const [expanded, setExpanded] = useState<string | null>(null)
+  const [classActions, setClassActions] = useState<ClassAction[]>([])
+  const [investigations, setInvestigations] = useState<Investigation[]>([])
+  const [pastActions, setPastActions] = useState<string[]>([])
+
+  useEffect(() => {
+    let cancelled = false
+    Promise.all([fetchCases(), fetchInvestigations(), fetchPastActions()]).then(
+      ([cs, inv, past]) => {
+        if (cancelled) return
+        setClassActions(cs)
+        setInvestigations(inv)
+        setPastActions(past)
+      },
+    )
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   return (
     <section id="class-actions" className="relative py-20 md:py-28 bg-white">

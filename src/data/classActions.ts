@@ -13,8 +13,18 @@ export type RecallTable = {
   columns: string[]
   rows: (string | { link: string; label: string })[][]
 }
+/** Rich-text HTML block (TipTap output) — used by DB-managed cases. */
+export type HtmlBlock = { kind: 'html'; html: string }
 
-export type Block = Paragraph | BulletList | OrderedList | LabeledLink | Email | Subheading | RecallTable
+export type Block =
+  | Paragraph
+  | BulletList
+  | OrderedList
+  | LabeledLink
+  | Email
+  | Subheading
+  | RecallTable
+  | HtmlBlock
 
 export type CaseStatus = 'Active' | 'Settled' | 'On Appeal' | 'Investigating'
 
