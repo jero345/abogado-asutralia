@@ -25,10 +25,11 @@ const team: Member[] = [
     role: 'Managing Partner',
     specialties: ['Class Actions', 'Securities Litigation', 'Insolvency', 'Commercial Litigation'],
     bio:
-      'Amanda is the Managing Partner of Banton Group, which she established in February 2020.',
+      'Amanda Banton is the Managing Partner of Banton Group, established in February 2020. She brings more than 20 years\u2019 experience in the legal profession.',
     extendedBio: [
-      'With over 20 years of legal experience — formerly at Squire Patton Boggs and Piper Alderman, where she ran substantial litigation practices, and drawing on consulting experience at KPMG and within the Federal Government — she has built Banton Group into one of Australia\u2019s most formidable litigation and insolvency practices.',
-      'Amanda is known for establishing cases from the ground up, her surgical strategic thinking, and her ability to execute ground-breaking matters in which new law is made and global precedent triggered. She is highly regarded by clients, litigation funders, insolvency practitioners and the Court alike.',
+      'Her career includes senior roles at Squire Patton Boggs and Piper Alderman, where she led substantial litigation practices, as well as consulting experience with KPMG and within the Federal Government. Her practice spans complex insolvency, regulatory, corporate and commercial disputes, including securities class actions, with particular expertise in matters involving corporations law, ASIC regulation, competition and consumer law, and fiduciary obligations.',
+      'Amanda is recognised for developing large-scale litigation without the benefit of complete documentation or witnesses. Under her leadership, Banton Group has secured a series of landmark outcomes, including multiple High Court victories and significant recoveries in complex proceedings.',
+      'She is known for her strategic judgement, rigorous attention to detail, and her ability to manage the interests of all stakeholders while advancing high-stakes litigation with precision and discipline.',
     ],
     photo: '/img/team/amanda-banton.jpg',
     awards: [
