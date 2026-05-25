@@ -127,6 +127,49 @@ create policy "Authenticated delete article-images"
   to authenticated
   using (bucket_id = 'article-images');
 
+-- ───────────────────────────────────────────────
+-- Storage bucket for PDF attachments (article + case bodies)
+-- Public-read, authenticated-write. PDFs only — enforced client-side
+-- in the editor, plus a 25 MB hard cap here.
+-- ───────────────────────────────────────────────
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'article-documents',
+  'article-documents',
+  true,
+  26214400,                       -- 25 MB
+  array['application/pdf']
+)
+on conflict (id) do update set
+  public = true,
+  file_size_limit = 26214400,
+  allowed_mime_types = array['application/pdf'];
+
+drop policy if exists "Public read article-documents"           on storage.objects;
+drop policy if exists "Authenticated upload article-documents"  on storage.objects;
+drop policy if exists "Authenticated update article-documents"  on storage.objects;
+drop policy if exists "Authenticated delete article-documents"  on storage.objects;
+
+create policy "Public read article-documents"
+  on storage.objects for select
+  using (bucket_id = 'article-documents');
+
+create policy "Authenticated upload article-documents"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'article-documents');
+
+create policy "Authenticated update article-documents"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'article-documents')
+  with check (bucket_id = 'article-documents');
+
+create policy "Authenticated delete article-documents"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'article-documents');
+
 -- ═══════════════════════════════════════════════════════════════════
 -- Class Actions admin (v3): cases, investigations, past actions
 -- ═══════════════════════════════════════════════════════════════════

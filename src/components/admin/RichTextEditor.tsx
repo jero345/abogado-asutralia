@@ -17,6 +17,7 @@ import {
   Quote,
   Link as LinkIcon,
   Image as ImageIcon,
+  FileText,
   Undo2,
   Redo2,
   Loader2,
@@ -85,13 +86,15 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
 // ─── Toolbar ──────────────────────────────────────────────────────────
 
 function Toolbar({ editor }: { editor: Editor }) {
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const [uploading, setUploading] = useState(false)
+  const imageInputRef = useRef<HTMLInputElement>(null)
+  const pdfInputRef = useRef<HTMLInputElement>(null)
+  const [uploading, setUploading] = useState<null | 'image' | 'pdf'>(null)
   const [uploadError, setUploadError] = useState<string | null>(null)
 
-  const onUploadClick = useCallback(() => fileInputRef.current?.click(), [])
+  const onUploadImageClick = useCallback(() => imageInputRef.current?.click(), [])
+  const onUploadPdfClick = useCallback(() => pdfInputRef.current?.click(), [])
 
-  const onFileChange = useCallback(
+  const onImageChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0]
       e.target.value = ''
@@ -109,7 +112,7 @@ function Toolbar({ editor }: { editor: Editor }) {
         return
       }
 
-      setUploading(true)
+      setUploading('image')
       setUploadError(null)
 
       const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
@@ -121,14 +124,87 @@ function Toolbar({ editor }: { editor: Editor }) {
         .upload(path, file, { cacheControl: '3600', upsert: false })
 
       if (uploadErr) {
-        setUploading(false)
+        setUploading(null)
         setUploadError(uploadErr.message)
         return
       }
 
       const { data } = supabase.storage.from('article-images').getPublicUrl(path)
       editor.chain().focus().setImage({ src: data.publicUrl }).run()
-      setUploading(false)
+      setUploading(null)
+    },
+    [editor],
+  )
+
+  const onPdfChange = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      e.target.value = ''
+      if (!file) return
+      if (!supabase) {
+        setUploadError('Supabase is not configured.')
+        return
+      }
+      const isPdf =
+        file.type === 'application/pdf' ||
+        file.name.toLowerCase().endsWith('.pdf')
+      if (!isPdf) {
+        setUploadError('Only PDF files are accepted.')
+        return
+      }
+      if (file.size > 25 * 1024 * 1024) {
+        setUploadError('PDF is too large (max 25 MB).')
+        return
+      }
+
+      setUploading('pdf')
+      setUploadError(null)
+
+      // Keep a sanitised version of the original filename in the URL so it
+      // shows up in browser downloads.
+      const base = file.name
+        .replace(/\.pdf$/i, '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9-]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 60) || 'document'
+      const path = `editor/${Date.now()}-${base}.pdf`
+
+      const { error: uploadErr } = await supabase.storage
+        .from('article-documents')
+        .upload(path, file, {
+          cacheControl: '3600',
+          upsert: false,
+          contentType: 'application/pdf',
+        })
+
+      if (uploadErr) {
+        setUploading(null)
+        setUploadError(uploadErr.message)
+        return
+      }
+
+      const { data } = supabase.storage.from('article-documents').getPublicUrl(path)
+      const label = file.name.replace(/\.pdf$/i, '')
+      // Insert a styled link to the PDF — the public renderer's `prose`
+      // classes will style it like any other inline link.
+      editor
+        .chain()
+        .focus()
+        .insertContent({
+          type: 'text',
+          text: `📄 ${label}`,
+          marks: [
+            {
+              type: 'link',
+              attrs: { href: data.publicUrl, target: '_blank', rel: 'noopener noreferrer' },
+            },
+          ],
+        })
+        .run()
+      setUploading(null)
     },
     [editor],
   )
@@ -234,15 +310,25 @@ function Toolbar({ editor }: { editor: Editor }) {
         <Btn onClick={setLink} active={editor.isActive('link')} title="Link">
           <LinkIcon size={14} />
         </Btn>
-        <Btn onClick={onUploadClick} title="Insert image" disabled={uploading}>
-          {uploading ? <Loader2 size={14} className="animate-spin" /> : <ImageIcon size={14} />}
+        <Btn onClick={onUploadImageClick} title="Insert image" disabled={uploading !== null}>
+          {uploading === 'image' ? <Loader2 size={14} className="animate-spin" /> : <ImageIcon size={14} />}
+        </Btn>
+        <Btn onClick={onUploadPdfClick} title="Insert PDF" disabled={uploading !== null}>
+          {uploading === 'pdf' ? <Loader2 size={14} className="animate-spin" /> : <FileText size={14} />}
         </Btn>
         <input
-          ref={fileInputRef}
+          ref={imageInputRef}
           type="file"
           accept="image/*"
           className="hidden"
-          onChange={onFileChange}
+          onChange={onImageChange}
+        />
+        <input
+          ref={pdfInputRef}
+          type="file"
+          accept="application/pdf,.pdf"
+          className="hidden"
+          onChange={onPdfChange}
         />
       </Group>
 
