@@ -43,6 +43,10 @@ export interface ClassAction {
   wordpressLink?: string
   /** Slug of the internal React detail page at /class-actions/:slug (if one exists) */
   detailSlug?: string
+  /** URL slug — same as `id` for DB-backed cases. */
+  slug?: string
+  /** Lower numbers sort first when merged with investigations. */
+  orderIndex?: number
 }
 
 export const classActions: ClassAction[] = [

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -106,6 +108,12 @@
     font-style: italic;
     font-weight: 400;
     letter-spacing: -0.02em;
+  }
+
+  /* Typewriter accent — used for Class Action case titles in the listing */
+  .font-typewriter {
+    font-family: 'Courier Prime', 'Courier New', 'Consolas', monospace;
+    letter-spacing: 0;
   }
 
   a {

@@ -1,127 +1,45 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { ChevronDown, Calendar, Scale, FileText, Mail, ArrowUpRight, Clock } from 'lucide-react'
-import { type Block, type CaseStatus, type ClassAction } from '@/data/classActions'
-import { fetchCases, fetchInvestigations, fetchPastActions, type Investigation } from '@/lib/classActions'
+import { ArrowUpRight } from 'lucide-react'
+import { type Block, type ClassAction } from '@/data/classActions'
+import {
+  fetchCases,
+  fetchInvestigations,
+  fetchPastActions,
+  type Investigation,
+} from '@/lib/classActions'
+import { embedPdfLinks } from '@/lib/embedPdfs'
 
-const statusColors: Record<CaseStatus, string> = {
-  // All statuses in the navy family — no green, no gold, no purple
-  Active: 'text-white bg-[#1C3A64] border-[#1C3A64]',
-  Settled: 'text-[#1C3A64] bg-[#E8F0FA] border-[#1C3A64]/25',
-  'On Appeal': 'text-white bg-[#385078] border-[#385078]',
-  Investigating: 'text-[#1C3A64] bg-white border-[#1C3A64]/40',
-}
+// Union of the entries we mix in the single ordered listing.
+type Row =
+  | { kind: 'case'; data: ClassAction; html: string }
+  | { kind: 'investigation'; data: Investigation }
 
-function BlockRenderer({ block }: { block: Block }) {
-  switch (block.kind) {
-    case 'html':
-      return (
-        <div
-          className="prose prose-slate prose-sm md:prose-base max-w-none prose-headings:text-[#1C3A64] prose-p:text-[#555555] prose-a:text-[#1C3A64] prose-blockquote:border-l-[#1C3A64]"
-          dangerouslySetInnerHTML={{ __html: block.html }}
-        />
-      )
-    case 'p':
-      return <p className="text-[#555555] text-[14px] md:text-[15px] leading-[1.75]">{block.text}</p>
-    case 'h':
-      return (
-        <h4 className="text-[#1C3A64] text-[15px] md:text-[16px] font-medium leading-[1.3] mt-2">
-          {block.text}
-        </h4>
-      )
-    case 'ul':
-      return (
-        <ul className="list-disc pl-5 space-y-2 text-[#555555] text-[14px] md:text-[15px] leading-[1.7]">
-          {block.items.map((i, k) => (
-            <li key={k}>{i}</li>
-          ))}
-        </ul>
-      )
-    case 'ol':
-      return (
-        <ol className="list-decimal pl-5 space-y-2 text-[#555555] text-[14px] md:text-[15px] leading-[1.7]">
-          {block.items.map((i, k) => (
-            <li key={k}>{i}</li>
-          ))}
-        </ol>
-      )
-    case 'link':
-      return (
-        <a
-          href={block.href}
-          className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium border border-[#1C3A64]/25 bg-white rounded-full px-4 py-2 hover:bg-[#1C3A64] hover:text-white transition-colors"
-        >
-          <FileText size={13} />
-          {block.label}
-        </a>
-      )
-    case 'email':
-      return (
-        <div className="inline-flex flex-wrap items-center gap-2 bg-[#F4F6FB] border border-[#1C3A64]/15 rounded-lg px-4 py-3">
-          <Mail size={13} className="text-[#1C3A64]" />
-          <span className="text-[#555555] text-[13px]">{block.label}:</span>
-          <a href={`mailto:${block.address}`} className="text-[#1C3A64] text-[13px] font-medium hover:underline">
-            {block.address}
-          </a>
-        </div>
-      )
-    case 'recalls':
-      return (
-        <div className="overflow-x-auto -mx-1">
-          <table className="min-w-full text-[12px] md:text-[13px] border border-[#1C3A64]/10 rounded-lg">
-            <thead className="bg-[#1C3A64]/[0.06]">
-              <tr>
-                {block.columns.map((c) => (
-                  <th
-                    key={c}
-                    className="text-left text-[#1C3A64] font-medium px-3 py-2.5 border-b border-[#1C3A64]/10 tracking-wide"
-                  >
-                    {c}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {block.rows.map((row, r) => (
-                <tr key={r} className={r % 2 === 0 ? 'bg-white' : 'bg-[#1C3A64]/[0.02]'}>
-                  {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 border-b border-[#1C3A64]/[0.06] text-[#555555]">
-                      {typeof cell === 'string' ? (
-                        cell
-                      ) : (
-                        <a href={cell.link} className="text-[#1C3A64] underline hover:opacity-70">
-                          {cell.label}
-                        </a>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )
-    default:
-      return null
-  }
+function caseHtml(c: ClassAction): string {
+  // DB-backed cases push an `html` block; legacy/static cases push
+  // structured Block[]. For listing we use the HTML body when present;
+  // otherwise fall back to the case summary.
+  const htmlBlock = c.content.find((b): b is Extract<Block, { kind: 'html' }> => b.kind === 'html')
+  if (htmlBlock) return htmlBlock.html
+  return `<p>${c.summary}</p>`
 }
 
 export function ClassActions() {
-  const [expanded, setExpanded] = useState<string | null>(null)
-  const [classActions, setClassActions] = useState<ClassAction[]>([])
+  const [cases, setCases] = useState<ClassAction[]>([])
   const [investigations, setInvestigations] = useState<Investigation[]>([])
   const [pastActions, setPastActions] = useState<string[]>([])
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     let cancelled = false
     Promise.all([fetchCases(), fetchInvestigations(), fetchPastActions()]).then(
       ([cs, inv, past]) => {
         if (cancelled) return
-        setClassActions(cs)
+        setCases(cs)
         setInvestigations(inv)
         setPastActions(past)
+        setLoaded(true)
       },
     )
     return () => {
@@ -129,184 +47,158 @@ export function ClassActions() {
     }
   }, [])
 
+  /**
+   * Merge cases and investigations into a single list ordered by
+   * `orderIndex` (lower first). Cases without orderIndex sort by
+   * insertion order; investigations land after by default.
+   */
+  const rows = useMemo<Row[]>(() => {
+    const merged: { row: Row; key: number }[] = []
+    cases.forEach((c, i) => {
+      merged.push({
+        row: { kind: 'case', data: c, html: caseHtml(c) },
+        key: typeof c.orderIndex === 'number' ? c.orderIndex : 1000 + i,
+      })
+    })
+    investigations.forEach((inv, i) => {
+      merged.push({
+        row: { kind: 'investigation', data: inv },
+        key: typeof inv.orderIndex === 'number' ? inv.orderIndex : 2000 + i,
+      })
+    })
+    merged.sort((a, b) => a.key - b.key)
+    return merged.map((m) => m.row)
+  }, [cases, investigations])
+
   return (
-    <section id="class-actions" className="relative py-20 md:py-28 bg-white">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <ScrollReveal className="mb-12">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
-              Landmark
-              <br />
-              <span className="italic-display text-[#6D8FB5]">class actions.</span>
-            </h2>
-            <p className="text-[#555555] text-[14px] md:text-[15px] leading-[1.7] lg:max-w-sm">
-              Representing real people against powerful institutions — tap any matter for the full summary, recall tables and enquiry contacts.
-            </p>
+    <section id="class-actions" className="relative bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-20">
+        {!loaded ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-4 border-[#1C3A64]/20 border-t-[#1C3A64] rounded-full animate-spin" />
           </div>
-        </ScrollReveal>
+        ) : (
+          <>
+            {rows.map((row, idx) =>
+              row.kind === 'case' ? (
+                <CaseRow key={`c-${row.data.id}`} caseData={row.data} html={row.html} first={idx === 0} />
+              ) : (
+                <InvestigationRow key={`i-${row.data.id}`} inv={row.data} />
+              ),
+            )}
 
-        {/* Case list */}
-        <div className="space-y-3">
-          {classActions.map((c, i) => {
-            const isOpen = expanded === c.id
-            return (
-              <ScrollReveal key={c.id} delay={i * 0.03}>
-                <motion.div
-                  layout
-                  className={`relative border rounded-2xl overflow-hidden transition-all duration-300 ${
-                    isOpen
-                      ? 'border-[#1C3A64]/25 bg-[#1C3A64]/[0.03]'
-                      : 'border-[#1C3A64]/10 bg-white hover:border-[#1C3A64]/20'
-                  }`}
-                >
-                  {/* Header row */}
-                  <button
-                    onClick={() => setExpanded(isOpen ? null : c.id)}
-                    className="w-full text-left p-5 lg:p-6"
-                  >
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                          <span
-                            className={`text-[11px] font-medium px-2.5 py-1 rounded-full border tracking-wide ${statusColors[c.status]}`}
-                          >
-                            {c.status}
-                          </span>
-                          <span className="text-[#1C3A64]/70 text-[11px] font-medium px-2.5 py-1 bg-[#1C3A64]/[0.05] border border-[#1C3A64]/15 rounded-full tracking-wide">
-                            {c.category}
-                          </span>
-                          <span className="text-[#888888] text-[11px] hidden sm:flex items-center gap-1">
-                            <Calendar size={11} />
-                            {c.year}
-                          </span>
-                        </div>
-                        <h3 className="text-[#1C3A64] font-medium text-[16px] md:text-[18px] leading-snug pr-4">
-                          {c.title}
-                        </h3>
-                        <p className="text-[#555555] text-[13px] md:text-[14px] mt-1.5 leading-relaxed line-clamp-2">
-                          {c.summary}
-                        </p>
-                        {c.keyDate && (
-                          <div className="flex items-center gap-1.5 mt-2.5 text-[#1C3A64] text-[11px] md:text-[12px] font-medium">
-                            <Clock size={11} />
-                            {c.keyDate}
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-4 lg:gap-6 flex-shrink-0">
-                        {c.court && (
-                          <div className="text-right hidden md:block">
-                            <div className="text-[#1C3A64] font-medium text-[13px] leading-tight">{c.court}</div>
-                          </div>
-                        )}
-                        <motion.div
-                          animate={{ rotate: isOpen ? 180 : 0 }}
-                          transition={{ duration: 0.25 }}
-                          className="w-9 h-9 border border-[#1C3A64]/20 rounded-full flex items-center justify-center text-[#1C3A64] flex-shrink-0"
-                        >
-                          <ChevronDown size={15} />
-                        </motion.div>
-                      </div>
-                    </div>
-                  </button>
-
-                  {/* Expanded body */}
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-5 lg:px-6 pb-7 border-t border-[#1C3A64]/[0.08]">
-                          {c.court && (
-                            <div className="mt-5 flex items-center gap-2 text-[#1C3A64] text-[12px] font-medium tracking-wide">
-                              <Scale size={13} />
-                              <span>Jurisdiction:</span>
-                              <span className="text-[#555555] font-normal">{c.court}</span>
-                            </div>
-                          )}
-                          <div className="mt-5 space-y-4">
-                            {c.content.map((b, k) => (
-                              <BlockRenderer key={k} block={b} />
-                            ))}
-                          </div>
-                          {c.detailSlug && (
-                            <Link
-                              to={`/class-actions/${c.detailSlug}`}
-                              className="mt-6 inline-flex items-center gap-2 text-[13px] font-medium text-white bg-[#1C3A64] hover:bg-[#2A4E72] rounded-full px-5 py-2.5 transition-colors tracking-[0.02em]"
-                            >
-                              View full case details
-                              <ArrowUpRight size={13} />
-                            </Link>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              </ScrollReveal>
-            )
-          })}
-        </div>
-
-        {/* Investigations — only shown when there are active investigations */}
-        {investigations.length > 0 && (
-          <ScrollReveal delay={0.1} className="mt-16">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-[#1C3A64]/40" />
-              <span className="text-[#1C3A64] text-[11px] font-medium tracking-[0.2em] uppercase">
-                Current Investigations
-              </span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {investigations.map((inv, i) => (
-                <ScrollReveal key={inv.id} delay={i * 0.06}>
-                  <div className="h-full bg-[#F4F6FB] border border-[#1C3A64]/10 rounded-2xl p-6">
-                    <h3 className="text-[#1C3A64] font-medium text-[16px] mb-2">{inv.title}</h3>
-                    <p className="text-[#555555] text-[13px] md:text-[14px] leading-[1.6] mb-3">{inv.summary}</p>
-                    <p className="text-[#555555] text-[13px] leading-[1.7] mb-4">{inv.body}</p>
-                    <a
-                      href={inv.link.href}
-                      className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:underline"
-                    >
-                      {inv.link.label}
-                      <ArrowUpRight size={13} />
-                    </a>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </ScrollReveal>
+            {pastActions.length > 0 && <PastActionsRow items={pastActions} />}
+          </>
         )}
-
-        {/* Past Actions */}
-        <ScrollReveal delay={0.2} className="mt-16">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-[#1C3A64]/40" />
-            <span className="text-[#1C3A64] text-[11px] font-medium tracking-[0.2em] uppercase">
-              Past Class Actions and Schemes
-            </span>
-          </div>
-          <p className="text-[#555555] text-[14px] leading-[1.7] mb-4 max-w-3xl">
-            Our team has acted for class members in the following matters, among others:
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {pastActions.map((m) => (
-              <span
-                key={m}
-                className="text-[#1C3A64] text-[11px] font-medium px-3 py-1.5 bg-[#1C3A64]/[0.04] border border-[#1C3A64]/15 rounded-full tracking-wide"
-              >
-                {m}
-              </span>
-            ))}
-          </div>
-        </ScrollReveal>
       </div>
     </section>
+  )
+}
+
+// ─── Body / prose styling shared by case + investigation rows ───────
+const proseClasses = [
+  'prose prose-slate max-w-none',
+  'prose-headings:text-[#1C3A64] prose-headings:font-medium',
+  'prose-p:text-[#555555] prose-p:leading-[1.75] prose-p:text-[14.5px]',
+  'prose-a:text-[#1C3A64] prose-a:font-normal prose-a:underline',
+  'prose-strong:text-[#1C3A64]',
+  'prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB] prose-blockquote:rounded-r-xl',
+  'prose-blockquote:not-italic',
+  'prose-li:text-[#555555] prose-li:text-[14.5px]',
+  // Inline PDF viewer
+  '[&_.pdf-embed]:my-6 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
+  '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15',
+  '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
+  '[&_.pdf-embed_iframe]:h-[80vh] [&_.pdf-embed_iframe]:min-h-[520px]',
+  '[&_.pdf-embed_iframe]:bg-[#F4F6FB] [&_.pdf-embed_iframe]:border-0',
+  '[&_.pdf-embed-fallback]:block [&_.pdf-embed-fallback]:text-center',
+  '[&_.pdf-embed-fallback]:text-[12px] [&_.pdf-embed-fallback]:text-[#1C3A64]',
+  '[&_.pdf-embed-fallback]:py-2 [&_.pdf-embed-fallback]:bg-[#F4F6FB]',
+].join(' ')
+
+function CaseRow({
+  caseData,
+  html,
+  first,
+}: {
+  caseData: ClassAction
+  html: string
+  first?: boolean
+}) {
+  const slug = caseData.slug ?? caseData.detailSlug ?? caseData.id
+  return (
+    <ScrollReveal>
+      <article
+        className={`grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-6 md:gap-10 py-10 md:py-12 ${
+          first ? '' : 'border-t border-[#1C3A64]/15'
+        }`}
+      >
+        <div className="md:pr-4">
+          <h3 className="font-typewriter text-[#1C3A64] text-[22px] md:text-[26px] leading-[1.25]">
+            {caseData.title}
+          </h3>
+        </div>
+        <div>
+          <div
+            className={proseClasses}
+            dangerouslySetInnerHTML={{ __html: embedPdfLinks(html) }}
+          />
+          <Link
+            to={`/class-actions/${slug}`}
+            className="mt-6 inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] text-white text-[13px] font-medium px-5 py-2.5 rounded-md transition-colors"
+          >
+            {caseData.title}
+            <ArrowUpRight size={13} />
+          </Link>
+        </div>
+      </article>
+    </ScrollReveal>
+  )
+}
+
+function InvestigationRow({ inv }: { inv: Investigation }) {
+  return (
+    <ScrollReveal>
+      <article className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-6 md:gap-10 py-10 md:py-12 border-t border-[#1C3A64]/15">
+        <div className="md:pr-4">
+          <h3 className="font-typewriter text-[#1C3A64] text-[22px] md:text-[26px] leading-[1.25]">
+            {inv.title}
+          </h3>
+        </div>
+        <div className={proseClasses}>
+          <p>{inv.summary}</p>
+          {inv.body && inv.body !== inv.summary && <p>{inv.body}</p>}
+          {inv.link?.href && inv.link.href !== '#' && (
+            <p>
+              <a href={inv.link.href} target="_blank" rel="noopener noreferrer">
+                {inv.link.label}
+              </a>
+            </p>
+          )}
+        </div>
+      </article>
+    </ScrollReveal>
+  )
+}
+
+function PastActionsRow({ items }: { items: string[] }) {
+  return (
+    <ScrollReveal>
+      <article className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-6 md:gap-10 py-10 md:py-12 border-t border-[#1C3A64]/15">
+        <div className="md:pr-4">
+          <h3 className="font-typewriter text-[#1C3A64] text-[22px] md:text-[26px] leading-[1.25]">
+            Past Class Actions and Schemes
+          </h3>
+        </div>
+        <div className={proseClasses}>
+          <p>Our team has acted for class members in the following matters, among others:</p>
+          <ul>
+            {items.map((m) => (
+              <li key={m}>{m}</li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    </ScrollReveal>
   )
 }

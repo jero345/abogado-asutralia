@@ -17,6 +17,7 @@ export interface Investigation {
   summary: string
   body: string
   link: { label: string; href: string }
+  orderIndex?: number
 }
 
 interface DbCaseRow {
@@ -85,6 +86,8 @@ function rowToCase(row: DbCaseRow): ClassAction {
     keyDate: row.key_date ?? undefined,
     wordpressLink: row.wordpress_link ?? undefined,
     detailSlug: row.detail_slug ?? undefined,
+    slug: row.slug,
+    orderIndex: row.order_index,
   }
 }
 
@@ -95,6 +98,7 @@ function rowToInvestigation(row: DbInvestigationRow): Investigation {
     summary: row.summary,
     body: row.body,
     link: { label: row.link_label ?? 'Learn more', href: row.link_href ?? '#' },
+    orderIndex: row.order_index,
   }
 }
 
