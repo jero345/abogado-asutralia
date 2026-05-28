@@ -49,6 +49,8 @@ export interface CaseDetail {
   summary: string
   /** Main body content as structured blocks. */
   content: CaseBlock[]
+  /** Rich-text HTML body (TipTap output). When set, takes priority over `content`. */
+  bodyHtml?: string
   /** Case-specific form field schema (extends the base shared fields). */
   caseSpecificFields?: FormField[]
 }
@@ -815,8 +817,7 @@ export const cases: CaseDetail[] = [
     category: 'Securities',
     year: '2021',
     court: 'Federal Court of Australia',
-    email: 'info@bantongroup.com',
-    hasInternalForm: true,
+    hasInternalForm: false,
     summary:
       'Consolidated class action (Banton Group with Shine Lawyers) on behalf of Blue Sky shareholders against Blue Sky, its former directors and auditor Ernst & Young.',
     content: [

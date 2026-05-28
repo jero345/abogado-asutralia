@@ -1,15 +1,38 @@
+import { useEffect, useState } from 'react'
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { PageHero } from '@/components/ui/PageHero'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { CaseRegistrationForm } from '@/components/ui/CaseRegistrationForm'
-import { ArrowLeft, Mail, MapPin } from 'lucide-react'
-import { getCaseBySlug } from '@/data/caseDetails'
+import { ArrowLeft, Loader2, Mail, MapPin } from 'lucide-react'
+import type { CaseDetail } from '@/data/caseDetails'
+import { fetchCaseDetailBySlug } from '@/lib/classActions'
 
 export function CaseRegisterPage() {
   const { slug } = useParams<{ slug: string }>()
-  const caseData = slug ? getCaseBySlug(slug) : undefined
+  const [caseData, setCaseData] = useState<CaseDetail | undefined | null>(undefined)
 
-  if (!caseData) return <Navigate to="/class-actions" replace />
+  useEffect(() => {
+    if (!slug) {
+      setCaseData(null)
+      return
+    }
+    let cancelled = false
+    fetchCaseDetailBySlug(slug).then((data) => {
+      if (!cancelled) setCaseData(data ?? null)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [slug])
+
+  if (caseData === undefined) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#1C3A64]" size={28} />
+      </div>
+    )
+  }
+  if (caseData === null) return <Navigate to="/class-actions" replace />
 
   return (
     <>

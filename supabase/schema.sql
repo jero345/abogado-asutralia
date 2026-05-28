@@ -130,19 +130,19 @@ create policy "Authenticated delete article-images"
 -- ───────────────────────────────────────────────
 -- Storage bucket for PDF attachments (article + case bodies)
 -- Public-read, authenticated-write. PDFs only — enforced client-side
--- in the editor, plus a 25 MB hard cap here.
+-- in the editor, plus a 50 MB hard cap here.
 -- ───────────────────────────────────────────────
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values (
   'article-documents',
   'article-documents',
   true,
-  26214400,                       -- 25 MB
+  52428800,                       -- 50 MB
   array['application/pdf']
 )
 on conflict (id) do update set
   public = true,
-  file_size_limit = 26214400,
+  file_size_limit = 52428800,
   allowed_mime_types = array['application/pdf'];
 
 drop policy if exists "Public read article-documents"           on storage.objects;
@@ -325,3 +325,136 @@ create policy "Authenticated update past_actions"
 create policy "Authenticated delete past_actions"
   on public.past_actions for delete
   to authenticated using (true);
+
+-- ═══════════════════════════════════════════════════════════════════
+-- Class Actions v4: registrations (public form submissions)
+-- ═══════════════════════════════════════════════════════════════════
+-- The public registration forms (Shareholder / Investment / Vehicle)
+-- write one row per submission here, plus optional file uploads in
+-- the `registration-uploads` bucket. The admin reads everything from
+-- the authenticated side; the public can only INSERT.
+
+create table if not exists public.registrations (
+  id              uuid primary key default gen_random_uuid(),
+  created_at      timestamptz not null default now(),
+
+  -- which case the user is registering for
+  case_slug       text not null,
+  case_title      text not null,            -- snapshot at submission time
+  form_type       text not null check (form_type in (
+                    'shareholder',
+                    'investment-detailed',
+                    'investment-interest',
+                    'vehicle'
+                  )),
+
+  -- common identity / contact fields (present in all 3 form types)
+  first_name      text not null,
+  last_name       text not null,
+  email           text not null,
+  phone           text not null,
+  address_line1   text,
+  address_line2   text,
+  city            text,
+  state           text,
+  postal          text,
+  country         text,
+
+  -- form-type specific fields live in payload (JSON) so we don't have
+  -- a hundred mostly-null columns. Keys mirror the field `name`s
+  -- declared in src/data/registrationForms.ts
+  payload         jsonb not null default '{}'::jsonb,
+
+  -- supporting documents uploaded to storage
+  -- each item: { name: text, url: text, size: int, contentType: text }
+  documents       jsonb not null default '[]'::jsonb,
+
+  -- vehicle form only — signature drawn with mouse/finger, stored as
+  -- a PNG data URL (small; keeping inline avoids extra storage round-trip)
+  signature_data  text,
+
+  -- retainer Yes/No (Shareholder forms) — captured separately for filtering
+  retainer        text,
+
+  -- admin workflow
+  status          text not null default 'new'
+                  check (status in ('new','contacted','archived')),
+  notes           text,                     -- admin internal notes
+  email_sent_at   timestamptz               -- set when Resend dispatch succeeds (later)
+);
+
+create index if not exists registrations_created_idx   on public.registrations (created_at desc);
+create index if not exists registrations_case_idx      on public.registrations (case_slug);
+create index if not exists registrations_status_idx    on public.registrations (status);
+
+alter table public.registrations enable row level security;
+
+drop policy if exists "Public can submit registrations"     on public.registrations;
+drop policy if exists "Authenticated read all registrations" on public.registrations;
+drop policy if exists "Authenticated update registrations"   on public.registrations;
+drop policy if exists "Authenticated delete registrations"   on public.registrations;
+
+-- anon (the public form) can INSERT but never SELECT existing rows.
+create policy "Public can submit registrations"
+  on public.registrations for insert
+  to anon, authenticated
+  with check (true);
+
+create policy "Authenticated read all registrations"
+  on public.registrations for select
+  to authenticated using (true);
+
+create policy "Authenticated update registrations"
+  on public.registrations for update
+  to authenticated using (true) with check (true);
+
+create policy "Authenticated delete registrations"
+  on public.registrations for delete
+  to authenticated using (true);
+
+-- ───────────────────────────────────────────────
+-- Storage bucket for registration uploads (supporting documents)
+-- PRIVATE bucket — only authenticated users (admin) can download.
+-- The public can upload, but cannot list or read.
+-- 50 MB per file, common document/image MIME types.
+-- ───────────────────────────────────────────────
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'registration-uploads',
+  'registration-uploads',
+  false,                              -- PRIVATE
+  52428800,                           -- 50 MB
+  array[
+    'application/pdf',
+    'image/png',
+    'image/jpeg',
+    'image/webp',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  ]
+)
+on conflict (id) do update set
+  public = false,
+  file_size_limit = 52428800,
+  allowed_mime_types = excluded.allowed_mime_types;
+
+drop policy if exists "Public can upload registration-uploads"   on storage.objects;
+drop policy if exists "Authenticated read registration-uploads"  on storage.objects;
+drop policy if exists "Authenticated delete registration-uploads" on storage.objects;
+
+create policy "Public can upload registration-uploads"
+  on storage.objects for insert
+  to anon, authenticated
+  with check (bucket_id = 'registration-uploads');
+
+create policy "Authenticated read registration-uploads"
+  on storage.objects for select
+  to authenticated
+  using (bucket_id = 'registration-uploads');
+
+create policy "Authenticated delete registration-uploads"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'registration-uploads');

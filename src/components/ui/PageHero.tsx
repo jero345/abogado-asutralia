@@ -8,6 +8,8 @@ interface PageHeroProps {
   title: string
   italicTitle?: string
   subtitle?: string
+  /** Optional extra line shown in red above the subtitle (for emphasis). */
+  redCallout?: string
   breadcrumbs?: Crumb[]
   /** Optional blurred background image — path under /public */
   backgroundImage?: string
@@ -17,6 +19,7 @@ export function PageHero({
   title,
   italicTitle,
   subtitle,
+  redCallout,
   breadcrumbs,
   backgroundImage,
 }: PageHeroProps) {
@@ -29,28 +32,17 @@ export function PageHero({
             src={backgroundImage}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            // Bias slightly toward the upper portion of the photo so any
+            // building name / signage in the top half stays visible above the
+            // headline (e.g. "SIXTY MARTIN PLACE" on the Work With Us hero).
+            className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
           />
           {/* Left-to-right dark-to-light gradient so the heading side stays legible
               while the right side of the photo shows through clearly */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0F2540]/85 via-[#1C3A64]/55 to-[#1C3A64]/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F2540]/80 via-[#1C3A64]/45 to-[#1C3A64]/10" />
           {/* Subtle bottom fade to ease the transition into the next section */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1C3A64]/40" />
         </div>
-      )}
-
-      {/* Decorative grid (only when no photo — otherwise too busy) */}
-      {!backgroundImage && (
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px',
-          }}
-        />
       )}
 
       {/* Radial glow */}
@@ -99,6 +91,18 @@ export function PageHero({
             </>
           )}
         </motion.h1>
+
+        {/* Red callout — emphasised secondary headline */}
+        {redCallout && (
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-[#FF6B6B] text-base md:text-xl font-medium leading-snug mt-5 md:mt-6 max-w-3xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)]"
+          >
+            {redCallout}
+          </motion.p>
+        )}
 
         {/* Subtitle */}
         {subtitle && (

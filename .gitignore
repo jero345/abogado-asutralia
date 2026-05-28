@@ -25,3 +25,13 @@ dist-ssr
 
 # Local asset sources (unoptimized originals — only optimized copies live in public/img)
 recursos/
+
+# Claude Code worktrees (per-task scratch dirs, not source)
+.claude/worktrees/
+
+# Source class-action documents consumed by scripts/migrate-cases.mjs.
+# ~50 MB of PDFs; they live on Supabase Storage once migrated.
+class-actions-cases/
+
+# Derived from the .docx files by scripts/extract-docx.ps1; regenerable.
+scripts/extracted-content.txt

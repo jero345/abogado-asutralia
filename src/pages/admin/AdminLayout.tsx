@@ -1,5 +1,5 @@
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
-import { Loader2, LogOut, FileText, Plus, ArrowLeft, Scale, Search, ListChecks } from 'lucide-react'
+import { Loader2, LogOut, FileText, Plus, ArrowLeft, Scale, Search, ListChecks, Inbox, HelpCircle } from 'lucide-react'
 import { useAuth } from '@/lib/auth'
 
 export function AdminLayout() {
@@ -36,6 +36,14 @@ export function AdminLayout() {
             <SidebarLink to="/admin/cases/new" icon={<Plus size={14} />}>New case</SidebarLink>
             <SidebarLink to="/admin/investigations" icon={<Search size={14} />}>Investigations</SidebarLink>
             <SidebarLink to="/admin/past-actions" icon={<ListChecks size={14} />}>Past actions</SidebarLink>
+          </SidebarGroup>
+
+          <SidebarGroup label="Submissions">
+            <SidebarLink to="/admin/registrations" icon={<Inbox size={14} />}>Registrations</SidebarLink>
+          </SidebarGroup>
+
+          <SidebarGroup label="Help">
+            <SidebarLink to="/admin/help" icon={<HelpCircle size={14} />}>Guide</SidebarLink>
           </SidebarGroup>
         </nav>
         <div className="px-3 py-4 border-t border-[#1C3A64]/10 space-y-1">

@@ -25,12 +25,7 @@ const team: Member[] = [
     role: 'Managing Partner',
     specialties: ['Class Actions', 'Securities Litigation', 'Insolvency', 'Commercial Litigation'],
     bio:
-      'Amanda Banton is the Managing Partner of Banton Group, established in February 2020. She brings more than 20 years\u2019 experience in the legal profession.',
-    extendedBio: [
-      'Her career includes senior roles at Squire Patton Boggs and Piper Alderman, where she led substantial litigation practices, as well as consulting experience with KPMG and within the Federal Government. Her practice spans complex insolvency, regulatory, corporate and commercial disputes, including securities class actions, with particular expertise in matters involving corporations law, ASIC regulation, competition and consumer law, and fiduciary obligations.',
-      'Amanda is recognised for developing large-scale litigation without the benefit of complete documentation or witnesses. Under her leadership, Banton Group has secured a series of landmark outcomes, including multiple High Court victories and significant recoveries in complex proceedings.',
-      'She is known for her strategic judgement, rigorous attention to detail, and her ability to manage the interests of all stakeholders while advancing high-stakes litigation with precision and discipline.',
-    ],
+      'Amanda Banton is the Managing Partner of Banton Group, established in February 2020. She brings more than 20 years\u2019 experience in the legal profession, including senior roles at Squire Patton Boggs and Piper Alderman, where she led substantial litigation practices, as well as consulting experience with KPMG and within the Federal Government. Her practice spans complex insolvency, regulatory, corporate and commercial disputes, including securities class actions, with particular expertise in matters involving corporations law, ASIC regulation, competition and consumer law, and fiduciary obligations. Amanda is recognised for developing large scale litigation in the absence of complete documentation or witnesses. Under her leadership, Banton Group has secured a series of landmark outcomes, including multiple High Court victories and significant recoveries in complex proceedings. She is known for her strategic judgement, rigorous attention to detail, and her ability to manage the interests of all stakeholders while advancing high stakes litigation with precision and discipline.',
     photo: '/img/team/amanda-banton.jpg',
     awards: [
       {
@@ -51,15 +46,15 @@ const team: Member[] = [
     role: 'Deputy Managing Partner',
     specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring'],
     bio:
-      'Elliott joined Banton Group as a founding partner in February 2020, bringing over 19 years of experience from top-tier and global firms in Australia and abroad.',
-    extendedBio: [
-      'Elliott has run complex class actions and large-scale commercial, restructuring and insolvency disputes across Australia, the Asia Pacific, the Middle East and Europe. Recent matters include the CuDeco class action, Kupang v Cth and the Phoslock class action. Elliott also has in-house experience having previously worked at a Big Four Bank and a Big Four accounting firm.',
-    ],
+      'Elliott joined Banton Group as a founding partner in February 2020, bringing over 19 years of experience from top-tier and global firms in Australia and abroad. Elliott has run complex class actions and large-scale commercial, restructuring and insolvency disputes across Australia, the Asia Pacific, the Middle East and Europe. Recent matters include the CuDeco class action, Kupang v Cth and the Phoslock class action. Elliott also has in-house experience having previously worked at a Big Four Bank and a Big Four accounting firm.',
     photo: '/img/team/elliott-smith.jpg',
     awards: [
       {
         category: 'Lawyers Weekly',
-        items: ['Partner of the Year \u2014 Class Actions, Finalist 2023, 2024, 2025'],
+        items: [
+          'Partner of the Year \u2014 Class Actions, 2026',
+          'Partner of the Year \u2014 Class Actions, Finalist 2023, 2024, 2025',
+        ],
       },
       {
         category: 'Legal 500',
@@ -72,10 +67,7 @@ const team: Member[] = [
     role: 'Partner',
     specialties: ['Commercial Litigation', 'Insolvency', 'Class Actions'],
     bio:
-      'Melissa brings extensive experience in complex commercial, corporate and insolvency litigation, representing both plaintiffs and defendants across Australia.',
-    extendedBio: [
-      'Her practice encompasses class action proceedings, liquidator claims against former directors and auditors, breaches of the Corporations Act, and trust and fiduciary disputes. Recent matters include the Blue Sky Alternative Investments class action, the Arrium class action and the Murray Darling Basin Authority class action.',
-    ],
+      'Melissa brings extensive experience in complex commercial, corporate and insolvency litigation, representing both plaintiffs and defendants across Australia. Her practice encompasses class action proceedings, liquidator claims against former directors and auditors, breaches of the Corporations Act, and trust and fiduciary disputes. Recent matters include the Blue Sky Alternative Investments class action, the Arrium class action and the Murray Darling Basin Authority class action.',
     photo: '/img/team/melissa-morgan.jpg',
     awards: [
       {
@@ -97,10 +89,7 @@ const team: Member[] = [
     role: 'Partner',
     specialties: ['Class Actions', 'Commercial Litigation', 'International Arbitration', 'Insolvency'],
     bio:
-      'Paul brings more than 15 years of experience acting on complex, high-value commercial and financial disputes in Australia and internationally.',
-    extendedBio: [
-      'His practice spans class actions, major commercial disputes, fraud and asset tracing, distressed funds, insolvencies and regulatory matters \u2014 including landmark class actions concerning synthetic collateralised debt obligations. Admitted in Australia, New Zealand and the Cayman Islands, Paul regularly acts on multi-jurisdictional disputes involving novel points of law.',
-    ],
+      'Paul brings more than 15 years of experience acting on complex, high-value commercial and financial disputes in Australia and internationally. His practice spans class actions, major commercial disputes, fraud and asset tracing, distressed funds, insolvencies and regulatory matters \u2014 including landmark class actions concerning synthetic collateralised debt obligations. Admitted in Australia, New Zealand and the Cayman Islands, Paul regularly acts on multi-jurisdictional disputes involving novel points of law.',
     photo: '/img/team/paul-smith.jpg',
     awards: [
       {
@@ -108,35 +97,6 @@ const team: Member[] = [
         items: ['Recommended Lawyer \u2014 Dispute Resolution'],
       },
     ],
-  },
-  {
-    name: 'Jack Johnstone',
-    role: 'Senior Associate',
-    specialties: ['Class Actions', 'Commercial Litigation', 'International Arbitration'],
-    bio:
-      'Jack has extensive experience in large-scale class actions and commercial litigation across superior and appellate courts in Australia.',
-    extendedBio: [
-      'Before joining Banton Group, Jack practised at Fried Frank in London and worked in-house at Macquarie Group, gaining cross-border experience across financial products, regulatory investigations and complex commercial disputes. His practice focuses principally on plaintiff litigation, acting for group members, liquidators and commercial entities in disputes with major financial institutions, ASX-listed companies and government bodies.',
-    ],
-    photo: '/img/team/jack-johnstone.jpg',
-    awards: [
-      {
-        category: 'Chambers Asia-Pacific',
-        items: ['Associate to Watch 2026'],
-      },
-    ],
-  },
-  {
-    name: 'Sabin Thomas',
-    role: 'Senior Associate',
-    specialties: ['Commercial Disputes', 'International Arbitration', 'Insolvency'],
-    bio:
-      'Sabin is a commercial disputes lawyer with extensive experience in high-value litigation and international arbitration.',
-    extendedBio: [
-      'She has represented corporate and international clients in complex, multi-jurisdictional matters, including construction, insolvency and enforcement proceedings. Having practised at leading Malaysian firms, Sabin has worked on significant cross-border disputes involving novel legal issues and coordinated with counsel across multiple jurisdictions.',
-    ],
-    photo: '/img/team/sabin-thomas.jpg',
-    photoFilter: 'contrast(1.2) brightness(0.80) saturate(0.85)',
   },
 ]
 
@@ -178,7 +138,7 @@ export function Team() {
         </div>
 
         {/* Team grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
           {team.map((member, i) => {
             const isOpen = expanded.has(member.name)
             const hasMore = !!(member.extendedBio && member.extendedBio.length > 0)
@@ -189,7 +149,7 @@ export function Team() {
                   className="group relative bg-white border border-[#1C3A64]/10 rounded-2xl overflow-hidden cursor-default h-full flex flex-col"
                 >
                   {/* Photo or placeholder */}
-                  <div className="relative aspect-[2/3] bg-[#EFF4F4] overflow-hidden">
+                  <div className="relative aspect-[2/3] w-full max-w-[340px] mx-auto mt-6 rounded-xl bg-[#EFF4F4] overflow-hidden">
                     {member.photo ? (
                       <img
                         src={member.photo}

@@ -1,10 +1,76 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEditor, EditorContent, type Editor } from '@tiptap/react'
+import { Node, mergeAttributes } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
+
+// Custom block-level node: an embedded PDF viewer. Renders as an <iframe>
+// inside a wrapper div so the public article page can show the full PDF
+// inline (scrollable) instead of just a download link.
+const PdfEmbed = Node.create({
+  name: 'pdfEmbed',
+  group: 'block',
+  atom: true,
+  selectable: true,
+  draggable: true,
+  addAttributes() {
+    return {
+      src: { default: null },
+      title: { default: 'PDF document' },
+    }
+  },
+  parseHTML() {
+    return [
+      {
+        tag: 'div[data-type="pdf-embed"]',
+        getAttrs: (node) => {
+          const el = node as HTMLElement
+          const iframe = el.querySelector('iframe')
+          return {
+            src: el.getAttribute('data-src') || iframe?.getAttribute('src') || null,
+            title: el.getAttribute('data-title') || iframe?.getAttribute('title') || 'PDF document',
+          }
+        },
+      },
+    ]
+  },
+  renderHTML({ HTMLAttributes }) {
+    const src = HTMLAttributes.src as string
+    const title = (HTMLAttributes.title as string) || 'PDF document'
+    return [
+      'div',
+      mergeAttributes({
+        'data-type': 'pdf-embed',
+        'data-src': src,
+        'data-title': title,
+        class: 'pdf-embed',
+      }),
+      [
+        'iframe',
+        {
+          src,
+          title,
+          loading: 'lazy',
+          allow: 'fullscreen',
+        },
+      ],
+      [
+        'a',
+        {
+          href: src,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          class: 'pdf-embed-fallback',
+        },
+        `Download "${title}"`,
+      ],
+    ]
+  },
+})
+
 import {
   Bold,
   Italic,
@@ -43,6 +109,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
         HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
       }),
       Image.configure({ inline: false, allowBase64: false }),
+      PdfEmbed,
       Placeholder.configure({
         placeholder: placeholder ?? 'Write the article…',
       }),
@@ -52,6 +119,22 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
       attributes: {
         class:
           'prose prose-slate max-w-none min-h-[400px] px-5 py-4 focus:outline-none ' +
+          // Quote styling: blue text, left blue border, italic, light blue background —
+          // mirrors what the public article page renders so editors see WYSIWYG.
+          '[&_blockquote]:border-l-[4px] [&_blockquote]:border-l-[#1C3A64] ' +
+          '[&_blockquote]:bg-[#F4F6FB] [&_blockquote]:rounded-r-xl ' +
+          '[&_blockquote]:px-5 [&_blockquote]:py-3 [&_blockquote]:my-5 ' +
+          '[&_blockquote]:not-italic ' +
+          '[&_blockquote_p]:text-[#1C3A64] [&_blockquote_p]:italic ' +
+          '[&_blockquote_p]:font-medium [&_blockquote_p]:m-0 ' +
+          // PDF embed styling inside the editor
+          '[&_.pdf-embed]:my-5 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden ' +
+          '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15 ' +
+          '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full ' +
+          '[&_.pdf-embed_iframe]:h-[520px] [&_.pdf-embed_iframe]:bg-[#F4F6FB] ' +
+          '[&_.pdf-embed_iframe]:border-0 ' +
+          '[&_.pdf-embed-fallback]:hidden ' +
+          // Placeholder
           '[&_p.is-editor-empty:first-child]:before:content-[attr(data-placeholder)] ' +
           '[&_p.is-editor-empty:first-child]:before:text-[#aaa] ' +
           '[&_p.is-editor-empty:first-child]:before:float-left ' +
@@ -187,21 +270,15 @@ function Toolbar({ editor }: { editor: Editor }) {
       }
 
       const { data } = supabase.storage.from('article-documents').getPublicUrl(path)
-      const label = file.name.replace(/\.pdf$/i, '')
-      // Insert a styled link to the PDF — the public renderer's `prose`
-      // classes will style it like any other inline link.
+      const label = file.name.replace(/\.pdf$/i, '') || 'PDF document'
+      // Insert as a block-level PDF embed so the public article renders the
+      // full document inline (scrollable viewer), not just a download link.
       editor
         .chain()
         .focus()
         .insertContent({
-          type: 'text',
-          text: `📄 ${label}`,
-          marks: [
-            {
-              type: 'link',
-              attrs: { href: data.publicUrl, target: '_blank', rel: 'noopener noreferrer' },
-            },
-          ],
+          type: 'pdfEmbed',
+          attrs: { src: data.publicUrl, title: label },
         })
         .run()
       setUploading(null)

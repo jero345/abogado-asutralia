@@ -57,18 +57,21 @@ export function Home() {
 
 
       {/* Closing call — lobby photo as visible background */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
-        {/* Lobby background (no blur, minimal overlay so it stays visible) */}
+      <section className="relative pt-44 md:pt-56 pb-20 md:pb-32 overflow-hidden">
+        {/* Lobby background (no blur, minimal overlay so it stays visible).
+            object-position anchored to the top so the "SIXTY MARTIN PLACE"
+            building name on the marble wall remains fully visible above
+            the heading, then the heading sits in the lower half. */}
         <div className="absolute inset-0 z-0">
           <img
             src="/img/hero-bg/work-with-us.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+            className="absolute inset-0 w-full h-full object-cover object-[center_top]"
           />
-          {/* Navy overlay — softer/centered so the building name on Martin Place
-              remains legible while the heading still reads */}
-          <div className="absolute inset-0 bg-[#1C3A64]/55 md:bg-gradient-to-b md:from-[#0F2540]/70 md:via-[#1C3A64]/40 md:to-[#1C3A64]/55" />
+          {/* Navy gradient — light at the top so the building name reads
+              clearly, darker at the bottom so the heading stays legible. */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1C3A64]/15 via-[#1C3A64]/45 to-[#0F2540]/85" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-left md:text-center">

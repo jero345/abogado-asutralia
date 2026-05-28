@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PageHero } from '@/components/ui/PageHero'
@@ -9,13 +10,16 @@ import {
   Download,
   ExternalLink,
   FileText,
+  Loader2,
   Mail,
   Scale,
   AlertCircle,
   CheckCircle2,
   Info,
 } from 'lucide-react'
-import { getCaseBySlug, type CaseBlock, type CaseStatus } from '@/data/caseDetails'
+import { type CaseBlock, type CaseDetail, type CaseStatus } from '@/data/caseDetails'
+import { fetchCaseDetailBySlug } from '@/lib/classActions'
+import { embedPdfLinks } from '@/lib/embedPdfs'
 
 const statusColors: Record<CaseStatus, string> = {
   Active: 'text-[#1C3A64] bg-[#E8F0FA] border-[#1C3A64]/20',
@@ -239,9 +243,30 @@ function BlockRenderer({ block }: { block: CaseBlock }) {
 
 export function CaseDetailPage() {
   const { slug } = useParams<{ slug: string }>()
-  const caseData = slug ? getCaseBySlug(slug) : undefined
+  const [caseData, setCaseData] = useState<CaseDetail | undefined | null>(undefined)
 
-  if (!caseData) return <Navigate to="/class-actions" replace />
+  useEffect(() => {
+    if (!slug) {
+      setCaseData(null)
+      return
+    }
+    let cancelled = false
+    fetchCaseDetailBySlug(slug).then((data) => {
+      if (!cancelled) setCaseData(data ?? null)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [slug])
+
+  if (caseData === undefined) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#1C3A64]" size={28} />
+      </div>
+    )
+  }
+  if (caseData === null) return <Navigate to="/class-actions" replace />
 
   return (
     <>
@@ -285,9 +310,31 @@ export function CaseDetailPage() {
             {/* Main column */}
             <ScrollReveal>
               <div>
-                {caseData.content.map((b, i) => (
-                  <BlockRenderer key={i} block={b} />
-                ))}
+                {caseData.bodyHtml ? (
+                  <div
+                    className={[
+                      'prose prose-slate max-w-none',
+                      'prose-headings:text-[#1C3A64] prose-p:text-[#555555] prose-p:leading-[1.8]',
+                      'prose-a:text-[#1C3A64] prose-a:font-medium prose-strong:text-[#1C3A64]',
+                      'prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB]',
+                      'prose-blockquote:rounded-r-xl prose-blockquote:py-2 prose-blockquote:px-5',
+                      'prose-blockquote:not-italic prose-li:text-[#555555]',
+                      // Inline PDF viewer
+                      '[&_.pdf-embed]:my-8 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
+                      '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15 [&_.pdf-embed]:shadow-sm',
+                      '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
+                      '[&_.pdf-embed_iframe]:h-[80vh] [&_.pdf-embed_iframe]:min-h-[520px]',
+                      '[&_.pdf-embed_iframe]:bg-[#F4F6FB] [&_.pdf-embed_iframe]:border-0',
+                      '[&_.pdf-embed-fallback]:block [&_.pdf-embed-fallback]:text-center',
+                      '[&_.pdf-embed-fallback]:text-[12px] [&_.pdf-embed-fallback]:text-[#1C3A64]',
+                      '[&_.pdf-embed-fallback]:py-2 [&_.pdf-embed-fallback]:bg-[#F4F6FB]',
+                      '[&_.pdf-embed-fallback]:hover:underline [&_.pdf-embed-fallback]:no-underline',
+                    ].join(' ')}
+                    dangerouslySetInnerHTML={{ __html: embedPdfLinks(caseData.bodyHtml) }}
+                  />
+                ) : (
+                  caseData.content.map((b, i) => <BlockRenderer key={i} block={b} />)
+                )}
               </div>
             </ScrollReveal>
 

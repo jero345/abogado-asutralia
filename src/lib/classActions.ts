@@ -7,6 +7,8 @@ import {
   type Block,
   type RecallTable,
 } from '@/data/classActions'
+import { cases as staticDetails, type CaseDetail } from '@/data/caseDetails'
+import { getFormConfig } from '@/data/registrationForms'
 import { supabase, hasSupabase } from './supabase'
 
 export interface Investigation {
@@ -150,3 +152,61 @@ export async function fetchPastActions(): Promise<string[]> {
 }
 
 export type { ClassAction, CaseStatus, Block }
+
+// ───────────────────────────────────────────────────────────────────
+// CaseDetail fetcher — used by /class-actions/:slug and the register
+// page. Tries Supabase first, falls back to the static array so legacy
+// rich detail entries (Arrium, CuDeco etc.) keep their original blocks.
+// ───────────────────────────────────────────────────────────────────
+function caseRowToDetail(row: DbCaseRow): CaseDetail {
+  const config = getFormConfig(row.slug)
+  return {
+    slug: row.slug,
+    title: row.title,
+    status: (VALID_STATUSES.includes(row.status as CaseStatus)
+      ? row.status
+      : 'Active') as CaseStatus,
+    category: row.category,
+    year: row.year,
+    court: row.court ?? undefined,
+    summary: row.summary,
+    // Render via bodyHtml only — content blocks stay empty for DB-backed cases.
+    content: [],
+    bodyHtml: row.body_html ?? undefined,
+    email: config?.notifyEmail,
+    hasInternalForm: Boolean(config),
+    registrationUrl: row.wordpress_link ?? undefined,
+  }
+}
+
+export async function fetchCaseDetailBySlug(slug: string): Promise<CaseDetail | undefined> {
+  // 1. Try Supabase — the freshest source (admin can edit any time).
+  if (hasSupabase && supabase) {
+    const nowIso = new Date().toISOString()
+    const { data, error } = await supabase
+      .from('cases')
+      .select('*')
+      .eq('slug', slug)
+      .eq('published', true)
+      .or(`publish_at.is.null,publish_at.lte.${nowIso}`)
+      .maybeSingle()
+    if (!error && data) {
+      const dbDetail = caseRowToDetail(data as DbCaseRow)
+      // If a static entry also exists, merge: keep DB's body_html but
+      // preserve static-only fields (leadPlaintiff, fileNumber, funder,
+      // caseSpecificFields) that the admin DB schema doesn't yet capture.
+      const staticEntry = staticDetails.find((c) => c.slug === slug)
+      if (staticEntry) {
+        return {
+          ...staticEntry,
+          ...dbDetail,
+          // If DB has no body_html, fall back to static content blocks.
+          content: dbDetail.bodyHtml ? [] : staticEntry.content,
+        }
+      }
+      return dbDetail
+    }
+  }
+  // 2. Fall back to the static array.
+  return staticDetails.find((c) => c.slug === slug)
+}

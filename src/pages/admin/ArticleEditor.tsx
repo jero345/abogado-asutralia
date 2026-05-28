@@ -376,8 +376,9 @@ export function ArticleEditor() {
 
         <Section
           title="Article body"
-          hint="Visual editor with a toolbar — use the buttons for bold, italic, headings, lists and images."
+          hint="Visual editor with a toolbar — use the buttons for bold, italic, headings, lists, images, PDFs and quotes."
         >
+          <EditorHelp />
           <div className="flex items-center gap-1 mb-3">
             <Tab active={view === 'edit'} onClick={() => setView('edit')}>
               <Pencil size={12} /> Write
@@ -782,6 +783,86 @@ function CoverImageInput({
   )
 }
 
+function EditorHelp() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="mb-4 rounded-xl border border-[#1C3A64]/15 bg-[#F4F6FB] overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left hover:bg-[#1C3A64]/[0.04] transition-colors"
+        aria-expanded={open}
+      >
+        <span className="flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium">
+          <FileText size={14} />
+          How to add images, PDFs and quotes
+        </span>
+        <span className="text-[#6D8FB5] text-[11px] tracking-wide">
+          {open ? 'Hide' : 'Show'}
+        </span>
+      </button>
+      {open && (
+        <div className="px-5 pb-5 pt-1 text-[13px] text-[#1C3A64] space-y-4 border-t border-[#1C3A64]/10">
+          <HelpItem
+            title="Insert an image"
+            steps={[
+              'Click where you want the image inside the article.',
+              'In the toolbar, press the image icon (the small picture).',
+              'Pick a file from your computer (JPG or PNG, up to 5 MB).',
+              'The image uploads automatically and appears inside the article.',
+            ]}
+            note="Images are stored in the article-images bucket on Supabase Storage, under editor/. Reuse one by copy-pasting it inside the editor — no need to re-upload."
+          />
+          <HelpItem
+            title="Insert a PDF (full inline viewer)"
+            steps={[
+              'Click where you want the PDF.',
+              'In the toolbar, press the document icon (sheet of paper).',
+              'Pick a PDF from your computer (up to 25 MB).',
+              'The PDF appears as a scrollable viewer inside the article — readers see every page without leaving the page.',
+            ]}
+            note="PDFs are stored in the article-documents bucket on Supabase Storage, under editor/. The reader still has a Download fallback link below the viewer."
+          />
+          <HelpItem
+            title="Insert a legal quote (blue, italic, left border)"
+            steps={[
+              'Select the text you want to turn into a quote (or place the cursor on an empty line).',
+              'In the toolbar, press the quotation marks icon (Quote).',
+              'The block turns into a styled quote: blue italic text with a blue left border on a light background.',
+              'Press the Quote button again on the same block to remove it.',
+            ]}
+            note="The Preview tab (next to Write) shows the quote exactly as readers will see it."
+          />
+        </div>
+      )}
+    </div>
+  )
+}
+
+function HelpItem({
+  title,
+  steps,
+  note,
+}: {
+  title: string
+  steps: string[]
+  note?: string
+}) {
+  return (
+    <div>
+      <h4 className="text-[#1C3A64] text-[13px] font-semibold mb-1.5">{title}</h4>
+      <ol className="list-decimal pl-5 space-y-1 text-[#1C3A64]/85 text-[12.5px] leading-[1.6]">
+        {steps.map((s, i) => (
+          <li key={i}>{s}</li>
+        ))}
+      </ol>
+      {note && (
+        <p className="mt-1.5 text-[11.5px] text-[#6D8FB5] leading-[1.5]">{note}</p>
+      )}
+    </div>
+  )
+}
+
 function PreviewPane({ form }: { form: ArticleForm }) {
   return (
     <div className="border border-[#1C3A64]/15 rounded-lg overflow-hidden bg-white">
@@ -818,7 +899,23 @@ function PreviewPane({ form }: { form: ArticleForm }) {
         )}
         {form.body_html ? (
           <div
-            className="prose prose-slate max-w-none"
+            className={[
+              'prose prose-slate max-w-none',
+              'prose-headings:text-[#1C3A64] prose-headings:font-medium',
+              'prose-p:text-[#555555] prose-p:leading-[1.8]',
+              'prose-a:text-[#1C3A64]',
+              'prose-blockquote:border-l-[4px] prose-blockquote:border-l-[#1C3A64]',
+              'prose-blockquote:bg-[#F4F6FB] prose-blockquote:rounded-r-xl',
+              'prose-blockquote:not-italic',
+              '[&_blockquote_p]:text-[#1C3A64] [&_blockquote_p]:italic [&_blockquote_p]:font-medium',
+              'prose-img:rounded-xl',
+              '[&_.pdf-embed]:my-6 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
+              '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15',
+              '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
+              '[&_.pdf-embed_iframe]:h-[520px] [&_.pdf-embed_iframe]:border-0',
+              '[&_.pdf-embed_iframe]:bg-[#F4F6FB]',
+              '[&_.pdf-embed-fallback]:hidden',
+            ].join(' ')}
             dangerouslySetInnerHTML={{ __html: form.body_html }}
           />
         ) : (

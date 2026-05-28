@@ -5,6 +5,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react'
 import { fetchArticle, type NewsArticle } from '@/lib/news'
 import { type ArticleBlock } from '@/data/news'
+import { embedPdfLinks } from '@/lib/embedPdfs'
 
 function formatDate(iso: string) {
   const d = new Date(iso)
@@ -173,8 +174,31 @@ export function NewsArticlePage() {
             {/* Body — TipTap HTML takes precedence, fall back to legacy block array */}
             {article.bodyHtml ? (
               <div
-                className="prose prose-slate max-w-none prose-headings:text-[#1C3A64] prose-headings:font-medium prose-headings:tracking-tight prose-p:text-[#555555] prose-p:leading-[1.8] prose-a:text-[#1C3A64] prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB] prose-blockquote:not-italic prose-img:rounded-xl"
-                dangerouslySetInnerHTML={{ __html: article.bodyHtml }}
+                className={[
+                  'prose prose-slate max-w-none',
+                  'prose-headings:text-[#1C3A64] prose-headings:font-medium prose-headings:tracking-tight',
+                  'prose-p:text-[#555555] prose-p:leading-[1.8]',
+                  'prose-a:text-[#1C3A64]',
+                  // Blockquote: blue text, left blue border, italic, light blue bg
+                  'prose-blockquote:border-l-[4px] prose-blockquote:border-l-[#1C3A64]',
+                  'prose-blockquote:bg-[#F4F6FB] prose-blockquote:rounded-r-xl',
+                  'prose-blockquote:not-italic',
+                  '[&_blockquote_p]:text-[#1C3A64] [&_blockquote_p]:italic [&_blockquote_p]:font-medium',
+                  'prose-img:rounded-xl',
+                  // PDF embed: full-width inline viewer
+                  '[&_.pdf-embed]:my-8 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
+                  '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15',
+                  '[&_.pdf-embed]:shadow-sm',
+                  '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
+                  '[&_.pdf-embed_iframe]:h-[80vh] [&_.pdf-embed_iframe]:min-h-[520px]',
+                  '[&_.pdf-embed_iframe]:bg-[#F4F6FB] [&_.pdf-embed_iframe]:border-0',
+                  '[&_.pdf-embed-fallback]:block [&_.pdf-embed-fallback]:text-center',
+                  '[&_.pdf-embed-fallback]:text-[12px] [&_.pdf-embed-fallback]:text-[#1C3A64]',
+                  '[&_.pdf-embed-fallback]:underline [&_.pdf-embed-fallback]:py-2',
+                  '[&_.pdf-embed-fallback]:bg-[#F4F6FB] [&_.pdf-embed-fallback]:no-underline',
+                  '[&_.pdf-embed-fallback]:hover:underline',
+                ].join(' ')}
+                dangerouslySetInnerHTML={{ __html: embedPdfLinks(article.bodyHtml) }}
               />
             ) : (
               article.content?.map((block, i) => <BlockRenderer key={i} block={block} />)
