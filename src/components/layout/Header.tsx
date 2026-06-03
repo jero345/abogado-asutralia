@@ -10,7 +10,7 @@ const navLinks = [
   { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Work With Us', to: '/work-with-us' },
+  { label: 'Careers', to: '/work-with-us' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -108,7 +108,7 @@ export function Header() {
                         : 'bg-[#1C3A64] text-white hover:bg-[#2A4E72]'
                     }`}
                   >
-                    Schedule Consultation
+                    Contact Us
                   </motion.span>
                 </Link>
               </div>
@@ -155,7 +155,7 @@ export function Header() {
             to="/contact"
             className="mt-3 w-full py-3 bg-white text-[#1C3A64] text-sm font-medium rounded-full text-center tracking-[0.02em] hover:bg-[#EFF4F4] transition-colors"
           >
-            Schedule Consultation
+            Contact Us
           </Link>
         </div>
       </motion.div>

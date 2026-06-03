@@ -7,10 +7,10 @@ export function AboutPage() {
   return (
     <>
       <PageHero
-        title="Specialist boutique,"
-        italicTitle="Big-firm firepower."
+        title="Specialist boutique."
+        italicTitle="Big firm firepower."
         redCallout=""
-        subtitle=" A private litigation and insolvency practice built for high-stakes matters."
+        subtitle="A litigation and insolvency practice built for high-stakes matters."
         breadcrumbs={[{ label: 'About Us' }]}
         backgroundImage="/img/hero-bg/about.jpg"
       />

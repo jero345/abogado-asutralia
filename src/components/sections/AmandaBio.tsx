@@ -74,11 +74,11 @@ export function AmandaBio() {
                 </p>
               </div>
 
-              {/* Publishable Matters */}
+              {/* Representative Matters */}
               <div className="mt-10 pt-8 border-t border-[#1C3A64]/[0.08]">
                 <div className="text-[11px] tracking-[0.2em] uppercase text-[#1C3A64] mb-5 flex items-center gap-3">
                   <span className="w-5 h-px bg-[#1C3A64]" />
-                  Publishable Matters
+                  Representative Matters
                 </div>
                 <ul className="space-y-4 text-[#555555] leading-[1.7] text-[14px] md:text-[15px]">
                   <li className="flex items-start gap-3">

@@ -94,24 +94,25 @@ export function KeyLitigation() {
 
             {/* Key clients */}
             <ScrollReveal delay={0.2}>
-              <div className="pt-4 border-t border-[#1C3A64]/[0.08]">
-                <p className="text-[#555555] text-[14px] md:text-[15px] leading-[1.7] mb-4">
-                  Our key clients in respect of insolvency and commercial litigation matters include{' '}
-                  <span className="text-[#1C3A64] font-medium">
-                    FTI, KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick, Grant Thornton, Kupang and Trilogy
-                  </span>
-                  , as well as a range of Trustees and Responsible Entities of Managed Investment Schemes.
-                </p>
-                <div className="flex flex-wrap gap-2 mt-5">
+              <div className="bg-[#F4F6FB] border border-[#1C3A64]/[0.08] rounded-xl p-6 md:p-7">
+                <h3 className="text-[#1C3A64] text-[16px] md:text-[18px] font-medium mb-4 leading-[1.4]">
+                  Our key clients in insolvency and commercial litigation matters include:
+                </h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
                   {clients.map((c) => (
-                    <span
+                    <motion.li
                       key={c}
-                      className="text-[#1C3A64] text-[11px] font-medium px-3 py-1.5 bg-[#1C3A64]/[0.06] border border-[#1C3A64]/15 rounded-full tracking-wide"
+                      whileHover={{ x: 2 }}
+                      className="flex items-center gap-3 text-[#555555] text-[14px]"
                     >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] flex-shrink-0" />
                       {c}
-                    </span>
+                    </motion.li>
                   ))}
-                </div>
+                </ul>
+                <p className="text-[#555555] text-[13px] md:text-[14px] leading-[1.7] mt-5 pt-4 border-t border-[#1C3A64]/[0.08]">
+                  As well as a range of Trustees and Responsible Entities of Managed Investment Schemes.
+                </p>
               </div>
             </ScrollReveal>
           </div>

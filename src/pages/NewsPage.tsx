@@ -45,7 +45,7 @@ export function NewsPage() {
               <p className="text-[#555555] text-[15px]">No articles yet. Check back soon.</p>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-8">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
               {articles.map((a, i) => {
                 const isExternal = Boolean(a.source?.url)
                 const href = isExternal ? a.source!.url : `/blog/${a.slug}`

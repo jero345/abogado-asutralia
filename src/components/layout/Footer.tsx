@@ -11,7 +11,7 @@ const quickLinks = [
   { label: 'Litigation', to: '/litigation' },
   { label: 'Class Actions', to: '/class-actions' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Work With Us', to: '/work-with-us' },
+  { label: 'Careers', to: '/work-with-us' },
   { label: 'Awards', to: '/awards' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -34,7 +34,7 @@ export function Footer() {
               <span className="text-white normal-case tracking-normal">ABN 85 632 702 919</span>
             </div>
             <p className="text-[#B8C8E0] text-[13px] leading-[1.65] mb-6">
-              A premier Litigation Firm — delivering extraordinary outcomes in class actions, commercial disputes and insolvency since 2020.
+              Strategic litigation. Extraordinary outcomes.
             </p>
             <div className="flex gap-3">
               <motion.a

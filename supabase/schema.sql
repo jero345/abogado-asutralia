@@ -198,6 +198,12 @@ create table if not exists public.cases (
   updated_at      timestamptz not null default now()
 );
 
+-- v5: registration-process intro shown on /class-actions/<slug>/register
+-- above the form (eligibility, "You may register by…", online-registration
+-- steps, supporting-document list, institutional-investor note, etc.).
+alter table public.cases
+  add column if not exists register_process_html text;
+
 create index if not exists cases_order_idx      on public.cases (order_index asc);
 create index if not exists cases_published_idx  on public.cases (published);
 create index if not exists cases_publish_at_idx on public.cases (publish_at);

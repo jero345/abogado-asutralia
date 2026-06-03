@@ -67,7 +67,7 @@ export function Home() {
             src="/img/hero-bg/work-with-us.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-[center_top]"
+            className="absolute inset-0 w-full h-full object-cover object-[center_top] blur-[3px] scale-105"
           />
           {/* Navy gradient — light at the top so the building name reads
               clearly, darker at the bottom so the heading stays legible. */}
@@ -89,7 +89,7 @@ export function Home() {
               to="/contact"
               className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em] shadow-lg"
             >
-              Schedule a Consultation
+              Contact Us
               <ArrowUpRight size={14} />
             </Link>
           </ScrollReveal>

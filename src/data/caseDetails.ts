@@ -51,6 +51,9 @@ export interface CaseDetail {
   content: CaseBlock[]
   /** Rich-text HTML body (TipTap output). When set, takes priority over `content`. */
   bodyHtml?: string
+  /** HTML shown on /class-actions/<slug>/register above the form: eligibility,
+   * how to register, supporting documents, institutional investors, privacy. */
+  registerProcessHtml?: string
   /** Case-specific form field schema (extends the base shared fields). */
   caseSpecificFields?: FormField[]
 }

@@ -88,7 +88,7 @@ export function About() {
                 className="relative md:absolute md:-bottom-6 md:right-0 md:max-w-[320px] mt-6 md:mt-0 bg-[#1C3A64] rounded-2xl p-6 shadow-xl border-l-4 border-l-[#6D8FB5]"
               >
                 <div className="font-serif text-lg md:text-xl font-semibold text-white leading-snug mb-3">
-                  "Complexity doesn't deter us.<br />It defines us."
+                  "Complexity doesn't deter us. It defines us."
                 </div>
                 <div className="text-[#8AAECE] text-xs tracking-wide">— Amanda Banton, Managing Partner</div>
               </motion.div>

@@ -30,6 +30,7 @@ interface DbCaseRow {
   court: string | null
   summary: string
   body_html: string | null
+  register_process_html: string | null
   key_date: string | null
   wordpress_link: string | null
   detail_slug: string | null
@@ -177,6 +178,7 @@ function caseRowToDetail(row: DbCaseRow): CaseDetail {
     // Render via bodyHtml only — content blocks stay empty for DB-backed cases.
     content: [],
     bodyHtml: row.body_html ?? undefined,
+    registerProcessHtml: row.register_process_html ?? undefined,
     email: config?.notifyEmail,
     hasInternalForm: Boolean(config),
     registrationUrl: row.wordpress_link ?? undefined,

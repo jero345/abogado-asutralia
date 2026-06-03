@@ -46,7 +46,12 @@ const team: Member[] = [
     role: 'Deputy Managing Partner',
     specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring'],
     bio:
-      'Elliott joined Banton Group as a founding partner in February 2020, bringing over 19 years of experience from top-tier and global firms in Australia and abroad. Elliott has run complex class actions and large-scale commercial, restructuring and insolvency disputes across Australia, the Asia Pacific, the Middle East and Europe. Recent matters include the CuDeco class action, Kupang v Cth and the Phoslock class action. Elliott also has in-house experience having previously worked at a Big Four Bank and a Big Four accounting firm.',
+      'Elliott Smith is the Deputy Managing Partner of Banton Group. He brings more than 18 years’ experience in complex commercial litigation, class actions, restructuring and insolvency disputes, and international arbitration across Australia, Asia, the Middle East and Europe. His practice spans plaintiff and defendant litigation, with particular expertise in securities class actions, misleading and deceptive conduct claims, Corporations Act disputes, cross-border trade disputes and multi-jurisdictional arbitration.',
+    extendedBio: [
+      'Elliott has spent significant time in-house at both a Big Four bank and a Big Four accounting firm, giving him a strong understanding of the commercial pressures and strategic imperatives facing major institutional and private clients. He acts for clients including banks, insolvency practitioners, directors, auditors and private equity firms.',
+      'Elliott currently leads a number of significant securities class actions and recovery proceedings arising from major Australian insolvencies. His recent work includes leading the CuDeco shareholder class action, including the court-approved settlement with KPMG, playing a central role in the Arrium High Court proceedings, and acting in substantial recovery litigation against the Commonwealth.',
+      'He is recognised for his technical expertise, commercial judgement and ability to manage complex litigation efficiently and strategically. Elliott regularly speaks at conferences and industry seminars, and his recognitions include being listed as a Rising Star in Asia Pacific Legal 500. The Asia Pacific Legal 500 Guide notes that “Elliott Smith has a top-notch working knowledge of his areas of specialty, together with excellent organisational skills.”',
+    ],
     photo: '/img/team/elliott-smith.jpg',
     awards: [
       {

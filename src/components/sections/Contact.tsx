@@ -267,8 +267,8 @@ export function Contact() {
               <h3 className="text-[#1e3a5f] font-semibold text-sm mb-4">Business Hours</h3>
               <div className="space-y-2 text-sm">
                 {[
-                  { day: 'Monday – Friday', hours: '8:30am – 6:00pm' },
-                  { day: 'Saturday', hours: 'By appointment' },
+                  { day: 'Monday – Friday', hours: '8:30am – 5:30pm' },
+                  { day: 'Saturday', hours: 'Closed' },
                   { day: 'Sunday', hours: 'Closed' },
                 ].map((h) => (
                   <div key={h.day} className="flex justify-between">

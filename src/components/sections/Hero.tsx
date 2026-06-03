@@ -56,20 +56,6 @@ export function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center"
       >
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="flex items-center justify-center gap-3 mb-10 md:mb-14"
-        >
-          <div className="h-px w-10 md:w-14 bg-gradient-to-r from-transparent to-[#8AAECE]/90" />
-          <span className="text-[#8AAECE] text-[10px] md:text-[11px] font-medium tracking-[0.25em] uppercase">
-            A Premier Litigation Firm
-          </span>
-          <div className="h-px w-10 md:w-14 bg-gradient-to-l from-transparent to-[#8AAECE]/90" />
-        </motion.div>
-
         {/* Main headline — capped at 64px desktop / 42px mobile per brief */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

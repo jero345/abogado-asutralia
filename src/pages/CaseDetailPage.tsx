@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useParams, Navigate, Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useParams, Navigate, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { PageHero } from '@/components/ui/PageHero'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
@@ -19,7 +19,7 @@ import {
 } from 'lucide-react'
 import { type CaseBlock, type CaseDetail, type CaseStatus } from '@/data/caseDetails'
 import { fetchCaseDetailBySlug } from '@/lib/classActions'
-import { embedPdfLinks } from '@/lib/embedPdfs'
+import { buttonizePdfLinks, buttonizeRegisterLinks, splitBodyAtFirstHeading } from '@/lib/caseBody'
 
 const statusColors: Record<CaseStatus, string> = {
   Active: 'text-[#1C3A64] bg-[#E8F0FA] border-[#1C3A64]/20',
@@ -243,7 +243,9 @@ function BlockRenderer({ block }: { block: CaseBlock }) {
 
 export function CaseDetailPage() {
   const { slug } = useParams<{ slug: string }>()
+  const navigate = useNavigate()
   const [caseData, setCaseData] = useState<CaseDetail | undefined | null>(undefined)
+  const bodyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!slug) {
@@ -258,6 +260,26 @@ export function CaseDetailPage() {
       cancelled = true
     }
   }, [slug])
+
+  // Intercept clicks on internal-link anchors inside the (HTML) body so they
+  // route via React Router instead of triggering a full page reload. Needed
+  // because the rewritten "Register Now" button lives inside dangerouslySetInnerHTML.
+  useEffect(() => {
+    const el = bodyRef.current
+    if (!el) return
+    const handler = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+      const link = (e.target as HTMLElement | null)?.closest('a')
+      if (!link) return
+      const href = link.getAttribute('href') || ''
+      if (href.startsWith('/') && !link.target) {
+        e.preventDefault()
+        navigate(href)
+      }
+    }
+    el.addEventListener('click', handler)
+    return () => el.removeEventListener('click', handler)
+  }, [navigate, caseData])
 
   if (caseData === undefined) {
     return (
@@ -312,25 +334,47 @@ export function CaseDetailPage() {
               <div>
                 {caseData.bodyHtml ? (
                   <div
+                    ref={bodyRef}
                     className={[
                       'prose prose-slate max-w-none',
-                      'prose-headings:text-[#1C3A64] prose-p:text-[#555555] prose-p:leading-[1.8]',
+                      'prose-headings:text-[#1C3A64] prose-headings:font-medium',
+                      // Class-action headings are underlined in the firm's PDFs
+                      'prose-h3:underline prose-h3:underline-offset-4 prose-h3:tracking-wide',
+                      'prose-p:text-[#555555] prose-p:leading-[1.8]',
                       'prose-a:text-[#1C3A64] prose-a:font-medium prose-strong:text-[#1C3A64]',
                       'prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB]',
                       'prose-blockquote:rounded-r-xl prose-blockquote:py-2 prose-blockquote:px-5',
                       'prose-blockquote:not-italic prose-li:text-[#555555]',
-                      // Inline PDF viewer
-                      '[&_.pdf-embed]:my-8 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
-                      '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15 [&_.pdf-embed]:shadow-sm',
-                      '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
-                      '[&_.pdf-embed_iframe]:h-[80vh] [&_.pdf-embed_iframe]:min-h-[520px]',
-                      '[&_.pdf-embed_iframe]:bg-[#F4F6FB] [&_.pdf-embed_iframe]:border-0',
-                      '[&_.pdf-embed-fallback]:block [&_.pdf-embed-fallback]:text-center',
-                      '[&_.pdf-embed-fallback]:text-[12px] [&_.pdf-embed-fallback]:text-[#1C3A64]',
-                      '[&_.pdf-embed-fallback]:py-2 [&_.pdf-embed-fallback]:bg-[#F4F6FB]',
-                      '[&_.pdf-embed-fallback]:hover:underline [&_.pdf-embed-fallback]:no-underline',
+                      // PDF outlined-button (replaces inline iframe — the firm
+                      // explicitly wants the case docs as downloadable buttons,
+                      // not inline viewers; that's blog-only).
+                      '[&_.pdf-button]:inline-flex [&_.pdf-button]:items-center [&_.pdf-button]:gap-3',
+                      '[&_.pdf-button]:bg-white [&_.pdf-button]:border [&_.pdf-button]:border-[#1C3A64]/30',
+                      '[&_.pdf-button]:hover:border-[#1C3A64]/60 [&_.pdf-button]:hover:bg-[#F4F6FB]',
+                      '[&_.pdf-button]:text-[#1C3A64] [&_.pdf-button]:text-[13px] [&_.pdf-button]:font-medium',
+                      '[&_.pdf-button]:px-5 [&_.pdf-button]:py-3 [&_.pdf-button]:rounded-md',
+                      '[&_.pdf-button]:no-underline [&_.pdf-button]:my-3 [&_.pdf-button]:transition-colors',
+                      '[&_.pdf-button_svg]:w-3.5 [&_.pdf-button_svg]:h-3.5 [&_.pdf-button_svg]:flex-shrink-0',
+                      // Lists of PDF buttons stack without the default bullets
+                      '[&_.pdf-li]:list-none [&_.pdf-li]:ml-0 [&_.pdf-li]:pl-0',
+                      '[&_ul:has(.pdf-li)]:pl-0 [&_ul:has(.pdf-li)]:list-none [&_ul:has(.pdf-li)]:space-y-0',
+                      // Primary "Register Now" button (rewritten from any WP register link)
+                      '[&_.register-button]:inline-flex [&_.register-button]:items-center [&_.register-button]:gap-2',
+                      '[&_.register-button]:bg-[#1C3A64] [&_.register-button]:hover:bg-[#2A4E72]',
+                      '[&_.register-button]:text-white [&_.register-button]:no-underline',
+                      '[&_.register-button]:text-[13px] [&_.register-button]:font-medium',
+                      '[&_.register-button]:px-5 [&_.register-button]:py-3 [&_.register-button]:rounded-md',
+                      '[&_.register-button]:my-4 [&_.register-button]:transition-colors',
+                      '[&_.register-button_svg]:w-3.5 [&_.register-button_svg]:h-3.5',
                     ].join(' ')}
-                    dangerouslySetInnerHTML={{ __html: embedPdfLinks(caseData.bodyHtml) }}
+                    dangerouslySetInnerHTML={{
+                      __html: buttonizeRegisterLinks(
+                        buttonizePdfLinks(
+                          splitBodyAtFirstHeading(caseData.bodyHtml).detail ||
+                            caseData.bodyHtml,
+                        ),
+                      ),
+                    }}
                   />
                 ) : (
                   caseData.content.map((b, i) => <BlockRenderer key={i} block={b} />)

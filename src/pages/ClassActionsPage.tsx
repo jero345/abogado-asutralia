@@ -5,9 +5,9 @@ export function ClassActionsPage() {
   return (
     <>
       <PageHero
-        title="Ten active actions."
-        italicTitle="Six courts. One goal."
-        subtitle="Representing real people against powerful institutions — securities, financial products, consumer, environmental and nuisance claims."
+        title="Active actions."
+        italicTitle="International reach. One goal."
+        subtitle="Representing individuals, groups and businesses in complex claims against powerful institutions, major corporations and global organisations."
         breadcrumbs={[{ label: 'Class Actions' }]}
         backgroundImage="/img/hero-bg/class-actions.jpg"
       />
