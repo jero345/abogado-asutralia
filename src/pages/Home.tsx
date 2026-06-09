@@ -64,10 +64,10 @@ export function Home() {
             the heading, then the heading sits in the lower half. */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/img/hero-bg/work-with-us.jpg"
+            src="/img/hero/blog.jpeg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-[center_top] blur-[3px] scale-105"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
           {/* Navy gradient — light at the top so the building name reads
               clearly, darker at the bottom so the heading stays legible. */}

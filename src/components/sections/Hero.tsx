@@ -117,7 +117,7 @@ export function Hero() {
       >
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-[#0F2540]/40 backdrop-blur-md w-full max-w-3xl">
           {[
-            { value: '$500M+', label: 'Recovered for Clients' },
+            { value: '$500M+', label: 'In Outcomes' },
             { value: '50+', label: 'Years Combined Leadership' },
             { value: '60+', label: 'Major Litigation Cases' },
             { value: '30+', label: 'Significant Judgments' },

@@ -139,6 +139,22 @@ const REGISTER = {
 <p>The privacy and confidentiality of our clients and group members is very important to Banton Group. For the current version of our Privacy Policy <a href="/privacy-policy">please click here</a>.</p>
 `.trim(),
 
+  'hyundai-abs': `
+<p>The Hyundai ABS Class Action concerns allegations of loss arising from a defect present in Hyundai brand vehicle models sold in Australia between 2004 to 2020, which breached the standards required under the Australian Consumer Law (<strong>ACL</strong>).</p>
+
+<p>The Hyundai ABS Class Action alleges that because of the breaches of the ACL, owners of affected vehicles suffered losses, including but not limited to overpaying for their vehicles and suffering consequential losses from having to manage the risks of the defect, which ought to be compensated by the Defendants.</p>
+
+<p>If you, or a person or entity you represent, purchased, leased or otherwise acquired a legal interest in one or more of the Affected Vehicles, you may be eligible to participate in the Hyundai ABS Class Action. You may be able to participate even if you no longer own the vehicle.</p>
+`.trim(),
+
+  'sp-cdo-cpdo': `
+<p><strong>Federal Court of Australia Proceeding NSD 881 of 2020</strong></p>
+
+<p style="background-color:#1C3A64;color:#ffffff;padding:32px 24px;border-radius:6px;text-align:center;line-height:1.7;">Please input the following to the best of your ability.<br /><br />By completing the form below, the class member named below will <em>register</em> their claim with Banton Group:</p>
+
+<p><strong>To:</strong> Banton Group<br />Level 12<br />60 Martin Place<br />Sydney NSW 2000<br />Attention: Amanda Banton<br />Email: <a href="mailto:sandpcdos@bantongroup.com">sandpcdos@bantongroup.com</a></p>
+`.trim(),
+
   phoslock: `
 <p>This case is currently being run as an open class action, however, discussions with the Respondents are in place regarding any potential court ordered registration, opt out process and class closure before the mediation ordered to occur on or before 20 May 2026.</p>
 

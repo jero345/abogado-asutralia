@@ -43,6 +43,7 @@ const FITCH = `${STORAGE}/fitch-scdo`
 const PHOS = `${STORAGE}/phoslock`
 const FITCHUK = `${STORAGE}/fitch-ratings-uk`
 const SPUK_CLAIM_FORM = 'https://bantongroup.com/wp-content/uploads/2026/04/2026.30.01-Amended-Claim-Form-SP-sealed-30-January-2025.pdf'
+const HYUN = `${STORAGE}/hyundai-abs`
 
 // slug -> body_html
 const BODY = {
@@ -737,6 +738,81 @@ const BODY = {
 <h3>Next Steps</h3>
 
 <p>If you have any questions or would likely any additional information or if you are interested in registering your claim, <a href="/class-actions/sp-cdo-cpdo/register">click here</a>.</p>
+`.trim(),
+
+  // NOTE: "Recall Notice" links are placeholders (#) until the firm supplies
+  // each recall-notice URL. The "HERE" document links use the PDFs already in
+  // storage; "Proposed Amended Funding Information Summary" has no file yet (#).
+  'hyundai-abs': `
+<h3>Background</h3>
+
+<p>Banton Group acts on behalf of Samantha Jane Edwards and Josephine Dolores Hoppner, who are the lead Plaintiffs in a class action against Hyundai Motor Company Australia Pty Ltd and Hyundai Motor Company (together, <strong>Hyundai</strong>) in relation to multiple safety recall notices which identify a defect in the Anti-Lock Braking System (<strong>ABS</strong>) in several Hyundai vehicle models.</p>
+
+<p>Due to a manufacturing error, an electronic control circuit board in the ABS module will short circuit when the components are exposed to moisture. This moisture creates the risk of an engine compartment fire, even when the vehicle is turned off, as the circuit is constantly powered. This could increase the risk of an accident, serious injury or death to vehicle occupants, other road users and bystanders, and/or damage to property.</p>
+
+<p>While the short circuit does not affect the functioning of the brake system, Hyundai have advised vehicle owners to park their vehicles in an open space and away from flammable materials and structures, i.e. not in a garage. However, parking vehicles outside presents a further set of risks and costs, including theft, higher insurance premiums and/or parking fees.</p>
+
+<p>The Hyundai ABS Class Action seeks compensation for vehicle owners who have suffered loss due to alleged breaches of the Australian Consumer Law by Hyundai.</p>
+
+<p>The Hyundai ABS Class Action is in the Supreme Court of Victoria.</p>
+
+<p>A competing class action has been filed by another law firm and a hearing is scheduled on 30 June 2025 to determine which law firm will be given carriage of the class action against Hyundai.</p>
+
+<h3><a href="/class-actions/hyundai-abs/register">Register</a></h3>
+
+<p>You may be eligible to <a href="/class-actions/hyundai-abs/register">register</a> to participate in the Hyundai ABS Class Action if you acquired one or more of the following affected vehicles listed in the tables below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hyundai Model(s)</th>
+      <th>Series</th>
+      <th>Model Years</th>
+      <th>Date vehicle acquired prior to</th>
+      <th>Safety Recall Notice Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Sonata</td><td>NF</td><td>2004 – 2013</td><td>28 February 2018</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-000624" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Grandeur</td><td>TG</td><td>2004 – 2013</td><td>28 February 2018</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-000636" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Santa Fe</td><td></td><td>2006 – 2009</td><td>8 May 2020</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-000601" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>i30</td><td></td><td>2005 – 2010</td><td>8 May 2020</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-000603" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Elantra</td><td></td><td>2005 – 2010</td><td>8 May 2020</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-001596" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Tuscon</td><td></td><td>2014 – 2020</td><td>4 February 2021</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-001597" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Genesis</td><td></td><td>2014 – 2017</td><td>30 May 2021</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-005532" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Genesis</td><td>G80</td><td>2018</td><td>30 May 2021</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-005532" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Santa Fe</td><td>DM</td><td>2014 – 2017</td><td>26 September 2022</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-005583" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>ix35</td><td></td><td>2014 – 2017</td><td>26 September 2022</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-006041" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>ix35 (EL)</td><td>EL</td><td>2014 – 2015</td><td>7 December 2022</td><td><a href="https://www.vehiclerecalls.gov.au/recalls/rec-006041" target="_blank" rel="noopener">Recall Notice</a></td></tr>
+    <tr><td>Veloster</td><td>FS</td><td>2007 – 2014</td><td>1 August 2024</td><td><a href="#">Recall Notice</a></td></tr>
+    <tr><td>ix35</td><td>LM</td><td>2007 – 2014</td><td>1 August 2024</td><td><a href="#">Recall Notice</a></td></tr>
+    <tr><td>Accent</td><td>RM</td><td>2007 – 2014</td><td>1 August 2024</td><td><a href="#">Recall Notice</a></td></tr>
+    <tr><td>i40</td><td>VF</td><td>2007 – 2014</td><td>1 August 2024</td><td><a href="#">Recall Notice</a></td></tr>
+    <tr><td>Santa Fe</td><td>DM</td><td>2007 – 2014</td><td>1 August 2024</td><td><a href="#">Recall Notice</a></td></tr>
+    <tr><td>iMax</td><td></td><td>2007 – 2014</td><td>1 August 2024</td><td><a href="#">Recall Notice</a></td></tr>
+    <tr><td>iLoad</td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<p>If you are unsure if you are eligible to participate in the Hyundai ABS Class Action, click the link of the recall notice and check whether your Vehicle Identification Number (VIN) is included on the list published. A VIN is a unique identification number which can be found on your vehicle&rsquo;s registration certificate or owner&rsquo;s manual. If after doing this you are still unsure about whether you can participate, please email <a href="mailto:Hyundaikia@bantongroup.com">Hyundaikia@bantongroup.com</a> with your name, mobile number and VIN and we will get back to you as soon as possible.</p>
+
+<p>You are still able to participate in the Hyundai ABS Class Action even if you have sold your vehicle, written off your vehicle or work to fix the issues relating to the recall notice has been done.</p>
+
+<p>The Hyundai ABS Class Action Group Proceeding Summary Statement can be accessed <a href="${HYUN}/20250505-Edwards-v-Hyundai-Group-Proceeding-Summary-Statement-SEALED-1.pdf" target="_blank" rel="noopener">HERE</a>.</p>
+
+<p>The Hyundai ABS Class Action Funding Information Summary Statement can be accessed <a href="${HYUN}/20250505-Edwards-v-Hyundai-Funding-Information-Summary-Statement-SEALED-1.pdf" target="_blank" rel="noopener">HERE</a>.</p>
+
+<h3>Update</h3>
+
+<p>On 28 March 2025, the lead Plaintiffs signalled their intention to seek leave of the Court amend the scope of the claim and against Hyundai to include group members with vehicle models recalled on 1 August 2024.</p>
+
+<p>Should the Court grant leave to amend the scope of the claim, the below linked documents will reflect the new scope of the Hyundai ABS Class Action:</p>
+
+<p>The proposed Amended Hyundai ABS Class Action Group Proceeding Summary Statement can be accessed <a href="${HYUN}/Proposed-Amended-Group-Proceeding-Summary-Statement-Copy.pdf" target="_blank" rel="noopener">HERE</a>.</p>
+
+<p>The proposed Amended Hyundai ABS Class Action Funding Information Summary Statement can be accessed <a href="#" target="_blank" rel="noopener">HERE</a>.</p>
+
+<p>For all enquiries about the Hyundai ABS Class Action, please email <a href="mailto:Hyundaikia@bantongroup.com">Hyundaikia@bantongroup.com</a></p>
 `.trim(),
 }
 

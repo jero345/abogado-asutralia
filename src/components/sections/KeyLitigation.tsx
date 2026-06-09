@@ -19,7 +19,7 @@ const insolvencies = [
   'Ceramic Fuel Cells Limited',
 ]
 
-const clients = ['FTI', 'KordaMentha', 'Deloitte', 'McGrath Nicol', 'KPMG', 'Hall Chadwick', 'Grant Thornton', 'Kupang', 'Trilogy']
+const clients = ['FTI Consulting', 'KordaMentha', 'Deloitte', 'McGrath Nicol', 'KPMG', 'Hall Chadwick', 'Grant Thornton', 'Kupang', 'Trilogy']
 
 export function KeyLitigation() {
   return (
@@ -96,7 +96,7 @@ export function KeyLitigation() {
             <ScrollReveal delay={0.2}>
               <div className="bg-[#F4F6FB] border border-[#1C3A64]/[0.08] rounded-xl p-6 md:p-7">
                 <h3 className="text-[#1C3A64] text-[16px] md:text-[18px] font-medium mb-4 leading-[1.4]">
-                  Our key clients in insolvency and commercial litigation matters include:
+                  We have acted for:
                 </h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
                   {clients.map((c) => (

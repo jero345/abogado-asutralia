@@ -56,13 +56,10 @@ const team: Member[] = [
     awards: [
       {
         category: 'Lawyers Weekly',
-        items: [
-          'Partner of the Year \u2014 Class Actions, 2026',
-          'Partner of the Year \u2014 Class Actions, Finalist 2023, 2024, 2025',
-        ],
+        items: ['Class Actions Partner of the Year \u2013 Finalist 2023, 2024, 2025 and 2026'],
       },
       {
-        category: 'Legal 500',
+        category: 'Asia Pacific Legal 500',
         items: ['Recommended Lawyer 2022', 'Rising Star 2017'],
       },
     ],
@@ -72,20 +69,24 @@ const team: Member[] = [
     role: 'Partner',
     specialties: ['Commercial Litigation', 'Insolvency', 'Class Actions'],
     bio:
-      'Melissa brings extensive experience in complex commercial, corporate and insolvency litigation, representing both plaintiffs and defendants across Australia. Her practice encompasses class action proceedings, liquidator claims against former directors and auditors, breaches of the Corporations Act, and trust and fiduciary disputes. Recent matters include the Blue Sky Alternative Investments class action, the Arrium class action and the Murray Darling Basin Authority class action.',
+      'Melissa has extensive experience in commercial, corporate and insolvency litigation matters. She is a highly strategic thinker and results-focused practitioner who regularly acts on large, complex class actions and other significant dispute and investigative matters.',
+    extendedBio: [
+      'Melissa\u2019s practice encompasses class actions (including shareholder class actions), prosecuting matters on behalf of large national corporates and high net worth individuals in a range of corporate litigation \u2013 including breaches of trust, fiduciary duties, directors\u2019 duties and the Corporations Act \u2013 as well as trust, equity, banking and finance, insolvency, property and consumer and competition related disputes. She has an in-depth knowledge of the legal system and her experience includes advising and litigating against the Commonwealth of Australia, major auditors and banking institutions.',
+      'Melissa has been a finalist in the Lawyers Weekly Awards for Class Actions Partner of the Year every year since 2023, as well as being recognised in Asia Pacific Legal 500 and Best Lawyers \u2013 a distinction that reflects her consistent standing among leading class action practitioners in Australia.',
+    ],
     photo: '/img/team/melissa-morgan.jpg',
     awards: [
       {
-        category: 'Legal 500 Asia-Pacific',
-        items: ['Recommended Lawyer 2026', 'Recommended Lawyer 2022'],
+        category: 'Lawyers Weekly',
+        items: ['Class Actions Partner of the Year \u2013 Finalist 2023, 2024, 2025 and 2026'],
       },
       {
-        category: 'Lawyers Weekly',
-        items: ['Partner of the Year \u2014 Class Actions, Finalist 2023, 2024, 2025, 2026'],
+        category: 'Asia Pacific Legal 500',
+        items: ['Recommended Lawyer 2022'],
       },
       {
         category: 'Best Lawyers',
-        items: ['Ones to Watch 2026, 2027'],
+        items: ['Ones to Watch 2026 and 2027'],
       },
     ],
   },
@@ -122,26 +123,6 @@ export function Team() {
       <div className="absolute inset-0 bg-white" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
-          <ScrollReveal>
-            <span className="section-label mb-4 block">
-              <span className="w-5 h-px bg-[#1e3a5f]" />
-              Our Team
-            </span>
-            <h2 className="text-[28px] sm:text-3xl md:text-[40px] lg:text-[44px] font-medium text-[#1C3A64] leading-[1.1] tracking-tight">
-              Expert Litigators,
-              <br />
-              <span className="italic-display text-[#6D8FB5]">relentless in pursuit of results.</span>
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.15} className="lg:max-w-sm">
-            <p className="text-[#555555] text-base leading-[1.6]">
-              Leading litigators, aligned in purpose — delivering results where it matters most.
-            </p>
-          </ScrollReveal>
-        </div>
-
         {/* Team grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
           {team.map((member, i) => {

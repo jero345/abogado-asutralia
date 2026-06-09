@@ -1,7 +1,6 @@
 import { PageHero } from '@/components/ui/PageHero'
 import { About } from '@/components/sections/About'
 import { AmandaBio } from '@/components/sections/AmandaBio'
-import { Innovation } from '@/components/sections/Innovation'
 
 export function AboutPage() {
   return (
@@ -15,7 +14,6 @@ export function AboutPage() {
         backgroundImage="/img/hero-bg/about.jpg"
       />
       <About />
-      <Innovation />
       <AmandaBio />
     </>
   )

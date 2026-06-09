@@ -31,7 +31,7 @@ export function NewsPage() {
         italicTitle="From the front line of litigation."
         subtitle="Firm updates, case notes and perspectives on developments shaping Australian litigation — written by the lawyers running the matters."
         breadcrumbs={[{ label: 'Blog' }]}
-        backgroundImage="/img/hero-bg/about.jpg"
+        backgroundImage="/img/hero/blog.jpeg"
       />
 
       <section className="relative py-20 md:py-28 bg-white">

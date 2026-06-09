@@ -21,7 +21,7 @@ const practices = [
     tagline: 'High-Stakes Disputes',
     description:
       'Complex commercial disputes demand sophisticated strategy. We provide expert advocacy in contract disputes, shareholder conflicts, trade practices, and commercial fraud matters across all Australian courts — with a particular focus on complex financial products.',
-    highlights: ['Contract disputes', 'Shareholder actions', 'Trade practices', 'Fraud & misrepresentation'],
+    highlights: ['Contract disputes', 'Shareholder actions', 'Australian Consumer Law', 'Fraud & misrepresentation'],
     color: 'from-[#2A4E72]/15 to-[#2A4E72]/[0.03]',
     accent: '#2A4E72',
   },
@@ -42,7 +42,7 @@ const practices = [
     title: 'Complex Financial Disputes',
     tagline: 'Precision Advocacy',
     description:
-      'Financial disputes require deep technical expertise and aggressive advocacy. We have pioneered successful claims in relation to complex financial products — including collateralised debt obligations and synthetic CDOs — against global ratings agencies and major Australian and global financial institutions.',
+      'Financial disputes require deep technical expertise and advocacy. We have pioneered successful claims in relation to complex financial products — including collateralised debt obligations and synthetic CDOs — against global ratings agencies and major Australian and global financial institutions.',
     highlights: ['Securities litigation', 'CDO & CPDO claims', 'Banking disputes', 'ASIC proceedings'],
     color: 'from-[#6D8FB5]/15 to-[#6D8FB5]/[0.03]',
     accent: '#1C3A64',

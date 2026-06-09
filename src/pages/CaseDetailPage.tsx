@@ -345,6 +345,11 @@ export function CaseDetailPage() {
                       'prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB]',
                       'prose-blockquote:rounded-r-xl prose-blockquote:py-2 prose-blockquote:px-5',
                       'prose-blockquote:not-italic prose-li:text-[#555555]',
+                      // Recall / eligibility tables (Hyundai & Kia ABS) — bordered
+                      // cells with a light header, matching the firm's pages.
+                      '[&_table]:w-full [&_table]:my-6 [&_table]:text-[14px] [&_table]:border-collapse',
+                      '[&_th]:border [&_th]:border-[#1C3A64]/15 [&_th]:bg-[#F4F6FB] [&_th]:text-[#1C3A64] [&_th]:font-medium [&_th]:text-left [&_th]:px-3 [&_th]:py-2.5',
+                      '[&_td]:border [&_td]:border-[#1C3A64]/15 [&_td]:px-3 [&_td]:py-2.5 [&_td]:align-top [&_td]:text-[#555555]',
                       // PDF outlined-button (replaces inline iframe — the firm
                       // explicitly wants the case docs as downloadable buttons,
                       // not inline viewers; that's blog-only).
