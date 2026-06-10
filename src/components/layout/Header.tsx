@@ -58,9 +58,9 @@ export function Header() {
                 className="flex items-center gap-3"
               >
                 <motion.img
-                  src="/img/logobg.png"
+                  src="/logo-navbar.png"
                   alt="Banton Group"
-                  className={`h-10 md:h-11 w-auto object-contain transition-all duration-300 ${darkBackground ? 'brightness-0 invert' : ''}`}
+                  className={`h-8 md:h-9 w-auto object-contain transition-all duration-300 ${darkBackground ? 'brightness-0 invert' : ''}`}
                   whileHover={{ scale: 1.03 }}
                 />
               </Link>

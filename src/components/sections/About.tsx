@@ -69,11 +69,11 @@ export function About() {
                 style={{ y: imageY }}
                 className="relative"
               >
-                <div className="relative bg-white border border-[#1e3a5f]/[0.1] rounded-2xl overflow-hidden aspect-[4/5] max-w-[460px] mx-auto flex items-center justify-center p-12">
+                <div className="relative bg-[#1e3a5f]/[0.03] border border-[#1e3a5f]/[0.1] rounded-2xl overflow-hidden aspect-[4/5] max-w-[460px] mx-auto">
                   <img
-                    src="/apple-touch-icon.png"
-                    alt="Banton Group"
-                    className="w-full h-auto object-contain"
+                    src="/img/about/established.jpeg"
+                    alt="Banton Group offices"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </motion.div>

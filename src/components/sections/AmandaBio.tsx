@@ -119,7 +119,13 @@ export function AmandaBio() {
           {/* Side column — contact + recognitions */}
           <div className="space-y-6 lg:sticky lg:top-28">
             <ScrollReveal delay={0.1}>
-              <div className="bg-[#1C3A64] text-white rounded-2xl p-6 shadow-sm">
+              <div className="bg-[#1C3A64] text-white rounded-2xl shadow-sm overflow-hidden">
+                <img
+                  src="/img/about/about-us-amanda.jpg"
+                  alt="Amanda Banton, Managing Partner"
+                  className="w-full aspect-[4/5] object-cover object-top"
+                />
+                <div className="p-6">
                 <div className="text-[11px] tracking-[0.2em] uppercase text-[#8AAECE] mb-3">
                   Amanda Banton
                 </div>
@@ -159,6 +165,7 @@ export function AmandaBio() {
                     <Phone size={14} className="text-[#8AAECE]" />
                     +61 424 156 859 <span className="text-[#8AAECE] text-[11px] ml-1">· Mobile</span>
                   </a>
+                </div>
                 </div>
               </div>
             </ScrollReveal>

@@ -18,7 +18,7 @@ export function WorkWithUsPage() {
         italicTitle="Progress on merit."
         subtitle="Work on some of Australia's most significant and complex disputes, alongside lawyers recognised for their strategic insight and technical excellence."
         breadcrumbs={[{ label: 'Careers' }]}
-        backgroundImage="/img/hero-bg/work-with-us.jpg"
+        backgroundImage="/img/hero/careers.jpeg"
       />
 
       {/* Intro block */}
