@@ -31,8 +31,8 @@ const practices = [
     title: 'Insolvency & Restructuring',
     tagline: 'Navigating Complexity',
     description:
-      'When businesses face financial distress, decisive legal action is critical. We advise on voluntary administration, receivership, deed of company arrangement, and complex creditor negotiations. We have acted for include KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick and Grant Thornton.',
-    highlights: ['Voluntary administration', 'Creditor rights', 'Liquidations', 'Corporate rescue', 'FTI consulting'],
+      'When businesses face financial distress, decisive legal action is critical. We advise on voluntary administration, receivership, deed of company arrangement, and complex creditor negotiations. We have acted for businesses including FTI Consulting, KordaMentha, Deloitte, McGrath Nicol, KPMG, Hall Chadwick and Grant Thornton.',
+    highlights: ['Voluntary administration', 'Creditor rights', 'Liquidations', 'Corporate rescue'],
     color: 'from-[#385078]/15 to-[#385078]/[0.03]',
     accent: '#385078',
   },

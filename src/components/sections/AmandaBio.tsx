@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { Linkedin, Mail, Phone, ArrowUpRight } from 'lucide-react'
+import { Linkedin, Mail, Phone, ArrowUpRight, ChevronDown } from 'lucide-react'
 
 const recognitions: { category: string; items: string[] }[] = [
   {
@@ -43,8 +44,10 @@ const recognitions: { category: string; items: string[] }[] = [
 ]
 
 export function AmandaBio() {
+  const [recogOpen, setRecogOpen] = useState(false)
+  const visibleRecognitions = recogOpen ? recognitions : recognitions.slice(0, 2)
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-white">
+    <section className="relative py-20 md:py-28 overflow-hidden bg-[#EFF4F4]">
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-10 lg:gap-16 items-start">
           {/* Main column */}
@@ -84,31 +87,55 @@ export function AmandaBio() {
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
                     <span>
-                      <span className="text-[#1C3A64] font-medium">Bogan v Smedley [2025] HCA 7</span> — landmark High Court authority on group cost orders.
+                      <span className="text-[#1C3A64] font-medium italic">Bogan v The Estate of Peter John Smedley (Deceased) &amp; Ors</span> [2025] HCA 7 – High Court of Australia
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
                     <span>
-                      <span className="text-[#1C3A64] font-medium">Bolitho v Banksia Securities Ltd [2022] VSC 201</span> — Supreme Court of Victoria approved a 40% group cost order.
+                      <span className="text-[#1C3A64] font-medium italic">Bogan v Estate of Peter John Smedley (Deceased) &amp; Ors</span>, Supreme Court of Victoria, S ECI 2020 03281
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
                     <span>
-                      <span className="text-[#1C3A64] font-medium">Hunt Leather Pty Ltd v Transport for NSW [2025] HCA 53</span> — High Court ruling on the Sydney Light Rail class action.
+                      <span className="text-[#1C3A64] font-medium italic">ACN 117 641 004 Pty Ltd (in liquidation) &amp; Anor v S&amp;P Global Inc &amp; Anor</span>, Federal Court of Australia, NSD 881/2020
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
                     <span>
-                      <span className="text-[#1C3A64] font-medium">In the matter of Kupang Resources Limited [2025] NSWSC 1477</span> — $46 million recovery for shareholders and creditors.
+                      <span className="text-[#1C3A64] font-medium italic">Belmont Park Investments Pty Ltd &amp; Anor v Fitch Ratings, Inc &amp; Anor</span>, Federal Court of Australia, NSD 924/2024
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
                     <span>
-                      <span className="text-[#1C3A64] font-medium">CuDeco Limited (in liquidation)</span> — acting for KPMG as liquidators (December 2025).
+                      <span className="text-[#1C3A64] font-medium italic">Hunt Leather Pty Ltd v Transport for NSW</span> [2025] HCA 53 – High Court of Australia
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
+                    <span>
+                      <span className="text-[#1C3A64] font-medium italic">Kupang Resources Pty Ltd v The Commonwealth of Australia</span>, NSWSC, 2020/106859
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
+                    <span>
+                      <span className="text-[#1C3A64] font-medium italic">Doyle&rsquo;s Farm Produce Pty Ltd &amp; Ors v Murray Darling Basin Authority &amp; Anor</span>, NSWSC, 2019/00150651
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
+                    <span>
+                      <span className="text-[#1C3A64] font-medium italic">Toner v CuDeco Limited (Receivers and Managers Appointed) (In Liquidation) &amp; Ors</span>, Federal Court of Australia, VID 176/2022
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#1C3A64] mt-2 flex-shrink-0" />
+                    <span>
+                      <span className="text-[#1C3A64] font-medium italic">MDC v NSW Ports Operations Hold Co Pty Ltd &amp; Ors</span> – Federal Court Proceeding No. NSD 862/2019; <span className="text-[#1C3A64] font-medium italic">Mayfield Development Corporation Pty Ltd ACN 154 495 048 v NSW Ports Operations Hold Co Pty Ltd ACN 163 262 351 &amp; Ors</span> Full Federal Court Proceeding No. NSD 840/2024
                     </span>
                   </li>
                 </ul>
@@ -176,7 +203,7 @@ export function AmandaBio() {
                   Recognitions
                 </div>
                 <div className="space-y-5">
-                  {recognitions.map((group) => (
+                  {visibleRecognitions.map((group) => (
                     <div key={group.category}>
                       <div className="text-[#1C3A64] text-[12px] font-semibold tracking-wide mb-2">
                         {group.category}
@@ -192,6 +219,21 @@ export function AmandaBio() {
                     </div>
                   ))}
                 </div>
+                {recognitions.length > 2 && (
+                  <button
+                    onClick={() => setRecogOpen((v) => !v)}
+                    className="mt-5 inline-flex items-center gap-1.5 text-[#1C3A64] text-[12px] font-medium hover:underline"
+                  >
+                    <motion.span
+                      animate={{ rotate: recogOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="inline-flex"
+                    >
+                      <ChevronDown size={14} />
+                    </motion.span>
+                    {recogOpen ? 'Show less' : 'Show more'}
+                  </button>
+                )}
               </div>
             </ScrollReveal>
           </div>

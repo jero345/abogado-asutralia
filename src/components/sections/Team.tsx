@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { Linkedin, User, ChevronDown } from 'lucide-react'
+import { User, ChevronDown } from 'lucide-react'
 
 type AwardGroup = { category: string; items: string[] }
 
@@ -25,19 +25,49 @@ const team: Member[] = [
     role: 'Managing Partner',
     specialties: ['Class Actions', 'Securities Litigation', 'Insolvency', 'Commercial Litigation'],
     bio:
-      'Amanda Banton is the Managing Partner of Banton Group, established in February 2020. She brings more than 20 years\u2019 experience in the legal profession, including senior roles at Squire Patton Boggs and Piper Alderman, where she led substantial litigation practices, as well as consulting experience with KPMG and within the Federal Government. Her practice spans complex insolvency, regulatory, corporate and commercial disputes, including securities class actions, with particular expertise in matters involving corporations law, ASIC regulation, competition and consumer law, and fiduciary obligations. Amanda is recognised for developing large scale litigation in the absence of complete documentation or witnesses. Under her leadership, Banton Group has secured a series of landmark outcomes, including multiple High Court victories and significant recoveries in complex proceedings. She is known for her strategic judgement, rigorous attention to detail, and her ability to manage the interests of all stakeholders while advancing high stakes litigation with precision and discipline.',
+      'Amanda Banton is the Managing Partner of Banton Group, established in February 2020. She brings more than 20 years\u2019 experience in the legal profession, including senior roles at Squire Patton Boggs and Piper Alderman, where she led substantial litigation practices, as well as consulting experience with KPMG and within the Federal Government.',
+    extendedBio: [
+      'Her practice spans complex insolvency, regulatory, corporate and commercial disputes, including securities class actions, with particular expertise in matters involving corporations law, ASIC regulation, competition and consumer law, and fiduciary obligations. Amanda is recognised for developing large scale litigation in the absence of complete documentation or witnesses.',
+      'Under her leadership, Banton Group has secured a series of landmark outcomes, including multiple High Court victories and significant recoveries in complex proceedings. She is known for her strategic judgement, rigorous attention to detail, and her ability to manage the interests of all stakeholders while advancing high stakes litigation with precision and discipline.',
+    ],
     photo: '/img/team/amanda-banton.jpg',
     awards: [
       {
         category: 'Chambers Asia-Pacific',
-        items: ['Leading Individual \u2014 Dispute Resolution 2022, 2023, 2025 & 2026'],
+        items: ['Dispute Resolution \u2014 Leading Individual 2022, 2023, 2025 & 2026'],
       },
       {
         category: 'Asia Pacific Legal 500',
         items: [
+          'Recommended Lawyer \u2014 Dispute Resolution: Class Actions 2022, 2023',
+          'Leading Individual \u2014 Class Action Dispute Resolution 2023',
           'Dispute Resolution: Class Actions \u2014 Band 2, 2026',
-          'Restructuring & Insolvency \u2014 Band 4, 2026',
+          'Restructuring and Insolvency \u2014 Band 4, 2026',
         ],
+      },
+      {
+        category: "Doyle's Guide",
+        items: ['Recommended Lawyer \u2014 Commercial Litigation & Dispute Resolution 2022'],
+      },
+      {
+        category: 'Australasian Law Awards',
+        items: ['Excellence Award \u2014 Law Firm Leader of the Year 2022'],
+      },
+      {
+        category: 'Australasian Lawyers',
+        items: ['Elite Women Awards 2022'],
+      },
+      {
+        category: 'APAC Insider',
+        items: ['Complex Litigator of the Year (Australia) 2022'],
+      },
+      {
+        category: 'Leaders in Law',
+        items: ['Commercial Litigation Expert of the Year (Australia) 2022'],
+      },
+      {
+        category: 'Global 100',
+        items: ['Complex Litigator of the Year (Australia) 2023'],
       },
     ],
   },
@@ -124,10 +154,13 @@ export function Team() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Team grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
           {team.map((member, i) => {
             const isOpen = expanded.has(member.name)
-            const hasMore = !!(member.extendedBio && member.extendedBio.length > 0)
+            const hasMore = !!(
+              (member.extendedBio && member.extendedBio.length > 0) ||
+              (member.awards && member.awards.length > 2)
+            )
             return (
               <ScrollReveal key={member.name} delay={i * 0.08}>
                 <motion.div
@@ -161,13 +194,6 @@ export function Team() {
                       <h3 className="text-[#1C3A64] font-medium text-[18px] md:text-[20px] leading-[1.2]">
                         {member.name}
                       </h3>
-                      <motion.a
-                        href="#"
-                        whileHover={{ scale: 1.1 }}
-                        className="w-8 h-8 border border-[#1C3A64]/10 rounded-full flex items-center justify-center text-[#1C3A64]/30 hover:text-[#1C3A64]/80 hover:border-[#1C3A64]/25 transition-colors duration-200 flex-shrink-0 ml-2"
-                      >
-                        <Linkedin size={13} />
-                      </motion.a>
                     </div>
                     <div className="text-[#1C3A64] text-[13px] font-medium mb-3">{member.role}</div>
 
@@ -227,7 +253,7 @@ export function Team() {
                     {/* Awards */}
                     {member.awards && member.awards.length > 0 && (
                       <div className="border-t border-[#1C3A64]/[0.08] pt-4 mt-auto space-y-3">
-                        {member.awards.map((group) => (
+                        {(isOpen ? member.awards : member.awards.slice(0, 2)).map((group) => (
                           <div key={group.category}>
                             <div className="text-[#1C3A64] text-[11px] font-semibold tracking-wide mb-1.5">
                               {group.category}

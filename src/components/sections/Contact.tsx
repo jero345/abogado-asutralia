@@ -164,7 +164,7 @@ export function Contact() {
                         rows={5}
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        placeholder="Please briefly describe your legal matter and what outcome you are seeking…"
+                        placeholder="Please briefly describe your legal matter"
                         className={`${inputClass} resize-none`}
                       />
                     </div>
@@ -268,8 +268,7 @@ export function Contact() {
               <div className="space-y-2 text-sm">
                 {[
                   { day: 'Monday – Friday', hours: '8:30am – 5:30pm' },
-                  { day: 'Saturday', hours: 'Closed' },
-                  { day: 'Sunday', hours: 'Closed' },
+                  { day: 'Saturday - Sunday', hours: 'Closed' },
                 ].map((h) => (
                   <div key={h.day} className="flex justify-between">
                     <span className="text-[#1e3a5f]/50">{h.day}</span>

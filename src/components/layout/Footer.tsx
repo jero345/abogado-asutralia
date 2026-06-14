@@ -60,16 +60,15 @@ export function Footer() {
 
 
           {/* Quick Links */}
-          <ScrollReveal delay={0.15}>
-            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6 text-center">Quick Links</h3>
-            <ul className="grid grid-cols-2 grid-rows-4 grid-flow-col gap-x-6 gap-y-3 justify-center">
+          <ScrollReveal delay={0.15} className="md:pl-10 lg:pl-16">
+            <h3 className="text-white text-[11px] font-medium tracking-[0.12em] uppercase mb-6">Quick Links</h3>
+            <ul className="flex flex-col items-start gap-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-[#B8C8E0] text-[13px] hover:text-white transition-colors duration-200 flex items-center gap-1 group"
+                    className="text-[#B8C8E0] text-[13px] hover:text-white transition-colors duration-200"
                   >
-                    <span className="w-3 h-px bg-transparent group-hover:bg-white/60 transition-all duration-200" />
                     {link.label}
                   </Link>
                 </li>
