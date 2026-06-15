@@ -1,8 +1,10 @@
 import type { CaseDetail } from '@/data/caseDetails'
-import { getFormConfig } from '@/data/registrationForms'
+import { resolveFormConfig } from '@/data/registrationForms'
 import { ShareholderForm } from './forms/ShareholderForm'
 import { InvestmentDetailedForm } from './forms/InvestmentDetailedForm'
 import { InvestmentInterestForm } from './forms/InvestmentInterestForm'
+import { ClaimDetailedForm } from './forms/ClaimDetailedForm'
+import { MiniInterestForm } from './forms/MiniInterestForm'
 import { VehicleForm } from './forms/VehicleForm'
 
 /**
@@ -13,7 +15,7 @@ import { VehicleForm } from './forms/VehicleForm'
  * back to the shareholder form (the legacy behaviour).
  */
 export function CaseRegistrationForm({ caseData }: { caseData: CaseDetail }) {
-  const config = getFormConfig(caseData.slug)
+  const config = resolveFormConfig(caseData.slug, caseData.formType, caseData.formNotifyEmail)
 
   if (!config) {
     return (
@@ -38,6 +40,10 @@ export function CaseRegistrationForm({ caseData }: { caseData: CaseDetail }) {
       return <InvestmentDetailedForm caseData={caseData} config={config} />
     case 'investment-interest':
       return <InvestmentInterestForm caseData={caseData} config={config} />
+    case 'claim-detailed':
+      return <ClaimDetailedForm caseData={caseData} config={config} />
+    case 'mini-interest':
+      return <MiniInterestForm caseData={caseData} config={config} />
     case 'vehicle':
       return <VehicleForm caseData={caseData} config={config} />
     default:

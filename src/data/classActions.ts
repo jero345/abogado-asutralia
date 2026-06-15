@@ -53,6 +53,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'arrium',
+    orderIndex: 50,
     title: 'Arrium Class Action',
     status: 'Active',
     category: 'Securities',
@@ -80,6 +81,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'cudeco',
+    orderIndex: 20,
     title: 'CuDeco Class Action',
     status: 'Active',
     category: 'Securities',
@@ -107,6 +109,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'fitch-scdo',
+    orderIndex: 60,
     title: 'Fitch SCDO Class Action',
     status: 'Active',
     category: 'Financial Products',
@@ -129,6 +132,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'fitch-uk',
+    orderIndex: 70,
     title: 'Fitch UK Representative Action',
     status: 'Active',
     category: 'Financial Products',
@@ -150,6 +154,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'sp-uk',
+    orderIndex: 80,
     title: 'S&P UK Representative Action',
     status: 'Active',
     category: 'Financial Products',
@@ -171,6 +176,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'mdba',
+    orderIndex: 90,
     title: 'Murray Darling Basin Authority Class Action',
     status: 'Active',
     category: 'Environmental',
@@ -217,6 +223,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'blue-sky',
+    orderIndex: 40,
     title: 'Blue Sky Class Action',
     status: 'Active',
     category: 'Securities',
@@ -253,6 +260,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'sp-cdo',
+    orderIndex: 100,
     title: 'S&P CDO & CPDO Ratings Class Action',
     status: 'Active',
     category: 'Financial Products',
@@ -303,6 +311,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'hyundai-abs',
+    orderIndex: 110,
     title: 'Hyundai ABS Class Action',
     status: 'Active',
     category: 'Consumer',
@@ -396,6 +405,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'kia-abs',
+    orderIndex: 120,
     title: 'Kia ABS Defect Class Action',
     status: 'Active',
     category: 'Consumer',
@@ -487,6 +497,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'salt-lake',
+    orderIndex: 130,
     title: 'Salt Lake Class Action',
     status: 'Investigating',
     category: 'Securities',
@@ -529,6 +540,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'zip-co',
+    orderIndex: 140,
     title: 'Zip Co Class Action',
     status: 'Investigating',
     category: 'Securities',
@@ -572,6 +584,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'qoin',
+    orderIndex: 150,
     title: 'Qoin Class Action',
     status: 'Settled',
     category: 'Consumer',
@@ -584,6 +597,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'light-rail',
+    orderIndex: 10,
     title: 'Light Rail Class Action',
     status: 'On Appeal',
     category: 'Nuisance',
@@ -636,6 +650,7 @@ export const classActions: ClassAction[] = [
   // ─────────────────────────────────────────────────────────────
   {
     id: 'phoslock',
+    orderIndex: 30,
     title: 'Phoslock Class Action',
     status: 'Active',
     category: 'Securities',

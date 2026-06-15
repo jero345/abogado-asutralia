@@ -15,8 +15,8 @@ import {
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { getDocumentSignedUrl } from '@/lib/registrations'
+import { FORM_TYPE_META, type FormType } from '@/data/registrationForms'
 
-type FormType = 'shareholder' | 'investment-detailed' | 'investment-interest' | 'vehicle'
 type Status = 'new' | 'contacted' | 'archived'
 
 interface Doc {
@@ -51,12 +51,7 @@ interface Row {
   email_sent_at: string | null
 }
 
-const FORM_LABELS: Record<FormType, string> = {
-  shareholder: 'Shareholder',
-  'investment-detailed': 'Investment (detailed)',
-  'investment-interest': 'Investment (interest)',
-  vehicle: 'Vehicle',
-}
+const formLabel = (ft: FormType) => FORM_TYPE_META[ft]?.label ?? ft
 
 const STATUS_STYLES: Record<Status, string> = {
   new: 'bg-amber-50 text-amber-700 border-amber-200',
@@ -310,7 +305,7 @@ export function RegistrationsAdmin() {
                       {r.status}
                     </span>
                     <span className="text-[11px] text-[#6D8FB5] bg-[#1C3A64]/[0.05] px-2 py-0.5 rounded">
-                      {FORM_LABELS[r.form_type]}
+                      {formLabel(r.form_type)}
                     </span>
                     {r.documents?.length > 0 && (
                       <span className="text-[11px] text-[#1C3A64] inline-flex items-center gap-1">
@@ -427,7 +422,7 @@ function DetailDrawer({
               {row.first_name} {row.last_name}
             </h2>
             <p className="text-[#888888] text-[12px] mt-0.5">
-              {row.case_title} · {FORM_LABELS[row.form_type]} · {fmtDate(row.created_at)}
+              {row.case_title} · {formLabel(row.form_type)} · {fmtDate(row.created_at)}
             </p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-[#1C3A64]/[0.06] rounded-lg">

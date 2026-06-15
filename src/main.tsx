@@ -28,6 +28,7 @@ import { CaseEditor } from '@/pages/admin/CaseEditor'
 import { InvestigationsAdmin } from '@/pages/admin/InvestigationsAdmin'
 import { PastActionsAdmin } from '@/pages/admin/PastActionsAdmin'
 import { RegistrationsAdmin } from '@/pages/admin/RegistrationsAdmin'
+import { FormsAdmin } from '@/pages/admin/FormsAdmin'
 import { HelpPage } from '@/pages/admin/HelpPage'
 
 createRoot(document.getElementById('root')!).render(
@@ -47,6 +48,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="investigations" element={<InvestigationsAdmin />} />
             <Route path="past-actions" element={<PastActionsAdmin />} />
             <Route path="registrations" element={<RegistrationsAdmin />} />
+            <Route path="forms" element={<FormsAdmin />} />
             <Route path="help" element={<HelpPage />} />
           </Route>
 

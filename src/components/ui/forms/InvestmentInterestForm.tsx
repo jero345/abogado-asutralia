@@ -256,6 +256,24 @@ export function InvestmentInterestForm({
           </>
         )}
       </motion.button>
+
+      {config.contactNote && (
+        <div className="mt-8 pt-6 border-t border-[#1C3A64]/10">
+          <h3 className="text-[#1C3A64] text-[13px] md:text-[15px] font-semibold tracking-[0.16em] uppercase mb-2">
+            Contact us
+          </h3>
+          <p className="text-[#555555] text-[13px] leading-[1.7]">
+            {config.contactNote.text}{' '}
+            <a
+              href={`mailto:${config.contactNote.email}`}
+              className="text-[#1C3A64] underline"
+            >
+              {config.contactNote.email}
+            </a>
+            .
+          </p>
+        </div>
+      )}
     </form>
   )
 }

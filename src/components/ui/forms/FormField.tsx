@@ -45,7 +45,7 @@ export function SectionHeader({
     <div className="col-span-full pt-6 first:pt-0">
       <div className="flex items-center gap-3">
         <div className="h-px w-6 bg-[#1C3A64]/40" />
-        <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-[#1C3A64]">
+        <span className="text-[13px] md:text-[15px] font-semibold tracking-[0.16em] uppercase text-[#1C3A64]">
           {label}
         </span>
         <div className="h-px flex-1 bg-[#1C3A64]/10" />

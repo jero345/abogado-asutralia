@@ -204,6 +204,13 @@ create table if not exists public.cases (
 alter table public.cases
   add column if not exists register_process_html text;
 
+-- v6: admin-assignable registration form. `form_type` selects which form the
+-- public /class-actions/<slug>/register page renders; null = no online form.
+alter table public.cases
+  add column if not exists form_type text;
+alter table public.cases
+  add column if not exists form_notify_email text;
+
 create index if not exists cases_order_idx      on public.cases (order_index asc);
 create index if not exists cases_published_idx  on public.cases (published);
 create index if not exists cases_publish_at_idx on public.cases (publish_at);
@@ -351,6 +358,8 @@ create table if not exists public.registrations (
                     'shareholder',
                     'investment-detailed',
                     'investment-interest',
+                    'claim-detailed',
+                    'mini-interest',
                     'vehicle'
                   )),
 

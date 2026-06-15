@@ -278,6 +278,21 @@ export function InvestmentDetailedForm({
           </>
         )}
       </motion.button>
+
+      {config.statutoryDeclarationUrl && (
+        <p className="text-[#555555] text-[12px] mt-6 leading-[1.6]">
+          The form of statutory declaration is available{' '}
+          <a
+            href={config.statutoryDeclarationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#1C3A64] underline"
+          >
+            here
+          </a>
+          .
+        </p>
+      )}
     </form>
   )
 }

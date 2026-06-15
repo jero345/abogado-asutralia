@@ -30,11 +30,6 @@ function caseHtml(c: ClassAction): string {
 const STATUS_ORDER: CaseStatus[] = ['Active', 'Investigating', 'On Appeal', 'Settled']
 const STATUS_FILTERS: (CaseStatus | 'All')[] = ['All', ...STATUS_ORDER]
 
-function statusRank(s: CaseStatus): number {
-  const i = STATUS_ORDER.indexOf(s)
-  return i === -1 ? STATUS_ORDER.length : i
-}
-
 function rowStatus(row: Row): CaseStatus {
   // Standalone investigation entries are, by definition, "Investigating".
   return row.kind === 'case' ? row.data.status : 'Investigating'
@@ -81,11 +76,12 @@ export function ClassActions() {
   }, [])
 
   /**
-   * Merge cases and investigations into a single list, ordered first by
-   * status hierarchy (Active → Investigating → On Appeal → Settled) and,
-   * within each status, by `orderIndex` (lower first). Entries without an
-   * orderIndex keep their insertion order; investigations land after by
-   * default.
+   * Merge cases and investigations into a single list ordered purely by
+   * `orderIndex` (lower first) — the manual order the firm maintains via
+   * the admin panel / order script. Status no longer groups the listing,
+   * so e.g. an "On Appeal" matter can sit at the very top if its
+   * orderIndex says so. Entries without an orderIndex keep insertion
+   * order; investigations land after by default.
    */
   const rows = useMemo<Row[]>(() => {
     const merged: { row: Row; key: number }[] = []
@@ -101,12 +97,7 @@ export function ClassActions() {
         key: typeof inv.orderIndex === 'number' ? inv.orderIndex : 2000 + i,
       })
     })
-    merged.sort((a, b) => {
-      const sa = statusRank(rowStatus(a.row))
-      const sb = statusRank(rowStatus(b.row))
-      if (sa !== sb) return sa - sb
-      return a.key - b.key
-    })
+    merged.sort((a, b) => a.key - b.key)
     return merged.map((m) => m.row)
   }, [cases, investigations])
 
@@ -178,7 +169,7 @@ export function ClassActions() {
               )
             )}
 
-            {showPastActions && <PastActionsRow items={pastActions} />}
+            {showPastActions && <PastActionsRow />}
           </>
         )}
       </div>
@@ -196,6 +187,11 @@ const proseClasses = [
   'prose-blockquote:border-l-[#1C3A64] prose-blockquote:bg-[#F4F6FB] prose-blockquote:rounded-r-xl',
   'prose-blockquote:not-italic',
   'prose-li:text-[#555555] prose-li:text-[14.5px]',
+  // Recall / eligibility tables (Hyundai & Kia ABS) — bordered cells with a
+  // light header, matching the detail page and the firm's pages.
+  '[&_table]:w-full [&_table]:my-6 [&_table]:text-[13px] [&_table]:border-collapse [&_table]:block [&_table]:overflow-x-auto',
+  '[&_th]:border [&_th]:border-[#1C3A64]/15 [&_th]:bg-[#F4F6FB] [&_th]:text-[#1C3A64] [&_th]:font-medium [&_th]:text-left [&_th]:px-3 [&_th]:py-2.5 [&_th]:whitespace-nowrap',
+  '[&_td]:border [&_td]:border-[#1C3A64]/15 [&_td]:px-3 [&_td]:py-2.5 [&_td]:align-top [&_td]:text-[#555555]',
 ].join(' ')
 
 function CaseRow({
@@ -279,7 +275,7 @@ function InvestigationRow({ inv, first }: { inv: Investigation; first?: boolean 
   )
 }
 
-function PastActionsRow({ items }: { items: string[] }) {
+function PastActionsRow() {
   return (
     <ScrollReveal>
       <article className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-6 md:gap-10 py-10 md:py-12 border-t border-[#1C3A64]/15">
@@ -291,10 +287,22 @@ function PastActionsRow({ items }: { items: string[] }) {
         <div className={proseClasses}>
           <p>Our team has acted for class members in the following matters, among others:</p>
           <ul>
-            {items.map((m) => (
-              <li key={m}>{m}</li>
-            ))}
+            <li>Arasor Class Action</li>
+            <li>Octaviar Notes Class Action</li>
+            <li>
+              Financial Products Class Actions against:
+              <ul>
+                <li>Standard &amp; Poor&rsquo;s</li>
+                <li>Fitch Ratings</li>
+                <li>Banks including Commonwealth Bank, ANZ and ABN Amro</li>
+                <li>Lehman Brothers</li>
+              </ul>
+            </li>
           </ul>
+          <p>
+            For further information or to contact us{' '}
+            <Link to="/contact">click here</Link>.
+          </p>
         </div>
       </article>
     </ScrollReveal>

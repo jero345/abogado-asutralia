@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
+import { FORM_TYPES, FORM_TYPE_META } from '@/data/registrationForms'
 
 type PublishMode = 'draft' | 'scheduled' | 'published'
 
@@ -36,6 +37,8 @@ interface CaseForm {
   order_index: number
   published: boolean
   publish_at: string | null
+  form_type: string
+  form_notify_email: string
 }
 
 const EMPTY: CaseForm = {
@@ -54,6 +57,8 @@ const EMPTY: CaseForm = {
   order_index: 0,
   published: false,
   publish_at: null,
+  form_type: '',
+  form_notify_email: '',
 }
 
 const STATUSES: CaseForm['status'][] = ['Active', 'Settled', 'On Appeal', 'Investigating']
@@ -178,6 +183,8 @@ export function CaseEditor() {
           order_index: data.order_index ?? 0,
           published: data.published,
           publish_at: data.publish_at,
+          form_type: data.form_type ?? '',
+          form_notify_email: data.form_notify_email ?? '',
         })
         setLoading(false)
       })
@@ -231,10 +238,21 @@ export function CaseEditor() {
       order_index: form.order_index,
       published,
       publish_at,
+      form_type: form.form_type || null,
+      form_notify_email: form.form_notify_email || null,
     }
-    const res = isEdit
-      ? await supabase.from('cases').update(payload).eq('id', id!)
-      : await supabase.from('cases').insert(payload)
+    const run = (body: Record<string, unknown>) =>
+      isEdit
+        ? supabase!.from('cases').update(body).eq('id', id!)
+        : supabase!.from('cases').insert(body)
+    let res = await run(payload)
+    // Graceful fallback if the form_type / form_notify_email columns haven't
+    // been added yet (migration 002 not run). Retry without them so saving
+    // still works; the admin just can't assign a form until they migrate.
+    if (res.error && /form_type|form_notify_email/.test(res.error.message)) {
+      const { form_type: _ft, form_notify_email: _fne, ...rest } = payload
+      res = await run(rest)
+    }
     setSaving(false)
     if (res.error) {
       setError(res.error.message)
@@ -434,6 +452,43 @@ export function CaseEditor() {
               onChange={(e) => update('detail_slug', e.target.value)}
               className={inputCls}
               placeholder="arrium"
+            />
+          </Field>
+        </Section>
+
+        <Section
+          title="Registration form"
+          hint="Pick which form the public /register page shows for this case. Leave as 'No online form' to hide registration."
+        >
+          <Field label="Form type">
+            <select
+              value={form.form_type}
+              onChange={(e) => update('form_type', e.target.value)}
+              className={inputCls + ' max-w-[360px]'}
+            >
+              <option value="">No online form</option>
+              {FORM_TYPES.map((t) => (
+                <option key={t} value={t}>
+                  {FORM_TYPE_META[t].label}
+                </option>
+              ))}
+            </select>
+            {form.form_type && (
+              <p className="text-[11px] text-[#888888] mt-1.5">
+                {FORM_TYPE_META[form.form_type as keyof typeof FORM_TYPE_META]?.description}
+              </p>
+            )}
+          </Field>
+          <Field
+            label="Notification email"
+            hint="Where enquiries for this form are directed (shown on the form / used for notifications)."
+          >
+            <input
+              type="email"
+              value={form.form_notify_email}
+              onChange={(e) => update('form_notify_email', e.target.value)}
+              className={inputCls + ' max-w-[360px]'}
+              placeholder="enquiries@bantongroup.com"
             />
           </Field>
         </Section>

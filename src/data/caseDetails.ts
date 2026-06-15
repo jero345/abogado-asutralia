@@ -45,6 +45,10 @@ export interface CaseDetail {
   registrationUrl?: string
   /** Does this case have an internal /register page? */
   hasInternalForm?: boolean
+  /** Admin-assigned registration form type (DB). Overrides the code default. */
+  formType?: string
+  /** Admin-assigned notification email for this case's form (DB). */
+  formNotifyEmail?: string
   /** One-line summary used on the list card header. */
   summary: string
   /** Main body content as structured blocks. */

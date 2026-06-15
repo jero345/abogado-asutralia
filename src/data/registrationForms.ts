@@ -5,7 +5,9 @@
 export type FormType =
   | 'shareholder'        // Arrium, CuDeco, Phoslock, MDBA — 3-section shareholder form
   | 'investment-detailed' // Fitch SCDO — full trade-info capture
-  | 'investment-interest' // Fitch UK / S&P UK / S&P CDO — light "register interest" form
+  | 'investment-interest' // Fitch UK / S&P UK — light "register interest" form
+  | 'claim-detailed'     // S&P CDO & CPDO — detailed "register your claim" form
+  | 'mini-interest'      // Investigations / formless matters — minimal interest form
   | 'vehicle'            // Hyundai, Kia — vehicle + signature
 
 // ─── Reusable field declarations ─────────────────────────────────
@@ -43,6 +45,16 @@ export interface CaseFormConfig {
   }
   /** Optional intro paragraph rendered above the form. */
   intro?: string
+  /** Optional "form of statutory declaration" PDF link rendered at the foot of the form. */
+  statutoryDeclarationUrl?: string
+  /** Optional "Contact us" note rendered at the foot of the form. The email is
+   * shown as a mailto link after the text. */
+  contactNote?: { text: string; email: string }
+  /** Label for the financial instrument in the claim-detailed form
+   * (e.g. 'CDO' for S&P, 'SCDO' for Fitch). Defaults to 'CDO'. */
+  instrumentLabel?: string
+  /** Dropdown for the mini-interest form. Defaults to an "I am a…" role select. */
+  interestSelect?: { label: string; options: string[] }
 }
 
 // ─── Per-case configurations ─────────────────────────────────────
@@ -141,6 +153,8 @@ export const caseFormConfigs: CaseFormConfig[] = [
     caseSlug: 'fitch-scdo',
     formType: 'investment-detailed',
     notifyEmail: 'fitchcdos@bantongroup.com',
+    statutoryDeclarationUrl:
+      'https://bantongroup.com/wp-content/uploads/2025/11/Fitch-Form-of-Statutory-Declaration-for-Registrants.pdf',
     investmentExtras: [
       {
         kind: 'radio',
@@ -181,10 +195,16 @@ export const caseFormConfigs: CaseFormConfig[] = [
     caseSlug: 'sp-global-uk',
     formType: 'investment-interest',
     notifyEmail: 'standardandpoorsukclaim@bantongroup.com',
+    contactNote: {
+      text:
+        'If you are uncertain whether you are a represented person, or you would like further information, please contact Banton Group by email at',
+      email: 'standardandpoorsukclaim@bantongroup.com',
+    },
   },
   {
     caseSlug: 'sp-cdo-cpdo',
-    formType: 'investment-interest',
+    formType: 'claim-detailed',
+    instrumentLabel: 'CDO',
     notifyEmail: 'sandpcdos@bantongroup.com',
   },
 
@@ -233,8 +253,83 @@ export const caseFormConfigs: CaseFormConfig[] = [
       ],
     },
   },
+
+  // ─── MINI INTEREST (investigations / formless matters) ──────
+  {
+    caseSlug: 'salt-lake',
+    formType: 'mini-interest',
+    notifyEmail: 'enquiries@bantongroup.com',
+  },
+  {
+    caseSlug: 'zip-co',
+    formType: 'mini-interest',
+    notifyEmail: 'enquiries@bantongroup.com',
+  },
+  {
+    caseSlug: 'highlow',
+    formType: 'mini-interest',
+    notifyEmail: 'enquiries@bantongroup.com',
+  },
+  {
+    caseSlug: 'tyro',
+    formType: 'mini-interest',
+    notifyEmail: 'enquiries@bantongroup.com',
+  },
 ]
 
 export function getFormConfig(slug: string): CaseFormConfig | undefined {
   return caseFormConfigs.find((c) => c.caseSlug === slug)
+}
+
+// Human-friendly metadata for each form type — shared by the admin (Forms
+// section, Registrations labels, Case editor) so labels stay consistent.
+export const FORM_TYPE_META: Record<FormType, { label: string; description: string }> = {
+  shareholder: {
+    label: 'Shareholder',
+    description: 'Securities / shareholder matters — identity, shareholding details and contact.',
+  },
+  'investment-detailed': {
+    label: 'Investment (detailed)',
+    description: 'Full trade-info capture (Fitch SCDO) — investment details + supporting documents.',
+  },
+  'investment-interest': {
+    label: 'Register interest (light)',
+    description: 'Light "register your interest" form — identity, contact and consent.',
+  },
+  'claim-detailed': {
+    label: 'Claim (detailed)',
+    description: 'Detailed claim form (S&P CDO) — class member, instruments acquired and a signed declaration.',
+  },
+  'mini-interest': {
+    label: 'Mini interest',
+    description: 'Minimal form for investigations — name, contact, a dropdown and privacy consent.',
+  },
+  vehicle: {
+    label: 'Vehicle',
+    description: 'Vehicle matters (Hyundai / Kia) — vehicle details + signature.',
+  },
+}
+
+export const FORM_TYPES = Object.keys(FORM_TYPE_META) as FormType[]
+
+/**
+ * Resolve the effective form config for a case. A `form_type` assigned in the
+ * admin (DB) takes precedence over the hard-coded config; any code-defined
+ * extras for that slug (custom fields, instrument label…) are preserved.
+ */
+export function resolveFormConfig(
+  slug: string,
+  dbFormType?: string | null,
+  dbNotifyEmail?: string | null,
+): CaseFormConfig | undefined {
+  const hardcoded = getFormConfig(slug)
+  const dbValid = dbFormType && dbFormType in FORM_TYPE_META ? (dbFormType as FormType) : undefined
+  const formType = dbValid ?? hardcoded?.formType
+  if (!formType) return undefined
+  return {
+    ...(hardcoded ?? {}),
+    caseSlug: slug,
+    formType,
+    notifyEmail: dbNotifyEmail || hardcoded?.notifyEmail || 'enquiries@bantongroup.com',
+  }
 }

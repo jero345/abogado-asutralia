@@ -26,26 +26,29 @@ const supabase = createClient(
 
 // Use multiples of 10 so admin users can later insert new items between
 // existing rows without renumbering everything.
+// Firm-requested order (Jun 2026): the six headline matters first, in this
+// exact sequence, regardless of status — Light Rail, CuDeco, Phoslock,
+// Blue Sky, Arrium, Fitch — then the remaining matters below.
 const CASES = [
-  ['arrium',           10],
+  ['light-rail',       10],
   ['cudeco',           20],
-  ['fitch-scdo',       30],
-  ['phoslock',         40],
-  ['fitch-ratings-uk', 50],
-  ['sp-global-uk',     60],
-  ['murray-darling',   70],
-  ['blue-sky',         80],
-  ['sp-cdo-cpdo',      90],
-  ['hyundai-abs',      100],
-  ['kia-abs',          110],
-  // 120, 130 reserved for the salt-lake + zip-co investigations
-  ['qoin',             140],
-  ['light-rail',       150],
+  ['phoslock',         30],
+  ['blue-sky',         40],
+  ['arrium',           50],
+  ['fitch-scdo',       60],
+  ['fitch-ratings-uk', 70],
+  ['sp-global-uk',     80],
+  ['murray-darling',   90],
+  ['sp-cdo-cpdo',      100],
+  ['hyundai-abs',      110],
+  ['kia-abs',          120],
+  // 130, 140 reserved for the salt-lake + zip-co investigations
+  ['qoin',             150],
 ]
 
 const INVESTIGATIONS = [
-  ['Salt Lake Potash Class Action Investigation', 120],
-  ['Zip Co Class Action Investigation',           130],
+  ['Salt Lake Potash Class Action Investigation', 130],
+  ['Zip Co Class Action Investigation',           140],
   ['HighLow Markets Pty Ltd Investigation',       160],
   ['Tyro Payments Ltd Investigation',             170],
 ]

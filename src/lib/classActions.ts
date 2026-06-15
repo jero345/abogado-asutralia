@@ -8,7 +8,7 @@ import {
   type RecallTable,
 } from '@/data/classActions'
 import { cases as staticDetails, type CaseDetail } from '@/data/caseDetails'
-import { getFormConfig } from '@/data/registrationForms'
+import { resolveFormConfig } from '@/data/registrationForms'
 import { supabase, hasSupabase } from './supabase'
 
 export interface Investigation {
@@ -38,6 +38,8 @@ interface DbCaseRow {
   order_index: number
   published: boolean
   publish_at: string | null
+  form_type?: string | null
+  form_notify_email?: string | null
 }
 
 interface DbInvestigationRow {
@@ -118,15 +120,14 @@ export async function fetchCases(): Promise<ClassAction[]> {
     return staticCases
   }
   const dbCases = (data ?? []).map(rowToCase)
-  // DB cases first (newest at top), then statics — by id collisions DB wins.
-  const byId = new Map<string, ClassAction>()
-  for (const c of staticCases) byId.set(c.id, c)
-  for (const c of dbCases) byId.set(c.id, c)
-  const dbIds = new Set(dbCases.map((c) => c.id))
-  return [
-    ...dbCases,
-    ...staticCases.filter((c) => !dbIds.has(c.id)),
-  ].map((c) => byId.get(c.id)!)
+  // The `cases` table is the admin-managed source of truth and already
+  // holds every matter the firm publishes. When it returns rows we use
+  // them exclusively — the static array is only a fallback for when
+  // Supabase is unavailable. (Merging the two duplicated matters: DB rows
+  // are keyed by uuid while static rows are keyed by slug, so they never
+  // deduped and every case rendered twice.)
+  if (dbCases.length > 0) return dbCases
+  return staticCases
 }
 
 export async function fetchInvestigations(): Promise<Investigation[]> {
@@ -164,7 +165,7 @@ export type { ClassAction, CaseStatus, Block }
 // rich detail entries (Arrium, CuDeco etc.) keep their original blocks.
 // ───────────────────────────────────────────────────────────────────
 function caseRowToDetail(row: DbCaseRow): CaseDetail {
-  const config = getFormConfig(row.slug)
+  const config = resolveFormConfig(row.slug, row.form_type, row.form_notify_email)
   return {
     slug: row.slug,
     title: row.title,
@@ -181,6 +182,8 @@ function caseRowToDetail(row: DbCaseRow): CaseDetail {
     registerProcessHtml: row.register_process_html ?? undefined,
     email: config?.notifyEmail,
     hasInternalForm: Boolean(config),
+    formType: config?.formType,
+    formNotifyEmail: config?.notifyEmail,
     registrationUrl: row.wordpress_link ?? undefined,
   }
 }
