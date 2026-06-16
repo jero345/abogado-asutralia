@@ -49,6 +49,8 @@ export interface CaseDetail {
   formType?: string
   /** Admin-assigned notification email for this case's form (DB). */
   formNotifyEmail?: string
+  /** Formstack embed URL (DB), used when formType = 'formstack'. */
+  formstackUrl?: string
   /** One-line summary used on the list card header. */
   summary: string
   /** Main body content as structured blocks. */

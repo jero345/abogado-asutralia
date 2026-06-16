@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Loader2, Download, Inbox, ClipboardList, ArrowUpRight } from 'lucide-react'
+import { Loader2, Download, Inbox, ClipboardList, ArrowUpRight, Plus, Pencil, Trash2, Wand2 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { FORM_TYPES, FORM_TYPE_META, getFormConfig, type FormType } from '@/data/registrationForms'
+import { fetchForms, deleteForm, type CustomFormDef } from '@/lib/forms'
 
 interface CaseRow {
   slug: string
@@ -31,24 +32,37 @@ const EXPORT_HEADERS = [
 export function FormsAdmin() {
   const [cases, setCases] = useState<CaseRow[] | null>(null)
   const [regs, setRegs] = useState<RegRow[] | null>(null)
+  const [customForms, setCustomForms] = useState<CustomFormDef[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+  const load = () => {
     if (!supabase) return
-    let cancelled = false
     Promise.all([
       supabase.from('cases').select('*').order('order_index', { ascending: true }),
       supabase.from('registrations').select('*').order('created_at', { ascending: false }),
-    ]).then(([c, r]) => {
-      if (cancelled) return
+      fetchForms(),
+    ]).then(([c, r, forms]) => {
       if (c.error) setError(c.error.message)
       setCases((c.data as CaseRow[]) ?? [])
       setRegs((r.data as RegRow[]) ?? [])
+      setCustomForms(forms)
     })
-    return () => {
-      cancelled = true
-    }
+  }
+
+  useEffect(() => {
+    load()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const removeForm = async (f: CustomFormDef) => {
+    if (!window.confirm(`Delete the form "${f.name}"? This cannot be undone.`)) return
+    const { error: err } = await deleteForm(f.id)
+    if (err) {
+      setError(err)
+      return
+    }
+    setCustomForms((prev) => (prev ? prev.filter((x) => x.id !== f.id) : prev))
+  }
 
   // Effective form type per case: DB form_type (if migrated) else the code default.
   const casesByForm = useMemo(() => {
@@ -67,7 +81,7 @@ export function FormsAdmin() {
     return m
   }, [regs])
 
-  const exportForm = (ft: FormType) => {
+  const exportForm = (ft: string) => {
     const rows = (regs ?? []).filter((r) => r.form_type === ft)
     if (!rows.length) return
     const lines = [EXPORT_HEADERS.join(',')]
@@ -83,7 +97,20 @@ export function FormsAdmin() {
     URL.revokeObjectURL(url)
   }
 
-  const loading = cases === null || regs === null
+  const loading = cases === null || regs === null || customForms === null
+
+  // Cases assigned to each custom form (cases.form_type === 'custom:<id>').
+  const casesByCustomForm = useMemo(() => {
+    const map: Record<string, { slug: string; title: string }[]> = {}
+    for (const c of cases ?? []) {
+      const ft = c.form_type ?? ''
+      if (ft.startsWith('custom:')) {
+        const id = ft.slice('custom:'.length)
+        ;(map[id] ??= []).push({ slug: c.slug, title: c.title })
+      }
+    }
+    return map
+  }, [cases])
 
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto">
@@ -95,13 +122,22 @@ export function FormsAdmin() {
             submissions captured. Assign a form to a case from the case editor.
           </p>
         </div>
-        <Link
-          to="/admin/registrations"
-          className="inline-flex items-center gap-2 bg-white border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] text-[#1C3A64] text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
-        >
-          <Inbox size={14} />
-          All registrations
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/admin/registrations"
+            className="inline-flex items-center gap-2 bg-white border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] text-[#1C3A64] text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
+          >
+            <Inbox size={14} />
+            All registrations
+          </Link>
+          <Link
+            to="/admin/forms/new"
+            className="inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] text-white text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
+          >
+            <Plus size={14} />
+            New form
+          </Link>
+        </div>
       </div>
 
       {error && (
@@ -115,6 +151,10 @@ export function FormsAdmin() {
           <Loader2 className="animate-spin text-[#1C3A64]" size={24} />
         </div>
       ) : (
+        <>
+        <div className="text-[11px] tracking-[0.15em] uppercase text-[#888888] font-medium mb-3">
+          Built-in forms
+        </div>
         <div className="grid gap-4 md:grid-cols-2">
           {FORM_TYPES.map((ft) => {
             const meta = FORM_TYPE_META[ft]
@@ -173,6 +213,87 @@ export function FormsAdmin() {
             )
           })}
         </div>
+
+        <div className="text-[11px] tracking-[0.15em] uppercase text-[#888888] font-medium mt-10 mb-3">
+          Custom forms ({customForms?.length ?? 0})
+        </div>
+        {(customForms?.length ?? 0) === 0 ? (
+          <div className="bg-white border border-dashed border-[#1C3A64]/20 rounded-2xl p-8 text-center">
+            <Wand2 size={26} className="mx-auto text-[#1C3A64]/30 mb-2" />
+            <p className="text-[#555555] text-[13px] mb-3">
+              No custom forms yet. Build one and assign it to a case from the case editor.
+            </p>
+            <Link
+              to="/admin/forms/new"
+              className="inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] text-white text-[13px] font-medium px-4 py-2 rounded-lg transition-colors"
+            >
+              <Plus size={14} /> New form
+            </Link>
+          </div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2">
+            {customForms!.map((f) => {
+              const usedBy = casesByCustomForm[f.id] ?? []
+              const count = regCountByForm[`custom:${f.id}`] ?? 0
+              return (
+                <div key={f.id} className="bg-white border border-[#1C3A64]/10 rounded-2xl p-6 flex flex-col">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div className="flex items-center gap-2">
+                      <Wand2 size={16} className="text-[#1C3A64]" />
+                      <h2 className="text-[#1C3A64] text-[15px] font-medium">{f.name}</h2>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Link to={`/admin/forms/edit/${f.id}`} className="p-1.5 text-[#1C3A64] hover:bg-[#1C3A64]/[0.08] rounded-lg" title="Edit form">
+                        <Pencil size={13} />
+                      </Link>
+                      <button onClick={() => removeForm(f)} className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg" title="Delete form">
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-[#555555] text-[13px] leading-[1.6] mb-4">
+                    {f.description || <span className="italic text-[#888888]">No intro text.</span>}
+                  </p>
+                  <div className="text-[12px] text-[#888888] mb-4">
+                    {f.fields.length} custom field{f.fields.length === 1 ? '' : 's'} · contact fields always included
+                  </div>
+
+                  <div className="mb-4">
+                    <div className="text-[11px] tracking-[0.12em] uppercase text-[#888888] font-medium mb-1.5">
+                      Used by ({usedBy.length})
+                    </div>
+                    {usedBy.length === 0 ? (
+                      <p className="text-[#888888] text-[12px] italic">Not assigned to any case yet.</p>
+                    ) : (
+                      <div className="flex flex-wrap gap-1.5">
+                        {usedBy.map((c) => (
+                          <Link key={c.slug} to={`/class-actions/${c.slug}/register`} className="inline-flex items-center gap-1 text-[12px] text-[#1C3A64] bg-[#1C3A64]/[0.05] hover:bg-[#1C3A64]/[0.1] px-2 py-1 rounded transition-colors">
+                            {c.title}
+                            <ArrowUpRight size={10} />
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#1C3A64]/10">
+                    <span className="text-[13px] text-[#555555]">
+                      <span className="text-[#1C3A64] font-medium tabular-nums">{count}</span> submission{count === 1 ? '' : 's'}
+                    </span>
+                    <button
+                      onClick={() => exportForm(`custom:${f.id}`)}
+                      disabled={count === 0}
+                      className="inline-flex items-center gap-2 text-[12px] font-medium text-[#1C3A64] border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      <Download size={13} /> Export CSV
+                    </button>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+        </>
       )}
     </div>
   )

@@ -40,6 +40,7 @@ interface DbCaseRow {
   publish_at: string | null
   form_type?: string | null
   form_notify_email?: string | null
+  formstack_url?: string | null
 }
 
 interface DbInvestigationRow {
@@ -180,10 +181,13 @@ function caseRowToDetail(row: DbCaseRow): CaseDetail {
     content: [],
     bodyHtml: row.body_html ?? undefined,
     registerProcessHtml: row.register_process_html ?? undefined,
-    email: config?.notifyEmail,
-    hasInternalForm: Boolean(config),
-    formType: config?.formType,
-    formNotifyEmail: config?.notifyEmail,
+    // `form_type` may be a built-in type, a 'custom:<id>' reference, or null.
+    // Custom forms have no entry in resolveFormConfig, so fall back to the row.
+    email: row.form_notify_email ?? config?.notifyEmail,
+    hasInternalForm: Boolean(row.form_type) || Boolean(config),
+    formType: row.form_type ?? config?.formType,
+    formNotifyEmail: row.form_notify_email ?? config?.notifyEmail,
+    formstackUrl: row.formstack_url ?? undefined,
     registrationUrl: row.wordpress_link ?? undefined,
   }
 }

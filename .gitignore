@@ -35,3 +35,6 @@ class-actions-cases/
 
 # Derived from the .docx files by scripts/extract-docx.ps1; regenerable.
 scripts/extracted-content.txt
+
+# Supabase CLI local state
+supabase/.temp/

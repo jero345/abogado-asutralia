@@ -5,6 +5,7 @@ import { InvestmentDetailedForm } from './forms/InvestmentDetailedForm'
 import { InvestmentInterestForm } from './forms/InvestmentInterestForm'
 import { ClaimDetailedForm } from './forms/ClaimDetailedForm'
 import { MiniInterestForm } from './forms/MiniInterestForm'
+import { CustomForm } from './forms/CustomForm'
 import { VehicleForm } from './forms/VehicleForm'
 
 /**
@@ -15,6 +16,30 @@ import { VehicleForm } from './forms/VehicleForm'
  * back to the shareholder form (the legacy behaviour).
  */
 export function CaseRegistrationForm({ caseData }: { caseData: CaseDetail }) {
+  // Embedded Formstack form (URL set on the case).
+  if (caseData.formType === 'formstack') {
+    if (!caseData.formstackUrl) {
+      return (
+        <div className="bg-amber-50 border border-amber-200 text-amber-900 text-[13px] rounded-xl p-4">
+          This matter is set to use a Formstack form but no form URL has been configured yet.
+        </div>
+      )
+    }
+    return (
+      <iframe
+        src={caseData.formstackUrl}
+        title={`${caseData.title} registration form`}
+        className="w-full min-h-[1000px] border-0 rounded-xl bg-white"
+        loading="lazy"
+      />
+    )
+  }
+
+  // Admin-built custom form: caseData.formType looks like "custom:<form id>".
+  if (caseData.formType?.startsWith('custom:')) {
+    return <CustomForm caseData={caseData} formId={caseData.formType.slice('custom:'.length)} />
+  }
+
   const config = resolveFormConfig(caseData.slug, caseData.formType, caseData.formNotifyEmail)
 
   if (!config) {

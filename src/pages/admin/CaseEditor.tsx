@@ -15,6 +15,7 @@ import {
 import { supabase } from '@/lib/supabase'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
 import { FORM_TYPES, FORM_TYPE_META } from '@/data/registrationForms'
+import { fetchForms, type CustomFormDef } from '@/lib/forms'
 
 type PublishMode = 'draft' | 'scheduled' | 'published'
 
@@ -39,6 +40,7 @@ interface CaseForm {
   publish_at: string | null
   form_type: string
   form_notify_email: string
+  formstack_url: string
 }
 
 const EMPTY: CaseForm = {
@@ -59,6 +61,7 @@ const EMPTY: CaseForm = {
   publish_at: null,
   form_type: '',
   form_notify_email: '',
+  formstack_url: '',
 }
 
 const STATUSES: CaseForm['status'][] = ['Active', 'Settled', 'On Appeal', 'Investigating']
@@ -144,8 +147,19 @@ export function CaseEditor() {
   const [error, setError] = useState<string | null>(null)
   const [slugTouched, setSlugTouched] = useState(isEdit)
   const [view, setView] = useState<'edit' | 'preview'>('edit')
+  const [customForms, setCustomForms] = useState<CustomFormDef[]>([])
 
   const mode = useMemo(() => computeMode(form), [form])
+
+  useEffect(() => {
+    let cancelled = false
+    fetchForms().then((f) => {
+      if (!cancelled) setCustomForms(f)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     if (!isEdit || !supabase) return
@@ -185,6 +199,7 @@ export function CaseEditor() {
           publish_at: data.publish_at,
           form_type: data.form_type ?? '',
           form_notify_email: data.form_notify_email ?? '',
+          formstack_url: data.formstack_url ?? '',
         })
         setLoading(false)
       })
@@ -240,17 +255,18 @@ export function CaseEditor() {
       publish_at,
       form_type: form.form_type || null,
       form_notify_email: form.form_notify_email || null,
+      formstack_url: form.formstack_url || null,
     }
     const run = (body: Record<string, unknown>) =>
       isEdit
         ? supabase!.from('cases').update(body).eq('id', id!)
         : supabase!.from('cases').insert(body)
     let res = await run(payload)
-    // Graceful fallback if the form_type / form_notify_email columns haven't
-    // been added yet (migration 002 not run). Retry without them so saving
-    // still works; the admin just can't assign a form until they migrate.
-    if (res.error && /form_type|form_notify_email/.test(res.error.message)) {
-      const { form_type: _ft, form_notify_email: _fne, ...rest } = payload
+    // Graceful fallback if the form columns haven't been added yet (migration
+    // not run). Retry without them so saving still works; the admin just can't
+    // assign a form until they migrate.
+    if (res.error && /form_type|form_notify_email|formstack_url/.test(res.error.message)) {
+      const { form_type: _ft, form_notify_email: _fne, formstack_url: _fu, ...rest } = payload
       res = await run(rest)
     }
     setSaving(false)
@@ -467,15 +483,29 @@ export function CaseEditor() {
               className={inputCls + ' max-w-[360px]'}
             >
               <option value="">No online form</option>
-              {FORM_TYPES.map((t) => (
-                <option key={t} value={t}>
-                  {FORM_TYPE_META[t].label}
-                </option>
-              ))}
+              <optgroup label="Built-in forms">
+                {FORM_TYPES.map((t) => (
+                  <option key={t} value={t}>
+                    {FORM_TYPE_META[t].label}
+                  </option>
+                ))}
+              </optgroup>
+              {customForms.length > 0 && (
+                <optgroup label="Custom forms">
+                  {customForms.map((f) => (
+                    <option key={f.id} value={`custom:${f.id}`}>
+                      {f.name}
+                    </option>
+                  ))}
+                </optgroup>
+              )}
             </select>
             {form.form_type && (
               <p className="text-[11px] text-[#888888] mt-1.5">
-                {FORM_TYPE_META[form.form_type as keyof typeof FORM_TYPE_META]?.description}
+                {form.form_type.startsWith('custom:')
+                  ? customForms.find((f) => `custom:${f.id}` === form.form_type)?.description ||
+                    'Custom form.'
+                  : FORM_TYPE_META[form.form_type as keyof typeof FORM_TYPE_META]?.description}
               </p>
             )}
           </Field>
@@ -491,6 +521,20 @@ export function CaseEditor() {
               placeholder="enquiries@bantongroup.com"
             />
           </Field>
+          {form.form_type === 'formstack' && (
+            <Field
+              label="Formstack form URL"
+              hint="The shareable / embed URL of the Formstack form (e.g. https://yourorg.formstack.com/forms/your_form). It's shown as an embedded iframe on the public register page."
+            >
+              <input
+                type="url"
+                value={form.formstack_url}
+                onChange={(e) => update('formstack_url', e.target.value)}
+                className={inputCls}
+                placeholder="https://bantongroup.formstack.com/forms/…"
+              />
+            </Field>
+          )}
         </Section>
 
         <Section title="Ordering">

@@ -8,6 +8,7 @@ export type FormType =
   | 'investment-interest' // Fitch UK / S&P UK — light "register interest" form
   | 'claim-detailed'     // S&P CDO & CPDO — detailed "register your claim" form
   | 'mini-interest'      // Investigations / formless matters — minimal interest form
+  | 'formstack'          // Embed an external Formstack form (URL on the case)
   | 'vehicle'            // Hyundai, Kia — vehicle + signature
 
 // ─── Reusable field declarations ─────────────────────────────────
@@ -303,6 +304,10 @@ export const FORM_TYPE_META: Record<FormType, { label: string; description: stri
   'mini-interest': {
     label: 'Mini interest',
     description: 'Minimal form for investigations — name, contact, a dropdown and privacy consent.',
+  },
+  formstack: {
+    label: 'Formstack (embedded)',
+    description: "Embed an existing Formstack form via its URL. Submissions can flow into this panel via the Formstack webhook.",
   },
   vehicle: {
     label: 'Vehicle',

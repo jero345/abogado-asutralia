@@ -17,7 +17,8 @@ export interface CommonFields {
 export interface SubmitInput {
   caseSlug: string
   caseTitle: string
-  formType: FormType
+  /** Built-in FormType, or a custom-form reference like `custom:<id>`. */
+  formType: FormType | (string & {})
   common: CommonFields
   /** Form-type-specific values keyed by field name. */
   payload: Record<string, unknown>

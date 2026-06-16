@@ -210,6 +210,9 @@ alter table public.cases
   add column if not exists form_type text;
 alter table public.cases
   add column if not exists form_notify_email text;
+-- Formstack embed URL, used when form_type = 'formstack'.
+alter table public.cases
+  add column if not exists formstack_url text;
 
 create index if not exists cases_order_idx      on public.cases (order_index asc);
 create index if not exists cases_published_idx  on public.cases (published);

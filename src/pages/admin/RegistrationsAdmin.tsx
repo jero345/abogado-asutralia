@@ -51,7 +51,8 @@ interface Row {
   email_sent_at: string | null
 }
 
-const formLabel = (ft: FormType) => FORM_TYPE_META[ft]?.label ?? ft
+const formLabel = (ft: string) =>
+  ft.startsWith('custom:') ? 'Custom form' : FORM_TYPE_META[ft as FormType]?.label ?? ft
 
 const STATUS_STYLES: Record<Status, string> = {
   new: 'bg-amber-50 text-amber-700 border-amber-200',
