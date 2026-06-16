@@ -155,7 +155,7 @@ export const caseFormConfigs: CaseFormConfig[] = [
     formType: 'investment-detailed',
     notifyEmail: 'fitchcdos@bantongroup.com',
     statutoryDeclarationUrl:
-      'https://bantongroup.com/wp-content/uploads/2025/11/Fitch-Form-of-Statutory-Declaration-for-Registrants.pdf',
+      'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Fitch-Form-of-Statutory-Declaration-for-Registrants.pdf',
     investmentExtras: [
       {
         kind: 'radio',

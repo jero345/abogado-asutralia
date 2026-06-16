@@ -54,7 +54,7 @@ export const articles: NewsArticle[] = [
     date: '2021-09-09',
     category: 'Commentary',
     author: 'Amanda Banton & Robert True',
-    coverImage: 'https://bantongroup.com/wp-content/uploads/2021/09/Insights1.jpg',
+    coverImage: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-images/blog-migrated/Insights1.jpg',
     excerpt:
       "Justice Delany's ruling in Jabiru Satellite v Société Générale highlights a possible inconsistency between Australia's Hague Convention obligations and the domestic civil-procedure rules enacted to implement them.",
     content: [
@@ -110,7 +110,7 @@ export const articles: NewsArticle[] = [
     date: '2021-10-13',
     category: 'Case Update',
     author: 'Amanda Banton & Melissa Morgan',
-    coverImage: 'https://bantongroup.com/wp-content/uploads/2021/10/insight2-scaled.jpg',
+    coverImage: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-images/blog-migrated/insight2-scaled.jpg',
     excerpt:
       'The NSW Court of Appeal confirms the Murray Darling Basin Authority and the Commonwealth cannot shelter behind the Civil Liability Act in this Banton Group-led farmers’ class action.',
     content: [
@@ -179,7 +179,7 @@ export const articles: NewsArticle[] = [
     date: '2022-01-19',
     category: 'Firm Update',
     author: 'Banton Group',
-    coverImage: 'https://bantongroup.com/wp-content/uploads/2022/01/Legal-500.jpg',
+    coverImage: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-images/blog-migrated/Legal-500.jpg',
     excerpt:
       'The Legal 500 Asia Pacific 2022 ranks Banton Group in Dispute Resolution: Litigation and Restructuring & Insolvency, and names the firm a “firm to watch” for Class Actions.',
     content: [
@@ -233,7 +233,7 @@ export const articles: NewsArticle[] = [
     date: '2022-02-16',
     category: 'Case Update',
     author: 'Amanda Banton & Elliott Smith',
-    coverImage: 'https://bantongroup.com/wp-content/uploads/2022/02/High_Court_of_Australia.jpg',
+    coverImage: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-images/blog-migrated/High_Court_of_Australia.jpg',
     excerpt:
       'In Walton v Arrium, a High Court majority confirms shareholders of companies in external administration may publicly examine former directors under section 596A of the Corporations Act.',
     content: [
@@ -301,7 +301,7 @@ export const articles: NewsArticle[] = [
     date: '2022-03-14',
     category: 'Case Update',
     author: 'Amanda Banton & Elliott Smith',
-    coverImage: 'https://bantongroup.com/wp-content/uploads/2022/03/Worley.jpg',
+    coverImage: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-images/blog-migrated/Worley.jpg',
     excerpt:
       'The Full Federal Court allows Crowley v Worley on appeal — a significant decision for misleading-or-deceptive-conduct and continuous-disclosure shareholder class actions in Australia.',
     content: [
@@ -448,7 +448,7 @@ export const articles: NewsArticle[] = [
     date: '2022-04-27',
     category: 'Case Update',
     author: 'Amanda Banton & Melissa Morgan',
-    coverImage: 'https://bantongroup.com/wp-content/uploads/2022/04/KPMG_Image.png',
+    coverImage: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-images/blog-migrated/KPMG_Image.png',
     excerpt:
       'Justice Williams holds that the proposed s 596A examinations of the Jewel Fine Foods administrators and liquidators are to proceed — rejecting their abuse-of-process objections.',
     content: [

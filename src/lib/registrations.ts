@@ -121,20 +121,20 @@ export async function submitRegistration(input: SubmitInput): Promise<{ id: stri
     retainer: input.retainer || null,
   }
 
-  const { data, error } = await supabase
-    .from('registrations')
-    .insert(row)
-    .select('id')
-    .single()
+  // Insert WITHOUT returning the row: the public (anon) role can INSERT but,
+  // by design, cannot SELECT registrations (privacy). A `.select()` here would
+  // trigger an RLS read on the new row and fail. We use the client-side
+  // submissionId as the reference instead.
+  const { error } = await supabase.from('registrations').insert(row)
 
-  if (error || !data) {
+  if (error) {
     throw new RegistrationError(
       'Could not save your registration. Please try again.',
-      error?.message,
+      error.message,
     )
   }
 
-  return { id: data.id }
+  return { id: submissionId }
 }
 
 /**

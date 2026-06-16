@@ -75,7 +75,6 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'More about the Arrium Class Action', href: '#arrium-info' },
     ],
     keyDate: 'Trial 3 Aug 2026',
-    wordpressLink: 'https://bantongroup.com/arrium-class-action/',
     detailSlug: 'arrium',
   },
   // ─────────────────────────────────────────────────────────────
@@ -103,7 +102,6 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'More about the CuDeco Class Action', href: '#cudeco-info' },
     ],
     keyDate: 'KPMG settled 2025 · Directors trial 29 Jun 2026',
-    wordpressLink: 'https://bantongroup.com/cudeco-class-action/',
     detailSlug: 'cudeco',
   },
   // ─────────────────────────────────────────────────────────────
@@ -126,7 +124,6 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'More about the Fitch SCDO Class Action', href: '#fitch-info' },
     ],
     keyDate: 'Opt-out 4 Apr 2026 · Trial 3 May 2027',
-    wordpressLink: 'https://bantongroup.com/fitch-ratings-class-action/',
     detailSlug: 'fitch-scdo',
   },
   // ─────────────────────────────────────────────────────────────
@@ -146,10 +143,9 @@ export const classActions: ClassAction[] = [
         text:
           'Banton Group acts on behalf of investors in a UK representative action against Fitch Ratings, Ltd in respect of synthetic collateralised debt obligations (SCDOs) assigned credit ratings of ‘AAA’, ‘AA+’, ‘AA’ or ‘AA-’ by Fitch in and around the period 2005 to 2007.',
       },
-      { kind: 'link', label: 'More about the Fitch UK Representative Action', href: 'https://bantongroup.com/fitch-ratings-uk-representative-action/' },
+      { kind: 'link', label: 'More about the Fitch UK Representative Action', href: '/class-actions' },
     ],
     keyDate: 'Active — High Court of Justice',
-    wordpressLink: 'https://bantongroup.com/fitch-ratings-uk-representative-action/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -168,10 +164,9 @@ export const classActions: ClassAction[] = [
         text:
           'Banton Group acts on behalf of investors in a UK representative action against S&P Global, Inc and Standard & Poor’s International, LLC in respect of collateralised debt obligations (CDOs) and constant proportion debt obligations (CPDOs) assigned credit ratings of ‘AAA’, ‘AA+’, ‘AA’ or ‘AA-’ by S&P in and around the period 2005 to 2007.',
       },
-      { kind: 'link', label: 'More about the S&P UK Representative Action', href: 'https://bantongroup.com/sp-global-uk-representative-action/' },
+      { kind: 'link', label: 'More about the S&P UK Representative Action', href: '/class-actions' },
     ],
     keyDate: 'Active — High Court of Justice',
-    wordpressLink: 'https://bantongroup.com/sp-global-uk-representative-action/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -217,7 +212,6 @@ export const classActions: ClassAction[] = [
       { kind: 'email', label: 'Enquiries', address: 'mdbaclassaction@bantongroup.com' },
     ],
     keyDate: 'Heard by Faulkner J · Judgment reserved 14 Nov 2025',
-    wordpressLink: 'https://bantongroup.com/mdba-class-action/',
     detailSlug: 'murray-darling',
   },
   // ─────────────────────────────────────────────────────────────
@@ -254,7 +248,6 @@ export const classActions: ClassAction[] = [
       },
     ],
     keyDate: 'Active — Federal Court',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
     detailSlug: 'blue-sky',
   },
   // ─────────────────────────────────────────────────────────────
@@ -306,7 +299,6 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'Register your claim / request further information', href: '#sp-register' },
     ],
     keyDate: 'Active — Federal Court of Australia',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -399,7 +391,6 @@ export const classActions: ClassAction[] = [
       { kind: 'email', label: 'All Hyundai ABS Class Action enquiries', address: 'HyundaiABS@bantongroup.com' },
     ],
     keyDate: 'Active — Carriage hearing 30 June 2025',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
     detailSlug: 'hyundai-abs',
   },
   // ─────────────────────────────────────────────────────────────
@@ -491,7 +482,6 @@ export const classActions: ClassAction[] = [
       { kind: 'email', label: 'All Kia ABS Class Action enquiries', address: 'KiaABS@bantongroup.com' },
     ],
     keyDate: 'Active — Carriage hearing 30 June 2025',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
     detailSlug: 'kia-abs',
   },
   // ─────────────────────────────────────────────────────────────
@@ -535,7 +525,6 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'Register as a group member / enquire', href: '#salt-lake-register' },
     ],
     keyDate: 'Investigation advanced',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -579,7 +568,6 @@ export const classActions: ClassAction[] = [
       { kind: 'link', label: 'Register as a group member / enquire', href: '#zip-register' },
     ],
     keyDate: 'Investigation advanced',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -592,7 +580,6 @@ export const classActions: ClassAction[] = [
     summary: 'Settlement approval orders dated 28 May 2025.',
     content: [{ kind: 'link', label: 'Settlement approval orders (28 May 2025)', href: '#qoin-settlement' }],
     keyDate: 'Settlement approved 28 May 2025',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -645,7 +632,6 @@ export const classActions: ClassAction[] = [
       { kind: 'email', label: 'Enquiries and registrations', address: 'lightrailclassaction@bantongroup.com' },
     ],
     keyDate: 'High Court hearing 15-16 May 2025',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
   },
   // ─────────────────────────────────────────────────────────────
   {
@@ -695,7 +681,6 @@ export const classActions: ClassAction[] = [
       { kind: 'email', label: 'Phoslock Class Action enquiries', address: 'phoslockclassaction@bantongroup.com' },
     ],
     keyDate: 'Discovery in progress · CMC 7 August 2026',
-    wordpressLink: 'https://bantongroup.com/class-actions/',
     detailSlug: 'phoslock',
   },
 ]

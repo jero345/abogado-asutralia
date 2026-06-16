@@ -452,15 +452,6 @@ export function CaseEditor() {
         </Section>
 
         <Section title="Links (optional)">
-          <Field label="WordPress canonical URL" hint="Link to the matter's page on the legacy bantongroup.com site.">
-            <input
-              type="url"
-              value={form.wordpress_link}
-              onChange={(e) => update('wordpress_link', e.target.value)}
-              className={inputCls}
-              placeholder="https://bantongroup.com/…"
-            />
-          </Field>
           <Field label="Internal detail page slug" hint="Only set this if a custom React detail page exists at /class-actions/&lt;slug&gt;.">
             <input
               type="text"

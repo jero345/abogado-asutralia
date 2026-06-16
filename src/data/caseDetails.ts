@@ -158,12 +158,12 @@ export const cases: CaseDetail[] = [
         kind: 'documents',
         heading: 'Key documents',
         items: [
-          { label: "Court's Orders, Notice and Registration Form", href: 'https://bantongroup.com/wp-content/uploads/2025/09/3281-20-ECI-7-Aug-2025-Bogan-v-Smedley-Orders.pdf' },
-          { label: 'Writ and Statement of Claim (14.08.2020)', href: 'https://bantongroup.com/wp-content/uploads/2025/09/1.-Writ-Statement-of-Claim-14.08.2020-3441-6780-8784-v1.pdf' },
-          { label: 'Amended Defence of the Director Defendants', href: 'https://bantongroup.com/wp-content/uploads/2025/09/First-to-Fourth-Defendants-Amended-Defence.pdf' },
-          { label: 'Defence of KPMG', href: 'https://bantongroup.com/wp-content/uploads/2025/09/Fifth-Defendant-Defence.pdf' },
-          { label: 'Further Amended Group Proceeding Summary Statement (23.06.2025)', href: 'https://bantongroup.com/wp-content/uploads/2025/09/Further-Amended-Group-Proceeding-Summary-Statement-23.06.2025-1.pdf' },
-          { label: 'Further Amended Funding Information Summary Statement (23 June 2025)', href: 'https://bantongroup.com/wp-content/uploads/2025/09/Further-Amended-Funding-Information-Summary-Statement-23-June-2025-1.pdf' },
+          { label: "Court's Orders, Notice and Registration Form", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/3281-20-ECI-7-Aug-2025-Bogan-v-Smedley-Orders.pdf' },
+          { label: 'Writ and Statement of Claim (14.08.2020)', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/1.-Writ-Statement-of-Claim-14.08.2020-3441-6780-8784-v1.pdf' },
+          { label: 'Amended Defence of the Director Defendants', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/First-to-Fourth-Defendants-Amended-Defence.pdf' },
+          { label: 'Defence of KPMG', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Fifth-Defendant-Defence.pdf' },
+          { label: 'Further Amended Group Proceeding Summary Statement (23.06.2025)', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Further-Amended-Group-Proceeding-Summary-Statement-23.06.2025-1.pdf' },
+          { label: 'Further Amended Funding Information Summary Statement (23 June 2025)', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Further-Amended-Funding-Information-Summary-Statement-23-June-2025-1.pdf' },
         ],
       },
 
@@ -354,9 +354,9 @@ export const cases: CaseDetail[] = [
         kind: 'documents',
         heading: 'Recent court orders',
         items: [
-          { label: "Court's orders dated 19 March 2026", href: 'https://bantongroup.com/wp-content/uploads/2026/04/2026-03-19_Federal-Court-Order-Justice-Moshinsky.pdf' },
-          { label: "Court's orders dated 16 March 2026", href: 'https://bantongroup.com/wp-content/uploads/2026/04/2026-03-16_Federal-Court-Order-Justice-Bennett_E5535951_v1-1.pdf' },
-          { label: "Court's orders dated 16 March 2026 (Suppressed)", href: 'https://bantongroup.com/wp-content/uploads/2026/04/2026-03-16_Federal-Court-Order-Justice-Bennett-Suppressed.pdf' },
+          { label: "Court's orders dated 19 March 2026", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2026-03-19_Federal-Court-Order-Justice-Moshinsky.pdf' },
+          { label: "Court's orders dated 16 March 2026", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2026-03-16_Federal-Court-Order-Justice-Bennett_E5535951_v1-1.pdf' },
+          { label: "Court's orders dated 16 March 2026 (Suppressed)", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2026-03-16_Federal-Court-Order-Justice-Bennett-Suppressed.pdf' },
         ],
       },
 
@@ -364,12 +364,12 @@ export const cases: CaseDetail[] = [
         kind: 'documents',
         heading: 'Key documents',
         items: [
-          { label: 'Further Amended Statement of Claim (8 August 2025)', href: 'https://bantongroup.com/wp-content/uploads/2025/10/2025-08-08-Further-Amended-Statement-of-Claim-dated-8-August-2025-sealed-1.pdf' },
-          { label: "Third Respondent's Defence", href: 'https://bantongroup.com/wp-content/uploads/2025/10/2023-03-28-Defence-of-Third-Respondent-Sealed.pdf' },
-          { label: "KPMG's Defence (Fourth Respondent)", href: 'https://bantongroup.com/wp-content/uploads/2025/10/2023-04-11-Defence-of-Fourth-Respondent-Sealed.pdf' },
-          { label: 'Notice of Proposed Settlement', href: 'https://bantongroup.com/wp-content/uploads/2025/10/Cudeco-Notice-of-Settlement.pdf' },
-          { label: "Court's Orders (9 October 2025)", href: 'https://bantongroup.com/wp-content/uploads/2025/10/2025-10-09_Federal-Court-Order-Justice-Bennett_E4791847_v1.pdf' },
-          { label: 'KPMG Settlement Confirmation', href: 'https://bantongroup.com/wp-content/uploads/2026/04/KPMG-Settlement-Confirmation-CuDeco-Class-Action-VID176-of-2022.pdf' },
+          { label: 'Further Amended Statement of Claim (8 August 2025)', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2025-08-08-Further-Amended-Statement-of-Claim-dated-8-August-2025-sealed-1.pdf' },
+          { label: "Third Respondent's Defence", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2023-03-28-Defence-of-Third-Respondent-Sealed.pdf' },
+          { label: "KPMG's Defence (Fourth Respondent)", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2023-04-11-Defence-of-Fourth-Respondent-Sealed.pdf' },
+          { label: 'Notice of Proposed Settlement', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Cudeco-Notice-of-Settlement.pdf' },
+          { label: "Court's Orders (9 October 2025)", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2025-10-09_Federal-Court-Order-Justice-Bennett_E4791847_v1.pdf' },
+          { label: 'KPMG Settlement Confirmation', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/KPMG-Settlement-Confirmation-CuDeco-Class-Action-VID176-of-2022.pdf' },
         ],
       },
 
@@ -563,11 +563,11 @@ export const cases: CaseDetail[] = [
         kind: 'documents',
         heading: 'Key documents',
         items: [
-          { label: 'Product List \u2014 Updated Global list of SCDOs', href: 'https://bantongroup.com/wp-content/uploads/2025/11/20250904-Updated-Global-list-of-SCDOs.pdf' },
-          { label: 'Amended Originating Application', href: 'https://bantongroup.com/wp-content/uploads/2025/11/Amended-Originating-Application.pdf' },
-          { label: 'Amended Statement of Claim', href: 'https://bantongroup.com/wp-content/uploads/2025/11/Amended-Statement-of-Claim.pdf' },
-          { label: "Fitch's Defence to the Amended Statement of Claim", href: 'https://bantongroup.com/wp-content/uploads/2025/11/2025-06-10-Respondents-Defence-to-the-Amended-Statement-of-Claim-10-June-2025-v1.pdf' },
-          { label: 'Notice to Opt Out, Register or Do Nothing', href: 'https://bantongroup.com/wp-content/uploads/2026/03/Fitch-Further-Opt-out-Notice.pdf' },
+          { label: 'Product List \u2014 Updated Global list of SCDOs', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/20250904-Updated-Global-list-of-SCDOs.pdf' },
+          { label: 'Amended Originating Application', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Amended-Originating-Application.pdf' },
+          { label: 'Amended Statement of Claim', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Amended-Statement-of-Claim.pdf' },
+          { label: "Fitch's Defence to the Amended Statement of Claim", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2025-06-10-Respondents-Defence-to-the-Amended-Statement-of-Claim-10-June-2025-v1.pdf' },
+          { label: 'Notice to Opt Out, Register or Do Nothing', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Fitch-Further-Opt-out-Notice.pdf' },
         ],
       },
 
@@ -716,7 +716,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'documents',
         items: [
-          { label: 'Opt Out Notice', href: 'https://bantongroup.com/wp-content/uploads/2024/04/Notice-to-Group-Members-April-2024-Court-approved-v1.pdf' },
+          { label: 'Opt Out Notice', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Notice-to-Group-Members-April-2024-Court-approved-v1.pdf' },
         ],
       },
 
@@ -941,8 +941,8 @@ export const cases: CaseDetail[] = [
         kind: 'documents',
         heading: 'Latest filings',
         items: [
-          { label: "Applicant's Further Amended Statement of Claim", href: 'https://bantongroup.com/wp-content/uploads/2026/03/2025-09-08-Further-Amended-Statement-of-Claim.pdf' },
-          { label: 'Latest orders made in the proceeding (20 February 2026)', href: 'https://bantongroup.com/wp-content/uploads/2026/03/Phoslock-Class-Action-Orders-made-on-20-February-2026.pdf' },
+          { label: "Applicant's Further Amended Statement of Claim", href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/2025-09-08-Further-Amended-Statement-of-Claim.pdf' },
+          { label: 'Latest orders made in the proceeding (20 February 2026)', href: 'https://ehymdracjodyxiyeimfb.supabase.co/storage/v1/object/public/article-documents/cases-migrated/Phoslock-Class-Action-Orders-made-on-20-February-2026.pdf' },
         ],
       },
 
@@ -950,7 +950,7 @@ export const cases: CaseDetail[] = [
       {
         kind: 'p',
         text:
-          'The deadline to register or opt out is 4:00pm on 27 May 2026. To register, visit https://bantongroup.com/class-actions, or email phoslockclassaction@bantongroup.com, or post to Banton Group, Level 12, 60 Martin Place, Sydney NSW 2000.',
+          'The deadline to register or opt out is 4:00pm on 27 May 2026. To register, visit /class-actions, or email phoslockclassaction@bantongroup.com, or post to Banton Group, Level 12, 60 Martin Place, Sydney NSW 2000.',
       },
 
       { kind: 'h2', text: 'Group Member eligibility' },
