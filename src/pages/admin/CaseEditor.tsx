@@ -474,15 +474,8 @@ export function CaseEditor() {
               className={inputCls + ' max-w-[360px]'}
             >
               <option value="">No online form</option>
-              <optgroup label="Built-in forms">
-                {FORM_TYPES.map((t) => (
-                  <option key={t} value={t}>
-                    {FORM_TYPE_META[t].label}
-                  </option>
-                ))}
-              </optgroup>
               {customForms.length > 0 && (
-                <optgroup label="Custom forms">
+                <optgroup label="Manual forms">
                   {customForms.map((f) => (
                     <option key={f.id} value={`custom:${f.id}`}>
                       {f.name}
@@ -490,12 +483,22 @@ export function CaseEditor() {
                   ))}
                 </optgroup>
               )}
+              <optgroup label="Embedded Formstack">
+                <option value="formstack">Embedded Formstack</option>
+              </optgroup>
+              <optgroup label="System forms (built-in)">
+                {FORM_TYPES.filter((t) => t !== 'formstack').map((t) => (
+                  <option key={t} value={t}>
+                    {FORM_TYPE_META[t].label}
+                  </option>
+                ))}
+              </optgroup>
             </select>
             {form.form_type && (
               <p className="text-[11px] text-[#888888] mt-1.5">
                 {form.form_type.startsWith('custom:')
                   ? customForms.find((f) => `custom:${f.id}` === form.form_type)?.description ||
-                    'Custom form.'
+                    'Manual form.'
                   : FORM_TYPE_META[form.form_type as keyof typeof FORM_TYPE_META]?.description}
               </p>
             )}

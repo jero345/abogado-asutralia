@@ -6,6 +6,7 @@ import {
   saveForm,
   fieldKey,
   FIELD_TYPE_LABELS,
+  OPTION_FIELD_TYPES,
   type CustomField,
   type CustomFieldType,
 } from '@/lib/forms'
@@ -78,7 +79,7 @@ export function FormEditor() {
         while (seen.has(key)) key = `${key}_${i + 1}`
         seen.add(key)
         const out: CustomField = { name: key, label: f.label.trim(), type: f.type, required: f.required }
-        if (f.type === 'select') out.options = (f.options ?? []).filter(Boolean)
+        if (OPTION_FIELD_TYPES.includes(f.type)) out.options = (f.options ?? []).filter(Boolean)
         return out
       })
     setSaving(true)
@@ -116,11 +117,13 @@ export function FormEditor() {
       </button>
 
       <h1 className="text-[#1C3A64] text-[26px] font-medium tracking-tight mb-2">
-        {isEdit ? 'Edit form' : 'New form'}
+        {isEdit ? 'Edit manual form' : 'New manual form'}
       </h1>
       <p className="text-[#888888] text-[13px] mb-8">
-        Build a custom registration form, then assign it to a case from the case editor. First Name,
-        Last Name, Email and Phone are always collected — add any extra fields below.
+        Build a manual form for basic capture, then assign it to a case from the case editor. First
+        Name, Last Name, Email and Phone are always collected — add any extra fields below. For
+        complex / legal forms (uploads, declarations, conditional logic) use Embedded Formstack
+        instead.
       </p>
 
       {error && (
@@ -233,14 +236,14 @@ export function FormEditor() {
                     <Trash2 size={14} />
                   </button>
                 </div>
-                {f.type === 'select' && (
+                {OPTION_FIELD_TYPES.includes(f.type) && (
                   <input
                     value={(f.options ?? []).join(', ')}
                     onChange={(e) =>
                       updateField(i, { options: e.target.value.split(',').map((s) => s.trim()) })
                     }
                     className={inputCls + ' mt-2'}
-                    placeholder="Dropdown options, comma-separated (e.g. Yes, No, Maybe)"
+                    placeholder="Options, comma-separated (e.g. Yes, No, Maybe)"
                   />
                 )}
               </div>

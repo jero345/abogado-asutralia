@@ -143,7 +143,7 @@ export function CustomForm({ caseData, formId }: { caseData: CaseDetail; formId:
         </div>
 
         {def.fields.map((f) => {
-          const full = f.type === 'textarea' || f.type === 'checkbox'
+          const full = f.type === 'textarea' || f.type === 'checkbox' || f.type === 'radio'
           return (
             <div key={f.name} className={full ? 'col-span-full' : undefined}>
               {f.type === 'checkbox' ? (
@@ -178,9 +178,34 @@ export function CustomForm({ caseData, formId }: { caseData: CaseDetail; formId:
                         </option>
                       ))}
                     </select>
+                  ) : f.type === 'radio' ? (
+                    <div className="space-y-2">
+                      {(f.options ?? []).map((o) => (
+                        <label
+                          key={o}
+                          className="flex items-center gap-3 p-3 border border-[#1C3A64]/15 rounded-xl cursor-pointer hover:bg-[#1C3A64]/[0.03] transition-colors"
+                        >
+                          <input
+                            type="radio"
+                            name={f.name}
+                            value={o}
+                            checked={v[f.name] === o}
+                            onChange={() => set(f.name)(o)}
+                            className="accent-[#1C3A64]"
+                          />
+                          <span className="text-[#1C3A64] text-[14px]">{o}</span>
+                        </label>
+                      ))}
+                    </div>
                   ) : (
                     <input
-                      type={f.type === 'email' ? 'email' : f.type === 'tel' ? 'tel' : 'text'}
+                      type={
+                        f.type === 'email' ? 'email'
+                        : f.type === 'tel' ? 'tel'
+                        : f.type === 'number' ? 'number'
+                        : f.type === 'date' ? 'date'
+                        : 'text'
+                      }
                       className={inputClass}
                       value={v[f.name] ?? ''}
                       onChange={(e) => set(f.name)(e.target.value)}

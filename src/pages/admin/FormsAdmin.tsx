@@ -1,9 +1,25 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Loader2, Download, Inbox, ClipboardList, ArrowUpRight, Plus, Pencil, Trash2, Wand2 } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Loader2, Download, Inbox, ClipboardList, ArrowUpRight, Plus, Pencil, Trash2, Wand2, Copy, ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { FORM_TYPES, FORM_TYPE_META, getFormConfig, type FormType } from '@/data/registrationForms'
-import { fetchForms, deleteForm, type CustomFormDef } from '@/lib/forms'
+import { fetchForms, deleteForm, saveForm, builtinFormTemplate, type CustomFormDef } from '@/lib/forms'
+
+const FORMSTACK_CREATE_URL = 'https://www.formstack.com/admin/forms'
+
+// Accent colour per form type so the cards are easy to tell apart at a glance.
+type Accent = { border: string; chip: string; icon: string; btn: string }
+const FORM_COLOR: Record<string, Accent> = {
+  shareholder:           { border: 'border-l-sky-400',     chip: 'bg-sky-50 text-sky-700',         icon: 'text-sky-600',     btn: 'bg-sky-50 text-sky-700 hover:bg-sky-100 border-sky-200' },
+  'investment-detailed': { border: 'border-l-violet-400',  chip: 'bg-violet-50 text-violet-700',   icon: 'text-violet-600',  btn: 'bg-violet-50 text-violet-700 hover:bg-violet-100 border-violet-200' },
+  'investment-interest': { border: 'border-l-teal-400',    chip: 'bg-teal-50 text-teal-700',       icon: 'text-teal-600',    btn: 'bg-teal-50 text-teal-700 hover:bg-teal-100 border-teal-200' },
+  'claim-detailed':      { border: 'border-l-amber-400',   chip: 'bg-amber-50 text-amber-700',     icon: 'text-amber-600',   btn: 'bg-amber-50 text-amber-700 hover:bg-amber-100 border-amber-200' },
+  'mini-interest':       { border: 'border-l-emerald-400', chip: 'bg-emerald-50 text-emerald-700', icon: 'text-emerald-600', btn: 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200' },
+  formstack:             { border: 'border-l-rose-400',    chip: 'bg-rose-50 text-rose-700',       icon: 'text-rose-600',    btn: 'bg-rose-50 text-rose-700 hover:bg-rose-100 border-rose-200' },
+  vehicle:               { border: 'border-l-indigo-400',  chip: 'bg-indigo-50 text-indigo-700',   icon: 'text-indigo-600',  btn: 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200' },
+}
+const MANUAL_ACCENT: Accent = { border: 'border-l-fuchsia-400', chip: 'bg-fuchsia-50 text-fuchsia-700', icon: 'text-fuchsia-600', btn: '' }
+const FALLBACK_ACCENT: Accent = { border: 'border-l-[#1C3A64]/30', chip: 'bg-[#1C3A64]/[0.05] text-[#6D8FB5]', icon: 'text-[#1C3A64]', btn: 'bg-[#1C3A64]/[0.06] text-[#1C3A64] hover:bg-[#1C3A64]/[0.12] border-[#1C3A64]/20' }
 
 interface CaseRow {
   slug: string
@@ -54,6 +70,8 @@ export function FormsAdmin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const navigate = useNavigate()
+
   const removeForm = async (f: CustomFormDef) => {
     if (!window.confirm(`Delete the form "${f.name}"? This cannot be undone.`)) return
     const { error: err } = await deleteForm(f.id)
@@ -62,6 +80,18 @@ export function FormsAdmin() {
       return
     }
     setCustomForms((prev) => (prev ? prev.filter((x) => x.id !== f.id) : prev))
+  }
+
+  // Built-in forms are code, so "edit" makes an editable manual COPY and opens it.
+  const duplicateBuiltin = async (ft: FormType) => {
+    const tpl = builtinFormTemplate(ft)
+    if (!tpl) return
+    const { id, error: err } = await saveForm({ ...tpl, notify_email: null })
+    if (err || !id) {
+      setError(err ?? 'Could not create the editable copy.')
+      return
+    }
+    navigate(`/admin/forms/edit/${id}`)
   }
 
   // Effective form type per case: DB form_type (if migrated) else the code default.
@@ -117,9 +147,13 @@ export function FormsAdmin() {
       <div className="flex items-start justify-between gap-4 mb-6 flex-wrap">
         <div>
           <h1 className="text-[#1C3A64] text-[26px] font-medium tracking-tight">Forms</h1>
-          <p className="text-[#888888] text-[13px] mt-1">
-            The registration forms available across the site, which cases use each one, and the
-            submissions captured. Assign a form to a case from the case editor.
+          <p className="text-[#888888] text-[13px] mt-1 max-w-2xl">
+            Two ways to add a registration form to a case:{' '}
+            <strong className="text-[#1C3A64]">Manual form</strong> — built here for basic capture
+            (name, email, phone, address, a short description); or{' '}
+            <strong className="text-[#1C3A64]">Embedded Formstack</strong> — paste a Formstack URL
+            for complex / legal forms (conditional logic, uploads, declarations). Assign either to a
+            case from the case editor.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -135,8 +169,17 @@ export function FormsAdmin() {
             className="inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] text-white text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
           >
             <Plus size={14} />
-            New form
+            New manual form
           </Link>
+          <a
+            href={FORMSTACK_CREATE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] text-[#1C3A64] text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
+          >
+            Create in Formstack
+            <ExternalLink size={14} />
+          </a>
         </div>
       </div>
 
@@ -153,21 +196,22 @@ export function FormsAdmin() {
       ) : (
         <>
         <div className="text-[11px] tracking-[0.15em] uppercase text-[#888888] font-medium mb-3">
-          Built-in forms
+          System forms (built-in)
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {FORM_TYPES.map((ft) => {
             const meta = FORM_TYPE_META[ft]
             const usedBy = casesByForm[ft] ?? []
             const count = regCountByForm[ft] ?? 0
+            const c = FORM_COLOR[ft] ?? FALLBACK_ACCENT
             return (
-              <div key={ft} className="bg-white border border-[#1C3A64]/10 rounded-2xl p-6 flex flex-col">
+              <div key={ft} className={`bg-white border border-[#1C3A64]/10 border-l-4 ${c.border} rounded-2xl p-6 flex flex-col`}>
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <div className="flex items-center gap-2">
-                    <ClipboardList size={16} className="text-[#1C3A64]" />
+                    <ClipboardList size={16} className={c.icon} />
                     <h2 className="text-[#1C3A64] text-[15px] font-medium">{meta.label}</h2>
                   </div>
-                  <span className="text-[11px] text-[#6D8FB5] bg-[#1C3A64]/[0.05] px-2 py-0.5 rounded font-mono">
+                  <span className={`text-[11px] ${c.chip} px-2 py-0.5 rounded font-mono`}>
                     {ft}
                   </span>
                 </div>
@@ -200,14 +244,26 @@ export function FormsAdmin() {
                     <span className="text-[#1C3A64] font-medium tabular-nums">{count}</span> submission
                     {count === 1 ? '' : 's'}
                   </span>
-                  <button
-                    onClick={() => exportForm(ft)}
-                    disabled={count === 0}
-                    className="inline-flex items-center gap-2 text-[12px] font-medium text-[#1C3A64] border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
-                  >
-                    <Download size={13} />
-                    Export CSV
-                  </button>
+                  <div className="flex items-center gap-2">
+                    {ft !== 'formstack' && (
+                      <button
+                        onClick={() => duplicateBuiltin(ft)}
+                        title="Create an editable manual copy of this form"
+                        className={`inline-flex items-center gap-1.5 text-[12px] font-semibold border px-3 py-1.5 rounded-lg transition-colors ${c.btn}`}
+                      >
+                        <Copy size={13} />
+                        Edit as manual
+                      </button>
+                    )}
+                    <button
+                      onClick={() => exportForm(ft)}
+                      disabled={count === 0}
+                      className="inline-flex items-center gap-2 text-[12px] font-medium text-[#1C3A64] border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      <Download size={13} />
+                      Export CSV
+                    </button>
+                  </div>
                 </div>
               </div>
             )
@@ -215,19 +271,19 @@ export function FormsAdmin() {
         </div>
 
         <div className="text-[11px] tracking-[0.15em] uppercase text-[#888888] font-medium mt-10 mb-3">
-          Custom forms ({customForms?.length ?? 0})
+          Manual forms ({customForms?.length ?? 0})
         </div>
         {(customForms?.length ?? 0) === 0 ? (
           <div className="bg-white border border-dashed border-[#1C3A64]/20 rounded-2xl p-8 text-center">
             <Wand2 size={26} className="mx-auto text-[#1C3A64]/30 mb-2" />
             <p className="text-[#555555] text-[13px] mb-3">
-              No custom forms yet. Build one and assign it to a case from the case editor.
+              No manual forms yet. Build one and assign it to a case from the case editor.
             </p>
             <Link
               to="/admin/forms/new"
               className="inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] text-white text-[13px] font-medium px-4 py-2 rounded-lg transition-colors"
             >
-              <Plus size={14} /> New form
+              <Plus size={14} /> New manual form
             </Link>
           </div>
         ) : (
@@ -236,11 +292,12 @@ export function FormsAdmin() {
               const usedBy = casesByCustomForm[f.id] ?? []
               const count = regCountByForm[`custom:${f.id}`] ?? 0
               return (
-                <div key={f.id} className="bg-white border border-[#1C3A64]/10 rounded-2xl p-6 flex flex-col">
+                <div key={f.id} className={`bg-white border border-[#1C3A64]/10 border-l-4 ${MANUAL_ACCENT.border} rounded-2xl p-6 flex flex-col`}>
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div className="flex items-center gap-2">
-                      <Wand2 size={16} className="text-[#1C3A64]" />
+                      <Wand2 size={16} className={MANUAL_ACCENT.icon} />
                       <h2 className="text-[#1C3A64] text-[15px] font-medium">{f.name}</h2>
+                      <span className={`text-[11px] ${MANUAL_ACCENT.chip} px-2 py-0.5 rounded font-mono`}>manual</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Link to={`/admin/forms/edit/${f.id}`} className="p-1.5 text-[#1C3A64] hover:bg-[#1C3A64]/[0.08] rounded-lg" title="Edit form">

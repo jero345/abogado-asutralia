@@ -306,8 +306,9 @@ export const FORM_TYPE_META: Record<FormType, { label: string; description: stri
     description: 'Minimal form for investigations — name, contact, a dropdown and privacy consent.',
   },
   formstack: {
-    label: 'Formstack (embedded)',
-    description: "Embed an existing Formstack form via its URL. Submissions can flow into this panel via the Formstack webhook.",
+    label: 'Embedded Formstack',
+    description:
+      'For complex / legal matters needing conditional logic, uploads, declarations or financial documents. Embed an existing Formstack form via its URL; submissions flow into this panel via the Formstack webhook.',
   },
   vehicle: {
     label: 'Vehicle',
