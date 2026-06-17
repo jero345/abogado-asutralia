@@ -7,19 +7,21 @@ import { fetchForms, deleteForm, saveForm, builtinFormTemplate, type CustomFormD
 
 const FORMSTACK_CREATE_URL = 'https://www.formstack.com/admin/forms'
 
-// Accent colour per form type so the cards are easy to tell apart at a glance.
+// Just two looks so the categories are easy to tell apart: native/manual
+// (brand navy) vs Embedded Formstack (green).
 type Accent = { border: string; chip: string; icon: string; btn: string }
-const FORM_COLOR: Record<string, Accent> = {
-  shareholder:           { border: 'border-l-sky-400',     chip: 'bg-sky-50 text-sky-700',         icon: 'text-sky-600',     btn: 'bg-sky-50 text-sky-700 hover:bg-sky-100 border-sky-200' },
-  'investment-detailed': { border: 'border-l-violet-400',  chip: 'bg-violet-50 text-violet-700',   icon: 'text-violet-600',  btn: 'bg-violet-50 text-violet-700 hover:bg-violet-100 border-violet-200' },
-  'investment-interest': { border: 'border-l-teal-400',    chip: 'bg-teal-50 text-teal-700',       icon: 'text-teal-600',    btn: 'bg-teal-50 text-teal-700 hover:bg-teal-100 border-teal-200' },
-  'claim-detailed':      { border: 'border-l-amber-400',   chip: 'bg-amber-50 text-amber-700',     icon: 'text-amber-600',   btn: 'bg-amber-50 text-amber-700 hover:bg-amber-100 border-amber-200' },
-  'mini-interest':       { border: 'border-l-emerald-400', chip: 'bg-emerald-50 text-emerald-700', icon: 'text-emerald-600', btn: 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200' },
-  formstack:             { border: 'border-l-rose-400',    chip: 'bg-rose-50 text-rose-700',       icon: 'text-rose-600',    btn: 'bg-rose-50 text-rose-700 hover:bg-rose-100 border-rose-200' },
-  vehicle:               { border: 'border-l-indigo-400',  chip: 'bg-indigo-50 text-indigo-700',   icon: 'text-indigo-600',  btn: 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200' },
+const SYSTEM_ACCENT: Accent = {
+  border: 'border-l-[#1C3A64]',
+  chip: 'bg-[#1C3A64]/[0.06] text-[#1C3A64]',
+  icon: 'text-[#1C3A64]',
+  btn: 'bg-[#1C3A64]/[0.06] text-[#1C3A64] hover:bg-[#1C3A64]/[0.12] border-[#1C3A64]/20',
 }
-const MANUAL_ACCENT: Accent = { border: 'border-l-fuchsia-400', chip: 'bg-fuchsia-50 text-fuchsia-700', icon: 'text-fuchsia-600', btn: '' }
-const FALLBACK_ACCENT: Accent = { border: 'border-l-[#1C3A64]/30', chip: 'bg-[#1C3A64]/[0.05] text-[#6D8FB5]', icon: 'text-[#1C3A64]', btn: 'bg-[#1C3A64]/[0.06] text-[#1C3A64] hover:bg-[#1C3A64]/[0.12] border-[#1C3A64]/20' }
+const FORMSTACK_ACCENT: Accent = {
+  border: 'border-l-emerald-500',
+  chip: 'bg-emerald-50 text-emerald-700',
+  icon: 'text-emerald-600',
+  btn: 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200',
+}
 
 interface CaseRow {
   slug: string
@@ -203,7 +205,7 @@ export function FormsAdmin() {
             const meta = FORM_TYPE_META[ft]
             const usedBy = casesByForm[ft] ?? []
             const count = regCountByForm[ft] ?? 0
-            const c = FORM_COLOR[ft] ?? FALLBACK_ACCENT
+            const c = ft === 'formstack' ? FORMSTACK_ACCENT : SYSTEM_ACCENT
             return (
               <div key={ft} className={`bg-white border border-[#1C3A64]/10 border-l-4 ${c.border} rounded-2xl p-6 flex flex-col`}>
                 <div className="flex items-start justify-between gap-3 mb-2">
@@ -292,12 +294,12 @@ export function FormsAdmin() {
               const usedBy = casesByCustomForm[f.id] ?? []
               const count = regCountByForm[`custom:${f.id}`] ?? 0
               return (
-                <div key={f.id} className={`bg-white border border-[#1C3A64]/10 border-l-4 ${MANUAL_ACCENT.border} rounded-2xl p-6 flex flex-col`}>
+                <div key={f.id} className={`bg-white border border-[#1C3A64]/10 border-l-4 ${SYSTEM_ACCENT.border} rounded-2xl p-6 flex flex-col`}>
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div className="flex items-center gap-2">
-                      <Wand2 size={16} className={MANUAL_ACCENT.icon} />
+                      <Wand2 size={16} className={SYSTEM_ACCENT.icon} />
                       <h2 className="text-[#1C3A64] text-[15px] font-medium">{f.name}</h2>
-                      <span className={`text-[11px] ${MANUAL_ACCENT.chip} px-2 py-0.5 rounded font-mono`}>manual</span>
+                      <span className={`text-[11px] ${SYSTEM_ACCENT.chip} px-2 py-0.5 rounded font-mono`}>manual</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Link to={`/admin/forms/edit/${f.id}`} className="p-1.5 text-[#1C3A64] hover:bg-[#1C3A64]/[0.08] rounded-lg" title="Edit form">
