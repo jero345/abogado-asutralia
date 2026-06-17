@@ -17,10 +17,10 @@ const SYSTEM_ACCENT: Accent = {
   btn: 'bg-[#1C3A64]/[0.06] text-[#1C3A64] hover:bg-[#1C3A64]/[0.12] border-[#1C3A64]/20',
 }
 const FORMSTACK_ACCENT: Accent = {
-  border: 'border-l-emerald-500',
-  chip: 'bg-emerald-50 text-emerald-700',
-  icon: 'text-emerald-600',
-  btn: 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200',
+  border: 'border-l-sky-400',
+  chip: 'bg-sky-50 text-sky-700',
+  icon: 'text-sky-500',
+  btn: 'bg-sky-50 text-sky-700 hover:bg-sky-100 border-sky-200',
 }
 
 interface CaseRow {
