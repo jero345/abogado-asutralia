@@ -75,11 +75,11 @@ export function PracticeAreas() {
           {practices.map((practice, i) => {
             const Icon = practice.icon
             return (
-              <ScrollReveal key={practice.title} delay={i * 0.1}>
+              <ScrollReveal key={practice.title} delay={i * 0.1} className="h-full">
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="relative bg-[#1e3a5f]/[0.025] border border-[#1e3a5f]/[0.06] rounded-2xl p-8 group cursor-default overflow-hidden"
+                  className="relative h-full flex flex-col bg-[#1e3a5f]/[0.025] border border-[#1e3a5f]/[0.06] rounded-2xl p-8 group cursor-default overflow-hidden"
                 >
                   {/* Background gradient on hover */}
                   <motion.div

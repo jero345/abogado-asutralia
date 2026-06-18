@@ -1,5 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
+import { KeyLitigation } from '@/components/sections/KeyLitigation'
 import { AmandaQuote } from '@/components/sections/AmandaQuote'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
@@ -12,6 +13,10 @@ export function Home() {
     <>
       <Hero />
       <AwardsStrip />
+
+      {/* Track record / key litigation — sits in the light space after the
+          AwardsStrip's dark→light transition. */}
+      <KeyLitigation />
 
       {/* Amanda feature — green-skirt portrait with name */}
       <section className="relative py-16 md:py-24 bg-white">

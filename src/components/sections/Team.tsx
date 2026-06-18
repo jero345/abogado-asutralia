@@ -76,8 +76,9 @@ const team: Member[] = [
     role: 'Deputy Managing Partner',
     specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring'],
     bio:
-      'Elliott Smith is the Deputy Managing Partner of Banton Group. He brings more than 18 years’ experience in complex commercial litigation, class actions, restructuring and insolvency disputes, and international arbitration across Australia, Asia, the Middle East and Europe. His practice spans plaintiff and defendant litigation, with particular expertise in securities class actions, misleading and deceptive conduct claims, Corporations Act disputes, cross-border trade disputes and multi-jurisdictional arbitration.',
+      'Elliott Smith is the Deputy Managing Partner of Banton Group. He brings more than 18 years’ experience in complex commercial litigation, class actions, restructuring and insolvency disputes, and international arbitration across Australia, Asia, the Middle East and Europe.',
     extendedBio: [
+      'His practice spans plaintiff and defendant litigation, with particular expertise in securities class actions, misleading and deceptive conduct claims, Corporations Act disputes, cross-border trade disputes and multi-jurisdictional arbitration.',
       'Elliott has spent significant time in-house at both a Big Four bank and a Big Four accounting firm, giving him a strong understanding of the commercial pressures and strategic imperatives facing major institutional and private clients. He acts for clients including banks, insolvency practitioners, directors, auditors and private equity firms.',
       'Elliott currently leads a number of significant securities class actions and recovery proceedings arising from major Australian insolvencies. His recent work includes leading the CuDeco shareholder class action, including the court-approved settlement with KPMG, playing a central role in the Arrium High Court proceedings, and acting in substantial recovery litigation against the Commonwealth.',
       'He is recognised for his technical expertise, commercial judgement and ability to manage complex litigation efficiently and strategically. Elliott regularly speaks at conferences and industry seminars, and his recognitions include being listed as a Rising Star in Asia Pacific Legal 500. The Asia Pacific Legal 500 Guide notes that “Elliott Smith has a top-notch working knowledge of his areas of specialty, together with excellent organisational skills.”',
@@ -157,10 +158,9 @@ export function Team() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
           {team.map((member, i) => {
             const isOpen = expanded.has(member.name)
-            const hasMore = !!(
-              (member.extendedBio && member.extendedBio.length > 0) ||
-              (member.awards && member.awards.length > 2)
-            )
+            // Every bio is clamped to 4 lines when collapsed, so every card
+            // gets a Show more / Show less toggle.
+            const hasMore = true
             return (
               <ScrollReveal key={member.name} delay={i * 0.08}>
                 <motion.div
@@ -209,8 +209,10 @@ export function Team() {
                       ))}
                     </div>
 
-                    {/* Bio (short) */}
-                    <p className="text-[#555555] text-[15px] leading-[1.7] mb-3">{member.bio}</p>
+                    {/* Bio — clamped to 4 lines until expanded */}
+                    <p className={`text-[#555555] text-[14.5px] leading-[1.7] mb-3 ${isOpen ? '' : 'line-clamp-4'}`}>
+                      {member.bio}
+                    </p>
 
                     {/* Extended bio — collapsible */}
                     <AnimatePresence initial={false}>
@@ -224,7 +226,7 @@ export function Team() {
                         >
                           <div className="space-y-3 mb-3">
                             {member.extendedBio.map((p, k) => (
-                              <p key={k} className="text-[#555555] text-[14px] leading-[1.7]">
+                              <p key={k} className="text-[#555555] text-[14.5px] leading-[1.7]">
                                 {p}
                               </p>
                             ))}
