@@ -12,7 +12,10 @@
       "Bash(python -c \"import pypdf\")",
       "Bash(where pdftoppm *)",
       "Bash(where pdftotext *)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(cat)",
+      "Bash(python /tmp/extract_docx.py)",
+      "Bash(PYTHONIOENCODING=utf-8 python /tmp/extract_one.py)"
     ]
   }
 }

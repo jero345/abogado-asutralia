@@ -10,8 +10,8 @@
  *
  *   2. Detail page (`/class-actions/<slug>`)
  *      - Everything from the first heading onwards.
- *      - PDF links rendered as outlined buttons with a doc icon
- *        (NOT inline iframe viewers — those are blog-only).
+ *      - PDF links rendered as outlined buttons with a doc icon that open
+ *        in a new tab (the blog renders PDFs the same way — no inline viewer).
  */
 
 const HEADING_RE = /<h[1-6]\b/i
@@ -45,13 +45,19 @@ const PDF_HREF_RE = /\.pdf(?:[?#][^"]*)?$/i
 
 function escapeHtml(s: string): string {
   return s
-    .replace(/&/g, '&amp;')
+    // Escape *bare* ampersands only. The labels we receive are pulled from
+    // already-encoded WordPress HTML, so they can legitimately contain
+    // entities like &rsquo;, &amp; or &#39;. Escaping those again produced
+    // double-encoding (e.g. "The Court&rsquo;s orders" rendered literally).
+    // The negative lookahead leaves any valid entity untouched while still
+    // escaping a stray "&" in plain text such as "Jones & Co".
+    .replace(/&(?!(?:#\d+|#x[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);)/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
 }
 
-function pdfButton(href: string, label: string): string {
+export function pdfButton(href: string, label: string): string {
   const cleanLabel = label.replace(/<[^>]+>/g, '').trim() || 'PDF document'
   const safeHref = href.replace(/"/g, '&quot;')
   // The icon is inlined so the helper doesn't depend on the consumer
@@ -76,29 +82,19 @@ function pdfButton(href: string, label: string): string {
  */
 export function buttonizeRegisterLinks(html: string): string {
   if (!html) return html
+  // Public online registration is disabled: strip any legacy WordPress
+  // "registration process" CTA paragraph from the body so no register button
+  // is shown. Visitors are directed to contact the firm instead.
   return html.replace(
-    /<p>\s*<a\s+([^>]*?)href="([^"]+)"([^>]*)>([\s\S]*?)<\/a>\s*<\/p>/gi,
-    (match, _pre, href, _post, label) => {
-      const m = href.match(BANTON_REGISTER_URL_RE)
-      if (!m) return match
-      const slug = m[1]
-      const cleanLabel = label.replace(/<[^>]+>/g, '').trim() || 'Register Now'
-      return (
-        `<a href="/class-actions/${slug}/register" class="register-button">` +
-          `${escapeHtml(cleanLabel)}` +
-          `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">` +
-            `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>` +
-          `</svg>` +
-        `</a>`
-      )
-    },
+    /<p>\s*<a\s+[^>]*?href="([^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/p>/gi,
+    (match, href) => (BANTON_REGISTER_URL_RE.test(href) ? '' : match),
   )
 }
 
 /**
  * Replaces PDF anchor tags wrapped in <p> or <li> with outlined-button
- * versions. Used on the class-action detail pages (not the blog —
- * blog still gets the inline iframe viewer via embedPdfLinks).
+ * versions. Used on both the class-action detail pages and the blog — PDFs
+ * always render as cards that open in a new tab (no inline iframe viewer).
  */
 export function buttonizePdfLinks(html: string): string {
   if (!html) return html

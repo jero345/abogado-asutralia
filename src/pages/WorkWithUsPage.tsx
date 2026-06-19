@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { PageHero } from '@/components/ui/PageHero'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { ArrowUpRight, Calendar, GraduationCap, Users, Mail } from 'lucide-react'
+import { ArrowUpRight, Calendar, GraduationCap, Users, Mail, Linkedin } from 'lucide-react'
 
 const clerkshipDetails = [
   { icon: Calendar, label: 'Two intakes yearly', value: 'December & February' },
@@ -179,13 +179,26 @@ export function WorkWithUsPage() {
             <p className="text-white/90 text-sm md:text-base lg:text-lg leading-[1.7] mb-8 max-w-2xl mx-auto">
               Send your resume, cover letter and academic transcript directly to our careers inbox.
             </p>
-            <a
-              href="mailto:careers@bantongroup.com"
-              className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em] shadow-lg"
-            >
-              careers@bantongroup.com
-              <ArrowUpRight size={14} />
-            </a>
+            <div className="flex flex-col items-center justify-center gap-3">
+              <a
+                href="mailto:careers@bantongroup.com"
+                className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em] shadow-lg"
+              >
+                careers@bantongroup.com
+                <ArrowUpRight size={14} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/banton-group-legal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View open roles on LinkedIn"
+                title="View open roles on LinkedIn"
+                className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em] shadow-lg"
+              >
+                View open roles
+                <Linkedin size={14} />
+              </a>
+            </div>
           </ScrollReveal>
         </div>
       </section>

@@ -5,7 +5,8 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ArrowLeft, Calendar, ExternalLink } from 'lucide-react'
 import { fetchArticle, type NewsArticle } from '@/lib/news'
 import { type ArticleBlock } from '@/data/news'
-import { embedPdfLinks } from '@/lib/embedPdfs'
+import { pdfEmbedsToButtons, embedFormstackLinks } from '@/lib/embedPdfs'
+import { buttonizePdfLinks } from '@/lib/caseBody'
 
 function formatDate(iso: string) {
   const d = new Date(iso)
@@ -185,20 +186,23 @@ export function NewsArticlePage() {
                   'prose-blockquote:not-italic',
                   '[&_blockquote_p]:text-[#1C3A64] [&_blockquote_p]:italic [&_blockquote_p]:font-medium',
                   'prose-img:rounded-xl',
-                  // PDF embed: full-width inline viewer
-                  '[&_.pdf-embed]:my-8 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
-                  '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15',
-                  '[&_.pdf-embed]:shadow-sm',
-                  '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
-                  '[&_.pdf-embed_iframe]:h-[80vh] [&_.pdf-embed_iframe]:min-h-[520px]',
-                  '[&_.pdf-embed_iframe]:bg-[#F4F6FB] [&_.pdf-embed_iframe]:border-0',
-                  '[&_.pdf-embed-fallback]:block [&_.pdf-embed-fallback]:text-center',
-                  '[&_.pdf-embed-fallback]:text-[12px] [&_.pdf-embed-fallback]:text-[#1C3A64]',
-                  '[&_.pdf-embed-fallback]:underline [&_.pdf-embed-fallback]:py-2',
-                  '[&_.pdf-embed-fallback]:bg-[#F4F6FB] [&_.pdf-embed-fallback]:no-underline',
-                  '[&_.pdf-embed-fallback]:hover:underline',
+                  // PDF documents render as outlined "card" buttons that open
+                  // in a new tab (no inline viewer, no "Download" label).
+                  '[&_.pdf-button]:inline-flex [&_.pdf-button]:items-center [&_.pdf-button]:gap-3',
+                  '[&_.pdf-button]:bg-white [&_.pdf-button]:border [&_.pdf-button]:border-[#1C3A64]/30',
+                  '[&_.pdf-button]:hover:border-[#1C3A64]/60 [&_.pdf-button]:hover:bg-[#F4F6FB]',
+                  '[&_.pdf-button]:text-[#1C3A64] [&_.pdf-button]:text-[14px] [&_.pdf-button]:font-medium',
+                  '[&_.pdf-button]:px-5 [&_.pdf-button]:py-3 [&_.pdf-button]:rounded-md',
+                  '[&_.pdf-button]:no-underline [&_.pdf-button]:my-3 [&_.pdf-button]:transition-colors',
+                  '[&_.pdf-button_svg]:w-4 [&_.pdf-button_svg]:h-4 [&_.pdf-button_svg]:flex-shrink-0',
+                  '[&_.pdf-li]:list-none [&_.pdf-li]:ml-0 [&_.pdf-li]:pl-0',
+                  '[&_ul:has(.pdf-li)]:pl-0 [&_ul:has(.pdf-li)]:list-none [&_ul:has(.pdf-li)]:space-y-0',
+                  // Inline Formstack form (pasted as a link in the body)
+                  '[&_.formstack-embed]:my-6 [&_.formstack-embed]:rounded-xl [&_.formstack-embed]:overflow-hidden',
+                  '[&_.formstack-embed]:border [&_.formstack-embed]:border-[#1C3A64]/15 [&_.formstack-embed]:bg-white',
+                  '[&_.formstack-iframe]:block [&_.formstack-iframe]:w-full [&_.formstack-iframe]:min-h-[1000px] [&_.formstack-iframe]:border-0',
                 ].join(' ')}
-                dangerouslySetInnerHTML={{ __html: embedPdfLinks(article.bodyHtml) }}
+                dangerouslySetInnerHTML={{ __html: buttonizePdfLinks(pdfEmbedsToButtons(embedFormstackLinks(article.bodyHtml))) }}
               />
             ) : (
               article.content?.map((block, i) => <BlockRenderer key={i} block={block} />)

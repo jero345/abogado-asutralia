@@ -7,9 +7,10 @@ import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
 
-// Custom block-level node: an embedded PDF viewer. Renders as an <iframe>
-// inside a wrapper div so the public article page can show the full PDF
-// inline (scrollable) instead of just a download link.
+// Custom block-level node for an attached PDF. Renders as an outlined "card"
+// button (title + opens in a new tab) — NOT an inline viewer. The wrapper div
+// keeps data-src / data-title so the node round-trips in the editor and the
+// public pages can rebuild the button (with a doc icon) via pdfEmbedsToButtons.
 const PdfEmbed = Node.create({
   name: 'pdfEmbed',
   group: 'block',
@@ -49,23 +50,14 @@ const PdfEmbed = Node.create({
         class: 'pdf-embed',
       }),
       [
-        'iframe',
-        {
-          src,
-          title,
-          loading: 'lazy',
-          allow: 'fullscreen',
-        },
-      ],
-      [
         'a',
         {
           href: src,
           target: '_blank',
           rel: 'noopener noreferrer',
-          class: 'pdf-embed-fallback',
+          class: 'pdf-button',
         },
-        `Download "${title}"`,
+        title,
       ],
     ]
   },
@@ -127,13 +119,12 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           '[&_blockquote]:not-italic ' +
           '[&_blockquote_p]:text-[#1C3A64] [&_blockquote_p]:italic ' +
           '[&_blockquote_p]:font-medium [&_blockquote_p]:m-0 ' +
-          // PDF embed styling inside the editor
-          '[&_.pdf-embed]:my-5 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden ' +
-          '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15 ' +
-          '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full ' +
-          '[&_.pdf-embed_iframe]:h-[520px] [&_.pdf-embed_iframe]:bg-[#F4F6FB] ' +
-          '[&_.pdf-embed_iframe]:border-0 ' +
-          '[&_.pdf-embed-fallback]:hidden ' +
+          // PDF attachment shows as a card button inside the editor (WYSIWYG)
+          '[&_.pdf-embed]:my-4 ' +
+          '[&_.pdf-button]:inline-flex [&_.pdf-button]:items-center [&_.pdf-button]:gap-3 ' +
+          '[&_.pdf-button]:bg-white [&_.pdf-button]:border [&_.pdf-button]:border-[#1C3A64]/30 ' +
+          '[&_.pdf-button]:text-[#1C3A64] [&_.pdf-button]:text-[14px] [&_.pdf-button]:font-medium ' +
+          '[&_.pdf-button]:px-5 [&_.pdf-button]:py-3 [&_.pdf-button]:rounded-md [&_.pdf-button]:no-underline ' +
           // Placeholder
           '[&_p.is-editor-empty:first-child]:before:content-[attr(data-placeholder)] ' +
           '[&_p.is-editor-empty:first-child]:before:text-[#aaa] ' +
@@ -271,8 +262,8 @@ function Toolbar({ editor }: { editor: Editor }) {
 
       const { data } = supabase.storage.from('article-documents').getPublicUrl(path)
       const label = file.name.replace(/\.pdf$/i, '') || 'PDF document'
-      // Insert as a block-level PDF embed so the public article renders the
-      // full document inline (scrollable viewer), not just a download link.
+      // Insert as a block-level PDF attachment — shown as a card button that
+      // opens the PDF in a new tab (no inline viewer).
       editor
         .chain()
         .focus()

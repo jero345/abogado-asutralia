@@ -27,9 +27,10 @@ import { CasesAdminDashboard } from '@/pages/admin/CasesAdminDashboard'
 import { CaseEditor } from '@/pages/admin/CaseEditor'
 import { InvestigationsAdmin } from '@/pages/admin/InvestigationsAdmin'
 import { PastActionsAdmin } from '@/pages/admin/PastActionsAdmin'
-import { RegistrationsAdmin } from '@/pages/admin/RegistrationsAdmin'
 import { FormsAdmin } from '@/pages/admin/FormsAdmin'
 import { FormEditor } from '@/pages/admin/FormEditor'
+import { SeoAdmin } from '@/pages/admin/SeoAdmin'
+import { AnalyticsAdmin } from '@/pages/admin/AnalyticsAdmin'
 import { HelpPage } from '@/pages/admin/HelpPage'
 
 createRoot(document.getElementById('root')!).render(
@@ -48,10 +49,11 @@ createRoot(document.getElementById('root')!).render(
             <Route path="cases/edit/:id" element={<CaseEditor />} />
             <Route path="investigations" element={<InvestigationsAdmin />} />
             <Route path="past-actions" element={<PastActionsAdmin />} />
-            <Route path="registrations" element={<RegistrationsAdmin />} />
             <Route path="forms" element={<FormsAdmin />} />
             <Route path="forms/new" element={<FormEditor />} />
             <Route path="forms/edit/:id" element={<FormEditor />} />
+            <Route path="seo" element={<SeoAdmin />} />
+            <Route path="analytics" element={<AnalyticsAdmin />} />
             <Route path="help" element={<HelpPage />} />
           </Route>
 

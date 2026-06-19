@@ -20,6 +20,7 @@ import {
 import { type CaseBlock, type CaseDetail, type CaseStatus } from '@/data/caseDetails'
 import { fetchCaseDetailBySlug } from '@/lib/classActions'
 import { buttonizePdfLinks, buttonizeRegisterLinks, splitBodyAtFirstHeading } from '@/lib/caseBody'
+import { pdfEmbedsToButtons, embedFormstackLinks } from '@/lib/embedPdfs'
 
 const statusColors: Record<CaseStatus, string> = {
   Active: 'text-[#1C3A64] bg-[#E8F0FA] border-[#1C3A64]/20',
@@ -371,12 +372,20 @@ export function CaseDetailPage() {
                       '[&_.register-button]:px-5 [&_.register-button]:py-3 [&_.register-button]:rounded-md',
                       '[&_.register-button]:my-4 [&_.register-button]:transition-colors',
                       '[&_.register-button_svg]:w-3.5 [&_.register-button_svg]:h-3.5',
+                      // Inline Formstack form (pasted as a link in the body)
+                      '[&_.formstack-embed]:my-6 [&_.formstack-embed]:rounded-xl [&_.formstack-embed]:overflow-hidden',
+                      '[&_.formstack-embed]:border [&_.formstack-embed]:border-[#1C3A64]/15 [&_.formstack-embed]:bg-white',
+                      '[&_.formstack-iframe]:block [&_.formstack-iframe]:w-full [&_.formstack-iframe]:min-h-[1000px] [&_.formstack-iframe]:border-0',
                     ].join(' ')}
                     dangerouslySetInnerHTML={{
                       __html: buttonizeRegisterLinks(
                         buttonizePdfLinks(
-                          splitBodyAtFirstHeading(caseData.bodyHtml).detail ||
-                            caseData.bodyHtml,
+                          pdfEmbedsToButtons(
+                            embedFormstackLinks(
+                              splitBodyAtFirstHeading(caseData.bodyHtml).detail ||
+                                caseData.bodyHtml,
+                            ),
+                          ),
                         ),
                       ),
                     }}
@@ -401,15 +410,7 @@ export function CaseDetailPage() {
                   <p className="text-white/85 text-[14px] leading-[1.6] mb-5">
                     Register your interest as a group member. All enquiries are private and confidential.
                   </p>
-                  {caseData.hasInternalForm ? (
-                    <Link
-                      to={`/class-actions/${caseData.slug}/register`}
-                      className="inline-flex items-center gap-2 w-full justify-center px-5 py-3 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
-                    >
-                      Register Now
-                      <ArrowUpRight size={14} />
-                    </Link>
-                  ) : caseData.registrationUrl ? (
+                  {caseData.registrationUrl ? (
                     <a
                       href={caseData.registrationUrl}
                       target="_blank"

@@ -1,34 +1,64 @@
+import { pdfButton } from './caseBody'
+
 /**
- * Transforms an HTML body string so any standalone PDF link is shown as
- * an embedded inline viewer instead of just an underlined text link.
+ * Converts any saved PDF-embed block into an outlined "card" button that
+ * opens the PDF in a new tab — NO inline iframe preview, NO "Download" word.
  *
- * Targets two common shapes produced by the editor / migration scripts:
- *   1. <p><a href="…file.pdf" …>Label</a></p>
- *   2. <li><a href="…file.pdf" …>Label</a></li>      (inside a <ul>)
+ * Handles the block the editor saves (old inline-viewer shape and the new
+ * one alike):
+ *   <div data-type="pdf-embed" data-src="…" data-title="…" class="pdf-embed">…</div>
  *
- * Links to non-PDF files are left untouched. Already-embedded PDFs
- * (<div class="pdf-embed"> … </div>) are also left as-is.
+ * The button markup is rebuilt from the div's data-src / data-title, so
+ * articles created before this change are normalised automatically at render
+ * time (the old <iframe> + "Download …" fallback inside are discarded).
+ *
+ * Standalone <p><a href="…pdf"> links are NOT touched here — run them through
+ * buttonizePdfLinks (from caseBody) as well, which both the article and case
+ * pages already do.
  */
-export function embedPdfLinks(html: string): string {
+export function pdfEmbedsToButtons(html: string): string {
   if (!html) return html
+  return html.replace(
+    /<div\b[^>]*\bclass="[^"]*\bpdf-embed\b[^"]*"[^>]*>[\s\S]*?<\/div>/gi,
+    (block) => {
+      const src = (block.match(/data-src="([^"]*)"/i) || [])[1]
+      const title = (block.match(/data-title="([^"]*)"/i) || [])[1] || 'PDF document'
+      return src ? pdfButton(src, title) : block
+    },
+  )
+}
 
-  // Quick regex to spot an <a href="…anything.pdf…"> on its own inside a
-  // <p> (possibly with the link's own attributes / whitespace around it).
-  // We don't bother with <li> for now to avoid breaking "Key documents"
-  // lists — only standalone-paragraph PDF links become embeds.
-  const re = /<p>\s*<a\s+([^>]*?)href="([^"]+\.pdf(?:[?#][^"]*)?)"([^>]*)>([\s\S]*?)<\/a>\s*<\/p>/gi
+const FORMSTACK_RE = /^https?:\/\/[a-z0-9.-]*formstack\.com\/forms\/[^\s"<]+$/i
 
-  return html.replace(re, (_match, _preAttrs, href, _postAttrs, label) => {
-    const safeHref = href.replace(/"/g, '&quot;')
-    const cleanLabel = label.replace(/<[^>]+>/g, '').trim() || 'PDF document'
-    const safeLabel = cleanLabel.replace(/"/g, '&quot;')
-    return (
-      `<div data-type="pdf-embed" data-src="${safeHref}" data-title="${safeLabel}" class="pdf-embed">` +
-        `<iframe src="${safeHref}" title="${safeLabel}" loading="lazy" allow="fullscreen"></iframe>` +
-        `<a href="${safeHref}" target="_blank" rel="noopener noreferrer" class="pdf-embed-fallback">` +
-          `Open "${cleanLabel}"` +
-        `</a>` +
-      `</div>`
-    )
-  })
+function formstackIframe(url: string): string {
+  const safe = url.replace(/"/g, '&quot;')
+  return (
+    `<div class="formstack-embed">` +
+      `<iframe src="${safe}" title="Registration form" loading="lazy" class="formstack-iframe"></iframe>` +
+    `</div>`
+  )
+}
+
+/**
+ * Embeds a Formstack registration form placed *inline* in the body. Any
+ * standalone paragraph that is just a Formstack form link — pasted as a link
+ * or as a bare URL on its own line — becomes an <iframe>, so editors drop the
+ * form exactly where they want it without a separate field.
+ *
+ * Submissions are captured by Formstack (off this site), which is why this is
+ * the firm's chosen registration method.
+ */
+export function embedFormstackLinks(html: string): string {
+  if (!html) return html
+  // <p><a href="…formstack…/forms/…">label</a></p>
+  let out = html.replace(
+    /<p>\s*<a\s+[^>]*?href="([^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/p>/gi,
+    (match, href) => (FORMSTACK_RE.test(href) ? formstackIframe(href) : match),
+  )
+  // <p>bare https://….formstack.com/forms/… URL</p>
+  out = out.replace(
+    /<p>\s*(https?:\/\/[a-z0-9.-]*formstack\.com\/forms\/[^\s"<]+)\s*<\/p>/gi,
+    (_match, url) => formstackIframe(url),
+  )
+  return out
 }

@@ -1,5 +1,5 @@
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
-import { Loader2, LogOut, FileText, Plus, ArrowLeft, Scale, Search, ListChecks, Inbox, ClipboardList, HelpCircle } from 'lucide-react'
+import { Loader2, LogOut, FileText, Plus, ArrowLeft, Scale, Search, ListChecks, HelpCircle, Globe, BarChart3 } from 'lucide-react'
 import { useAuth } from '@/lib/auth'
 
 export function AdminLayout() {
@@ -38,9 +38,9 @@ export function AdminLayout() {
             <SidebarLink to="/admin/past-actions" icon={<ListChecks size={14} />}>Past actions</SidebarLink>
           </SidebarGroup>
 
-          <SidebarGroup label="Submissions">
-            <SidebarLink to="/admin/forms" icon={<ClipboardList size={14} />}>Forms</SidebarLink>
-            <SidebarLink to="/admin/registrations" icon={<Inbox size={14} />}>Registrations</SidebarLink>
+          <SidebarGroup label="Site">
+            <SidebarLink to="/admin/seo" icon={<Globe size={14} />}>SEO</SidebarLink>
+            <SidebarLink to="/admin/analytics" icon={<BarChart3 size={14} />}>Analytics</SidebarLink>
           </SidebarGroup>
 
           <SidebarGroup label="Help">

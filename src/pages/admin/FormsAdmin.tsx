@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Loader2, Download, Inbox, ClipboardList, ArrowUpRight, Plus, Pencil, Trash2, Wand2, Copy, ExternalLink } from 'lucide-react'
+import { Loader2, Download, ClipboardList, ArrowUpRight, Plus, Pencil, Trash2, Wand2, Copy, ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { FORM_TYPES, FORM_TYPE_META, getFormConfig, type FormType } from '@/data/registrationForms'
 import { fetchForms, deleteForm, saveForm, builtinFormTemplate, type CustomFormDef } from '@/lib/forms'
@@ -159,13 +159,6 @@ export function FormsAdmin() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Link
-            to="/admin/registrations"
-            className="inline-flex items-center gap-2 bg-white border border-[#1C3A64]/20 hover:bg-[#1C3A64]/[0.06] text-[#1C3A64] text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"
-          >
-            <Inbox size={14} />
-            All registrations
-          </Link>
           <Link
             to="/admin/forms/new"
             className="inline-flex items-center gap-2 bg-[#1C3A64] hover:bg-[#2A4E72] text-white text-[13px] font-medium px-4 py-2.5 rounded-lg transition-colors"

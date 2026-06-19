@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Banton Group — Resumen de Seguridad de la Plataforma</title>
+<style>
+  :root { --navy:#1C3A64; --muted:#555; --line:#e3e8f0; --bg:#f4f6fb; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:#222; line-height:1.6; margin:0; background:#fff;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .page { max-width: 820px; margin: 0 auto; padding: 48px 56px; }
+  header { border-bottom: 3px solid var(--navy); padding-bottom: 18px; margin-bottom: 28px; }
+  .kicker { color: var(--navy); font-size: 11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; }
+  h1 { color: var(--navy); font-size: 26px; margin: 6px 0 4px; }
+  .sub { color: var(--muted); font-size: 13px; }
+  h2 { color: var(--navy); font-size: 16px; margin: 28px 0 8px; border-left: 4px solid var(--navy); padding-left: 10px; }
+  p { margin: 8px 0; font-size: 13.5px; color:#2b2b2b; }
+  ul { margin: 6px 0 6px 0; padding-left: 20px; }
+  li { font-size: 13.5px; margin: 5px 0; }
+  strong { color: var(--navy); }
+  .lead { font-size: 14px; background: var(--bg); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  .card { border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .card h3 { color: var(--navy); font-size: 13px; margin:0 0 4px; text-transform:uppercase; letter-spacing:.06em; }
+  .card p { font-size: 12.5px; margin: 2px 0; color: var(--muted); }
+  table { width:100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background: var(--bg); color: var(--navy); }
+  .ok::before { content:"✓ "; color:#1A6B41; font-weight:700; }
+  footer { margin-top: 34px; border-top:1px solid var(--line); padding-top: 14px; color:#888; font-size: 11px; }
+  .note { font-size: 12px; color:#888; }
+  @media print { .page { padding: 0; max-width:none; } @page { margin: 18mm; } h2 { break-after: avoid; } .card, table { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="kicker">Banton Group · Plataforma de Class Actions</div>
+    <h1>Resumen de Seguridad de la Plataforma</h1>
+    <div class="sub">Cómo se protegen el sitio web, el panel de administración y los datos de los clientes.</div>
+  </header>
+
+  <p class="lead">
+    La plataforma está construida sobre <strong>infraestructura cloud moderna y administrada</strong> (Vercel + Supabase),
+    con controles de seguridad estándar de la industria: conexiones cifradas, reglas de acceso a nivel de base de datos
+    y un panel de administración protegido con autenticación. <strong>Ningún dato de registrantes es legible públicamente</strong>,
+    y las funciones administrativas están restringidas solo a personal autorizado.
+  </p>
+
+  <h2>1. Arquitectura en pocas palabras</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Sitio web público</h3>
+      <p>Aplicación React alojada en <strong>Vercel</strong>. Se sirve por HTTPS a través de una red global (CDN) con protección anti-DDoS integrada. No contiene secretos.</p>
+    </div>
+    <div class="card">
+      <h3>Datos y backend del admin</h3>
+      <p><strong>Supabase</strong> (PostgreSQL administrado, autenticación y almacenamiento de archivos) sobre infraestructura de AWS. Todo el contenido, los registros y los documentos viven aquí.</p>
+    </div>
+  </div>
+  <p class="note">No hay un servidor propio que parchear o exponer: ambos proveedores son plataformas administradas y auditadas (SOC&nbsp;2).</p>
+
+  <h2>2. Panel de administración — control de acceso</h2>
+  <ul>
+    <li class="ok">El área de administración (<strong>/admin</strong>) está protegida con <strong>autenticación de Supabase</strong>. Un visitante sin sesión válida es redirigido automáticamente al inicio de sesión: las páginas del admin nunca se muestran sin un usuario autenticado.</li>
+    <li class="ok">Las sesiones usan tokens firmados y con expiración (JWT) emitidos y verificados por Supabase; no se pueden falsificar.</li>
+    <li class="ok">Solo pueden ingresar las personas a las que el bufete les crea una cuenta explícitamente. Las cuentas se pueden revocar en cualquier momento.</li>
+    <li class="ok">Las contraseñas <strong>nunca se guardan en texto plano</strong>: Supabase las almacena como hashes con salt (bcrypt).</li>
+  </ul>
+
+  <h2>3. Seguridad en la base de datos — Row Level Security (RLS)</h2>
+  <p>Todas las tablas aplican <strong>Row Level Security</strong>: es la propia base de datos la que decide quién puede leer o escribir cada fila, no la aplicación. Las reglas vigentes:</p>
+  <table>
+    <thead><tr><th>Datos</th><th>Público (visitantes del sitio)</th><th>Personal autorizado (admin)</th></tr></thead>
+    <tbody>
+      <tr><td>Casos / artículos publicados</td><td>Solo lectura (lo publicado)</td><td>Lectura y escritura total</td></tr>
+      <tr><td>Registros de formularios</td><td><strong>Solo enviar</strong> — no puede leer ningún registro</td><td>Leer, gestionar, exportar</td></tr>
+      <tr><td>Documentos subidos</td><td>Sin acceso directo</td><td>Acceso por enlaces firmados temporales</td></tr>
+      <tr><td>Contenido en borrador / programado</td><td>No visible</td><td>Visible y editable</td></tr>
+    </tbody>
+  </table>
+  <p>En la práctica: una persona del público puede <em>enviar</em> un formulario de registro, pero <strong>no puede ver ningún registro — ni siquiera el suyo — a través del sitio web.</strong> Solo el personal con sesión iniciada puede ver los datos de los registrantes.</p>
+
+  <h2>4. Privacidad de datos y documentos</h2>
+  <ul>
+    <li class="ok">Los envíos de formularios se guardan en una tabla privada que el rol público nunca puede leer.</li>
+    <li class="ok">Los archivos subidos junto a un registro se guardan en un <strong>bucket de almacenamiento privado</strong>; el personal los abre mediante enlaces firmados temporales (no enlaces públicos).</li>
+    <li class="ok">Los datos sensibles del registrante (nombre, contacto, información financiera) solo se muestran dentro del panel de administración autenticado.</li>
+  </ul>
+
+  <h2>5. Cifrado</h2>
+  <ul>
+    <li class="ok"><strong>En tránsito:</strong> todo el tráfico — sitio web, panel y llamadas a la API — va cifrado con TLS/HTTPS.</li>
+    <li class="ok"><strong>En reposo:</strong> Supabase cifra la base de datos y los archivos almacenados en disco.</li>
+  </ul>
+
+  <h2>6. "¿Por qué hay una llave en el sitio web?" — y por qué es seguro</h2>
+  <p>
+    El sitio público lleva una <strong>llave pública (anon key)</strong> de Supabase. Esto es <strong>por diseño y es seguro</strong>:
+    la llave por sí sola no otorga ningún privilegio — cada solicitud que hace se sigue verificando contra las reglas de
+    Row Level Security anteriores. No puede hacer nada que un visitante normal no esté ya autorizado a hacer
+    (por ejemplo, leer contenido publicado o enviar un formulario).
+  </p>
+  <p>
+    La llave poderosa (<strong>service-role key</strong>), que sí puede saltarse esas reglas, <strong>nunca está en el sitio
+    web ni en el navegador</strong>. Solo se usa en herramientas seguras del lado del servidor y se mantiene en secreto.
+  </p>
+
+  <h2>7. Cumplimiento e infraestructura</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Supabase</h3>
+      <p>Certificado SOC&nbsp;2 Type II e ISO&nbsp;27001; compatible con GDPR; HIPAA disponible en planes elegibles. Alojado en Amazon Web Services (AWS).</p>
+    </div>
+    <div class="card">
+      <h3>Vercel</h3>
+      <p>Certificado SOC&nbsp;2 Type II; HTTPS automático, red global en el borde (edge) y mitigación de DDoS.</p>
+    </div>
+  </div>
+
+  <h2>8. Disponibilidad y respaldos</h2>
+  <ul>
+    <li class="ok">Infraestructura administrada, con escalado automático y alta disponibilidad en ambos proveedores.</li>
+    <li class="ok">Supabase realiza respaldos automáticos de la base de datos; la recuperación a un punto en el tiempo (point-in-time recovery) está disponible en los planes de producción.</li>
+  </ul>
+
+  <h2>9. Buenas prácticas recomendadas (para mantenerlo robusto)</h2>
+  <ul>
+    <li>Usar contraseñas fuertes y únicas para cada cuenta de administrador, y activar <strong>autenticación de dos factores (MFA)</strong>, que Supabase admite.</li>
+    <li>Otorgar cuentas de administrador solo al personal que realmente las necesite; quitar el acceso cuando alguien se va.</li>
+    <li>Mantener el proyecto de Supabase en un plan que incluya respaldos diarios / recuperación a un punto en el tiempo.</li>
+    <li>Revisar periódicamente la lista de usuarios administradores.</li>
+  </ul>
+
+  <h2>En resumen</h2>
+  <p class="lead">
+    Los datos de clientes y registrantes están protegidos por <strong>reglas de acceso aplicadas por la base de datos</strong>,
+    <strong>conexiones cifradas</strong> y un <strong>panel de administración con autenticación</strong>, todo sobre plataformas
+    administradas y auditadas (SOC&nbsp;2). El público puede enviar información, pero nunca leerla de vuelta; solo el personal
+    autorizado del bufete puede verla y gestionarla.
+  </p>
+
+  <footer>
+    Banton Group — Plataforma de Class Actions · Resumen de Seguridad. Preparado para revisión interna/del cliente.
+    Infraestructura: Vercel (alojamiento) y Supabase (datos, autenticación, almacenamiento). Este documento describe
+    los controles de seguridad vigentes al momento de su redacción.
+  </footer>
+</div>
+</body>
+</html>

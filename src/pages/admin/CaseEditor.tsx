@@ -14,8 +14,9 @@ import {
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
-import { FORM_TYPES, FORM_TYPE_META } from '@/data/registrationForms'
-import { fetchForms, type CustomFormDef } from '@/lib/forms'
+import { SeoAssistant } from '@/components/admin/SeoAssistant'
+import { buttonizePdfLinks, buttonizeRegisterLinks } from '@/lib/caseBody'
+import { pdfEmbedsToButtons, embedFormstackLinks } from '@/lib/embedPdfs'
 
 type PublishMode = 'draft' | 'scheduled' | 'published'
 
@@ -31,6 +32,7 @@ interface CaseForm {
   court: string
   summary: string
   body_html: string
+  seo_keyphrase: string
   key_date: string
   wordpress_link: string
   detail_slug: string
@@ -52,6 +54,7 @@ const EMPTY: CaseForm = {
   court: '',
   summary: '',
   body_html: '',
+  seo_keyphrase: '',
   key_date: '',
   wordpress_link: '',
   detail_slug: '',
@@ -147,19 +150,8 @@ export function CaseEditor() {
   const [error, setError] = useState<string | null>(null)
   const [slugTouched, setSlugTouched] = useState(isEdit)
   const [view, setView] = useState<'edit' | 'preview'>('edit')
-  const [customForms, setCustomForms] = useState<CustomFormDef[]>([])
 
   const mode = useMemo(() => computeMode(form), [form])
-
-  useEffect(() => {
-    let cancelled = false
-    fetchForms().then((f) => {
-      if (!cancelled) setCustomForms(f)
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [])
 
   useEffect(() => {
     if (!isEdit || !supabase) return
@@ -190,6 +182,7 @@ export function CaseEditor() {
           court: data.court ?? '',
           summary: data.summary ?? '',
           body_html: data.body_html ?? '',
+          seo_keyphrase: data.seo_keyphrase ?? '',
           key_date: data.key_date ?? '',
           wordpress_link: data.wordpress_link ?? '',
           detail_slug: data.detail_slug ?? '',
@@ -246,6 +239,7 @@ export function CaseEditor() {
       court: form.court || null,
       summary: form.summary.trim(),
       body_html: form.body_html || null,
+      seo_keyphrase: form.seo_keyphrase || null,
       key_date: form.key_date || null,
       wordpress_link: form.wordpress_link || null,
       detail_slug: form.detail_slug || null,
@@ -265,8 +259,8 @@ export function CaseEditor() {
     // Graceful fallback if the form columns haven't been added yet (migration
     // not run). Retry without them so saving still works; the admin just can't
     // assign a form until they migrate.
-    if (res.error && /form_type|form_notify_email|formstack_url/.test(res.error.message)) {
-      const { form_type: _ft, form_notify_email: _fne, formstack_url: _fu, ...rest } = payload
+    if (res.error && /form_type|form_notify_email|formstack_url|seo_keyphrase/.test(res.error.message)) {
+      const { form_type: _ft, form_notify_email: _fne, formstack_url: _fu, seo_keyphrase: _kp, ...rest } = payload
       res = await run(rest)
     }
     setSaving(false)
@@ -434,11 +428,43 @@ export function CaseEditor() {
           ) : (
             <div className="border border-[#1C3A64]/15 rounded-lg p-6 bg-white">
               <div
-                className="prose prose-slate max-w-none"
-                dangerouslySetInnerHTML={{ __html: form.body_html || '<p class="text-gray-400 italic">No body yet.</p>' }}
+                className={[
+                  'prose prose-slate max-w-none',
+                  '[&_.pdf-button]:inline-flex [&_.pdf-button]:items-center [&_.pdf-button]:gap-3',
+                  '[&_.pdf-button]:bg-white [&_.pdf-button]:border [&_.pdf-button]:border-[#1C3A64]/30',
+                  '[&_.pdf-button]:text-[#1C3A64] [&_.pdf-button]:text-[13px] [&_.pdf-button]:font-medium',
+                  '[&_.pdf-button]:px-5 [&_.pdf-button]:py-3 [&_.pdf-button]:rounded-md [&_.pdf-button]:no-underline [&_.pdf-button]:my-3',
+                  '[&_.pdf-button_svg]:w-3.5 [&_.pdf-button_svg]:h-3.5 [&_.pdf-button_svg]:flex-shrink-0',
+                  '[&_.formstack-embed]:my-6 [&_.formstack-embed]:rounded-xl [&_.formstack-embed]:overflow-hidden',
+                  '[&_.formstack-embed]:border [&_.formstack-embed]:border-[#1C3A64]/15 [&_.formstack-embed]:bg-white',
+                  '[&_.formstack-iframe]:block [&_.formstack-iframe]:w-full [&_.formstack-iframe]:min-h-[1000px] [&_.formstack-iframe]:border-0',
+                ].join(' ')}
+                dangerouslySetInnerHTML={{
+                  __html: buttonizeRegisterLinks(
+                    buttonizePdfLinks(
+                      pdfEmbedsToButtons(
+                        embedFormstackLinks(form.body_html || '<p class="text-gray-400 italic">No body yet.</p>'),
+                      ),
+                    ),
+                  ),
+                }}
               />
             </div>
           )}
+        </Section>
+
+        <Section
+          title="SEO"
+          hint="A live SEO & readability check (like Yoast). Uses the case title and summary above plus the body below."
+        >
+          <SeoAssistant
+            keyphrase={form.seo_keyphrase}
+            onKeyphraseChange={(v) => update('seo_keyphrase', v)}
+            title={form.title}
+            metaDescription={form.summary}
+            slug={form.slug}
+            bodyHtml={form.body_html}
+          />
         </Section>
 
         <Section
@@ -461,74 +487,6 @@ export function CaseEditor() {
               placeholder="arrium"
             />
           </Field>
-        </Section>
-
-        <Section
-          title="Registration form"
-          hint="Pick which form the public /register page shows for this case. Leave as 'No online form' to hide registration."
-        >
-          <Field label="Form type">
-            <select
-              value={form.form_type}
-              onChange={(e) => update('form_type', e.target.value)}
-              className={inputCls + ' max-w-[360px]'}
-            >
-              <option value="">No online form</option>
-              {customForms.length > 0 && (
-                <optgroup label="Manual forms">
-                  {customForms.map((f) => (
-                    <option key={f.id} value={`custom:${f.id}`}>
-                      {f.name}
-                    </option>
-                  ))}
-                </optgroup>
-              )}
-              <optgroup label="Embedded Formstack">
-                <option value="formstack">Embedded Formstack</option>
-              </optgroup>
-              <optgroup label="System forms (built-in)">
-                {FORM_TYPES.filter((t) => t !== 'formstack').map((t) => (
-                  <option key={t} value={t}>
-                    {FORM_TYPE_META[t].label}
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-            {form.form_type && (
-              <p className="text-[11px] text-[#888888] mt-1.5">
-                {form.form_type.startsWith('custom:')
-                  ? customForms.find((f) => `custom:${f.id}` === form.form_type)?.description ||
-                    'Manual form.'
-                  : FORM_TYPE_META[form.form_type as keyof typeof FORM_TYPE_META]?.description}
-              </p>
-            )}
-          </Field>
-          <Field
-            label="Notification email"
-            hint="Where enquiries for this form are directed (shown on the form / used for notifications)."
-          >
-            <input
-              type="email"
-              value={form.form_notify_email}
-              onChange={(e) => update('form_notify_email', e.target.value)}
-              className={inputCls + ' max-w-[360px]'}
-              placeholder="enquiries@bantongroup.com"
-            />
-          </Field>
-          {form.form_type === 'formstack' && (
-            <Field
-              label="Formstack form URL"
-              hint="The shareable / embed URL of the Formstack form (e.g. https://yourorg.formstack.com/forms/your_form). It's shown as an embedded iframe on the public register page."
-            >
-              <input
-                type="url"
-                value={form.formstack_url}
-                onChange={(e) => update('formstack_url', e.target.value)}
-                className={inputCls}
-                placeholder="https://bantongroup.formstack.com/forms/…"
-              />
-            </Field>
-          )}
         </Section>
 
         <Section title="Ordering">

@@ -814,6 +814,35 @@ const BODY = {
 
 <p>For all enquiries about the Hyundai ABS Class Action, please email <a href="mailto:Hyundaikia@bantongroup.com">Hyundaikia@bantongroup.com</a></p>
 `.trim(),
+
+  'light-rail': `
+<p>Banton Group acts on behalf of businesses, landlords and residents in class proceedings against Transport for New South Wales (<strong>TfNSW</strong>) in relation to its conduct in planning and procuring the CBD &amp; South-East Light Rail project (<strong>Project</strong>).</p>
+
+<p><a href="/class-actions/light-rail">Click here for more information about the Light Rail Class Action</a></p>
+
+<h3>Background</h3>
+
+<p>On 19 July 2023, following a six-week trial, Cavanagh J handed down his judgment in relation to these proceedings, which found in favour of the corporate lead plaintiffs, Hunt Leather Pty Ltd and Ancio Investments Pty Ltd. A copy of that judgment is <a href="https://supremecourt.nsw.gov.au/cases/class-actions/current-class-actions/light-rail-nuisance.html" target="_blank" rel="noopener">here</a>. TfNSW subsequently appealed that decision to the NSW Court of Appeal and on 18 September 2024, Bell CJ, Leeming JA and Mitchelmore JA handed down their judgment in favour of TfNSW.</p>
+
+<p>The lead plaintiffs have successfully sought special leave to appeal the decision of the NSW Court of Appeal to the High Court and the hearing of that appeal is listed for 15-16 May 2025.</p>
+
+<h3>Group Member Definition</h3>
+
+<p>You are a group member if you:</p>
+
+<ul>
+  <li>(a) hold, or have held, an interest in land in the vicinity of the Project and have suffered loss or damage by reason of the Defendant&rsquo;s alleged interference with your enjoyment of your interest in land; or</li>
+  <li>(b) have suffered loss or damage by reason of the Defendant&rsquo;s alleged interference with public land through the carrying out of the Project (other than merely loss or damage in your capacity as a member of the general public).</li>
+</ul>
+
+<p>In simple terms, you are likely to be a group member if you own land in the vicinity of the Project, own or operate a business in the vicinity of the Project, or live in the vicinity of the Project, and you have been adversely affected by the consequences of the construction of the Project.</p>
+
+<p>You are excluded from being a group member if you are an officer or employee of the Defendant, a judge or registrar of the Supreme Court of NSW or the High Court of Australia, or an officer or employee of, or other legal practitioner engaged in connection with these proceedings by Mitry Lawyers or Banton Group.</p>
+
+<h3>Registration</h3>
+
+<p>If you would like further information or would like to express your interest in participating as a group member in the proceeding, please email us at: <a href="mailto:lightrailclassaction@bantongroup.com">lightrailclassaction@bantongroup.com</a></p>
+`.trim(),
 }
 
 const only = process.argv.slice(2)

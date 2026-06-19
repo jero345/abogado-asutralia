@@ -197,8 +197,8 @@ export function Team() {
                     </div>
                     <div className="text-[#1C3A64] text-[13px] font-medium mb-3">{member.role}</div>
 
-                    {/* Specialties */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    {/* Specialties — reserve 2 lines so 3- vs 4-tag cards keep the divider aligned */}
+                    <div className="flex flex-wrap gap-1.5 mb-4 min-h-[44px] content-start">
                       {member.specialties.map((s) => (
                         <span
                           key={s}
@@ -209,8 +209,9 @@ export function Team() {
                       ))}
                     </div>
 
-                    {/* Bio — clamped to 4 lines until expanded */}
-                    <p className={`text-[#555555] text-[14.5px] leading-[1.7] mb-3 ${isOpen ? '' : 'line-clamp-4'}`}>
+                    {/* Bio — clamped to 4 lines until expanded; reserve those 4 lines so the
+                        credentials divider starts at the same level across a row */}
+                    <p className={`text-[#555555] text-[14.5px] leading-[1.7] mb-3 ${isOpen ? '' : 'line-clamp-4 min-h-[99px]'}`}>
                       {member.bio}
                     </p>
 
@@ -254,7 +255,7 @@ export function Team() {
 
                     {/* Awards */}
                     {member.awards && member.awards.length > 0 && (
-                      <div className="border-t border-[#1C3A64]/[0.08] pt-4 mt-auto space-y-3">
+                      <div className="border-t border-[#1C3A64]/[0.08] pt-4 space-y-3">
                         {(isOpen ? member.awards : member.awards.slice(0, 2)).map((group) => (
                           <div key={group.category}>
                             <div className="text-[#1C3A64] text-[11px] font-semibold tracking-wide mb-1.5">

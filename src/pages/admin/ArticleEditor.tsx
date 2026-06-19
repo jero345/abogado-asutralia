@@ -15,6 +15,9 @@ import {
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
+import { SeoAssistant } from '@/components/admin/SeoAssistant'
+import { pdfEmbedsToButtons, embedFormstackLinks } from '@/lib/embedPdfs'
+import { buttonizePdfLinks } from '@/lib/caseBody'
 
 type PublishMode = 'draft' | 'scheduled' | 'published'
 
@@ -33,6 +36,7 @@ interface ArticleForm {
   seo_title: string
   seo_description: string
   seo_og_image: string
+  seo_keyphrase: string
   published: boolean
   publish_at: string | null
 }
@@ -52,6 +56,7 @@ const EMPTY: ArticleForm = {
   seo_title: '',
   seo_description: '',
   seo_og_image: '',
+  seo_keyphrase: '',
   published: false,
   publish_at: null,
 }
@@ -148,6 +153,7 @@ export function ArticleEditor() {
           seo_title: data.seo_title ?? '',
           seo_description: data.seo_description ?? '',
           seo_og_image: data.seo_og_image ?? '',
+          seo_keyphrase: data.seo_keyphrase ?? '',
           published: data.published,
           publish_at: data.publish_at,
         })
@@ -229,6 +235,7 @@ export function ArticleEditor() {
       seo_title: form.seo_title || null,
       seo_description: form.seo_description || null,
       seo_og_image: form.seo_og_image || null,
+      seo_keyphrase: form.seo_keyphrase || null,
       published,
       publish_at,
       // Clear legacy block content when saving from the new editor so the
@@ -472,6 +479,17 @@ export function ArticleEditor() {
               placeholder={form.cover_image || 'https://…'}
             />
           </Field>
+
+          <div className="pt-2 mt-2 border-t border-[#1C3A64]/10">
+            <SeoAssistant
+              keyphrase={form.seo_keyphrase}
+              onKeyphraseChange={(v) => update('seo_keyphrase', v)}
+              title={form.seo_title || form.title}
+              metaDescription={form.seo_description || form.excerpt}
+              slug={form.slug}
+              bodyHtml={form.body_html}
+            />
+          </div>
         </Section>
 
         <Section title="Publishing" hint="Pick what happens when you save.">
@@ -909,14 +927,19 @@ function PreviewPane({ form }: { form: ArticleForm }) {
               'prose-blockquote:not-italic',
               '[&_blockquote_p]:text-[#1C3A64] [&_blockquote_p]:italic [&_blockquote_p]:font-medium',
               'prose-img:rounded-xl',
-              '[&_.pdf-embed]:my-6 [&_.pdf-embed]:rounded-xl [&_.pdf-embed]:overflow-hidden',
-              '[&_.pdf-embed]:border [&_.pdf-embed]:border-[#1C3A64]/15',
-              '[&_.pdf-embed_iframe]:block [&_.pdf-embed_iframe]:w-full',
-              '[&_.pdf-embed_iframe]:h-[520px] [&_.pdf-embed_iframe]:border-0',
-              '[&_.pdf-embed_iframe]:bg-[#F4F6FB]',
-              '[&_.pdf-embed-fallback]:hidden',
+              '[&_.pdf-button]:inline-flex [&_.pdf-button]:items-center [&_.pdf-button]:gap-3',
+              '[&_.pdf-button]:bg-white [&_.pdf-button]:border [&_.pdf-button]:border-[#1C3A64]/30',
+              '[&_.pdf-button]:hover:border-[#1C3A64]/60 [&_.pdf-button]:hover:bg-[#F4F6FB]',
+              '[&_.pdf-button]:text-[#1C3A64] [&_.pdf-button]:text-[14px] [&_.pdf-button]:font-medium',
+              '[&_.pdf-button]:px-5 [&_.pdf-button]:py-3 [&_.pdf-button]:rounded-md',
+              '[&_.pdf-button]:no-underline [&_.pdf-button]:my-3 [&_.pdf-button]:transition-colors',
+              '[&_.pdf-button_svg]:w-4 [&_.pdf-button_svg]:h-4 [&_.pdf-button_svg]:flex-shrink-0',
+              '[&_.pdf-li]:list-none [&_.pdf-li]:ml-0 [&_.pdf-li]:pl-0',
+              '[&_.formstack-embed]:my-6 [&_.formstack-embed]:rounded-xl [&_.formstack-embed]:overflow-hidden',
+              '[&_.formstack-embed]:border [&_.formstack-embed]:border-[#1C3A64]/15 [&_.formstack-embed]:bg-white',
+              '[&_.formstack-iframe]:block [&_.formstack-iframe]:w-full [&_.formstack-iframe]:min-h-[1000px] [&_.formstack-iframe]:border-0',
             ].join(' ')}
-            dangerouslySetInnerHTML={{ __html: form.body_html }}
+            dangerouslySetInnerHTML={{ __html: buttonizePdfLinks(pdfEmbedsToButtons(embedFormstackLinks(form.body_html))) }}
           />
         ) : (
           <p className="text-[#aaa] italic text-[14px]">No body yet — start writing in the Write tab.</p>

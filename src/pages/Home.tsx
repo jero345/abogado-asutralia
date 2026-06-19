@@ -1,6 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { AwardsStrip } from '@/components/sections/AwardsStrip'
-import { KeyLitigation } from '@/components/sections/KeyLitigation'
+import { TrackRecord } from '@/components/sections/TrackRecord'
 import { AmandaQuote } from '@/components/sections/AmandaQuote'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
@@ -14,9 +14,10 @@ export function Home() {
       <Hero />
       <AwardsStrip />
 
-      {/* Track record / key litigation — sits in the light space after the
-          AwardsStrip's dark→light transition. */}
-      <KeyLitigation />
+      {/* Track record — acted for / acted against, sits in the light space
+          after the AwardsStrip's dark→light transition. The full detailed
+          version lives on the Litigation page (KeyLitigation). */}
+      <TrackRecord />
 
       {/* Amanda feature — green-skirt portrait with name */}
       <section className="relative py-16 md:py-24 bg-white">
@@ -61,15 +62,14 @@ export function Home() {
 
 
 
-      {/* Closing call — lobby photo as visible background */}
+      {/* Closing call — 60 Martin Place facade (same image as the Contact hero) */}
       <section className="relative pt-44 md:pt-56 pb-20 md:pb-32 overflow-hidden">
-        {/* Lobby background (no blur, minimal overlay so it stays visible).
-            object-position anchored to the top so the "SIXTY MARTIN PLACE"
-            building name on the marble wall remains fully visible above
-            the heading, then the heading sits in the lower half. */}
+        {/* Building facade background (no blur, minimal overlay so it stays
+            visible), with a navy gradient that darkens toward the bottom so
+            the heading stays legible. */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/img/hero/blog.jpeg"
+            src="/img/hero-bg/contact.jpg"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover object-center"
