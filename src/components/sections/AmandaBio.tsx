@@ -47,7 +47,7 @@ export function AmandaBio() {
   const [recogOpen, setRecogOpen] = useState(false)
   const visibleRecognitions = recogOpen ? recognitions : recognitions.slice(0, 2)
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-[#EFF4F4]">
+    <section className="relative pt-1 md:pt-2 pb-20 md:pb-28 overflow-hidden bg-[#EFF4F4]">
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-10 lg:gap-16 items-start">
           {/* Main column */}

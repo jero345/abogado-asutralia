@@ -12,12 +12,12 @@ export function Home() {
   return (
     <>
       <Hero />
-      <AwardsStrip />
 
-      {/* Track record — acted for / acted against, sits in the light space
-          after the AwardsStrip's dark→light transition. The full detailed
-          version lives on the Litigation page (KeyLitigation). */}
+      {/* Track record — acted for / acted against, right after the hero.
+          The full detailed version lives on the Litigation page (KeyLitigation). */}
       <TrackRecord />
+
+      <AwardsStrip />
 
       {/* Amanda feature — green-skirt portrait with name */}
       <section className="relative py-16 md:py-24 bg-white">

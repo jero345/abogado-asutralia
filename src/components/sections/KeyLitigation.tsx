@@ -8,6 +8,8 @@ const cdoDefendants = [
   'ABN Amro',
   'Commonwealth Bank',
   'ANZ Bank',
+  'Australian Taxation Office',
+  'Transport for NSW',
 ]
 
 const insolvencies = [
