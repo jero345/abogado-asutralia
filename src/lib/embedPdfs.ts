@@ -50,10 +50,17 @@ function formstackIframe(url: string): string {
  */
 export function embedFormstackLinks(html: string): string {
   if (!html) return html
-  // <p><a href="…formstack…/forms/…">label</a></p>
+  // <p><a href="…formstack…/forms/…">label</a></p>  (link is the whole paragraph)
   let out = html.replace(
     /<p>\s*<a\s+[^>]*?href="([^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/p>/gi,
     (match, href) => (FORMSTACK_RE.test(href) ? formstackIframe(href) : match),
+  )
+  // …text<br><br><a href="…formstack…">label</a></p>  (link tacked onto the end
+  // of a paragraph, after line breaks — close that paragraph and embed below it,
+  // e.g. when the editor leaves the form link right after the contact email).
+  out = out.replace(
+    /(?:<br\s*\/?>\s*)+<a\s+[^>]*?href="([^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/p>/gi,
+    (match, href) => (FORMSTACK_RE.test(href) ? `</p>${formstackIframe(href)}` : match),
   )
   // <p>bare https://….formstack.com/forms/… URL</p>
   out = out.replace(
