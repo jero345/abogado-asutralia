@@ -1,15 +1,8 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { Send, Phone, Mail, MapPin, CheckCircle, ChevronDown } from 'lucide-react'
+import { Phone, Mail, MapPin } from 'lucide-react'
 
-const enquiryTypes = [
-  'Class Action Registration',
-  'Commercial Litigation',
-  'Insolvency & Restructuring',
-  'Financial Dispute',
-  'General Enquiry',
-]
+const FORMSTACK_CONTACT_URL = 'https://bantongroup.formstack.com/forms/contact'
 
 const offices = [
   {
@@ -30,37 +23,7 @@ const offices = [
   },
 ]
 
-interface FormState {
-  name: string
-  email: string
-  phone: string
-  type: string
-  message: string
-}
-
 export function Contact() {
-  const [form, setForm] = useState<FormState>({
-    name: '',
-    email: '',
-    phone: '',
-    type: '',
-    message: '',
-  })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [typeOpen, setTypeOpen] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    await new Promise((r) => setTimeout(r, 1500))
-    setLoading(false)
-    setSubmitted(true)
-  }
-
-  const inputClass =
-    'w-full bg-white border border-[#1C3A64]/25 rounded-xl px-5 py-3.5 text-[#1C3A64] text-[15px] placeholder:text-[#888888] focus:outline-none focus:border-[#1C3A64] focus:bg-white focus:ring-2 focus:ring-[#1C3A64]/10 transition-all duration-200'
-
   return (
     <section id="contact" className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] to-[#f0f4f8]" />
@@ -71,154 +34,15 @@ export function Contact() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Form */}
+          {/* Formstack contact form */}
           <ScrollReveal className="lg:col-span-3">
-            <div className="bg-[#1e3a5f]/[0.02] border border-[#1e3a5f]/[0.06] rounded-2xl p-8">
-              <AnimatePresence mode="wait">
-                {!submitted ? (
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    onSubmit={handleSubmit}
-                    className="space-y-5"
-                  >
-                    <div className="grid sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Full Name *</label>
-                        <input
-                          type="text"
-                          required
-                          value={form.name}
-                          onChange={(e) => setForm({ ...form, name: e.target.value })}
-                          placeholder="Andrew Smith"
-                          className={inputClass}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Email Address *</label>
-                        <input
-                          type="email"
-                          required
-                          value={form.email}
-                          onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          placeholder="your@email.com"
-                          className={inputClass}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Phone Number</label>
-                        <input
-                          type="tel"
-                          value={form.phone}
-                          onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                          placeholder="+61 4__ ___ ___"
-                          className={inputClass}
-                        />
-                      </div>
-                      <div className="relative">
-                        <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Enquiry Type</label>
-                        <button
-                          type="button"
-                          onClick={() => setTypeOpen(!typeOpen)}
-                          className={`${inputClass} flex items-center justify-between text-left`}
-                        >
-                          <span className={form.type ? 'text-[#1e3a5f]' : 'text-[#1e3a5f]/25'}>
-                            {form.type || 'Select type…'}
-                          </span>
-                          <motion.div animate={{ rotate: typeOpen ? 180 : 0 }}>
-                            <ChevronDown size={15} className="text-[#1e3a5f]/30" />
-                          </motion.div>
-                        </button>
-                        <AnimatePresence>
-                          {typeOpen && (
-                            <motion.div
-                              initial={{ opacity: 0, y: -8 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -8 }}
-                              className="absolute top-full mt-2 left-0 right-0 bg-white border border-[#1e3a5f]/[0.1] rounded-xl overflow-hidden z-50 shadow-lg"
-                            >
-                              {enquiryTypes.map((type) => (
-                                <button
-                                  key={type}
-                                  type="button"
-                                  onClick={() => { setForm({ ...form, type }); setTypeOpen(false) }}
-                                  className="w-full text-left px-5 py-3 text-sm text-[#1e3a5f]/60 hover:text-[#1e3a5f] hover:bg-[#1e3a5f]/[0.04] transition-colors duration-150"
-                                >
-                                  {type}
-                                </button>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[#1C3A64] text-[13px] font-medium mb-2 tracking-wide">Your Message *</label>
-                      <textarea
-                        required
-                        rows={5}
-                        value={form.message}
-                        onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        placeholder="Please briefly describe your legal matter"
-                        className={`${inputClass} resize-none`}
-                      />
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <div className="w-4 h-4 border border-[#1e3a5f]/20 rounded flex-shrink-0 mt-0.5" />
-                      <p className="text-[#1e3a5f]/40 text-xs leading-relaxed">
-                        By submitting this form, you agree to our Privacy Policy. All information is strictly confidential and subject to legal professional privilege.
-                      </p>
-                    </div>
-
-                    <motion.button
-                      type="submit"
-                      disabled={loading}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 bg-[#1e3a5f] text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-2.5 hover:bg-[#2a4f82] transition-colors duration-200 disabled:opacity-70"
-                    >
-                      {loading ? (
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                          className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
-                        />
-                      ) : (
-                        <>
-                          Send Enquiry
-                          <Send size={15} />
-                        </>
-                      )}
-                    </motion.button>
-                  </motion.form>
-                ) : (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="py-16 text-center"
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: 'spring', stiffness: 300, delay: 0.1 }}
-                      className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-6"
-                    >
-                      <CheckCircle size={28} className="text-emerald-600" />
-                    </motion.div>
-                    <h3 className="text-[#1e3a5f] text-2xl font-semibold mb-3">Enquiry Received</h3>
-                    <p className="text-[#1e3a5f]/60 text-sm leading-relaxed max-w-xs mx-auto">
-                      Thank you for contacting Banton Group. A member of our team will be in touch within one business day.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <div className="bg-white border border-[#1e3a5f]/[0.08] rounded-2xl overflow-hidden shadow-[0_1px_3px_rgba(30,58,95,0.05)]">
+              <iframe
+                src={FORMSTACK_CONTACT_URL}
+                title="Contact form"
+                loading="lazy"
+                className="block w-full min-h-[900px] border-0 bg-white"
+              />
             </div>
           </ScrollReveal>
 
