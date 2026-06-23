@@ -25,7 +25,7 @@ const clients = ['FTI Consulting', 'KordaMentha', 'Deloitte', 'McGrath Nicol', '
 
 export function KeyLitigation() {
   return (
-    <section className="relative py-20 md:py-28 bg-white border-t border-[#1C3A64]/[0.08]">
+    <section className="relative py-20 md:py-28 bg-[#EEF3F4] border-t border-[#1C3A64]/[0.08]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-[340px_1fr] gap-12 lg:gap-20">
           {/* Left label */}
