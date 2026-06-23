@@ -31,6 +31,7 @@ interface CaseForm {
   year: string
   court: string
   summary: string
+  description: string
   body_html: string
   seo_keyphrase: string
   key_date: string
@@ -53,6 +54,7 @@ const EMPTY: CaseForm = {
   year: String(new Date().getFullYear()),
   court: '',
   summary: '',
+  description: '',
   body_html: '',
   seo_keyphrase: '',
   key_date: '',
@@ -181,6 +183,7 @@ export function CaseEditor() {
           year: data.year ?? '',
           court: data.court ?? '',
           summary: data.summary ?? '',
+          description: data.description ?? '',
           body_html: data.body_html ?? '',
           seo_keyphrase: data.seo_keyphrase ?? '',
           key_date: data.key_date ?? '',
@@ -238,6 +241,7 @@ export function CaseEditor() {
       year: form.year,
       court: form.court || null,
       summary: form.summary.trim(),
+      description: form.description || null,
       body_html: form.body_html || null,
       seo_keyphrase: form.seo_keyphrase || null,
       key_date: form.key_date || null,
@@ -259,8 +263,8 @@ export function CaseEditor() {
     // Graceful fallback if the form columns haven't been added yet (migration
     // not run). Retry without them so saving still works; the admin just can't
     // assign a form until they migrate.
-    if (res.error && /form_type|form_notify_email|formstack_url|seo_keyphrase/.test(res.error.message)) {
-      const { form_type: _ft, form_notify_email: _fne, formstack_url: _fu, seo_keyphrase: _kp, ...rest } = payload
+    if (res.error && /form_type|form_notify_email|formstack_url|seo_keyphrase|description/.test(res.error.message)) {
+      const { form_type: _ft, form_notify_email: _fne, formstack_url: _fu, seo_keyphrase: _kp, description: _d, ...rest } = payload
       res = await run(rest)
     }
     setSaving(false)
@@ -408,8 +412,19 @@ export function CaseEditor() {
         </Section>
 
         <Section
+          title="Description"
+          hint="The short intro shown on the case card in the /class-actions listing (e.g. 'Banton Group acts on behalf of…'). Supports bold and links."
+        >
+          <RichTextEditor
+            value={form.description}
+            onChange={(html) => update('description', html)}
+            placeholder="Banton Group acts on behalf of…"
+          />
+        </Section>
+
+        <Section
           title="Case body"
-          hint="Use the toolbar for bold, italic, headings, lists and links — same editor as the blog."
+          hint="The full case content shown on the case page (timeline, documents, registration). Use the toolbar for bold, italic, headings, lists and links."
         >
           <div className="flex items-center gap-1 mb-3">
             <Tab active={view === 'edit'} onClick={() => setView('edit')}>

@@ -29,6 +29,7 @@ interface DbCaseRow {
   year: string
   court: string | null
   summary: string
+  description: string | null
   body_html: string | null
   register_process_html: string | null
   key_date: string | null
@@ -86,6 +87,7 @@ function rowToCase(row: DbCaseRow): ClassAction {
     year: row.year,
     court: row.court ?? undefined,
     summary: row.summary,
+    description: row.description ?? undefined,
     content,
     keyDate: row.key_date ?? undefined,
     wordpressLink: row.wordpress_link ?? undefined,

@@ -395,43 +395,6 @@ export function CaseDetailPage() {
 
             {/* Sidebar */}
             <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-              {/* Case summary */}
-              <ScrollReveal delay={0.15}>
-                <div className="bg-[#F4F6FB] border border-[#1C3A64]/10 rounded-2xl p-6">
-                  <div className="text-[#1C3A64] text-[10px] tracking-[0.2em] uppercase mb-4 font-medium">
-                    Case Summary
-                  </div>
-                  <dl className="space-y-3 text-[13px]">
-                    <div>
-                      <dt className="text-[#888888]">Category</dt>
-                      <dd className="text-[#1C3A64] font-medium">{caseData.category}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-[#888888]">Commenced</dt>
-                      <dd className="text-[#1C3A64] font-medium">{caseData.year}</dd>
-                    </div>
-                    {caseData.court && (
-                      <div>
-                        <dt className="text-[#888888]">Court</dt>
-                        <dd className="text-[#1C3A64] font-medium">{caseData.court}</dd>
-                      </div>
-                    )}
-                    {caseData.fileNumber && (
-                      <div>
-                        <dt className="text-[#888888]">File number</dt>
-                        <dd className="text-[#1C3A64] font-medium">{caseData.fileNumber}</dd>
-                      </div>
-                    )}
-                    {caseData.funder && (
-                      <div>
-                        <dt className="text-[#888888]">Funder</dt>
-                        <dd className="text-[#1C3A64] font-medium">{caseData.funder}</dd>
-                      </div>
-                    )}
-                  </dl>
-                </div>
-              </ScrollReveal>
-
               {/* Back link */}
               <ScrollReveal delay={0.2}>
                 <Link

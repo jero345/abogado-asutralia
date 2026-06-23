@@ -209,7 +209,11 @@ function CaseRow({
   // content from the first heading onwards — when it's empty the case has
   // no dedicated detail page, so we don't render the "read more" button.
   const { summary, detail } = splitBodyAtFirstHeading(html)
-  const intro = cleanListingSummary(summary) || `<p>${caseData.summary}</p>`
+  // Prefer the dedicated Description field; fall back to the body intro (text
+  // before the first heading) and finally the short summary.
+  const intro = caseData.description?.trim()
+    ? caseData.description
+    : cleanListingSummary(summary) || `<p>${caseData.summary}</p>`
   const hasDetail = detail.trim().length > 0
   return (
     <ScrollReveal>

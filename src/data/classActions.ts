@@ -36,6 +36,8 @@ export interface ClassAction {
   year: string
   court?: string
   summary: string
+  /** Rich-text intro (HTML) shown on the listing card. */
+  description?: string
   content: Block[]
   /** Short status line shown on the card — e.g. "Active — Federal Court NSD 924/2024" */
   keyDate?: string
