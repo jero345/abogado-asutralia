@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, Navigate, Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { PageHero } from '@/components/ui/PageHero'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import {
@@ -11,7 +10,6 @@ import {
   ExternalLink,
   FileText,
   Loader2,
-  Mail,
   Scale,
   AlertCircle,
   CheckCircle2,
@@ -398,49 +396,6 @@ export function CaseDetailPage() {
 
             {/* Sidebar */}
             <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-              {/* Register Interest */}
-              <ScrollReveal delay={0.1}>
-                <motion.div
-                  whileHover={{ y: -3 }}
-                  className="bg-[#1C3A64] rounded-2xl p-6 text-white shadow-lg"
-                >
-                  <div className="text-[#8AAECE] text-[10px] tracking-[0.2em] uppercase mb-3">
-                    Register Interest
-                  </div>
-                  <p className="text-white/85 text-[14px] leading-[1.6] mb-5">
-                    Register your interest as a group member. All enquiries are private and confidential.
-                  </p>
-                  {caseData.registrationUrl ? (
-                    <a
-                      href={caseData.registrationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 w-full justify-center px-5 py-3 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
-                    >
-                      Register Now
-                      <ArrowUpRight size={14} />
-                    </a>
-                  ) : (
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-2 w-full justify-center px-5 py-3 bg-white text-[#1C3A64] text-[13px] font-medium rounded-full hover:bg-[#EFF4F4] transition-colors tracking-[0.02em]"
-                    >
-                      Contact us
-                      <ArrowUpRight size={14} />
-                    </Link>
-                  )}
-                  {caseData.email && (
-                    <a
-                      href={`mailto:${caseData.email}`}
-                      className="mt-4 pt-4 border-t border-white/15 flex items-center gap-2 text-[#8AAECE] hover:text-white text-[13px] transition-colors break-all"
-                    >
-                      <Mail size={13} className="flex-shrink-0" />
-                      {caseData.email}
-                    </a>
-                  )}
-                </motion.div>
-              </ScrollReveal>
-
               {/* Case summary */}
               <ScrollReveal delay={0.15}>
                 <div className="bg-[#F4F6FB] border border-[#1C3A64]/10 rounded-2xl p-6">

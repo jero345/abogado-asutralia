@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { Linkedin, Mail, Phone, ArrowUpRight, ChevronDown } from 'lucide-react'
+import { Linkedin, Mail, Phone, ArrowUpRight } from 'lucide-react'
 
 const recognitions: { category: string; items: string[] }[] = [
   {
@@ -44,8 +43,6 @@ const recognitions: { category: string; items: string[] }[] = [
 ]
 
 export function AmandaBio() {
-  const [recogOpen, setRecogOpen] = useState(false)
-  const visibleRecognitions = recogOpen ? recognitions : recognitions.slice(0, 2)
   return (
     <section className="relative pt-1 md:pt-2 pb-20 md:pb-28 overflow-hidden bg-[#EFF4F4]">
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -203,7 +200,7 @@ export function AmandaBio() {
                   Recognitions
                 </div>
                 <div className="space-y-5">
-                  {visibleRecognitions.map((group) => (
+                  {recognitions.map((group) => (
                     <div key={group.category}>
                       <div className="text-[#1C3A64] text-[12px] font-semibold tracking-wide mb-2">
                         {group.category}
@@ -219,21 +216,6 @@ export function AmandaBio() {
                     </div>
                   ))}
                 </div>
-                {recognitions.length > 2 && (
-                  <button
-                    onClick={() => setRecogOpen((v) => !v)}
-                    className="mt-5 inline-flex items-center gap-1.5 text-[#1C3A64] text-[12px] font-medium hover:underline"
-                  >
-                    <motion.span
-                      animate={{ rotate: recogOpen ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="inline-flex"
-                    >
-                      <ChevronDown size={14} />
-                    </motion.span>
-                    {recogOpen ? 'Show less' : 'Show more'}
-                  </button>
-                )}
               </div>
             </ScrollReveal>
           </div>
