@@ -293,7 +293,6 @@ export function CaseDetailPage() {
     <>
       <PageHero
         title={caseData.title}
-        subtitle={caseData.summary}
         breadcrumbs={[{ label: 'Class Actions', to: '/class-actions' }, { label: caseData.title }]}
       />
 

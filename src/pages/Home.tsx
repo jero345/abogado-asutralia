@@ -62,23 +62,8 @@ export function Home() {
 
 
 
-      {/* Closing call — 60 Martin Place facade (same image as the Contact hero) */}
-      <section className="relative pt-44 md:pt-56 pb-20 md:pb-32 overflow-hidden">
-        {/* Building facade background (no blur, minimal overlay so it stays
-            visible), with a navy gradient that darkens toward the bottom so
-            the heading stays legible. */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/img/hero-bg/contact.jpg"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-          {/* Navy gradient — light at the top so the building name reads
-              clearly, darker at the bottom so the heading stays legible. */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1C3A64]/15 via-[#1C3A64]/45 to-[#0F2540]/85" />
-        </div>
-
+      {/* Closing call — solid navy background (no photo) */}
+      <section className="relative pt-44 md:pt-56 pb-20 md:pb-32 overflow-hidden bg-[#1C3A64]">
         <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-left md:text-center">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 mb-5">
