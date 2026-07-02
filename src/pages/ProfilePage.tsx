@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Linkedin, Phone, Mail, FileText, Share2, Check, Scale } from 'lucide-react'
+import { Phone, Mail, Scale } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { profiles } from '@/data/profiles'
 import { NotFoundPage } from '@/pages/NotFoundPage'
@@ -25,7 +24,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export function ProfilePage({ slug }: { slug: string }) {
   const profile = profiles[slug]
-  const [copied, setCopied] = useState(false)
 
   // Hidden page: keep it out of search indexes and set a per-person <title>.
   useEffect(() => {
@@ -43,19 +41,6 @@ export function ProfilePage({ slug }: { slug: string }) {
   }, [profile])
 
   if (!profile) return <NotFoundPage />
-
-  const share = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1800)
-    } catch {
-      /* clipboard unavailable — ignore */
-    }
-  }
-
-  const pillBtn =
-    'inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#1C3A64]/15 bg-white text-[#1C3A64] text-[12.5px] font-medium tracking-wide hover:border-[#1C3A64]/40 hover:bg-[#1C3A64]/[0.03] transition-colors'
 
   return (
     <div className="bg-white">
@@ -87,30 +72,6 @@ export function ProfilePage({ slug }: { slug: string }) {
 
       {/* ── Overview / Contact / Recent cases ────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-8 py-14 lg:py-20">
-        {/* Action bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-10 border-b border-[#1C3A64]/10">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <a href={profile.contact.cvUrl || '#'} target="_blank" rel="noopener noreferrer" className={pillBtn}>
-              <FileText size={14} /> View Full CV
-            </a>
-            {profile.contact.linkedin && (
-              <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" className={pillBtn}>
-                <Linkedin size={14} /> LinkedIn
-              </a>
-            )}
-            <button onClick={share} className={pillBtn}>
-              {copied ? <Check size={14} className="text-[#1A6B41]" /> : <Share2 size={14} />}
-              {copied ? 'Link copied' : 'Share'}
-            </button>
-          </div>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 text-[#1C3A64] text-[13px] font-medium hover:opacity-70 transition-opacity"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#C9A84C]" /> Contact
-          </Link>
-        </div>
-
         <div className="grid lg:grid-cols-[260px_minmax(0,1fr)_300px] gap-10 lg:gap-14 items-start">
           {/* Left — contact */}
           <ScrollReveal>
