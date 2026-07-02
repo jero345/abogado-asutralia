@@ -5,6 +5,7 @@ import { Footer } from './Footer'
 import { CustomCursor } from '@/components/ui/CustomCursor'
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar'
 import { SeoManager } from '@/components/SeoManager'
+import { MetaPixelEvents } from '@/components/MetaPixelEvents'
 
 export function Layout() {
   const { pathname } = useLocation()
@@ -17,6 +18,7 @@ export function Layout() {
   return (
     <div className="min-h-screen bg-white text-[#1e3a5f] flex flex-col">
       <SeoManager />
+      <MetaPixelEvents />
       <CustomCursor />
       <ScrollProgressBar />
       <Header />

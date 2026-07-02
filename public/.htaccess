@@ -1,0 +1,78 @@
+# SPA fallback for the React Router single-page app (LiteSpeed / Apache).
+# Without this, opening a client-side route directly (e.g. /thanks, or any page
+# refreshed / linked from outside such as the Formstack confirmation redirect)
+# returns a server 404, because no real file exists at that path. The rule below
+# serves the app's index.html for any request that isn't an existing file or
+# directory, so React Router can take over and render the right page.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # --- Legacy WordPress URL redirects (301) ---
+  # Old site paths that no longer exist in the React app. Without these, a
+  # Google result or external link to e.g. /our-team/ lands on the in-app 404.
+
+  # General site pages.
+  RewriteRule ^our-team/?$        /team           [R=301,L]
+  RewriteRule ^about-us/?$        /about          [R=301,L]
+  RewriteRule ^careers/?$         /work-with-us   [R=301,L]
+  RewriteRule ^practice-areas/?$  /litigation     [R=301,L]
+  RewriteRule ^contact-us/?$      /contact        [R=301,L]
+
+  # Old per-case pages → new /class-actions/<slug> detail pages.
+  # (slug map taken from scripts/migrate-cases.mjs wordpressLink → slug.)
+  RewriteRule ^arrium-class-action/?$                    /class-actions/arrium           [R=301,L]
+  RewriteRule ^blue-sky-class-action/?$                  /class-actions/blue-sky         [R=301,L]
+  RewriteRule ^cudeco-class-action/?$                    /class-actions/cudeco           [R=301,L]
+  RewriteRule ^fitch-ratings-uk-representative-action/?$ /class-actions/fitch-ratings-uk [R=301,L]
+  RewriteRule ^fitch-ratings-class-action/?$             /class-actions/fitch-scdo       [R=301,L]
+  RewriteRule ^hyundai-abs-class-action/?$               /class-actions/hyundai-abs      [R=301,L]
+  RewriteRule ^kia-abs-class-action/?$                   /class-actions/kia-abs          [R=301,L]
+  RewriteRule ^(sydney-)?light-rail-class-action/?$      /class-actions/light-rail       [R=301,L]
+  RewriteRule ^murray-darling-basin-class-action/?$      /class-actions/murray-darling   [R=301,L]
+  RewriteRule ^phoslock-class-action/?$                  /class-actions/phoslock         [R=301,L]
+  RewriteRule ^qoin-class-action/?$                      /class-actions/qoin             [R=301,L]
+  RewriteRule ^sp-global-uk-representative-action/?$     /class-actions/sp-global-uk     [R=301,L]
+
+  # Safety net: any other old "…-class-action" / "…-representative-action" page,
+  # or a registration-process page, we didn't map above → the full Class Actions
+  # list, so an old link never dead-ends on the 404 (covers sp-cdo-cpdo, the
+  # investigations, etc.). Specific rules above win because they carry [L].
+  RewriteRule ^registration-process-for-.+              /class-actions  [R=301,L]
+  RewriteRule (-class-action|-representative-action)/?$ /class-actions  [R=301,L]
+
+  # Serve real files and directories as-is (assets, images, fonts, favicon…).
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else → the SPA entry point.
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# --- Caching: fixes "page is broken on first load, works after a reload" ---
+# Vite fingerprints every bundle (e.g. index-CBoasJVm.js). After a new deploy
+# those hashes change. If the browser/host kept a cached index.html, it asks for
+# the OLD hashes — which no longer exist — so the app fails to boot until a manual
+# reload fetches fresh HTML. The rules below make the HTML always-revalidate while
+# letting the content-hashed assets cache forever.
+<IfModule mod_headers.c>
+  # Never trust a cached copy of the HTML entry point.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Hashed build assets are immutable — cache them for a year.
+  <FilesMatch "\.(js|css|woff2?|ttf|eot|otf|png|jpe?g|gif|svg|ico|webp|avif)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Stop LiteSpeed's built-in cache from serving a stale HTML page.
+<IfModule LiteSpeed>
+  RewriteEngine On
+  RewriteRule \.html$ - [E=Cache-Control:no-cache]
+</IfModule>
