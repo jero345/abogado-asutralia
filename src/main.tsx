@@ -14,11 +14,14 @@ import { TeamPage } from '@/pages/TeamPage'
 import { AwardsPage } from '@/pages/AwardsPage'
 import { WorkWithUsPage } from '@/pages/WorkWithUsPage'
 import { ContactPage } from '@/pages/ContactPage'
+import { ThankYouPage } from '@/pages/ThankYouPage'
 import { NewsPage } from '@/pages/NewsPage'
 import { NewsArticlePage } from '@/pages/NewsArticlePage'
 import { TermsOfUsePage } from '@/pages/TermsOfUsePage'
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { ProfilePage } from '@/pages/ProfilePage'
+import { profiles } from '@/data/profiles'
 import { AdminLogin } from '@/pages/admin/AdminLogin'
 import { AdminLayout } from '@/pages/admin/AdminLayout'
 import { AdminDashboard } from '@/pages/admin/AdminDashboard'
@@ -75,8 +78,16 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/work-with-us" element={<WorkWithUsPage />} />
             <Route path="/awards" element={<AwardsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            {/* Formstack confirmation-redirect target → fires the Meta Pixel conversion */}
+            <Route path="/thanks" element={<ThankYouPage />} />
+            <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/terms-of-use" element={<TermsOfUsePage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            {/* Hidden profile pages — reachable only by direct slug (e.g. /amanda-banton),
+                never linked in the nav and marked noindex. Registered from src/data/profiles.ts. */}
+            {Object.keys(profiles).map((slug) => (
+              <Route key={slug} path={`/${slug}`} element={<ProfilePage slug={slug} />} />
+            ))}
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
