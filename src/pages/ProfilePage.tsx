@@ -46,16 +46,26 @@ export function ProfilePage({ slug }: { slug: string }) {
     <div className="bg-white">
       {/* ── Hero: full-bleed portrait with name overlaid ─────────────────── */}
       <section className="relative h-[86vh] min-h-[520px] w-full overflow-hidden bg-black">
+        {/* Blurred, cover copy of the same photo fills the sides so the sharp
+            portrait's rectangular edges melt into the hero instead of showing
+            hard seams — the "ambient" look. */}
+        <img
+          src={profile.heroPhoto}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-60"
+        />
+        {/* Sharp, full portrait — shown uncropped. */}
         <img
           src={profile.heroPhoto}
           alt={profile.name}
           className="absolute inset-0 w-full h-full object-contain object-center"
         />
-        {/* The portrait sits on black so it shows in full (uncropped) and its own
-            black studio backdrop blends into the hero. Soft gradients keep the
-            white nav (top) and the name (bottom) legible. */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/60 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black via-black/60 to-transparent" />
+        {/* Extra side feathering + keep the white nav (top) and name (bottom) legible. */}
+        <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/90 to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/90 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black via-black/70 to-transparent" />
 
         <div className="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col justify-end pb-12 md:pb-16">
           <motion.div
