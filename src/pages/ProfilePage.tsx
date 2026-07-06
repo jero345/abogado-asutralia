@@ -55,16 +55,23 @@ export function ProfilePage({ slug }: { slug: string }) {
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover scale-150 blur-3xl opacity-80"
         />
-        {/* Sharp, full portrait — shown uncropped. */}
-        <img
-          src={profile.heroPhoto}
-          alt={profile.name}
-          className="absolute inset-0 w-full h-full object-contain object-center"
-        />
-        {/* Symmetric side feathering (both edges equally) + keep the white nav
-            (top) and name (bottom) legible. */}
-        <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black via-black/40 to-transparent" />
-        <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black via-black/40 to-transparent" />
+        {/* Sharp, full portrait (2:3, uncropped). Its own left/right edges are
+            faded to transparent with a mask, so there is no hard rectangle cut —
+            the photo melts into the blurred backdrop on both sides. */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="relative h-full aspect-[2/3]"
+            style={{
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%)',
+              maskImage:
+                'linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%)',
+            }}
+          >
+            <img src={profile.heroPhoto} alt={profile.name} className="w-full h-full object-cover" />
+          </div>
+        </div>
+        {/* Keep the white nav (top) and the name (bottom) legible. */}
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black via-black/70 to-transparent" />
 
