@@ -45,14 +45,17 @@ export function ProfilePage({ slug }: { slug: string }) {
   return (
     <div className="bg-white">
       {/* ── Hero: full-bleed portrait with name overlaid ─────────────────── */}
-      <section className="relative h-[86vh] min-h-[520px] w-full overflow-hidden">
+      <section className="relative h-[86vh] min-h-[520px] w-full overflow-hidden bg-black">
         <img
           src={profile.heroPhoto}
           alt={profile.name}
-          className="absolute inset-0 w-full h-full object-cover object-top"
+          className="absolute inset-0 w-full h-full object-contain object-center"
         />
-        {/* Dark gradients: bottom for the name, top for the white header nav */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/45" />
+        {/* The portrait sits on black so it shows in full (uncropped) and its own
+            black studio backdrop blends into the hero. Soft gradients keep the
+            white nav (top) and the name (bottom) legible. */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/60 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
         <div className="relative z-10 h-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col justify-end pb-12 md:pb-16">
           <motion.div
@@ -158,54 +161,37 @@ export function ProfilePage({ slug }: { slug: string }) {
         </section>
       )}
 
-      {/* ── Perspective / Admissions & Qualifications / Practice areas ────── */}
+      {/* ── Recognition / Practice areas ─────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-8 py-14 lg:py-24">
-        <div className="grid lg:grid-cols-3 gap-10 lg:gap-14 items-start">
-          {/* Perspective */}
-          {profile.perspective && (
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-10 lg:gap-16 items-start">
+          {/* Recognition */}
+          {profile.recognitions && profile.recognitions.length > 0 && (
             <ScrollReveal>
               <div>
-                <SectionHeading>Perspective</SectionHeading>
-                <p className="italic-display text-[#A9803F] text-[22px] md:text-[26px] leading-[1.35]">
-                  ‘{profile.perspective.quote}’
-                </p>
-                {profile.perspective.attribution && (
-                  <p className="text-[#888888] text-[13px] font-medium mt-4">— {profile.perspective.attribution}</p>
-                )}
+                <SectionHeading>Recognition</SectionHeading>
+                <div className="grid sm:grid-cols-2 gap-x-10 gap-y-7">
+                  {profile.recognitions.map((group) => (
+                    <div key={group.category}>
+                      <div className="text-[#1C3A64] text-[13px] font-semibold mb-2.5">{group.category}</div>
+                      <ul className="space-y-2">
+                        {group.items.map((it) => (
+                          <li key={it} className="flex items-start gap-2.5">
+                            <span className="w-1 h-1 rounded-full bg-[#C9A84C] mt-2 flex-shrink-0" />
+                            <span className="text-[#555555] text-[13px] leading-[1.55]">{it}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </div>
             </ScrollReveal>
           )}
 
-          {/* Admissions & Qualifications */}
-          <ScrollReveal delay={0.05}>
-            <div className="space-y-12">
-              {profile.admissions && profile.admissions.length > 0 && (
-                <div>
-                  <SectionHeading>Admissions &amp; Appointments</SectionHeading>
-                  <div>
-                    {profile.admissions.map((a, i) => (
-                      <DividerRow key={i}>{a}</DividerRow>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {profile.qualifications && profile.qualifications.length > 0 && (
-                <div>
-                  <SectionHeading>Qualifications</SectionHeading>
-                  <div>
-                    {profile.qualifications.map((q, i) => (
-                      <DividerRow key={i}>{q}</DividerRow>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </ScrollReveal>
-
           {/* Practice areas */}
           {profile.practiceAreas && profile.practiceAreas.length > 0 && (
             <ScrollReveal delay={0.1}>
-              <div>
+              <div className="lg:sticky lg:top-28">
                 <SectionHeading>Practice Areas</SectionHeading>
                 <div>
                   {profile.practiceAreas.map((p, i) => (

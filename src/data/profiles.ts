@@ -5,29 +5,24 @@
 // here keyed by its slug — a route is registered automatically in main.tsx.
 
 export type ProfileCase = { title: string; citation?: string }
+export type RecognitionGroup = { category: string; items: string[] }
 
 export type Profile = {
   slug: string
   name: string
   /** Small pill above the name in the hero, e.g. "Managing Partner". */
   role: string
-  /** Full-bleed hero portrait, path under /public. */
+  /** Full-bleed hero portrait, path under /public. Shown uncropped on a black hero. */
   heroPhoto: string
   contact: {
     phone?: string
     phoneLabel?: string
     email?: string
-    linkedin?: string
-    /** Link to a full-CV PDF. Leave as '#' until the PDF is uploaded. */
-    cvUrl?: string
   }
   /** Overview paragraphs. */
   overview: string[]
   recentCases: ProfileCase[]
-  /** Short testimonial-style quote shown under "Perspective". */
-  perspective?: { quote: string; attribution?: string }
-  admissions?: string[]
-  qualifications?: string[]
+  recognitions?: RecognitionGroup[]
   practiceAreas?: string[]
   /** Award badge images (path under /public) shown in the recognition strip. */
   awardBadges?: string[]
@@ -43,14 +38,12 @@ export const profiles: Record<string, Profile> = {
       phone: '+61 2 8076 8090',
       phoneLabel: 'Sydney HQ',
       email: 'amanda.banton@bantongroup.com',
-      linkedin: 'https://linkedin.com/in/amandabanton',
-      cvUrl: '#', // TODO: replace with the uploaded CV PDF (e.g. /docs/amanda-banton-cv.pdf)
     },
     overview: [
-      'As Managing Partner of Banton Group, established in February 2020, Amanda Banton brings more than 20 years of experience in the legal profession. Prior to founding the firm, she led substantial litigation practices at Squire Patton Boggs and Piper Alderman, and also gained consulting experience at KPMG alongside expertise developed within the federal government.',
-      "Under her leadership, Banton Group has developed into one of Australia's leading litigation and insolvency practices, acting in some of the nation's most significant disputes and regulatory matters. Her experience spans complex class actions, competition and consumer law proceedings, breaches of trust and fiduciary duty claims and equity disputes, various negligence and nuisance claims as well as various matters arising under the Corporations Act 2001 (Cth), the ASIC Act 2001 (Cth), the Civil Liability Act 2002 (NSW) and the Competition and Consumer Act 2010 (Cth).",
-      'Recognised for her ability to build cases from the ground up, Amanda is known for her strategic thinking and capacity to execute ground-breaking matters in which new law has been created and global precedents triggered. She is highly regarded by clients, litigation funders, insolvency practitioners, and the Court alike.',
-      "She has also been at the forefront of the evolving class action funding landscape, establishing a significant capital base to bankroll litigation internally while maintaining strong relationships with Australia's leading litigation funders. The firm acts on a contingency fee basis where appropriate in the Supreme Court of Victoria.",
+      "Amanda Banton is the Managing Partner and founder of Banton Group, which she established in February 2020. She brings more than 20 years' experience in the legal profession, with prior roles at Squire Patton Boggs and Piper Alderman, where she led substantial litigation practices, and consulting experience at KPMG and in the Federal Government.",
+      "Amanda's practice encompasses complex insolvency, regulatory, corporate and commercial disputes and litigation, including securities class actions. Her work spans a broad range of legal issues including contract, corporations and ASIC legislation, competition and consumer law, and breaches of trust and fiduciary duties. She has established a track record of investigating and developing class actions from inception, reconstructing complex factual histories and building cases in circumstances where key documentation or witnesses may initially be unavailable.",
+      'Under Amanda\'s leadership, Banton Group has achieved a number of landmark results, including: a unanimous High Court victory in Bogan v The Estate of Peter John Smedley (Deceased) [2025] HCA 7, confirming the relevance of Victorian group costs orders to transfer applications; the highest group costs order rate (40%) ever awarded in Australia in Bogan v Estate of Peter Smedley (Deceased) [2022] VSC 201; a High Court victory in Hunt Leather Pty Ltd v Transport for NSW [2025] HCA 53, reinstating the trial judge\'s finding of liability for private nuisance; a ~$46 million recovery against the Commonwealth in Kupang Resources Pty Ltd v Commonwealth of Australia (No 4) [2025] NSWSC 1477; and a successful settlement with KPMG in the CuDeco class action in December 2025.',
+      "Amanda is known for her capacity to establish cases from the ground up for those seeking legal recourse for significant losses. She carefully manages the interests of all stakeholders — clients, funders, the court and defendants' solicitors — and is recognised for her strategic thinking and meticulous attention to detail across all her matters.",
     ],
     recentCases: [
       {
@@ -58,8 +51,8 @@ export const profiles: Record<string, Profile> = {
         citation: '[2025] HCA 7 — High Court of Australia',
       },
       {
-        title: 'Hunt Leather Pty Ltd v Transport for NSW',
-        citation: '[2025] HCA 53 — High Court of Australia',
+        title: 'Bogan v Estate of Peter John Smedley (Deceased) & Ors',
+        citation: 'Supreme Court of Victoria, S ECI 2020 03281',
       },
       {
         title: 'ACN 117 641 004 Pty Ltd (in liquidation) & Anor v S&P Global Inc & Anor',
@@ -70,41 +63,82 @@ export const profiles: Record<string, Profile> = {
         citation: 'Federal Court of Australia, NSD 924/2024',
       },
       {
-        title: 'Toner v CuDeco Limited (Receivers and Managers Appointed) (In Liquidation) & Ors',
-        citation: 'Federal Court of Australia, VID 176/2022',
+        title: 'Hunt Leather Pty Ltd v Transport for NSW',
+        citation: '[2025] HCA 53 — High Court of Australia',
+      },
+      {
+        title: 'Kupang Resources Pty Ltd v The Commonwealth of Australia',
+        citation: 'Supreme Court of NSW, 2020/106859',
       },
       {
         title: "Doyle's Farm Produce Pty Ltd & Ors v Murray Darling Basin Authority & Anor",
         citation: 'Supreme Court of NSW, 2019/00150651',
       },
       {
-        title: 'Kupang Resources Pty Ltd v The Commonwealth of Australia',
-        citation: 'Supreme Court of NSW, 2020/106859',
+        title: 'Toner v CuDeco Limited (Receivers and Managers Appointed) (In Liquidation) & Ors',
+        citation: 'Federal Court of Australia, VID 176/2022',
+      },
+      {
+        title: 'MDC v NSW Ports Operations Hold Co Pty Ltd & Ors',
+        citation:
+          'Federal Court, NSD 862/2019; Mayfield Development Corporation Pty Ltd v NSW Ports Operations Hold Co Pty Ltd & Ors, Full Federal Court, NSD 840/2024',
       },
     ],
-    // Placeholder paraphrase of Amanda's standing — replace with a sourced client
-    // testimonial when available.
-    perspective: {
-      quote:
-        'Amanda builds cases from the ground up — her strategic judgement and command of detail are why clients, funders and the Court hold her in such high regard.',
-    },
-    admissions: [
-      'Founder & Managing Partner, Banton Group — since February 2020',
-      'Formerly led litigation practices at Squire Patton Boggs and Piper Alderman',
-      'Admitted as a Legal Practitioner — (year to confirm)', // TODO: confirm
-    ],
-    qualifications: [
-      'LLB — (institution / year to confirm)', // TODO: confirm
+    recognitions: [
+      {
+        category: 'Chambers Asia Pacific',
+        items: [
+          'Dispute Resolution — Ranked 2022, 2023, 2025 & 2026',
+          'Dispute Resolution — Leading Individual 2023, 2025 & 2026',
+        ],
+      },
+      {
+        category: 'Asia Pacific Legal 500',
+        items: [
+          'Recommended Lawyer — Dispute Resolution: Class Actions 2022 & 2023',
+          'Leading Individual — Class Action Dispute Resolution 2023',
+          'Dispute Resolution: Class Actions — Band 4 (2024), Band 2 (2026)',
+          'Recommended Lawyer — Restructuring & Insolvency 2022',
+          'Restructuring & Insolvency — Band 3 (2024), Band 4 (2026)',
+        ],
+      },
+      {
+        category: "Doyle's Guide",
+        items: ['Recommended Lawyer — Commercial Litigation & Dispute Resolution 2022'],
+      },
+      {
+        category: 'Australasian Law Awards',
+        items: ['Excellence Award — Law Firm Leader of the Year 2022'],
+      },
+      {
+        category: 'Australasian Lawyers',
+        items: ['Elite Women Award 2022'],
+      },
+      {
+        category: 'APAC Insider',
+        items: ['Complex Litigator of the Year (Australia) 2022'],
+      },
+      {
+        category: 'Leaders in Law',
+        items: ['Commercial Litigation Expert of the Year (Australia) 2022'],
+      },
+      {
+        category: 'Global 100',
+        items: ['Complex Litigator of the Year (Australia) 2023'],
+      },
     ],
     practiceAreas: [
-      'Class Actions',
-      'Securities Litigation',
-      'Commercial Litigation',
-      'Insolvency & Restructuring',
-      'Competition & Consumer Law',
-      'Corporations Act & Regulatory',
-      'Equity, Trusts & Fiduciary Duties',
-      'Contentious Insolvency & Recovery',
+      'Complex insolvency',
+      'Regulatory disputes',
+      'Corporate & commercial disputes',
+      'Commercial litigation',
+      'Securities class actions',
+      'Contract disputes',
+      'Corporations & ASIC legislation',
+      'Competition & consumer law',
+      'Breaches of trust & fiduciary duties',
+      'Class action dispute resolution',
+      'Restructuring & insolvency',
     ],
     awardBadges: [
       '/img/marcas-web/2025-chambers-leading-individual-apac-akb.png',
