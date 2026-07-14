@@ -135,6 +135,28 @@ const team: Member[] = [
       },
     ],
   },
+  {
+    name: 'Shaan Palmer',
+    role: 'Special Counsel', // TODO: confirm Shaan's exact title with the firm
+    specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring', 'Regulatory'],
+    bio:
+      'Shaan Palmer is a commercial, regulatory, insolvency, and class action disputes lawyer with over 20 years\u2019 experience in large-scale complex litigation across Australia and the United Kingdom, and has held senior roles at Piper Alderman, Squire Patton Boggs and Webb Henderson.',
+    extendedBio: [
+      'Shaan has acted for a diverse range of public and private sector clients, including high net worth individuals, regulators, corporations, fund managers, responsible entities, secured creditors, insolvency practitioners, and litigation funders. She has acted for plaintiffs and defendants throughout her career and her practice spans a broad spectrum of complex commercial disputes, including claims against major banks, ratings agencies and auditors, shareholder oppression claims, competition related disputes, shareholder class actions and claims arising from large corporate collapses, including claims against directors for breach of duty and insolvent transactions.',
+      'Shaan has been recognised as a leading lawyer, recommended in the Asia Pacific Legal 500 in the Dispute Resolution, Class Actions, and Restructuring & Insolvency categories, and is admitted to practice in Australia and the United Kingdom.',
+    ],
+    photo: '/img/team/shaan-palmer.jpg',
+    awards: [
+      {
+        category: 'Asia Pacific Legal 500',
+        items: [
+          'Recommended Lawyer \u2014 Dispute Resolution',
+          'Recommended Lawyer \u2014 Class Actions',
+          'Recommended Lawyer \u2014 Restructuring & Insolvency',
+        ],
+      },
+    ],
+  },
 ]
 
 export function Team() {
