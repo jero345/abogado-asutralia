@@ -137,7 +137,7 @@ const team: Member[] = [
   },
   {
     name: 'Shaan Palmer',
-    role: 'Special Counsel', // TODO: confirm Shaan's exact title with the firm
+    role: 'Partner',
     specialties: ['Class Actions', 'Commercial Litigation', 'Insolvency & Restructuring', 'Regulatory'],
     bio:
       'Shaan Palmer is a commercial, regulatory, insolvency, and class action disputes lawyer with over 20 years\u2019 experience in large-scale complex litigation across Australia and the United Kingdom, and has held senior roles at Piper Alderman, Squire Patton Boggs and Webb Henderson.',
