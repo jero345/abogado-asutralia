@@ -6,6 +6,7 @@ import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import Underline from '@tiptap/extension-underline'
+import TextAlign from '@tiptap/extension-text-align'
 
 // Custom block-level node for an attached PDF. Renders as an outlined "card"
 // button (title + opens in a new tab) — NOT an inline viewer. The wrapper div
@@ -107,6 +108,10 @@ import {
   Redo2,
   Loader2,
   Minus,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
@@ -124,6 +129,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
       }),
       Underline,
       TabIndent,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
       Link.configure({
         openOnClick: false,
         HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
@@ -317,7 +323,7 @@ function Toolbar({ editor }: { editor: Editor }) {
   }, [editor])
 
   return (
-    <div className="sticky top-0 z-10 rounded-t-lg border-b border-[#1C3A64]/15 bg-[#F4F6FB] px-2 py-1.5 flex flex-wrap items-center gap-0.5 shadow-sm">
+    <div className="sticky top-0 z-10 rounded-t-lg border-b border-[#1C3A64]/15 bg-[#F4F6FB] px-2.5 py-2 flex flex-wrap items-center gap-1 shadow-sm">
       <Group>
         <Btn
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -403,6 +409,39 @@ function Toolbar({ editor }: { editor: Editor }) {
       <Divider />
 
       <Group>
+        <Btn
+          onClick={() => editor.chain().focus().setTextAlign('left').run()}
+          active={editor.isActive({ textAlign: 'left' })}
+          title="Align left"
+        >
+          <AlignLeft size={15} />
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().setTextAlign('center').run()}
+          active={editor.isActive({ textAlign: 'center' })}
+          title="Align center"
+        >
+          <AlignCenter size={15} />
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().setTextAlign('right').run()}
+          active={editor.isActive({ textAlign: 'right' })}
+          title="Align right"
+        >
+          <AlignRight size={15} />
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+          active={editor.isActive({ textAlign: 'justify' })}
+          title="Justify"
+        >
+          <AlignJustify size={15} />
+        </Btn>
+      </Group>
+
+      <Divider />
+
+      <Group>
         <Btn onClick={setLink} active={editor.isActive('link')} title="Link">
           <LinkIcon size={14} />
         </Btn>
@@ -459,7 +498,7 @@ function Group({ children }: { children: React.ReactNode }) {
 }
 
 function Divider() {
-  return <span className="w-px h-5 bg-[#1C3A64]/15 mx-1" />
+  return <span className="w-px h-6 bg-[#1C3A64]/15 mx-1" />
 }
 
 function Btn({
@@ -483,7 +522,7 @@ function Btn({
       title={title}
       aria-pressed={active}
       className={[
-        'p-1.5 rounded-md transition-colors',
+        'p-2 rounded-md transition-colors [&_svg]:w-[17px] [&_svg]:h-[17px]',
         active
           ? 'bg-[#1C3A64] text-white'
           : 'text-[#1C3A64] hover:bg-[#1C3A64]/10',
