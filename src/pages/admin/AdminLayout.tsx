@@ -19,7 +19,7 @@ export function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F6FB] flex">
+    <div className="h-screen bg-[#F4F6FB] flex">
       <aside className="w-60 bg-white border-r border-[#1C3A64]/10 flex flex-col">
         <div className="px-6 py-6 border-b border-[#1C3A64]/10">
           <img src="/img/logobg.png" alt="Banton Group" className="h-9 w-auto object-contain" />
