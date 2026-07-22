@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEditor, EditorContent, type Editor } from '@tiptap/react'
-import { Node, mergeAttributes } from '@tiptap/core'
+import { Node, Extension, mergeAttributes } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
@@ -63,6 +63,33 @@ const PdfEmbed = Node.create({
   },
 })
 
+// Tab / Shift-Tab in normal text inserts (or removes) a 4-space indent. Inside
+// lists it stays out of the way so Tab still indents/outdents the list item.
+const INDENT = '    '
+const TabIndent = Extension.create({
+  name: 'tabIndent',
+  priority: 10,
+  addKeyboardShortcuts() {
+    return {
+      Tab: () => {
+        if (this.editor.isActive('listItem')) return false
+        return this.editor.commands.insertContent(INDENT)
+      },
+      'Shift-Tab': () => {
+        if (this.editor.isActive('listItem')) return false
+        const { state } = this.editor
+        const { from, empty } = state.selection
+        if (!empty) return false
+        const before = state.doc.textBetween(Math.max(0, from - INDENT.length), from)
+        const trailing = before.match(/ +$/)
+        if (!trailing) return false
+        const remove = Math.min(INDENT.length, trailing[0].length)
+        return this.editor.commands.deleteRange({ from: from - remove, to: from })
+      },
+    }
+  },
+})
+
 import {
   Bold,
   Italic,
@@ -96,6 +123,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
         heading: { levels: [1, 2, 3] },
       }),
       Underline,
+      TabIndent,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
@@ -150,7 +178,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
   if (!editor) return null
 
   return (
-    <div className="border border-[#1C3A64]/15 rounded-lg overflow-hidden bg-white">
+    <div className="border border-[#1C3A64]/15 rounded-lg bg-white">
       <Toolbar editor={editor} />
       <EditorContent editor={editor} />
     </div>
@@ -289,7 +317,7 @@ function Toolbar({ editor }: { editor: Editor }) {
   }, [editor])
 
   return (
-    <div className="border-b border-[#1C3A64]/15 bg-[#F4F6FB] px-2 py-1.5 flex flex-wrap items-center gap-0.5">
+    <div className="sticky top-0 z-10 rounded-t-lg border-b border-[#1C3A64]/15 bg-[#F4F6FB] px-2 py-1.5 flex flex-wrap items-center gap-0.5 shadow-sm">
       <Group>
         <Btn
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}

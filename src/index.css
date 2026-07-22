@@ -175,6 +175,13 @@
   .section-label {
     @apply inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[#1e3a5f];
   }
+
+  /* Keep blank lines visible: an empty paragraph (pressing Enter on an empty
+     line) holds a line's height in rendered prose instead of collapsing to
+     nothing — so editors can add vertical space between paragraphs. */
+  .prose p:empty::before {
+    content: '\00a0';
+  }
 }
 
 /* Noise texture overlay */
